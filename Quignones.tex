@@ -2,17 +2,15 @@
 
 \usepackage{amsfonts}
 \usepackage{hyperref}
-\usepackage[utf8]{inputenc}
+\usepackage{bookmark}
+% \usepackage[utf8]{inputenc}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[hmarginratio=1:1]{geometry}% equal left and right margins
+\usepackage[margin=0.5in,hmarginratio=1:1]{geometry}% equal left and right margins
 \usepackage{graphicx}
 % \usepackage{fontspec}
 % \setmainfont{Times New Roman}
 \usepackage{titling}
 
-% \usepackage{sectsty}
-% \chapterfont{\color{Red} \normalsize \mdseries}  % sets colour of chapters
-% \sectionfont{\color{Red}}  % sets colour of sections
 
 \usepackage{afterpage}
 \newcommand\myemptypage{
@@ -26,30 +24,37 @@
 
 \def\ae{æ}
 \def\AE{Æ}
+\def\oe{œ}
+\def\OE{Œ}
 
 
 \begin{document}
 \pagenumbering{roman}
 
 
-\title{\includegraphics[width=2in]{Picture1.png} \\ \Huge \bfseries \color{Red} B R E V I A R V M \\ \huge R O M A N V M, \\ \large \mdseries \color{Black} Ex sacra potissimum scriptura, \& probatis sanctorum \\ historiis nuper consectum, ac denuo per \\ eundem authorem accurantius \\ recognitum. \\ \ \\ \itshape scrutamini scripturas, quoniam illæ sunt, \\ quæ testimonium perhibent de me. \\Iohan. V.}
+\title{\includegraphics[width=2.5in]{Picture1.png} \\ \Huge \bfseries \color{Red} B R E V I A R V M \\ \huge R O M A N V M, \\ \large \mdseries \color{Black} Ex sacra potissimum scriptura, \& probatis sanctorum \\ historiis nuper consectum, ac denuo per \\ eundem authorem accurantius \\ recognitum. \\ \ \\ \itshape scrutamini scripturas, quoniam illæ sunt, \\ quæ testimonium perhibent de me. \\Iohan. V.}
 
 \author{VENETIIS APVD IVNCTAS}
 \date{MDCXXXI}
 
 \maketitle
-
+\bookmark[page=1]{TITULUM}
 \myemptypage
 
 % \frontmatter
 
 \pagenumbering{roman}
 
-\begin{center} \color{red}
-AD SANCTISSIMVM PATREM \\ \& Dominum nostrum Paulum tertium \\ Pontificem Maximum, \\ \color{black} Francisci Quignonij Tituli Sanctæ Crucis in Ierusalem presbyteri Cardinalis, in Breuiarium proxime consectum, ac denuo \\ recognitum.
+\begin{center} \color{red} \hypertarget{Preface} \Large
+AD SANCTISSIMVM PATREM \\ \& Dominum nostrum Paulum tertium \\ Pontificem Maximum,
 \end{center}
 
-\centerline{\color{red}P R \AE \ F A T I O.}
+\begin{center} \color{black} \large
+Francisci Quignonij Tituli Sanctæ Crucis in Ierusalem presbyteri Cardinalis, in Breuiarium proxime consectum, ac denuo \\ recognitum.
+\end{center}
+\vspace{+.25em}
+\centerline{\Large \color{red} P R \AE \ F A T I O.}
+\bookmark[dest=Preface]{PR\AE FATIO}
 
 \Huge \textbf{B}
 \normalsize Reviarum Romanum nuper a nobis felicis recordationis Clementis. VII. Pontifi. Maximi hortatu consectum, ac potius in ampliorem sacrarum scripturam lectionem, ad veterem sanctorum patrum, \& conciliorum antiquorum formam reuocatum, tuaque voluntate sanctissime pater editum, graues plerosque ac doctos viros ita probasse \& recepisse intellexi, vt nihil in eo metandum existimarent.
@@ -58,21 +63,23 @@ Illud vero nunquam dubitatui, fore in tanta multitudine nonnullos ex ijs videlic
 Imo vero nobis primam editionem Breuiarij, non tanquam promulgationem legis esse placuerat, sed quasi publicam quandam deliberationem:
 vt sic proposita nostra sententia, iudicia multorum exquireremus, \& quod omnium commodissimum, \& religioni, ac pietati conuenientissimum plerisque prudentibus, grauibusque viris visum esset, sequeremur.
 Nihil enim humano elaboratum ingenio tam exactum initio vnquam fuit, quin postea multorum accedente iudicio perfectius reddi possit, vt in ipsis etiam ecclesiasticis institutis, circa primitiuam presertim ecclesiam contigisse videmus.
-Itaque, multorum sententiis % end pp7
-collatis, qu\ae \ nobis partim vocibus, partim scriptis innotuerunt, iudicium eorum secuti, qui omnium prudentissime sentire visi sunt, libenter quedam addidimus, alia mutauimus, \& omnia dilidenter recongnouimus, retenta tamen summa forma Breuiarii.
+Itaque, multorum sententiis 
+% end pp7
+collatis, qu\ae \ nobis partim vocibus, partim scriptis innotuerunt, iudicium eorum secuti, qui omnium prudentissime sentire visi sunt, libenter quedam addidimus, alia mutauimus, \& omnia diligenter recongnouimus, retenta tamen summa forma Breuiarii.
 Sed quoniam sic fert natura rerum, vt nihil sit tam rectum, nihil ranta ratione in vitam vsumque hominum inductum, cuius nouitas non sit aliquibus ingrata, non temere facturi esse videmur, si rationem totius instituti nostri a nobis prius summatim redditam, nunc accuratius recognito Breuiario, paulo latius explicabimus.
 Mihi enim (vt s\ae pe sum professus) cogitanti, atque animo repetenti initia veteris insituti, quo sancitum est, vt clerici sacris initiati, vel sacerdotiis pr\ae sidentes, singulis diebus perlegant horarias preces, quas Canonicas etiam appellamus, tres pr\ae cipue caus\ae \ spectat\ae \ fuisse videri solent.
-Quarum ea prima est, qui cum c\ae teri homines in quaque ciuitate, aut suum quisque negocium agant, aut in Republica administranda sint occupati, clericis ex eo vocatis, qui sortis Domini sint, quique bonis ecclesiasticis aluntur, hoc potissimum negocium diuinis, \& humanis legibus est iniunctum, vt Deum habere propitium in comissum sibi populum, de se bene merentem cunctis rationibus enitantur.
+Quarum ea prima est, qui cum c\ae teri homines in quaque ciuitate, aut suum quisque negocium agant, aut in Republica administranda sint occupati, clericis ex eo vocatis, qui sortis Domini sint, quique bonis ecclesiasticis aluntur, hoc potissimum negocium diuinis, \& humanis legibus est iniunctum, vt Deum habere propitium in commissum sibi populum, de se bene merentem cunctis rationibus enitantur.
 quod %sic
-non solum sacrificiis efficitur, sed etiam precibus, qu\ae \ a pio corede proficiscantur.
+non solum sacrificiis efficitur, sed etiam precibus, qu\ae \ a pio corde proficiscantur.
 ipsi %sic
 enim (vt testimonio versibusque vtar beati Alexandri pap\ae \ \& martyris) pro populo interpellant, \& populi peccata comedunt, quia precibus suis \& oblationibus ea delent, atque consumunt.
 Qui quanto digniores fuerint, tanto facilius pro quibus necessitatibus clamant, exaudiuntur.
 Quod testimonio probat Iacobi Apostoli, qui nos ad precandum cohortans, Orate (inquit) pro inuicem vt saluemini.
 multum %sic
 enim valet deprecatio iusti assidua.
-Altera causa est, vt qui reliquo populo exemplo debent esse virtutis \& sanctimoni\ae , assidua precatione Deum alloquentes, minus opportuni reddantur tentatori diabolo, si eos inuenerit, vt Hieronumus ait, occupatos, \& a cogitationibus caducarum rerum subinde auocati, contemplationi diuinarum assuescant.
-Tertia, vt religionis quoque futuri magistri quotidiana sacr\ae \ scriptur\ae \ \& ecclesiasticum historiarum lectione erudiantur, complectanturque (vt Paulos ait) eum, qui secundum doctrinam est, fidelem %end pp8
+Altera causa est, vt qui reliquo populo exemplo debent esse virtutis \& sanctimoni\ae , assidua precatione Deum alloquentes, minus opportuni reddantur tentatori diabolo, si eos inuenerit, vt Hieronymus ait, occupatos, \& a cogitationibus caducarum rerum subinde auocati, contemplationi diuinarum assuescant.
+Tertia, vt religionis quoque futuri magistri quotidiana sacr\ae \ scriptur\ae \ \& ecclesiasticum historiarum lectione erudiantur, complectanturque (vt Paulos ait) eum, qui secundum doctrinam est, fidelem 
+%end pp8
 sermonem, \& potentes sint exhortari in doctrina sana, \& eos, qui contradicunt, arguere.
 Et profecto si quis modum precandi olim a maioribus traditum diligenter confideret, plane inelligat horum omnium pr\ae cipia ab ipsis habitam esse rationem.
 Sed factum est nescio quo pacto precantium negligentia, vt paulatim a sanctissimis illis veterum patrum institutis discederetur.
@@ -80,25 +87,77 @@ Nam libri scripure sacr\ae, qui statis anni temporibus legendi erant more maioru
 Tam histori\ae \ sanctorum quedam tam inculte, \& tam sine delectu script\ae \ habentur in eodem, vt nec authoritatem habere videantur, nec grauitatem.
 Accedit tam perplexus ordo, tamque difficilis precandi ratio, vt interdum paulo minor opera in requirendo ponatur, qui, cum inueneris, in legendo.
 Quibus rebus animaduersis, felicis recordationis Clemens. VII. Pontifex Maxi. cum intelligeret officii sui esse, cum aliorum Christianorum commoditatibus prospicere, tum in primis clericorum, quibus ministris vteretur in commisso sibi grege administrando, me hortatus est, negociumque dedit, vt quantum cura, \& diligentia niti possem, preces horarias ita disponerem, \& ad veterm illam formam, quoad fieri posset, redigerem:
-vt difficultatibusm dispendiisque sublatis, nec a summa rationis olim ab antiquis sanctisque patribus institut\ae, discederetur:
+vt difficultatibus, dispendiisque sublatis, nec a summa rationis olim ab antiquis sanctisque patribus institut\ae, discederetur:
 nec rursum clerici ab officio precandi deterrerentur laboris magnitudine.
 Quam ego pro uinciam libentissime suscepi, simul vt Christi vicario honestissima precipienti parerem, simul vt bono publico pro mea virili parte seruirem.
 Adhibitis igitur quibusdam meorum domesticorum prudentibus hominibus, ac sacrarum literarum \& pontificii iuris doctrina pr\ae ditis, eisdemque Gr\ae ce \& Latine eruditis, dedi operam qui maxime potui, vt commode ac ex vtilitate publica rem conficerem.
-Ac illud ante omnia visum nobis est in consuetudinem reuocare, vt scriptura sacra 
-
+Ac illud ante omnia visum nobis est in consuetudinem reuocare, vt scriptura sacra omnia visum nobis est in consuetudinem reuocare, vt scriptura sacra maxime omnium toto anno, \& omnes %oes
+psalmi singulis septimanis perlegerent.
+Utrumque enim veteribus patribus summa ratione placuisse videbamus, qui plerosque libros (vt supra dictum est) utrumsque testamenti per anni tempora legendos disposuerant in Breuiario, \& per dies sic psalmos distribuerant, vt singulis septimanis
+%end pp9
+totum psalterium legeretur, quod singulis diebus in primitua ecclesia perlegi solitum esse tradit Speculator.
+Sed (vt supra diximus) precantium negligentia factum erat, vt minima pars scriptur\ae \ sacr\ae \ legeretur, \& psalmorum plerisque omissis, pauci singulis fere diebus repeterentur.
+Quod eis accidit, dum officij ferialis optime sanctissimeque, a maioribus instituti longitudinem \& laborem refugerent.
+Ad quem vitandum, varia compendia excogitantes, consuetudinem induxerunt omissis feriis, toto fere anno scriptorum %sctoru
+festa celebrandi, etiam in quadragesima.
+quod %sic
+quantum sit contra veterum instituta, declarat concilium Laodicenum, quo cautum est, ne in quadragesima martyrum natalitia celebrentur, \& item Toletanum decimum, in quo traditur, nihil esse in quadragesima de scriptorum %sctoru
+solennitatibus %sic
+celebrandum, idque de antiquitate regulari cautum esse.
+Quod ipsi animaduertentes, conditionemque temporum \& infirmitatem clericorum spectantes, rationem ineundam putauimus, vt pari propemodum labore, vt cum festum celebrabatur, sed minor qui cum agebatur de feria veteris testamenti, magna \& vtilissima pars, \& totum nouum, pr\ae ter partem Apocalypsis, in anno, \& singulis Septimanis psalmi omnes perlegerentur, terni singulis horis, vnius longitudine cum alterius breuitate sic compensata, vt labor legendi diurnus par propemodum sit omnibus diebus, siue feria sit, siue festum celebretur, habita quoque in distribuendo, quoad fieri potuit, ratione feriarum, festorum non perinde, nec enim si cuius psalmi vnum aut alterum verbum potest ad aliquod festum accommodori, idcirco mutandus erat ordo commodissimus, quo nullus psalmorum in hebdomada pr\ae termittitur, vt non illa verba solum, sed c\ae tera omnia in ipsis contenta mysteria, liceat intelligentibus septimoquoque die contemplari.
+Nam ad psalterium perlegendum, si veterem illam rectam \& sanctam psalmorum distributionem ferialem, in qua psalmi quidam quotidie repetuntur, retinuissemus, longitudo officij perinde vt antea clericos deterreret, qui hac commodissima, \& ad vetusinstitutum %not sure
+afformata mediocritate, multum, vtiam experi sumus, alliciuntur.
+Nam licet opera consueta legendi scripturas, parum minuatur in hoc Breuiario, presertim cum pleraque omnia ex libro legi sit necesse, curauimus tamen, vt ordine longe simpliciore, \& expeditiore magna 
+%end page 10
+pars laboris minueretur, sublato t\ae dio \& difficultate, psalmos, \& alia hincinde cum mora \& molestia perquirendi, \& difficillimam rationem longo tempore perdiscendi.
+Versiculos, responsoria, \& capitula omitiere %omittere??
+idcirco visum est, non qui h\ae c superuacanea aut inutilia viderentur (augent enim pietatem, \& sunt scriptur\ae \ sacr\ae \ particul\ae ) sed quam %qm
+cum introduct\ae \ sint ad cantus potissimum modulandes, \& legentes s\ae pe morentur cum molestia qu\ae ritandi, locum relinqui voluimus continenti lectioni scriptur\ae \ sacr\ae , qu\ae \ magis facit ad pietatem atque doctrinam priuatim legentium, quorum hac quidem in parte maiorem rationem haberi voluimus, qui concinentium.
+Nec enim ad precandum cuncta vtilia \& salubria congeri debent, ne clerici grauentur iniquiori pondere.
+Atque vtinam tam robusti essemus, vt totum etiam vetus testamentum in anno perlegere nongrauaremur, libenter enim omnes %oes
+illius libros legendos proponeremus:
+sed (vt dictum est) habenda fuit ratio, ne precandi labor in tanta clericorum infirmitate modum excederet.
+Officium beat\ae \ virginis in alio Breuiario vsitatum omittitur, nec propterea minuitur ipsius honor.
+Nam paucis festis exceptis, quotidie variis commemorationibus adoratur, \& obsecratur:
+atque eius memoria multis dicatis eidem festis, \& octauis pro cuiusque ratione celebratur, ipsisque solidum officium tribuitur sabbatis fere omnibus pr\ae ter qui in Quadragesima, in qua ne ipsum quidem Annuntiationis festum celebrari placuit veteribus patribus:
+vt docet idem Concilium, quod supra diximus, Toletanum.
+Et profecto quorundam Psalmorum grauem plerisque repetitionem omitti, non iam molestum esse virgini matri credi par est, qui gratum illud, quod clerici ad ipsius filij Iesu Christi diuinum cultum commodissima \& expedita ratione alliciantur.
+Ex scriptorum %sctoru
+historiis diligenter consideratis, quasdam delegimus, ex probatis authoribus Gr\ae cis \& Latinis fere decerptas, \& has cultiore stylo non tamen fucato, sed potius ex industria \& iussu Clementis pontificis attemperato, %sic
+disposuimus per annum totum.
+Nam licet veteribus in quadragesima nulla (vt docuimus) scriptorum %sctoru
+festa celebrari placuerit, tamen a iunioribus tam assidue in ea quoque celebrantur, vt a nobis ne tum quidem omnino festa saltem solennia sine aliquo pusillorum offendiculo vitari
+%end pp11
+posse putauerimus.
+Vt igitur quasdam sanctorum historias retinuimus, aut reposuimus denuo conquisitas, sic quasdam omisimus illis nec probabilitate, nec grauitate pares, temeritate videlicet priuata quorundam introductas, qui dum fugerent officii ferialis longitudinem, festa scriptorum %sctoru
+studiose conquirentes, quasdam in Breuiario pr\ae ter publicam authoritatem inconsultis Pontificibus inserendas curauerunt, quas Pontifices ipsi haud dubie in vsum ecclesi\ae \ non admisissent.
+Sunt enim nonnull\ae \ (nisi fallimur) ex earum genere, que publico sanctissimoque decreto ab ecclesia reiiciuntur, \& quidem in eo loco siue capite celeberrimo in quo sancta Romana ecclesia quas scripturas clericis legendas admittat, \& rursus quas reiiciat, explicatur.
+Vbi cum multa summo iudicio sancita, tum illud habetur sanctissime \& grauissime a sanctis patribus institutum de historiis scriptorum, %sctoru
+quarum authores ignorantur.
+Ibi enim Gelasius papa ex synodo septuaginta episcoporum, Gesta (inquit) scriptorum %sctoru
+martyrum, qui multiplicibus tormentorum cruciatibus, \& mirabilibus confessionum triumphis irradiant, quid ita esse catholicorum dubitet?
+\& maiora eos in agone fuisse perpessos?
+nec suis viribus, sed Dei gratia \& antiquam \& consuetudinem in sancta Romana ecclesia non leguntur:
+quia eorum, qui scripsere, nomina penitus ignorantur, \& ab infidelibus, aut dictis superflua, aut minus apta qui rei ordo fuerit scripta esse putantur.
+Hactenus
 
 
 \newpage
-\begin{center} \color{red}
+
+% pp14
+\begin{center} \color{red} \hypertarget{Letter} \Large
 Tabula literarum Dominicalium. 1564.
 \end{center}
+\bookmark[dest=Letter]{TABULA LITERARUM DOMINICALIUM}
 
+\begin{center}
 \begin{tabular}{c c c c c c c c c c c c c c}
 b & g & f & e & d & b & \color{red} A & g & f & d & c & b & \color{red} A & f\\
 \color{red} A & \  & \  & \  & c & \  & \  & \  & e & \  & \  & \  & g & \ \\
 e & d & c & \color{red} A & g & f & e & c & b & \color{red} A & g & e & d & c\\
 \  & \  & b & \  & \ & \  & d & \  & \  & \  & f & \  & \  & \ \\
 \end{tabular}
+\end{center}
 
 \Huge \textbf{\color{red} I}
 \normalsize N Tabula suprascripta, literam Dominicalem singulis annis hoc pacto inuenius.
@@ -111,36 +170,295 @@ si duplex, Bissextiliem.
 Et tunc prior, id est superior, usque ad festim Mathi\ae \ apostoli feseruiet.
 Inferior autem ad reliquam nni partem accommodabitur.
 Sciendum autem qui finitis \color{red} 18. \color{black} annis, redeundum est ad principium cum annis tunc currentibus.
-\begin{center} \color{red}
+
+\begin{center} \color{red} \hypertarget{Golden} \Large
 Aureus numeris.
+\end{center}
+\vspace{-1em}
+\begin{center}
+7.8.9.10.11.12.13.14.15.16.17.18.19.1.2.3.4.5.6.7.8.\\
+9.10.11.12.13.14.15.
+\end{center}
+\bookmark[rellevel=1,dest=Golden]{AUREUS NUMERIS}
+
+\Huge \textbf{\color{red} S}
+\normalsize Imili modo, vt dictum est de litera Dominicali deprehendes etiam aureum numerum in suprascripta numerorum serie.
+Nam primum numerum, qui est. \color{red} 7. \color{black} tribue anno. \color{red} 1564.
+\color{black} Sequentem qui est. \color{red} 8. \color{black} tribue anno. \color{red} 1565. \color{black} \& sic deinceps, donec ad annum tuum peruenias: \& finitis. \color{red} 19. \color{black} annis, regredere iterum ad principium.
+
+\begin{center} \color{red} \hypertarget{NewMoon} \Large
+Nouiluniorum Canon.
+\end{center}
+\bookmark[dest=NewMoon]{NOUILUNIORUM CANON}
+\vspace{-1em}
+\Huge \textbf{\color{red} N}
+\normalsize Ouilunium singulis mensibus sic reperitur:
+Habito aureo numero anni tui, vbicunque ille in ordine aurei numeri in Calen. posito tibi occurrerit, a loco illius diei iuxta positi sequentium verborum syllabas sursum computa.
+In c\oe lis est \color{red} hic. \color{black} vnicuique diei accommodando syllabam vnam.
+Diesque, ille supra quem syllaba, \color{red} hic. \color{black} ceciderit, dies est Nouilunii.
+\color{red} I\color{black} n sequenti Calend. cuilibet festo habenti aliquid propium apponitur, quoto folio id inueniatur.
+Alia vero festa, quibus non apponitur folio % f'.
+nihil habent proprium.
+Item in quibusdam diebus assignantur terti\ae \ lectiones repetend\ae \ ex epistolis cum fit officium de feria, quarum nonnull\ae \ in quibusdam annis omittuntur, in aliis autem leguntur, vt infra in regulis generalibus videbitur.
+
+
+\newpage
+
+%pp15
+\begin{center} \hypertarget{Kalendar} \Large
+IANVARIVS HABET DIES XXXI.
+\end{center}
+\bookmark[startatroot,dest=Kalendar]{KALENDAR}
+\bookmark[rellevel=1,dest=Kalendar]{IANVARIVS}
+
+\begin{center}
+\begin{tabular}{l r l r r l}
+\multicolumn{2}{l}{\color{red}Au. nu.} & & & \color{red} Dies & \\
+iij & \color{red} A & \multicolumn{2}{c}{\color{red} Calendis} & 1 & \color{red}Circuncisio Christi duplex maius. \color{black} \#\#.\\
+ & b & iiij & no. & 2 & Octaua sancti Stephani duplex mi. \color{black} \#\#.\\
+xj & c & iij & no. & 3 & Octaua sancti Ioannis euan. du. mi. \color{black} \#\#.\\
+ & d & \color{red} prid. & no. & 4 & Octaua sanctorum Innocen. dup. mi. \color{black} \#\#.\\
+xix & e & \multicolumn{2}{c}{\color{red} Nonis} & 5 & De vigilia epiphani\ae . \color{black} \#\#.\\
+viij & f & viij & id. & 6 & \color{red} Epiphania Christi duplex maius. \color{black} \#\#.\\
+ & g & vij & id. & 7 & De octaua Epiphani\ae . \color{black} \#\#.\\
+xvj & \color{red} A & vj & id. & 8 & De octaua Epiphani\ae . \color{black} \#\#.\\
+v & b & v & id. & 9 & De octaua Epiphani\ae . \color{black} \#\#.\\
+ & c & iiij & id. & 10 & De octaua Epiphani\ae . \color{black} \#\#.\\
+xiij & d & iij & id. & 11 & De octaua Epiphani\ae . \color{black} \#\#.\\
+ij & e & \color{red} prid. & id. & 12 & De octaua Epiphani\ae . \color{black} \#\#.\\
+ & f & \multicolumn{2}{c}{\color{red} Idibus} & 13 & De octaua Epiphani\ae \ duplex mi. \color{black} \#\#.\\
+x & g & xix & cal. & 14 & Basilius episcopus confes. \color{red} Fuit. 1. hu. \color{black} \#\#.\\
+ & \color{red} A & xviij & cal. & 15 & Martina virg: marty. \color{red} Fuit. 2. hu. \color{black} \#\#.\\
+xviij & b & xvij & cal. & 16 & Marcellus papa martyr. \color{black} \#\#.\\
+vij & c & xvj & cal. & 17 & Antonius abbas duplex minus. \color{black} \#\#.\\
+ & d & xv & cal. & 18 & Cathedra Romana Petri dup. ma. \color{black} \#\#.\\
+xv & e & xiiij & cal. & 19 & Telespho. papa mart. \color{red} Fuit. 5. hu. \color{black} \#\#.\\
+iiij & f & xiij & cal. & 20 & \color{red} Fabianus papa \& Sebast. mar. du. mi. \color{black} \#\#.\\
+ & g & xij & cal. & 21 & Agnes virgo mar. duplex minus. \color{black} \#\#.\\
+xij & \color{red} A & xj & cal. & 22 & \color{red} Vincentius \& Anastasius mar. \color{black} \#\#.\\
+j & b & x & cal. & 23 & Alphonsus archiepiscopus confes. \color{black} \#\#.\\
+ & c & ix & cal. & 24 & Timotheus episcopus marty. \color{black} \#\#.\\
+ix & d & viij & cal. & 25 & \color{red} Conuersio Pauli apostoli dup. ma. \color{black} \#\#.\\
+& e & vij & cal. & 26 & Polycarpus episcopus marty. \color{black} \#\#.\\
+xvij & f & vj & cal. & 27 & Ioannes Chrysostomus episcopus confes. \color{black} \#\#.\\
+vj & g & v & cal. & 28 & Lucianus presby. mar. \color{red} Fuit. 7. hu. \color{black} \#\#.\\
+ & \color{red} A & iiij & cal. & 29 & Paulus primus eremita. \color{red} Fuit. 10. hu. \color{black} \#\#.\\
+xiiij & b & iij & cal. & 30 & Iginius papa mar. \color{red} Fuit. 11. hu. \color{black} \#\#.\\
+ & c & \color{red} prid. & cal. & 31 & Hilarius episcopus confes. \color{red} Fuit. 13. hu. \color{black} \#\#.\\
+\end{tabular}
+\end{center}
+
+%pp16
+\newpage
+
+\begin{center} \hypertarget{FEBRVA} \Large
+FEBRVA. HABET DIES XXVIII.
+\end{center}
+\bookmark[dest=FEBRVA]{FEBRVARIUS}
+\begin{center}
+\color{red} Et si fuerit Bissextus. XXIX.
+\end{center}
+
+\begin{center}
+\begin{tabular}{l r l r r l}
+\multicolumn{2}{l}{\color{red}Au. nu.} & & & \color{red} Dies & \\
+ & d & \multicolumn{2}{c}{\color{red} Calendis} & 1 & Ignatius episcopus martyr. folio. \color{black} \#\#.\\
+xi & e & iiii & no. & 2 & \color{red} Purificatio Mari\ae \ virginis du. ma. \color{black} \#\#.\\
+xix & f & iii & no. & 3 & Blasius episcopus martyr. \color{black} \#\#.\\
+viii & g & \color{red} prid. & \color{red} no. & 4 & Phileas episcopus \& Philoromus mar. \color{black} \#\#.\\
+ & \color{red} A & \multicolumn{2}{c}{\color{red} Nonis} & 5 & Agata virgo martyr. \color{black} \#\#.\\
+xvi & b & viii & id. & 6 & Dorothea virgo martyr. \color{black} \#\#.\\
+v & c & vii & id. & 7 & Adauctus, \& socii martyres. \color{black} \#\#.\\
+ & d & vi & id. & 8 & Cointha virgo martyr. \color{black} \#\#.\\
+xiii & e & v & id. & 9 & Apollonia virgo martyr. \color{black} \#\#.\\
+ii & f & iiii & id. & 10 & Scholastica virgo. \\%sic
+ & g & iii & id. & 11 & Prisca virgo mar. qu\ae \ fuit. 18 Ian. \color{black} \#\#.\\
+x & \color{red} A & \color{red} prid. & \color{red} id. & 12 & Eulalia virgo martyr. \color{black} \#\#.\\
+ & b & \multicolumn{2}{c}{\color{red} Idibus} & 13 & Ex epist. i. Petri. \color{red} P\color{black} ropter quod. \#\#.\\
+xviii & c & xvi & cal. & 14 & Valentinus presbyter martyr. \color{black} \#\#.\\
+vii & d & xv & cal. & 15 & Faustinus, \& Iovita marty. \color{black} \#\#.\\
+ & e & xiiii & cal. & 16 & Iuliana virgo martyr. \color{black} \#\#.\\
+xv & f & xiii & cal. & 17 & Ex epist. i. Petri. \color{red} D\color{black} eponentes. \#\#.\\
+iiii & g & xii & cal. & 18 & Ex epist. i. Petri. \color{red} C\color{black} harissimi. \#\#.\\
+ & \color{red} A & xi & cal. & 19 & Gabinus presbyter martyr. \color{black} \#\#.\\
+xii & b & x & cal. & 20 & Ex epist. i. Petri. \color{red} S\color{black} imiliter. \#\#.\\
+i & c & ix & cal. & 21 & Ex epist. i. Petri. \color{red} C\color{black} hristo igitur. \#\#.\\
+ & d & viii & cal. & 22 & \color{red} Cathedra Antioch. Pet. apo. du. ma. \color{black} \#\#.\\
+ix & e & vii & cal. & 23 & Ex epist. i. Petri. \color{red} S\color{black} eniores. \color{red} Vigilia. \color{black} \#\#.\\
+ & f & vi & cal. & 24 & \color{red} Mathias aposto duplex maius. \color{black} \#\#.\\
+xvii & g & v & cal. & 25 & Epist. Pauli ad Phil. \color{red} P\color{black} aulus. \#\#.\\
+vi & \color{red} A & iiii & cal. & 26 & Ex epist. Pauli ad Philip. \color{red} M\color{black} ihi. \#\#.\\
+ & b & iii & cal. & 27 & Iulianus, \& Eunus martyres. \color{black} \#\#.\\
+xiiii & c & \color{red} prid. & \color{red} cal. & 28 & Ex epist. Pauli ad Philip. \color{red} I\color{black} taque. \#\#.\\
+\end{tabular}
 \end{center}
 
 
-\chapter{Fundamentals }
-\vspace{-5em} 
+%pp17
+\newpage
 
-\section{Vectors in Euclidean Space}
+\begin{center} \hypertarget{MARTIVS} \Large
+MARTIVS HABET DIES XXXI.
+\end{center}
+\vspace{+.25em}
+\bookmark[dest=MARTIVS]{MARTIVS}
+
+\begin{center}
+\begin{tabular}{l r l r r l}
+\multicolumn{2}{l}{\color{red}Au. nu.} & & & \color{red} Dies & \\
+iii & d & \multicolumn{2}{c}{\color{red} Calendis} & 1 & Ex epist. Pauli ad Phil. \color{red} D\color{black} e c\ae te. fo. \#\#.\\%Ch3
+ & e & iiii & no. & 2 & Ex epist. Pauli ad Philip. \color{red} I\color{black} taque fres. \#\#.\\%Ch4
+xi & f & iii & no. & 3 & Emete. \& Cel. \& Aste. martyr. \color{black} \#\#.\\
+ & g & \color{red} prid. & \color{red} no. & 4 & Lucius papa martyr. \color{black} \#\#.\\
+xix & \color{red} A & \multicolumn{2}{c}{\color{red} Nonis} & 5 & Epistola ad Coloss. \color{red} P\color{black} aulus. \#\#.\\
+viii & b & viii & id. & 6 & Epistola ad Coloss. \color{red} E\color{black} t vos. \#\#.\\
+ & c & vii & id. & 7 & Thomas Aquin. confessor. \color{black} \#\#.\\
+xvi & d & vi & id. & 8 & Epistola ad Coloss. \color{red} V\color{black} idete. \#\#.\\
+v & e & v & id. & 9 & Quadraginta milites marty. \color{black} \#\#.\\
+ & f & iiii & id. & 10 & \color{red} \AE quinoctium. \\%sic
+xiii & g & iii & id. & 11 & \\%sic
+ii & \color{red} A & \color{red} prid. & \color{red} id. & 12 & Gregorius papa confes. duplex mi. \color{black} \#\#.\\
+ & b & \multicolumn{2}{c}{\color{red} Idibus} & 13 & \\
+x & c & xix & cal. & 14 & \\
+ & d & xviii & cal. & 15 & \\
+xviii & e & xvii & cal. & 16 & \\
+vii & f & xvi & cal. & 17 & \\
+ & g & xv & cal. & 18 & \\
+xv & \color{red} A & xiiii & cal. & 19 & Ioseph confessor duplex minus. \#\#.\\
+iiii & b & xiii & cal. & 20 & \\
+ & c & xii & cal. & 21 & Benedictus abbas duplex minus. \#\#.\\
+xii & d & xi & cal. & 22 & \\
+i & e & x & cal. & 23 & \\
+ & f & ix & cal. & 24 & \\
+ix & g & viii & cal. & 25 & \color{red} Annuntiatio Mari\ae \ virgi. du. ma. \color{black} \#\#.\\
+ & \color{red} A & vii & cal. & 26 & \\
+xvii & b & vi & cal. & 27 & \\
+vi & c & v & cal. & 28 & \\
+ & d & iiii & cal. & 29 & \\
+xiiii & e & iii & cal. & 30 & Ex epist. ad Coloss. \color{red} I\color{black} gitur si. \#\#.\\
+iii & f & \color{red} prid. & \color{red} cal. & 31 & Ex epist. ad Coloss. \color{red} D\color{black} omini quod. \#\#.\\
+\end{tabular}
+\end{center}
+
+
+%pp18
+\newpage
+
+\begin{center} \hypertarget{APRILIS} \Large
+APRILIS HABET DIES XXX.
+\end{center}
+\vspace{+.25em}
+\bookmark[dest=APRILIS]{APRILIS}
+
+\begin{center}
+\begin{tabular}{l r l r r l}
+\multicolumn{2}{l}{\color{red}Au. nu.} & & & \color{red} Dies & \\
+ & g & \multicolumn{2}{c}{\color{red} Calendis} & 1 & Ex epist. j. ad Thess. \color{red} P\color{black} aulus. folio. \#\#.\\%Ch1
+xj & \color{red} A & iiij & no. & 2 & Ex epist. ad Thess. \color{red} I\color{black} deo \& nos. \#\#.\\%Ch2:13
+ & b & iij & no. & 3 & Pancratius martyr. \color{black} \#\#.\\
+xix & c & \color{red} prid. & no. & 4 & Isidorus episcopus confessor. \color{black} \#\#.\\
+viij & d & \multicolumn{2}{c}{\color{red} Nonis} & 5 & Vincentius confessor ordinis pr\ae di. \color{black} \#\#.\\
+xvj & e & viij & id. & 6 & Xystus papa martyr. \color{black} \#\#.\\
+v & f & vij & id. & 7 & Ex epist. prima ad Thess. \color{red} D\color{black} e cetero. \#\#.\\
+ & g & vj & id. & 8 & Dionysius episcopus confessor. \color{black} \#\#.\\
+
+v & e & v & id. & 9 & Quadraginta milites marty. \color{black} \#\#.\\
+
+ & f & iiii & id. & 10 & \color{red} \AE quinoctium. \\%sic
+
+xiii & g & iii & id. & 11 & \\%sic
+
+ii & \color{red} A & \color{red} prid. & \color{red} id. & 12 & Gregorius papa confes. duplex mi. \color{black} \#\#.\\
+
+ & b & \multicolumn{2}{c}{\color{red} Idibus} & 13 & \\
+
+x & c & xix & cal. & 14 & \\
+
+ & d & xviii & cal. & 15 & \\
+
+xviii & e & xvii & cal. & 16 & \\
+
+vii & f & xvi & cal. & 17 & \\
+
+ & g & xv & cal. & 18 & \\
+
+xv & \color{red} A & xiiii & cal. & 19 & Ioseph confessor duplex minus. \#\#.\\
+
+iiii & b & xiii & cal. & 20 & \\
+
+ & c & xii & cal. & 21 & Benedictus abbas duplex minus. \#\#.\\
+
+xii & d & xi & cal. & 22 & \\
+
+i & e & x & cal. & 23 & \\
+
+ & f & ix & cal. & 24 & \\
+
+ix & g & viii & cal. & 25 & \color{red} Annuntiatio Mari\ae \ virgi. du. ma. \color{black} \#\#.\\
+
+ & \color{red} A & vii & cal. & 26 & \\
+
+xvii & b & vi & cal. & 27 & \\
+
+vi & c & v & cal. & 28 & \\
+
+ & d & iiii & cal. & 29 & \\
+
+xiiii & e & iii & cal. & 30 & Ex epist. ad Coloss. \color{red} I\color{black} gitur si. \#\#.\\
+
+iii & f & \color{red} prid. & \color{red} cal. & 31 & Ex epist. ad Coloss. \color{red} D\color{black} omini quod. \#\#.\\
+
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%pp27
+\newpage
+
+\begin{center} \color{red} \hypertarget{Canon} \Large
+Canon Sequentis Taul\ae \ ad festa mobilia\\ perpetuo inuenienda.
+\end{center}
+% \bookmark[startatroot,dest=Canon]{CANON SEQUENTIS TAUL\AE}
+
+
+
 
 % \mainmatter
 
-\pagenumbering{arabic}
-
-\chapter{First Chapter}
-
-This will be an empty chapter...
 
 \newpage
 \thispagestyle{empty}
 \mbox{}
 \newpage
 
+\pagenumbering{arabic}
+
 \chapter{Fundamentals of Vectors}
 
 \section{Vectors in Euclidean Space}
-
-
-
-
 
 
 
