@@ -16,14 +16,6 @@
 \usepackage{lettrine}
 \usepackage{multicol}
 
-\usepackage{afterpage}
-\newcommand\myemptypage{
-    \null
-    \thispagestyle{empty}
-    \addtocounter{page}{-1}
-    \newpage
-    }
-
 \setlength{\droptitle}{-1in}
 
 \def\ae{æ}
@@ -33,8 +25,8 @@
 
 
 \begin{document}
-\pagenumbering{roman}
 
+\frontmatter
 
 \title{\includegraphics[width=2.5in]{Picture1.png} \\ \Huge \bfseries \color{Red} B R E V I A R V M \\ \huge R O M A N V M, \\ \large \mdseries \color{Black} Ex sacra potissimum scriptura, \& probatis sanctorum \\ historiis nuper consectum, ac denuo per \\ eundem authorem accurantius \\ recognitum. \\ \ \\ \itshape scrutamini scripturas, quoniam illæ sunt, \\ quæ testimonium perhibent de me. \\Iohan. V.}
 
@@ -43,11 +35,11 @@
 
 \maketitle
 \bookmark[page=1]{TITULUM}
-\myemptypage
 
-% \frontmatter
-
-\pagenumbering{roman}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 \begin{center} \color{red} \hypertarget{Preface} \Large
 A D \ \ S A N C T I S S I M V M \ \ P A T R E M \\ \& Dominum nostrum Paulum tertium \\ Pontificem Maximum,
@@ -61,8 +53,6 @@ Francisci Quignonij Tituli Sanctæ Crucis in Ierusalem presbyteri Cardinalis, in
 \bookmark[dest=Preface]{PR\AE FATIO}
 \vspace{+1em}
 
-% \Huge \textbf{B}
-% \normalsize 
 \yinipar{B}Reviarum Romanum nuper a nobis felicis recordationis Clementis. VII. Pontifi. Maximi hortatu consectum, ac potius in ampliorem sacrarum scripturam lectionem, ad veterem sanctorum patrum, \& conciliorum antiquorum formam reuocatum, tuaque voluntate sanctissime pater editum, graues plerosque ac doctos viros ita probasse \& recepisse intellexi, vt nihil in eo metandum existimarent.
 Alios item animaduerti graues etiam, \& prudentes homines, qui eius rationem magnopere probantes, nonnihil tamen in eo desiderari affimarent.
 Illud vero nunquam dubitatui, fore in tanta multitudine nonnullos ex ijs videlicet, qui in diuerso precandi ritu consenuissent, quibus labor ille noster non esset perinde gratus, existimantibus ab inueterata illa consuetudine precandi nulla ratione clericis esse discedendum.
@@ -193,8 +183,6 @@ e & d & c & \color{red} A & g & f & e & c & b & \color{red} A & g & e & d & c\\
 \end{tabular}
 \end{center}
 
-% \Huge \textbf{\color{red} I}
-% \normalsize
 \lettrine[lines=2]{\textbf{\color{red} I}}{}
 N Tabula suprascripta, literam Dominicalem singulis annis hoc pacto inuenius.
 Primam literam, qu\ae \ est \color{red} b a \color{black} tribue anno. \color{red} 1564.
@@ -217,8 +205,6 @@ Aureus numeris.
 \end{center}
 \bookmark[rellevel=1,dest=Golden]{AUREUS NUMERIS}
 
-% \Huge \textbf{\color{red} S}
-% \normalsize 
 \lettrine[lines=2]{\textbf{\color{red} S}}{}
 Imili modo, vt dictum est de litera Dominicali deprehendes etiam aureum numerum in suprascripta numerorum serie.
 Nam primum numerum, qui est. \color{red} 7. \color{black} tribue anno. \color{red} 1564.
@@ -230,8 +216,6 @@ Nouiluniorum Canon.
 \bookmark[dest=NewMoon]{NOUILUNIORUM CANON}
 % \vspace{-1em}
 
-% \Huge \textbf{\color{red} N}
-% \normalsize 
 \lettrine[lines=2]{\textbf{\color{red} N}}{}
 Ouilunium singulis mensibus sic reperitur:
 Habito aureo numero anni tui, vbicunque ille in ordine aurei numeri in Calen. posito tibi occurrerit, a loco illius diei iuxta positi sequentium verborum syllabas sursum computa.
@@ -1360,7 +1344,7 @@ I N D E X \ \ E V A N G E L I O R V M
 \& Epistolarum, qu\ae \ in ecclesia recitantur: \& in hoc\\Breuiario continentur, quorum initium erit\\vbi fuerit \textdagger \ intus: cum litera foris in\\margine assignata, \&  finis,\\hoc signum.]
 \end{center}
 
-\begin{multicols*}{2}
+\begin{multicols}{2}
 \centering
 \noindent
 \begin{tabular}{l r}
@@ -2085,111 +2069,356 @@ Accessit ad Iesum. & 369.C\\
 \end{tabular}
 \begin{tabular}{l r}
 \multicolumn{2}{c}{\color{red} Transfiguratio.}\\
+Epist. Non enim doctas. & 438.D\\
+Euan. Assumpsit Iesus Pe. & 364.A\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} S. Laurentius.}\\
+Epist. Qui parce. & 335.B\\
+Euang. Nisi granum. & 169.D\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Assumptio.}\\
+Epist. In omnibus. & 519.C\\
+Euang. Intrauit in. & 97.E\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Docollatio sancti Ioannis.}\\
+Euang. Herodes misit. & 408.C\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Natiuita. beat\ae \ Mari\ae .}\\
+Epist. Domini. poss. & 108.\\
+Euang. Liber generatio. & 340 A\\%sic
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Exaltatio. S. Crucis.}\\
+Epist. Factus obed. & 396.C\\
+Euang. Nunc iudicium est. & 169.F\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Feria. iiij. quatour temporum.}\\
+Euang. Et respondens. & 413.C\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Feria. vj quatuor temporum.}\\
+Euang. Rogabat autem. & 89.F\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Sabbato. iiij. temp. Septem.}\\
+Epist. Tabernaculum. & 388.A\\
+Euang. Arborem fici. & 102.B\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} S. Matth\ae us.}\\
+Euang. Vidit hominem. & 150.B\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} S. Michael.}\\
+Epist. Qu\ae \ oportet. & 440.A\\
+Euang. Accesserunt. & 165.A\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} S. Francisci.}\\
+Epist. Mihi autem absit. & 123.A\\
+Euang. Confiteor tibi domine. & 355.C\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} \large F E S T V M \ \ O M N I V M}\\
+\multicolumn{2}{c}{\color{red} Sanctorum.}\\
+Epis. Pars extrema. Vidi. & 500.C\\
+Euang. Videns Iesus tur. & 343.A\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Commemo. Defunct.}\\
+Epist. Nolumus autem. & 132.C\\
+Item. Ecce mysterium. & 267.E\\
+Euang. Dixit ergo. & 165.B\\
+Item Euang. Omne quod. & 152.D\\
+Item Euang. Amen amen. & 150.D\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} \large C O M M V N E}\\
+\multicolumn{2}{c}{\color{red} Sanctorum.}\\
+\multicolumn{2}{c}{\color{red} In vigilia Apostolorum.}\\
+Epist. Per manus. & 279.B\\
+Item Epist. Benedictus. & 123.A\\
+Item Epist. Spectaculum. & 250.C\\
+Euang. Ego sum vitis. & 175.A\\
+%pp48
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} In festis Apostolorum.}\\
+Epist. Iam non. & 125.D\\
+Item Epist. Vniquique. & 126.B\\
+Euang. Ecce ego mitto. & 352.B\\
+Item Euang. H\ae c man. & 176.C\\
+Item Euang. Designauit. & 96.A\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Vnius martyris.}\\
+Epist. Beatus homo. & 101.B\\
+Item Epist. Benedictus. & 327.A\\
+Euang. Nolite arbitrari. & 353.D\\
+Item Euang. Nisi granum. & 169.D\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Plurium martyrum.}\\
+Epist. Iustorum anim\ae . & 111.A\\
+Item Epist. Qui per. & 391.B\\
+Euang. Videns Iesus. & 343.A\\
+Item Euang. Attendite a. & 100.A\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Confessorum.}\\
+Epist. Iustus autem. & 113.C\\
+Item Epist. Testificor. & 429.A\\
+Euang. Vigilate ergo. & 376.E\\
+Item Euang. Sicut enim. & 377.B\\
+Vos estis sal terre. & 344.\\%sic
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Virginum.}\\
+Epist. Qui autem gloriatur. & 336.D\\%gloriat'
+Item Epist. De virginibus. & 253.B\\
+Euang. Simile erit. & 377.A\\
+Item Euang. Simile est. & 377.F\\
+\end{tabular}
+\begin{tabular}{l r}
+\multicolumn{2}{c}{\color{red} Dedicatio.}\\
+Euang. Et ingressus. & 112.A\\
+\end{tabular}
+\end{multicols}
 
-Epist. Estote autem fact. & 190.C\\
+\begin{center} \large
+F I N I S.
+\end{center}
+% \vspace{+1em}
+\begin{center} \large \color{red} \hypertarget{INDEXPSALMORVM}
+I N D E X \ \ P S A L M O R V M.
+\end{center}
+\bookmark[dest=INDEXPSALMORVM]{INDEX PSALMORVM}
 
-Euang. Amen amen. & 178.E\\
+\begin{center}
+\begin{multicols*}{2}
+\begin{tabular}{l r}
+\bfseries \color{red} \Huge A\color{black} \normalsize \normalfont d dom. cum tri. ps. cxix. f. & XX\\
+Ad te domine clam. ps. xxvii. & XX\\
+Ad te leuaui psalmus. cxxii. & XX\\
+Ad te domine psalmus. xxiiii. & XX\\
+Afferte Domino psalmus. xxviii. & XX\\
+Attendite popule psalmus lxxvii. & XX\\
+Audite h\ae c psalmus. xlviii. & XX\\
+Audite c\oe li qu\ae \ loquar. & XX\\
+\multicolumn{2}{c}{\color{red} B}\\
+Beatus vir qui non abiit ps. i. & XX\\
+Beati omnes qui psalmus. cxxvii & XX\\
+Beati quorum psalmus. xxxi. & XX\\
+Beati immaculati psalmus. cxviii. & XX\\
+Beatus vir qui timet ps. cxi. & XX\\
+Beatus vir qui intellegit ps. xl. & XX\\%added vir?
+Benedicam dom. psa. xxxiii. & XX\\
+Benedic anima mea ps. ciii. & XX\\
+Benedic anima mea ps. cii. & XX\\
+Benedixisti psalmus. lxxxiiii. & XX\\
+Benedictus psalmus. xcliii. & XX\\
+Bonitatem psalmus. cxviii. & XX\\
+Bonum est confiteri ps. xci. & XX\\
+Benedictus dominus Deus Israel. & XX\\
+Benedicite omnia opera. & XX\\
+\multicolumn{2}{c}{\color{red} C}\\
+Cantate domino psalmus. xcvii. & XX\\
+Cantate domino psalmus. xcv. & XX\\
+Cantate domino psalmus. cxlix. & XX\\
+C\oe li enarrant psalmus. xviii. & XX\\
+Clamaui in toto psalmus. cxviii. & XX\\
+%pp49
+\end{tabular}
+\begin{tabular}{l r}
+&\\
+Confitemini psalmus. ciiii. & XX\\
+Confitemini psalmus. cxvii. & XX\\
+Confitemini psalmus. cv. & XX\\
+Confitemini psalmus. cvi. & XX\\
+Confitemini psalmus. cxxxv. & XX\\
+Confitebimur psalmus. lxxiiii. & XX\\
+Confitebor tibi psalmus. cx. & XX\\
+Confitebor tibi psa. cxxxvii. & XX\\
+Confitebor tibi domine Isa. & XX\\
+Confitebor tibi domine psa. ix. & XX\\
+Conserua mei psalmus. xv. & XX\\
+Credidi propter psalmus. cxv. & XX\\
+Cum inuocarem psalmus. iiii. & XX\\
+Cantemus domino. v. & XX\\
+\multicolumn{2}{c}{\color{red} D}\\
+Deus in adiutorium psa. lxix. & XX\\
+Deus, quis psalmus. lxxxii. & XX\\
+Deus, venerunt psalmus. lxxviii. & XX\\
+Deus, repulisti psalmus. lix. & XX\\
+Deus, in nomine psalmus. liii. & XX\\
+Deus stetit psalmus. lxxxi. & XX\\
+Deus auribus psalmus. xliii. & XX\\
+Deus laudem psalmus. cviii. & XX\\
+Deus, iudicium psalmus. lxxi. & XX\\
+Deus deus meus psalmus. lxii. & XX\\
+Deus misereatur no. psa. lxvi. & XX\\
+\multicolumn{2}{l}{Deus deus meus, respice in me,}\\
+\quad quare me psalmus. xxi. & XX\\
+Deus Deorum psalmus. xlix. & XX\\
+Deus noster refu. psa. xlv. & XX\\
+\end{tabular}
+\begin{tabular}{l r}
+Deus vltionum psalmus. xciii. & XX\\
+Defecit in salutari psa. xciii. & XX\\
+De profundis psalmus. cxxix. & XX\\
+Diligam te domine psa. xvii. & XX\\
+\multicolumn{2}{l}{Dilexi quoniam exaudiet doms. vocem}\\
+\quad orationis me\ae \ ps. cxiiii. & XX\\
+Dixi, custodiam psa. xxxviii. & XX\\
+Dixit dominus dom. meo psa. cix. & XX\\
+Dixit insipiens psalmus. xiii. & XX\\
+Dixit insipiens psalmus. lii. & XX\\
+Dixit iniustus psalmus. xxxv. & XX\\
+Domine Deus salu. psa. lxxxvii. & XX\\
+Domine refugium psalmus. lxxxix. & XX\\
+Domine dominus noster psa. viii. & XX\\
+Domine Deus meus psalmus. vii. & XX\\
+Domine exaudi psalmus. cxlii. & XX\\
+Domine exaudi ora psalmus. ci. & XX\\
+Domine quis habitabit psa. xiiii. & XX\\
+Domine, in virtute psalmus. xx. & XX\\
+Domine, non est exal. psa. cxxx. & XX\\
+Domine ne in furore psalmus. vi. & XX\\
+Domine, clamaui psalmus. cxl. & XX\\
+Domine quid multi psalmus. iii. & XX\\
+Domine ne in furore ps. xxxvii. & XX\\
+Domine probasti ps. cxxxviii. & XX\\
+Dominus regnauit, iras ps. xcviii. & XX\\
+Dominus regnauit decorem ps. xcii. & XX\\
+Dominus regnavit, exul. ps. xcvi. & XX\\
+Dominus regit me psalmus. xxii. & XX\\
+Dominus illuminatio ps. xxvi. & XX\\
+Domini est terra psalmus. xxiii. & XX\\
+Domine audiui autidionem. & XX\\
+\multicolumn{2}{c}{\color{red} E}\\
+Ecce, quam bonum ps. xcccii. & XX\\
+Ecce nunc bene. ps. cxxxiii. & XX\\
+Eripe me de inimi. ps. lviii. & XX\\
+Eripe me domine ps. cxxxix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
+ psalmus. ix. & XX\\
 
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
 
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
-\multicolumn{2}{c}{\color{red} Dominica. v. post Pascha.}\\
-
-Epist. Estote autem fact. & 190.C\\
-
-Euang. Amen amen. & 178.E\\
-
+% Eructavit cor meum verbum bonum: dico ego opera mea Regi.
+% Exaltabo te, Deus meus, rex: \& benedicam nomini tuo in sǽculum, \& in sǽculum sǽculi.
+% Exaltabo te, Domine, quoniam suscepisti me: nec delectasti inimicos meos super me.
+% Exspectans exspectavi Dominum, \& intendit mihi.
+% Exsultate Deo, adiutori nostro: iubilate Deo Jacob.
+% Exsultate, iusti, in Domino: rectos dec\& collaudatio.
+% Exsúrgat Deus, \& dissipentur inimici eius, \& fúgiant qui oderunt eum, a facie eius.
+% Exaudi, Deus, deprecationem meam: intende orationi me\ae .
+% Exaudi, Deus, orationem meam cum deprecor: a timore inimici eripe animam meam.
+% Exaudi, Deus, orationem meam, \& ne despexeris deprecationem meam: intende mihi, \& exaudi me.
+% Exaudi, Domine, iustitiam meam: intende deprecationem meam.
+% Exaudiat te Dominus in die tribulationis: protegat te nomen Dei Jacob.
+% Fundamenta eius in montibus sanctis: diligit Dominus portas Sion super omnia tabernacula Jacob.
+% In Domino confido: quomodo dicitis anim\ae  me\ae : Transmigra in montem sicut passer?
+% In convertendo Dominus captivitatem Sion: facti sumus sicut consolati:
+% In te, Domine, speravi, non confúndar in \ae ternum: in iustitia tua libera me, \& eripe me.
+% In te, Domine, speravi, non confúndar in \ae ternum: in iustitia tua libera me.
+% In exitu Israël de Ægýpto, domus Jacob de populo barbaro:
+% Inclina, Domine, aurem tuam, \& exaudi me: quoniam inops, \& pauper sum ego.
+% Iubilate Deo, omnis terra, psalmum dicite nomini eius: date gloriam laudi eius.
+% Iubilate Deo, omnis terra: servite Domino in l\ae titia.
+% Iúdica me, Deus, \& discerne causam meam de gente non sancta, ab homine iniquo, \& doloso erue me.
+% Iúdica me, Domine, quoniam ego in innocentia mea ingressus sum: \& in Domino sperans non infirmabor.
+% Iúdica, Domine, nocentes me, expúgna impugnantes me.
+% Lauda, Jerúsalem, Dominum: lauda Deum tuum, Sion.
+% Lauda, anima mea, Dominum, laudabo Dominum in vita mea: psallam Deo meo quamdiu fúero.
+% Laudate Dominum de c\ae lis: laudate eum in excelsis.
+% Laudate Dominum in sanctis eius: laudate eum in firmamento virtútis eius.
+% Laudate Dominum quoniam bonus est psalmus: Deo nostro sit iucúnda, decoraque laudatio.
+% Laudate Dominum, omnes gentes: laudate eum, omnes populi:
+% Laudate nomen Domini, laudate, servi, Dominum.
+% Laudate, púeri, Dominum: laudate nomen Domini.
+% Levavi oculos meos in montes, unde veni\& auxilium mihi.
+% L\ae tatus sum in his, qu\ae  dicta sunt mihi: In domum Domini ibimus.
+% Magnus Dominus, \& laudabilis nimis in civitate Dei nostri, in monte sancto eius.
+% Memento, Domine, David, \& omnis mansu\&údinis eius:
+% Misericordiam, \& iudicium cantabo tibi, Domine:
+% Misericordias Domini in \ae ternum cantabo.
+% Miserere mei, Deus, miserere mei: quoniam in te confidit anima mea.
+% Miserere mei, Deus, quoniam conculcavit me homo: tota die impúgnans tribulavit me.
+% Miserere mei, Deus, secúndum magnam misericordiam tuam.
+% Nisi Dominus \ae dificaverit domum, in vanum laboraverunt qui \ae dificant eam.
+% Nisi quia Dominus erat in nobis, dicat nunc Israël: nisi quia Dominus erat in nobis,
+% Noli \ae mulari in malignantibus: neque zelaveris facientes iniquitatem.
+% Nonne Deo subiecta erit anima mea? ab ipso enim salutare meum.
+% Notus in Judǽa Deus: in Israël magnum nomen eius.
+% Omnes gentes, plaudite manibus: iubilate Deo in voce exsultationis.
+% Paratum cor meum, Deus, paratum cor meum: cantabo, \& psallam in gloria mea.
+% Quam bonus Israël Deus, his, qui recto sunt corde!
+% Quam dilecta tabernacula tua, Domine virtútum: concupiscit, \& deficit anima mea in atria Domini.
+% Quare fremuerunt gentes: \& populi meditati sunt inania?
+% Quemadmodum desiderat cervus ad fontes aquarum: ita desiderat anima mea ad te, Deus.
+% Qui confidunt in Domino, sicut mons Sion: non commovebitur in \ae ternum, qui habitat in Jerúsalem.
+% Qui habitat in adiutorio Altissimi, in protectione Dei c\ae li commorabitur.
+% Qui regis Israël, intende: qui dedúcis velut ovem Joseph.
+% Quid gloriaris in malitia, qui potens es in iniquitate?
+% Salvum me fac, Deus: quoniam intraverunt aqu\ae  usque ad animam meam.
+% Salvum me fac, Domine, quoniam defecit sanctus: quoniam diminút\ae  sunt veritates a filijs hominum.
+% Si vere útique iustitiam loquimini: recta iudicate, filij hominum.
+% Super flúmina Babylonis, illic sedimus \& flevimus: cum recordaremur Sion:
+% S\ae pe expugnaverunt me a iuventúte mea, dicat nunc Israël.
+% Te dec\& hymnus, Deus, in Sion: \& tibi reddetur votum in Jerúsalem.
+% Venite, exsultemus Domino: iubilemus Deo salutari nostro:
+% Verba mea auribus percipe, Domine, intellege clamorem meum.
+% Voce mea ad Dominum clamavi: voce mea ad Deum, \& intendit mihi.
+% Voce mea ad Dominum clamavi: voce mea ad Dominum deprecatus sum:
+% Vsquequo, Domine, oblivisceris me in finem? Úsquequo avertis faciem tuam a me?
+% Vt quid, Deus, repulisti in finem: iratus est furor tuus super oves pascu\ae  tu\ae ?
 \end{tabular}
 \end{multicols*}
+\end{center}
 
 
-
-
-
-% \mainmatter
-
+\begin{multicols}{2}
+\color{red} Oratio ante inchoationem officij. \color{black}
+\lettrine[lines=2]{\color{red} \bfseries L}{}
+Iberator animarum mundi redemptor Iesu Chrsite rex \ae terne \& immortalis:
+qu\ae so immensam clementiam tuam, vt per modulationem psalmorum, quos ego peccator indignus decantare propono:
+liberes animam meam a peccato:
+\& cor meum a prauis cogitationibus, ac insidijs %missing j
+omnibus diabolicis auerte:
+libera qu\ae so domine animam meam a seruitute peccati:
+repelle a me carnalem concupiscentiam:
+eripe me de omni impedimento sathan\ae :
+\& ministrorum eius, \& inimicorum meorum visibilium, \& inuisibilium, qu\ae rentium animam meam:
+saluator mundi Deus. Qui viuis \& regnas. Per omnia secula seculorum. Amen.
+\newline \color{red} Post peractum officium. Oratio. \color{black}
+\lettrine[lines=2]{\color{red} \bfseries S}{}
+Vscipe clementissime Deus, precibus \& meritis beat\ae \ Mari\ae \ semper virginis, beati Michaelis archangeli, beati Ioannis Baptist\ae , sanctorum apostolorum tuorum Petri \& Pauli, ac omnium electorum tuorum obsequium seruitutis me\ae :
+\& si in hoc tuo sacro officio aliquid dignum peregi, propitius respice, \& quod negligenter per me actum est, vel imperfecte, clementer ignosce:
+\& me famulum tuum N. vtinam dignum ab omni aduersitate %adnersitate
+custodi:
+\& in tuorum semitam mandatorum dirige:
+vt ad gaudia paradisi peruenire valeam. Amen.
+\end{multicols}
 
 \newpage
 \thispagestyle{empty}
-\mbox{}
-\newpage
 
-\pagenumbering{arabic}
+\mainmatter
+
+% \thispagestyle{empty}
+% \mbox{}
+% \newpage
 
 %pp53
 \newpage
