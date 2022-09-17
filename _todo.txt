@@ -1,1 +1,7 @@
 Translate to English
+Implement Margin notes.
+[Eventually] Ensure all Indexes are correct:
+	[ ]	Librorum
+	[ ]	Invitatorium
+	[ ]	Evangelorium (all incorrect)
+	[x]	Psalmorum
