@@ -1,5 +1,6 @@
 Translate to English
 Implement Margin notes.
+	[x] Ability added
 [Eventually] Ensure all Indexes are correct:
 	[ ]	Librorum
 	[ ]	Invitatorium
