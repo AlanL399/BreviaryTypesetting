@@ -15,32 +15,44 @@
 
 \makeatletter
 \def\leftmarginnote{%
-	\xymarginnote{\hskip -\marginparsep \hskip -2.5em}}
+	\lrmarginnote{\hskip -\marginparsep \hskip -3em}}
 	% \xymarginnote{\hskip -\marginparsep \hskip -\marginparwidth}}
 
 \def\rightmarginnote{%
-	\xymarginnote{\hskip\columnwidth \hskip -1em}}
+	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
 	% \xymarginnote{\hskip\columnwidth \hskip\marginparsep}}
 
-\long\def\xymarginnote#1#2{%
+\long\def\lrmarginnote#1#2{%
 \vadjust{#1%
 \smash{\vtop{{%
 		\hsize\marginparwidth
         \@parboxrestore
         \@marginparreset
 #2}}}}}
+\makeatother
 
-%gregoriotex is much slower, but slighly prettier than the method used below, which renders much faster
 % \usepackage{gregoriotex}
-\usepackage{fontspec, newunicodechar}
-\newfontfamily{\fallbackfont}{Noto Serif}
-% \setmainfont{Nimbus Roman}
-% \setmainfont{Times New Roman}
-\DeclareTextFontCommand{\textfallback}{\fallbackfont}
-\newunicodechar{℣}{\textfallback{℣}}
-\newunicodechar{℟}{\textfallback{℟}}
-\def\Vbar{℣}
-\def\Rbar{℟}
+%gregoriotex is much slower, but slighly prettier than the method used below, which renders much faster
+% \usepackage{fontspec, newunicodechar}
+% \newfontfamily{\fallbackfont}{Noto Serif}
+% % \setmainfont{Nimbus Roman}
+% % \setmainfont{Times New Roman}
+% \DeclareTextFontCommand{\textfallback}{\fallbackfont}
+% \newunicodechar{℣}{\textfallback{℣}}
+% \newunicodechar{℟}{\textfallback{℟}}
+% \def\Vbar{℣}
+% \def\Rbar{℟}
+
+%This version is better than above, and looks similar to gregoriotex
+\makeatletter
+\DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+\DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+\newcommand{\vers@resp@sym}{\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}}
+\newcommand{\vers@resp}[2]{%
+  {\ooalign{\hidewidth\kern#1\vers@resp@sym\hidewidth\cr#2\cr}}%
+}
+\makeatother
+
 
 \def\ae{æ}
 \def\AE{Æ}
@@ -52,8 +64,7 @@
 \begin{multicols*}{2}
 \lettrine[lines=2]{\bfseries \color{red} P}{}Ater noster, qui es in c\oe lis, sanctificetur %sanctifecet'
 nomen tuum. Aduieniat regnum tuum. Fiat voluntas tua sicut in c\oe lo \& in terra. Panem nostrum quotidianum da nobis hodie. Et dimitte nobis debita nostra, sicut \& nos dimittimus debitoribus nostris. Et ne nos inducas in tentionem. Sed libera nos a malo. Amen.
-\lettrine[lines=2]{\bfseries \color{red} A}{}Ve Maria gratia plena. Dominus tecum, Benedicta tu in mulieribus, \& benedictus fructus ventris tui Iesus. Sancta Maria mater Dei, Ora pro nobis peccatoribus. Amen.
-\leftmarginnote{no\\yes}
+\lettrine[lines=2]{\bfseries \color{red} A}{}Ve \leftmarginnote{no\\yes} Maria gratia plena. Dominus tecum, Benedicta tu in mulieribus, \& benedictus fructus ventris tui Iesus. Sancta Maria mater Dei, Ora pro nobis peccatoribus. Amen.
 \lettrine[lines=2]{\bfseries \color{red} C}{}Onfiteor Deo omnipotenti, beat\ae \ Mari\ae \ %beate Marie, hooked e
 semper virgini, beato Michaeli archangelo, beato Ioanni Baptist\ae , %Baptiste
 sanctis apostolis Petro \& Paulo, omnibus sanctis, \& \color{red} tibi pater, \color{black} quia peccaui nimis cogitatione, verbo \& opere. Mea culpa, Mea culpa, Mea maxima culpa. Ideo precor beatam Mariam semper virginem, beatum Michaelem archangelum, beatum Ioannem Baptistam, sanctos Apostolos Petrum \& Paulum, omnes sanctos, \& \color{red} te pater \color{black} orare pro me. \quad \color{red} Absolutio. \color{black}

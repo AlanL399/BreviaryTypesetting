@@ -13,16 +13,34 @@
 \usepackage{lettrine}
 \usepackage{multicol}
 
-%gregoriotex is much slower, but slighly prettier than the method used below, which renders much faster, but also causes spacing issues
-\usepackage{gregoriotex}
-% \usepackage{fontspec, newunicodechar}
-% \newfontfamily{\fallbackfont}{Noto Serif}
-%% \setmainfont{Times New Roman}
-% \DeclareTextFontCommand{\textfallback}{\fallbackfont}
-% \newunicodechar{℣}{\textfallback{℣}}
-% \newunicodechar{℟}{\textfallback{℟}}
-% \def\Vbar{℣}
-% \def\Rbar{℟}
+\makeatletter
+\def\leftmarginnote{%
+	\lrmarginnote{\hskip -\marginparsep \hskip -6.5em}}
+	% \lrmarginnote{\hskip -\marginparsep \hskip -3.5em}}
+	% \xymarginnote{\hskip -\marginparsep \hskip -\marginparwidth}}
+
+\def\rightmarginnote{%
+	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
+	% \xymarginnote{\hskip\columnwidth \hskip\marginparsep}}
+
+\long\def\lrmarginnote#1#2{%
+\vadjust{#1%
+\smash{\vtop{{%
+		\hsize\marginparwidth
+        \@parboxrestore
+        \@marginparreset
+#2}}}}}
+\makeatother
+
+% \usepackage{gregoriotex}%2.5x longer
+\makeatletter
+\DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+\DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+\newcommand{\vers@resp@sym}{\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}}
+\newcommand{\vers@resp}[2]{%
+  {\ooalign{\hidewidth\kern#1\vers@resp@sym\hidewidth\cr#2\cr}}%
+}%
+\makeatother
 
 \setlength{\droptitle}{-1in}
 
@@ -3109,7 +3127,7 @@ AD LAVDES.
 \newline \color{red} \hypertarget{benedicite}{Canticum} trium puerorum. \color{black}
 % \marginpar[]{Daniel.\\3.} 			implement???
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} B}{}Enedicite omnia opera domini domino: laudate, \& superexaltate eum in secula.
+\lettrine[lines=2]{\bfseries \color{red} B}{}Enedicite\rightmarginnote{Dan.\\3.} omnia opera domini domino: laudate, \& superexaltate eum in secula.
 \newline \color{red} B\color{black}enedicite angeli domini domino, benedicite c\oe li domino.
 \newline \color{red} B\color{black}enedicite aqu\ae \ omnes, qu\ae \ super c\oe los sunt domino: benedicite omnes virtutes domini domino.
 \newline \color{red} B\color{black}enedicite sol, \& luna domino: benedicite stell\ae \ c\oe li domino.
@@ -3510,7 +3528,7 @@ AD VESPERAS.
 \newline \color{red} S\color{black}ed nos qui viuimus benedicimus domino: ex hoc nunc \& vsque in seculum.
 \newline \color{red} \hypertarget{Magnificat}{Canticum} beat\ae \ virgi. Mari\ae \ \& dicitur quotidie ad vesper. \color{black}
 % \vspace{-.5em}
-\lettrine[lines=2]{\bfseries \color{red} M}{}Agnificat anima mea dominum.
+\lettrine[lines=2]{\bfseries \color{red} M}{}Agnificat anima mea dominum.\leftmarginnote{\begin{flushright}Lu.\\1.\end{flushright}}
 \newline \linebreak
 \noindent \color{red} E\color{black}t exultauit spiritus meus in Deo salutari meo.
 \newline \color{red} Q\color{black}uia respexit humilitatem ancill\ae \ su\ae : ecce enim ex hoc beatam me dicent omnes generationes.
@@ -3767,7 +3785,7 @@ AD LAVDES.
 \hypertarget{Isaiah}{Canticum} Isai\ae \ prophet\ae .
 \end{center}
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} C}{}Onfitebor tibi domine, quoniam iratus es mihi: conuersus est furor tuus, \& consolatus es me.
+\lettrine[lines=2]{\bfseries \color{red} C}{}Onfitebor tibi domine, quoniam iratus es mihi:\leftmarginnote{\begin{flushright}Isa.\\12.\end{flushright}} conuersus est furor tuus, \& consolatus es me.
 \newline \color{red} E\color{black}cce deus saluator meus, fiducialiter agam, \& non timebo.
 \newline \color{red} Q\color{black}uia fortitudo mea, \& laus mea dominus, \& factus est mihi in salutem.
 \newline \color{red} H\color{black}aurietis aquas in gaudio de fontibus saluatoris, \& dicetis in illa die, Confitemini domino, \& inuocate nomen eius.%vulgate: die illa
@@ -4276,7 +4294,7 @@ AD LAVDES.
 \hypertarget{Ezekiel}{Canticum} Ezechi\ae .
 \end{center}
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}Go dixi, In dimidio dierum meorum vadam ad portas inferi.
+\lettrine[lines=2]{\bfseries \color{red} E}{}Go dixi,\leftmarginnote{\begin{flushright}Isa.\\38.\end{flushright}} In dimidio dierum meorum vadam ad portas inferi.
 \newline \color{red} Q\color{black}u\ae siui residuum annorum meorum: Dixi, Non videbo dominum Deum in terra viuentium.
 \newline \color{red} N\color{black}on aspiciam hominem vltra: \& habitatorem quietis.
 \newline \color{red} G\color{black}eneratio mea ablata est: \& conuoluta est a me, quasi tabernaculum pastorum.
@@ -4798,7 +4816,7 @@ AD LAVDES.
 \hypertarget{Anna}{Canticum} Ann\ae .
 \end{center}
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}Xultauit cor meum in domino: \& exaltatum est cornu meum in domino.%vulgate:Deo meo
+\lettrine[lines=2]{\bfseries \color{red} E}{}Xultauit\rightmarginnote{j. reg.\\2.} cor meum in domino: \& exaltatum est cornu meum in domino.%vulgate:Deo meo
 \newline \color{red} D\color{black}ilatatum est os meum super inimicos meos: quia l\ae tata sum in salutari tuo.
 \newline \color{red} N\color{black}on est sanctus, vt est dominus: neque enim est alius extra te: \& non est fortis, sicut deus noster.
 \newline \color{red} N\color{black}olite multiplicare loqui sublimia, gloriantes.
@@ -5808,7 +5826,7 @@ AD LAVDES.
 \hypertarget{Habakkuk}{Canticum} Habacuc.
 \end{center}
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} D}{}Omine audiui auditionem tuam, \& timui.
+\lettrine[lines=2]{\bfseries \color{red} D}{}Omine\rightmarginnote{Haba.\\3.} audiui auditionem tuam, \& timui.
 \newline \color{red} D\color{black}omine opus tuum in medio annorum, viuifica illud.
 \newline \color{red} I\color{black}n medio annorum notum facies: cum iratus fueris, misericordi\ae \ recordaberis.
 \newline \color{red} D\color{black}eus ab Austro veniet, \& sanctus de monte Pharan.
@@ -6782,7 +6800,7 @@ Finita antiphona dicitur. \color{black} Pater noster, \&c. Et ne nos. Sed libera
 \color{red} Et ad primam, qu\ae \ semper est veteris testamenti, semper etiam dicitur benedictio. \color{black} Deus pater omnipotens sit nobis propitius, \& clemens. \color{red} \Rbar . \color{black} Amen.
 \newline \color{red} Prophetia Isai\ae . \hfill Lectio prima. \color{black}
 \vspace{-1em}
-\yinipar{V}Isio Isai\ae \ filij Amos, quam vidit super Iudam \& Ierusalem in diebus Ozi\ae , Ioatham, Achaz, \& Ezechi\ae \ regum Iuda. 
+\yinipar{V}Isio\leftmarginnote{\begin{flushright}ca. 1.\end{flushright}} Isai\ae \ filij Amos, quam vidit super Iudam \& Ierusalem in diebus Ozi\ae , Ioatham, Achaz, \& Ezechi\ae \ regum Iuda. 
 Audite c\oe li, \& auribus percipe terra, quoniam dominus loquutus est, Filios enutriui, \& exaltaui: ipsi autem spreuerunt me.
 Cognouit bos possessorem suum, \& asinus pr\ae sepe domini sui: Israel autem me non cognouit, \& populus meus non intellexit.
 V\ae \ genti peccatrici, populo graui iniquitate, semini nequam, filijs sceleratis.
@@ -6809,7 +6827,7 @@ Manus vestr\ae \ sanguine plen\ae \ sunt.%vulgate: missing enim
 \newline \color{red} Et h\ae c similiter benedictio dicitur per totum annum ad secundam lectionem, quem est semper noui testamenti. Sanctum Iesu Christi euangelium secundum Lucam. Lectio. ij. \color{black}
 \vspace{-2em}
 \lettrine[lines=2]{\bfseries \color{red} Q}{}Voniam quidem multi conati sunt ordinare narrationem, qu\ae \ in nobis complet\ae \ sunt rerum, sicut tradiderunt nobis qui ab initio ipsi viderunt, \& ministri fuerunt sermonis: visum est \& mihi assequuto omnia, a principio diligenter ex ordine tibi scribere, optime Theophile, vt cognoscas eorum verborum, de quibus eruditus es, veritatem. \textdagger \ 
-Fuit in diebus Herodis regis Iud\ae \ae , sacerdos quidam nomine Zacharias, de vice Abia: \& vxor illius de filiabus Aaron, \& nomen eius Elisabeth.
+Fuit\leftmarginnote{\begin{flushright}ca. 1.\\A\end{flushright}} in diebus Herodis regis Iud\ae \ae , sacerdos quidam nomine Zacharias, de vice Abia: \& vxor illius de filiabus Aaron, \& nomen eius Elisabeth.
 Erant autem iusti ambo ante Deum, incedentes in omnibus mandatis \& iustificationibus domini sine querela, \& non erat illis filius: eo quod esset Elisabeth sterilis, \& ambo processissent in diebus suis.
 Factum est autem, cum sacerdotio fungeretur in ordine vicis su\ae \ ante Deum, secundum consuetudinem sacerdotij, sorte exijt vt incensum poneret ingressus in templum domini: \& omnis multitudo populi erat orans foris hora incensi.
 Apparuit autem illi angelus domini, stans a dextris altaris incensi.
@@ -6818,7 +6836,7 @@ Ait autem ad illum angelus, Ne timeas Zacharia, quoniam exaudita est deprecatio 
 Erit enim magnus coram domino: \& vinum \& siceram non bibet: \& spiritu sancto replebitur adhuc ex vtero matris su\ae :
 %pp186
 \& multos filiorum Israel conuertet ad dominum Deum ipsorum: \& ipse pr\ae cedet ante illum in spiritu, \& virtute Eli\ae : vt conuertat corda patrum in filios, \& incredulos ad prudentiam iustorum, parare domino plebem perfectam.]
-Et dixit Zacharias ad angelum: Vnde hoc sciam? ego enim sum senex: \& vxor mea processit in diebus suis.
+Et\rightmarginnote{B} dixit Zacharias ad angelum: Vnde hoc sciam? ego enim sum senex: \& vxor mea processit in diebus suis.
 Et respondens angelus, dixit ei: Ego sum Gabriel, qui asto ante Deum: \& missus sum loqui ad te, \& h\ae c tibi euangelizare.
 Et ecce, eris tacens, \& non poteris loqui vsque in diem quo h\ae c fiant: pro eo quod non credidisti verbis meis, qu\ae \ implebuntur in tempore suo.
 Et erat plebs expectans Zachariam: \& mirabantur, quod tardaret ipse in templo.
@@ -6830,7 +6848,7 @@ Post hos autem dies concepit Elisabeth vxor eius: \& occultabat se mensibus quin
 \newline \textswab{C} \color{red} Ad tertiam lectionem \Vbar . \color{black} Iube domine benedicere. \color{red} \&c. Benedictio. \color{black} Spiritus sancti gratia illuminet sensus, \& corda nostra. \color{red} \Rbar . \color{black} Amen.
 \newline \color{red} Secundum Lucam. \hfill Lectio iij.\color{black}
 \vspace{-1em}
-\lettrine[lines=2]{\bfseries \color{red} I}{}N illo tempore, Dixit Iesus discipulis suis, Erunt signa in Sole, \& Luna, \& Stellis, \& in terris pressura gentium. \color{red} Et reliqua. \color{black}
+\lettrine[lines=2]{\bfseries \color{red} I}{}N\rightmarginnote{Lu.\\21.} illo tempore, Dixit Iesus discipulis suis, Erunt signa in Sole, \& Luna, \& Stellis, \& in terris pressura gentium. \color{red} Et reliqua. \color{black}
 \newline \color{red} Homilia sancti Gregorij Pap\ae . \color{black}
 \newline \color{red} L\color{black}ectioni sancti euangelij, quam modo vestra fraternitas audiuit, paulo superius dominus pr\ae misit, dicens:
 Exurget gens contra gentem, \& regnum aduersus regnum: \& terr\ae motus magni erunt per loca, \& pestilenti\ae , \& fames. 
@@ -6978,12 +6996,12 @@ Diuinum auxilium maneat semper nobiscum. \color{red} \Rbar . \color{black} Amen.
 \newline \color{red} \hypertarget{MON-PRIMA-ADV}{Feria secunda,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[rellevel=-1,dest=MON-PRIMA-ADV]{FERIA SECVNDA}
 \vspace{-1em}
-\yinipar{L}\textdagger Auamini, mundi estote, auferte malum cogitationum vestrarum ab oculis meis.
+\yinipar{L}\textdagger Auamini,\leftmarginnote{\begin{flushright}ca. 1.\\E\end{flushright}} mundi estote, auferte malum cogitationum vestrarum ab oculis meis.
 Quiescite agere peruerse: discite benefacere: qu\ae rite iudicium, subuenite oppresso, iudicate pupillo, defendite viduam.
 Et venite, \& arguite me, dicit dominus.
 Si fuerint peccata vestra vt coccinum: quasi nix, dealbabuntur, \& si fuerint rubra sicut vermiculus, velut lana, alba erunt.
 Si volueritis, \& audieritis me, bona terr\ae \ comeditis.]
-Quod si nolueritis, \& me ad iracundiam prouocaueritis, gladius deuorabit vos, quia os domini loquutum est.
+Quod\leftmarginnote{\begin{flushright}F\end{flushright}} si nolueritis, \& me ad iracundiam prouocaueritis, gladius deuorabit vos, quia os domini loquutum est.
 Quomodo facta est meretrix ciuitas fidelis, plena iudicij?
 Iustitia habitauit in ea, nunc autem homicid\ae .
 Argentum tuum versum est in scoriam: vinum tuum mistum est aqua.
@@ -6999,7 +7017,7 @@ Et erit fortitudo vestra vt fauilla stupp\ae , \& opus vestrum quasi scintilla: 
 %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Can delete line !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij.\color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} I}{}N mense autem sexto \textdagger \ missus est Angelus Gabriel a Deo in ciuitatem Galil\ae \ae \ cui nomen Nazareth, ad virginem desponsatam viro, cui nomen erat Ioseph, de domo Dauid: \& nomen virginis Maria.
+\lettrine[lines=2]{\bfseries \color{red} I}{}N\rightmarginnote{ca. 1.\\C} mense autem sexto \textdagger \ missus est Angelus Gabriel a Deo in ciuitatem Galil\ae \ae \ cui nomen Nazareth, ad virginem desponsatam viro, cui nomen erat Ioseph, de domo Dauid: \& nomen virginis Maria.
 Et ingressus angelus ad eam, dixit: Aue, gratia plena, dominus tecum, benedicta tu in mulieribus.
 Qu\ae \ cum audisset, 
 %pp196
@@ -7011,14 +7029,14 @@ Et respondens angelus, dixit ei, Spiritus sanctus superueniet in te, \& virtus a
 Ideoque \& quod nascetur ex te sanctum, vocabitur filius Dei.
 Et ecce Elisabeth cognata tua, \& ipsa concepit filium in senectute sua: \& hic mensis, sextus est illi, qu\ae \ vocatur sterilis: quia non erit impossibile apud Deum omne verbum.
 Dixit autem Maria: Ecce ancilla domini, fiat mihi secundum verbum tuum.]
-Et discessit ab illa angelus. \textdagger \ 
+Et\leftmarginnote{\begin{flushright}D\end{flushright}} discessit ab illa angelus. \textdagger \ 
 Exurgens autem Maria in diebus illis, abijt in montana cum festinatione in ciuitatem Iuda: \& intrauit in domum Zachari\ae , \& salutauit Elisabeth.
 Et factum est, vt audiuit salutationem Mari\ae \ Elisabeth, exultauit infans in vtero eius: \& repleta est spiritu sancto Elisabeth: \& exclamauit voce magna, \& dixit, Benedicta tu inter mulieres, \& benedictus fructus ventris tui.
 Et vnde hoc mihi, vt veniat mater domini mei ad me?
 Ecce enim vt facta est vox salutationis tu\ae \ in auribus meis, exultauit in gaudio infans in vtero meo: \& beata, qu\ae \ credidisti: quoniam perficientur ea qu\ae \ dicta sunt tibi a domino.
 Et ait Maria, Magnificat anima mea dominum.
 Et exultauit spiritus meus in Deo salutari meo.]
-Quia respexit humilitatem ancill\ae \ su\ae : ecce enim ex hoc beatam me dicent omnes generationes.
+Quia\leftmarginnote{\begin{flushright}E\end{flushright}} respexit humilitatem ancill\ae \ su\ae : ecce enim ex hoc beatam me dicent omnes generationes.
 Quia fecit mihi magna qui potens est: \& sanctum nomen eius.
 Et misericordia eius a progenie in progenies, timentibus eum.
 Fecit potentiam in brachio suo: dispersit superbos mente cordis sui.
@@ -7047,13 +7065,13 @@ Et ideo mundemus quantum possumus cum Dei adiutorio corda simul \& corpora nostr
 \newline \textswab{C} \color{red} \hypertarget{TUE-PRIMA-ADV}{Feria tertia,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=TUE-PRIMA-ADV]{FERIA TERTIA}
 \vspace{-.5em}
-\yinipar{V}Erbum quod vidit Isaias filius Amos super Iudam \& Ierusalem. \textdagger \ 
+\yinipar{V}Erbum\leftmarginnote{\begin{flushright}c.2.a\end{flushright}} quod vidit Isaias filius Amos super Iudam \& Ierusalem. \textdagger \ 
 Et erit in nouissimis diebus pr\ae paratus mons domus domini in vertice montium, \& eleuabitur super colles.
 Et fluent ad eum omnes gentes: \& ibunt populi multi, \& dicent: Venite, \& ascendamus ad montem domini, \& ad domum Dei Iacob, \& docebit nos vias suas, \& ambulabimus in semitis eius: quia de Sion exibit lex, \& verbum domini de Ierusalem.
 Et iudicabit gentes, \& arguet populos multos. Et conflabunt gladios suos in vomeres, \& lanceas suas in falces.
 Non leuabit gens contra gentem gladium, nec exercebuntur vltra ad pr\ae lium.
 Domus Iacob venite, \& ambulemus in lumine domini.]
-Proiecisti enim populum tuum domum Iacob: quia repleti sunt vt olim, \& augeres habuerunt vt Philisthiim, \& pueris alienis adh\ae serunt.
+Proiecisti\leftmarginnote{\begin{flushright}B\end{flushright}} enim populum tuum domum Iacob: quia repleti sunt vt olim, \& augeres habuerunt vt Philisthiim, \& pueris alienis adh\ae serunt.
 Et repleta est terra argento \& auro: \& non est finis thesaurorum eius. Et repleta est terra eius equis \& innumerabiles quadrig\ae \ eius. Et repleta est terra eius idolis.
 Opus manuum suarum adorauerunt, quod fecerunt digiti eorum. Et incuruauit se homo, \& humiliatus est vir.
 Ne ergo dimittas eis.
@@ -7061,7 +7079,7 @@ Ingredere in petram, \& abscondere in fossa humo a facie timoris domini, \& a gl
 Oculi sublimes hominis humiliati sunt, \& incuruabitur altitudo virorum: exaltabitur autem dominus solus in die illa.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij.\color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}\textdagger \ Lisabeth autem impletum est tempus pariendi: \& peperit filium.
+\lettrine[lines=2]{\bfseries \color{red} E}{}\textdagger Lisabeth\rightmarginnote{c.1.f} autem impletum est tempus pariendi: \& peperit filium.
 Et audierunt vicini \& cognati eius quia magnificauit dominus misericordiam suam cum illa, \& congratulabantur ei.
 Et factum est: in die octauo venerunt circuncidere puerum, \& vocabant eum nomine patris sui, Zachariam.
 Et respondens mater eius dixit, Nequaquam, sed vocabitur Ioannes.
@@ -7097,12 +7115,12 @@ H\ae c si fideliter Christo adiuuante volueritis implere, \& in hoc seculo ad al
 \newline \textswab{C} \color{red} \hypertarget{WED-PRIMA-ADV}{Feria quarta} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=WED-PRIMA-ADV]{FERIA QVARTA}
 \vspace{-.5em}
-\yinipar{I}N die illa erit germen domini in magnificentia, \& gloria, \& fructus terr\ae \ sublimis, \& exultatio his qui saluati fuerint de Israel.
+\yinipar{I}N\leftmarginnote{\begin{flushright}ca. 4.\end{flushright}} die illa erit germen domini in magnificentia, \& gloria, \& fructus terr\ae \ sublimis, \& exultatio his qui saluati fuerint de Israel.
 Et erit: omnis qui relictus fuerit in Sion, \& residuus in Ierusalem, sanctus vocabitur, omnis qui scriptus est in vita in Ierusalem, si abluerit dominus sordes filiarum Sion, \& sanguinem Ierusalem lauerit de medio eius in spiritu iudicij \& spiritu ardoris.
 %pp201
 Et creabit dominus super omnem locum montis Sion, \& vbi inuocatus est, nubem per diem, \& fumum \& splendorem ignis flammantis in nocte.
 Super omnem enim gloriam protectio, \& tabernaculum erit in vmbraculum diei ab \ae stu, \& in securitatem \& absconsionem a turbine \& a pluuia.
-\newline \indent Cantabo dilecto meo canticum patruelis mei vine\ae \ su\ae : Vinea facta est dilecto meo in cornu filio olei.
+\newline \indent Cantabo\leftmarginnote{\begin{flushright}ca. 5.\end{flushright}} dilecto meo canticum patruelis mei vine\ae \ su\ae : Vinea facta est dilecto meo in cornu filio olei.
 Et sepiuit eam, \& lapides elegit ex ea, \& plantauit vineam electam: \& \ae dificauit turrim in medio eius, \& torcular extruxit in ea. Et expectauit vt faceret vuas, \& fecit labruscas.
 Nunc ergo habitatores Ierusalem, \& viri Iuda, iudicate inter me \& vineam meam.
 Quid est quod debui vltra facere vine\ae \ me\ae , \& non feci ei? an quod expectaui vt faceret vuas, \& fecit labruscas?
@@ -7112,7 +7130,7 @@ Et ponam eam desertam: non putabitur, \& non fodietur: \& ascendent super eam ve
 Vinea enim domini exercituum, domus Israel est: \& vir Iuda, germen eius delectabile.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij.\color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} F}{}Actum est autem: in diebus illis \textdagger \ exijt edictum a C\ae sare Augusto, vt describeretur vniuersus orbis.
+\lettrine[lines=2]{\bfseries \color{red} F}{}Actum\rightmarginnote{c.2.a} est autem: in diebus illis \textdagger \ exijt edictum a C\ae sare Augusto, vt describeretur vniuersus orbis.
 H\ae c descriptio prima, facta est a pr\ae side Syri\ae \ Cirino: Et ibant omnes vt profiterentur, singuli in suam ciuitatem.
 Ascendit autem \& Ioseph a Galil\ae a de ciuitate Nazareth, in Iud\ae am, in ciuitatem Dauid, qu\ae \ vocatur Bethlehem: eo quod esset de domo \& familia Dauid, vt profiteretur cum Maria desponsata sibi vxore, pr\ae gnante.
 Factum est autem cum essent ibi, impleti sunt dies vt pareret.
@@ -7122,7 +7140,7 @@ Et dixit illis angelus, Nolite timere: ecce enim euangelizo vobis gaudium magnum
 Et hoc vobis signum, Inuenietis infantem pannis inuolutum, \& positum in pr\ae sepio.
 %pp202
 Et subito facta est cum angelo multitudo militi\ae \ c\oe lestis, laudantium Deum \& dicentium, Gloria in altissimis Deo: \& in terra, pax hominibus bon\ae \ voluntatis.]
-Et factum est, vt discesserunt ab eis angeli in c\oe lum, \textdagger \ pastores loquebantur ad inuicem, Transeamus vsque Bethlehem, \& videamus hoc verbum, quod factum est, quod fecit dominus, \& ostendit nobis.
+Et factum est, vt discesserunt ab eis angeli in c\oe lum, \textdagger \ pastores\rightmarginnote{B} loquebantur ad inuicem, Transeamus vsque Bethlehem, \& videamus hoc verbum, quod factum est, quod fecit dominus, \& ostendit nobis.
 Et venerunt festinantes: \& inuenerunt Mariam \& Ioseph, \& infantem positum in pr\ae sepio.
 Videntes autem cognouerunt de verbo quod dictum erat illis de puero hoc.
 Et omnes qui audierunt, mirati sunt, \& de his qu\ae \ dicta erant a pastoribus ad ipsos.
@@ -7149,7 +7167,7 @@ Quicquid ergo non vis inuenire in domo tua, quantum potes labora vt non inueniat
 \newline \textswab{C} \color{red} \hypertarget{THU-PRIMA-ADV}{Feria quinta,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=THU-PRIMA-ADV]{FERIA QVINTA}
 \vspace{-.5em}
-\yinipar{E}T factum est in diebus Achaz filij Ioatham, filij Ozi\ae , regis Iuda, ascendit Rasin rex Syri\ae , \& Phacee filius Romeli\ae \ rex Israel, in Ierusalem: ad pr\ae liandum contra eam: \& non potuerunt debellare eam.
+\yinipar{E}T\rightmarginnote{ca. 7.} factum est in diebus Achaz filij Ioatham, filij Ozi\ae , regis Iuda, ascendit Rasin rex Syri\ae , \& Phacee filius Romeli\ae \ rex Israel, in Ierusalem: ad pr\ae liandum contra eam: \& non potuerunt debellare eam.
 Et nuntiauerunt domui Dauid, dicentes: Requieuit Syria super Ephraim, \& commotum est cor eius, \& cor populi eius: sicut mouentur ligna syluarum a facie venti.
 Et dixit dominus ad Isaiam: Egredere in occursum Achaz, tu, \& qui derelictus est, Iasub filius tuus, ad extremum aqu\ae \ ductus piscin\ae \ superioris in via agri fullonis, \& dices ad eum, Vide vt sileas: noli timere, \& cor tuum ne formidet a duabus caudis titionum fumigantium istorum in ira furoris Rasin regis Syri\ae , \& filij Romeli\ae : eo quod consilium inierit contra te Syria in malum Ephraim, \& filius Romeli\ae , dicentes: Ascendamus ad Iudam, \& suscitemus eum, \& auellamus eum ad nos, \& ponamus regem in medio eius filium Tabeel.
 H\ae c dicit dominus Deus: Non stabit, \& non erit istud:
@@ -7157,25 +7175,25 @@ H\ae c dicit dominus Deus: Non stabit, \& non erit istud:
 Sed caput Syri\ae \ Damascus, \& caput Damasci Rasin.
 Et adhuc sexaginta \& quinque anni, \& desinet Ephraim esse populus, \& caput Ephraim Samaria, \& caput Samari\ae \ fili Romeli\ae .
 Si non credideritis, non permanebitis. \textdagger \ 
-Et adiecit dominus loqui ad Achaz, dicens: Pete tibi signum a domino Deo tuo in profundum inferni, siue in excelsum supra. Et dixit Achaz, Non petam, \& non tentabo dominum.
+Et\leftmarginnote{\begin{flushright}B\end{flushright}} adiecit dominus loqui ad Achaz, dicens: Pete tibi signum a domino Deo tuo in profundum inferni, siue in excelsum supra. Et dixit Achaz, Non petam, \& non tentabo dominum.
 Et dixit: Audite ergo domus Dauid: Nunquid parum vobis est molestos esse hominibus, quia molesti estis \& Deo meo?
 Propter hoc dabit dominus ipse vobis signum, Ecce virgo concipiet \& pariet filium, \& vocabitur nomen eius Emmanuel.
 Butyrum \& mel comedet, vt sciat reprobare malum, \& eligere bonum.]
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}\textdagger \ T postquam consummati sunt dies octo vt circuncideretur puer: vocatum est nomen eius Iesus, quod vocatum est ab Angelo priusquam in vtero conciperetur.] \textdagger \ 
-Et postquam impleti sunt dies purgationis eius secundum legem Moysi, tulerunt illum in Ierusalem, vt sisterent eum domino, sicut scriptum est in lege domini: Quia omne masculinum adaperiens vuluam sanctum domino vocabitur, \& vt darent hostiam, secundum quod dictum est in lege domini, par turturum, aut duos pullos columbarum.
+\lettrine[lines=2]{\bfseries \color{red} E}{}\textdagger T\leftmarginnote{\begin{flushright}c.2.c\end{flushright}} postquam consummati sunt dies octo vt circuncideretur puer: vocatum est nomen eius Iesus, quod vocatum est ab Angelo priusquam in vtero conciperetur.]\textdagger \ 
+Et\rightmarginnote{D} postquam impleti sunt dies purgationis eius secundum legem Moysi, tulerunt illum in Ierusalem, vt sisterent eum domino, sicut scriptum est in lege domini: Quia omne masculinum adaperiens vuluam sanctum domino vocabitur, \& vt darent hostiam, secundum quod dictum est in lege domini, par turturum, aut duos pullos columbarum.
 Et ecce: homo erat in Ierusalem, cui nomen Simeon, \& homo iste iustus \& timoratus, expectans consolationem Israel: \& spiritus sanctus erat in eo.
 Et responsum acceperat a Spiritu sancto, non visurum se mortem, nisi prius videret Christum domini. Et venit in spiritu in templum.
 Et cum inducerent puerum Iesum parentes eius, vt facerent secundum consuetudinem legis pro eo: \& ipse accepit eum in vlnas suas, \& benedixit Deum, \& dixit, Nunc dimittis seruum tuum domine, secundum verbum tuum in pace: Quia viderunt oculi mei salutare tuum, Quod parasti ante faciem omnium populorum.
-Lumen ad reuelationem gentium, \& gloriam plebis tu\ae \ Israel.] \textdagger \ 
-Et erat pater eius \& mater eius mirantes super ijs qu\ae \ dicebantur de illo.
+Lumen ad reuelationem gentium, \& gloriam plebis tu\ae \ Israel.]\textdagger \ 
+Et\rightmarginnote{E} erat pater eius \& mater eius mirantes super ijs qu\ae \ dicebantur de illo.
 Et benedixit illis Simeon: \& dixit ad Mariam matrem eius: Ecce, positus est hic in ruinam, \& in resurrectionem multorum in Israel, \& in signum cui contradicetur.
 Et tuam ipsius animam pertransibit gladius: vt reuelentur ex multis cordibus cogitationes.
 %pp205
 \newline \textswab{C} \color{red} Sequens tertia lectio dicenda est in omnibus quintis Ferijs aduentus, quando non occurrit festum: excipitur vigilia Natiuitatis, si inciderit in Feria quinta. \color{black}
 \newline \color{red} Ex sermone sancti Aug. episc. L. iij. \color{black}
-% \vspace{-.25em}
+\vspace{-.25em}
 \lettrine[lines=2]{\bfseries \color{red} C}{}Erte si te Rex terrenus aut quicunque paterfamilias ad suum natalitium inuitaret, qualibus vestimentis studeres ornatus incedere? quam nouis vel nitidis, quam splendidis, quorum nec vetustas, nec vilitas, nec aliqua f\oe ditas oculos inuitantis offenderet?
 Tali ergo studio inquantum pr\ae vales (Christo auxiliante) contende, vt diuersis virtutum ornamentis anima tua composita, simplicitatis gemmis \& sobrietatis floribus adornata, ad solennitatem regis \ae terni, id est, ad natalem domini saluatoris cum secura conscientia procedat, castitate nitida, charitate splendida, eleemosynis candida.
 Christus enim dominus si te ita compositum natalitium suum celebrare cognouerit, ipse per se venire, \& animam tuam non solum visitare, sed etiam requiescere, \& in perpetuum in illa dignabitur habitare, sicut scriptum est, Et inhabitabo in illis, \& inambulabo.
@@ -7190,24 +7208,24 @@ celebrare disponitis, ebrietatem ante omnia fugite, iracundi\ae \ quasi besti\ae
 \newline \textswab{C} \color{red} \hypertarget{FRI-PRIMA-ADV}{Feria sexta,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=FRI-PRIMA-ADV]{FERIA SEXTA}
 \vspace{-.5em}
-\yinipar{E}T \textdagger \ egredietur virga de radice Iesse, \& flos de radice eius ascendet.
+\yinipar{E}T \textdagger \ egredietur\rightmarginnote{c. 11.\\a} virga de radice Iesse, \& flos de radice eius ascendet.
 Et requiescet super eum spiritus domini, spiritus sapienti\ae \ \& intellectus, spiritus consilij \& fortitudinis, spiritus scienti\ae \ \& pietatis. Et replebit eum spiritus timoris domini.
 Non secundum visionem oculorum iudicabit, neque secundum auditum aurium arguet, sed iudicabit in iustitia pauperes, \& arguet in \ae quitate pro mansuetis terr\ae .
 Et percutiet terram virga oris sui, \& spiritu labiorum suorum interficiet impium. Et erit iustitia cingulum lumborum eius, \& fides cinctorium renum eius.]
-Habitabit lupus cum agno: \& pardus cum h\oe do accubabit: vitulus, \& leo, \& ouis simul morabuntur, \& puer paruulus minabit eos.
+Habitabit\rightmarginnote{B} lupus cum agno: \& pardus cum h\oe do accubabit: vitulus, \& leo, \& ouis simul morabuntur, \& puer paruulus minabit eos.
 Vitulus, \& vrsus pascentur, simul requiescent catuli eorum, \& leo quasi bos comedet paleas.
 Et delectabitur infans ab vbere super foramine aspidis: \& in cauernam reguli, qui ablactatus fuerit, manum suam mittet.
 Non nocebunt, \& non occident in vniuerso monte sancto meo, quia repleta est terra scientia domini, sicut aqua maris operientes.
 In die illa radix Iesse, qui stat in signum populorum ipsum gentes deprecabuntur, \& erit sepulchrum eius gloriosum.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}T \textdagger \ erat Anna prophetissa, filia Phanuel, de tribu Aser: h\ae c processerat in diebus multis, \& vixerat cum viro suo annis septem a virginitate sua.
+\lettrine[lines=2]{\bfseries \color{red} E}{}T \textdagger \ erat\leftmarginnote{\begin{flushright}c.2.f\end{flushright}} Anna prophetissa, filia Phanuel, de tribu Aser: h\ae c processerat in diebus multis, \& vixerat cum viro suo annis septem a virginitate sua.
 Et h\ae c vidua vsque ad annos octogintaquatuor: qu\ae \ non discedebat de templo, ieiunijs \& obsecrationibus seruiens nocte ac die.
 Et hac ipsa hora superueniens, confitebatur domino: \& loquebatur de illo omnibus qui expectabant redemptionem Israel.
 Et vt perfecerunt omnia secundum legem domini, reuersi sunt in Galil\ae am, in ciuitatem suam Nazareth.
 Puer autem crescebat, \& confortabatur: plenus sapientia, \& gratia Dei erat in illo.]
 %pp207
-Et ibant parentes eius per omnes annos in Ierusalem, in die solenni pasch\ae . \textdagger \ 
+Et\leftmarginnote{\begin{flushright}G\end{flushright}} ibant parentes eius per omnes annos in Ierusalem, in die solenni pasch\ae . \textdagger \ 
 Et cum factus esset annorum duodecim, ascendentibus illis Ierosolymam secundum consuetudinem diei festi, consummatisque diebus cum redirent, remansit puer Iesus in Ierusalem, \& non cognouerunt parentes eius.
 Existimantes autem illum esse in comitatu, venerunt iter diei, \& requirebant eum inter cognatos \& notos.
 Et non inuenientes, regressi sunt in Ierusalem, requirentes eum. Et factum est: post triduum inuenerunt illum in templo, sedentem in medio doctorum, audientem illos, \& interrogantem eos.
@@ -7249,7 +7267,7 @@ Magna ergo est eleemosyna, qu\ae \ ardentium criminum globos beneuolenti\ae \ su
 \newline \textswab{C} \color{red} \hypertarget{SAT-PRIMA-ADV}{Sabbato,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=SAT-PRIMA-ADV]{SABBATO}
 \vspace{-.5em}
-\yinipar{S}Acerdos \& propheta nescierunt pr\ae \ ebrietate, absorpti sunt a vino, errauerunt in ebrietate, nescierunt videntem, ignorauerunt iudicium.
+\yinipar{S}Acerdos\leftmarginnote{\begin{flushright}c. 28.\end{flushright}} \& propheta nescierunt pr\ae \ ebrietate, absorpti sunt a vino, errauerunt in ebrietate, nescierunt videntem, ignorauerunt iudicium.
 Omnes enim mens\ae \ replet\ae \ sunt vomitu sordiumque, ita vt non esset vltra locus.
 Quem docebit scientiam? \& quem intelligere faciet auditum?
 Ablactatos a lacte, auulsos ab vberibus: quia Manda remanda, manda remanda, expecta reexpecta: expecta reexpecta, modicum ibi, modicum ibi.
@@ -7264,10 +7282,10 @@ Qui crediderit, non festinet. Et ponam in pondere iudicium, \& iustitiam in mens
 Et delebitur f\oe dus vestrum cum morte: \& pactum vestrum cum inferno non stabit.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} A}{}\textdagger \ Nno autem quintodecimo imperij Tyberij C\ae saris procurante Pontio Pilato Iud\ae am, tetrarcha autem Gali\ae \ae \ Herode, Philippo autem fratre eius tetrarcha Itur\ae \ae \ \& Traconitidis regionis, \& Lysania Abilin\ae \ tetrarcha, sub principibus sacerdotum Anna \& Chaipha, factum est verbum domini super Ioannem Zachari\ae \ filium, in deserto.
+\lettrine[lines=2]{\bfseries \color{red} A}{}\textdagger Nno\rightmarginnote{c.3.a} autem quintodecimo imperij Tyberij C\ae saris procurante Pontio Pilato Iud\ae am, tetrarcha autem Gali\ae \ae \ Herode, Philippo autem fratre eius tetrarcha Itur\ae \ae \ \& Traconitidis regionis, \& Lysania Abilin\ae \ tetrarcha, sub principibus sacerdotum Anna \& Chaipha, factum est verbum domini super Ioannem Zachari\ae \ filium, in deserto.
 Et venit in omnem regionem Iordanis, pr\ae dicans baptismum p\oe nitenti\ae \ in remissionem peccatorum, sicut scriptum est in libro sermonum Isai\ae \ prophet\ae , Vox clamantis in deserto, Parate viam domini, rectas facite semitas eius.
 Omnis vallis implebitur: \& omnis mons \& collis humiliabitur, \& erunt praua in directa, \& aspera in vias planas, \& videbit omnis caro salutare Dei.]
-Dicebat ergo ad turbas, qu\ae \ exibant vt baptizarentur ab ipso, Genimina viperarum, quis ostendit vobis fugere a ventura ira?
+Dicebat\rightmarginnote{B} ergo ad turbas, qu\ae \ exibant vt baptizarentur ab ipso, Genimina viperarum, quis ostendit vobis fugere a ventura ira?
 Facite ergo fructus dignos p\oe nitenti\ae , \& ne c\oe peritis dicere, Patrem habemus Abraham.
 Dico enim vobis, quia potens est Deus de lapidibus istis suscitare filios Abrah\ae .
 Iam enim securis ad radicem arboris posita est.
@@ -7284,19 +7302,19 @@ Herodes autem tetrarcha cum corriperetur ab illo de Herodiade vxore fratris sui,
 \newline \textswab{C} \color{red} \hypertarget{SUN-SECUNDA-ADV}{Sabbato,} ex Isaia. \hfill Lectio. j. \color{black}
 \bookmark[dest=SUN-SECUNDA-ADV]{DOMINICA}
 % \vspace{-.25em}
-\yinipar{L}\textdagger \ \AE tabitur deserta, \& inuia, \& exultabit solitudo, \& florebit quasi lilium.
+\yinipar{L}\textdagger \ \AE tabitur\rightmarginnote{c. 35.\\a} deserta, \& inuia, \& exultabit solitudo, \& florebit quasi lilium.
 Germinans germinabit, \& exultabit l\ae tabunda, \& laudans.
 Gloria Libani data, est ei, decor Carmeli \& Saron, Ipsi videbunt gloriam domini, \& decorem Dei nostri.
 Confortate manus dissolutas, \& genua debilia roborate.
 Dicite pusillanimis, Confortamini, \& nolite timere, ecce Deus vester vltionem adducet retributionis: Deus ipse veniet, \& saluabit vos.
 Tunc aperientur oculi c\ae corum, \& aures surdorum patebunt
 Tunc saliet sicut ceruus claudus, \& aperta erit lingua mutorum: quia sciss\ae \ sunt in deserto aqu\ae : \& torrentes in solitudine, \& qu\ae \ erat arida in stagnum, \& sitiens in fontes aquarum.]
-In cubilibus in quibus prius dracones habitabant, orietur viror calami, \& iunci: \& erit ibi semita \& via: \& via sancta vocabitur: non transibit per eam pollutus, \& h\ae c erit vobis directa via, ita vt stulti non errent per eam.
+In\rightmarginnote{B} cubilibus in quibus prius dracones habitabant, orietur viror calami, \& iunci: \& erit ibi semita \& via: \& via sancta vocabitur: non transibit per eam pollutus, \& h\ae c erit vobis directa via, ita vt stulti non errent per eam.
 Non erit ibi leo, \& mala bestia non ascendet per eam, nec inuenietur ibi.
 Et ambulabunt qui liberati fuerint, \& redempti a domino, conuertentur \& venient in Sion cum laude: \& l\ae titia sempiterna super caput eorum: gaudium \& l\ae titiam obtinebunt, \& fugiet dolor \& gemitus.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} F}{}Actum est autem cum baptizaretur omnis populus, \& Iesu baptizato \& orante apertum est c\oe lum: \& descendit spiritus sanctus corporali specie sicut columba in ipsum: \& vox de c\oe lo facta est.
+\lettrine[lines=2]{\bfseries \color{red} F}{}Actum\rightmarginnote{ca. 3.} est autem cum baptizaretur omnis populus, \& Iesu baptizato \& orante apertum est c\oe lum: \& descendit spiritus sanctus corporali specie sicut columba in ipsum: \& vox de c\oe lo facta est.
 Tu es filius meus dilectus: in te complacui mihi.
 Et ipse Iesus erat incipiens quasi annorum triginta: vt putabatur filius Ioseph, qui fuit Heli, qui fuit Matthat, qui fuit Leui, qui fuit Melchi,
 %pp225
@@ -7485,10 +7503,93 @@ Ecce, isti de longe venient, \& ecce illi ab aquilone \& mari, \& isti de terra 
 Laudate c\oe li, \& exsulta terra: iubilate montes laudem: quia consolatus est dominus populum suum, \& pauperum suorum miserebitur.
 \newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
 \vspace{-.25em}
-\lettrine[lines=2]{\bfseries \color{red} E}{}T \textdagger \ factum est in vna dierum, \& ipse sedebat docens. Et erant pharis\ae i sedentes, \& legis doctores, qui venerunt ex omni castello Galil\ae \ae , \& Iud\ae \ae , \& Ierusalem: \& virtus Domini erat ad sanandum eos. [18] Et ecce viri portantes in lecto hominem, qui erat paralyticus: \& qu\ae rebant eum inferre, \& ponere ante eum. [19] Et non inuenientes qua parte illum inferrent pr\ae \ turba, ascenderunt supra tectum, \& per tegulas summiserunt eum cum lecto in medium ante Iesum. [20] Quorum fidem vt vidit, dixit: Homo, remittuntur tibi peccata tua.
-[21] Et c\oe perunt cogitare scrib\ae \ \& pharis\ae i, dicentes: Quis est hic, qui loquitur blasphemias? quis potest dimittere peccata, nisi solus Deus? [22] Vt cognouit autem Iesus cogitationes eorum, respondens, dixit ad illos: Quid cogitatis in cordibus vestris? [23] Quid est facilius dicere: Dimittuntur tibi peccata: an dicere: Surge, \& ambula? [24] Vt autem sciatis quia Filius hominis habet potestatem in terra dimittendi peccata, ( ait paralytico) tibi dico, surge, tolle lectum tuum, \& vade in domum tuam. [25] Et confestim consurgens coram illis, tulit lectum in quo iacebat: \& abijt in domum suam, magnificans Deum.
-[26] Et stupor apprehendit omnes, \& magnificabant Deum. Et repleti sunt timore, dicentes: Quia vidimus mirabilia hodie. [27] Et post h\ae c exijt, \& vidit publicanum nomine Leui, sedentem ad telonium, \& ait illi: Sequere me. [28] Et relictis omnibus, surgens secutus est eum. [29] Et fecit ei conuiuium magnum Leui in domo sua: \& erat turba multa publicanorum, \& aliorum qui cum illis erant discumbentes. [30] Et murmurabant pharis\ae i \& scrib\ae \ eorum, dicentes ad discipulos eius: Quare cum publicanis \& peccatoribus manducatis \& bibitis?
-[31] Et respondens Iesus, dixit ad illos: Non egent qui sani sunt medico, sed qui male habent. [32] Non veni vocare iustos, sed peccatores ad p\oe nitentiam.
+\lettrine[lines=2]{\bfseries \color{red} E}{}T \textdagger \ factum est in vna dierum, \& ipse sedebat docens.
+Et erant Pharis\ae i sedentes \& legis doctores qui venerant ex omni castello Galil\ae \ae \ \& Iud\ae \ae \ \& Ierusalem: \& virtus domini erat ad sanandum eos.
+Et ecce viri portantes in lecto hominem qui
+%pp233
+erat paralyticus, \& qu\ae rebant eum inferre, \& ponere ante eum.
+Et non inuenientes qua parte illum inferrent pr\ae \ turba, ascenderunt supra tectum, \& per tegulas submiserunt eum cum lecto in medium ante Iesum.
+Quorum fidem vt vidit, dixit: Homo, remittuntur tibi peccata tua.
+Et c\oe perunt cogitare Scrib\ae \ \& Pharis\ae i, dicentes: Quis est hic qui loquitur blasphemias? quis potest dimittere peccata, nisi solus Deus?
+Vt cognouit autem Iesus cogitationes eorum, respondens dixit ad illos? Quid cogitatis in cordibus vestris?
+Quid est facilius, dicere, dimittuntur tibi peccata: an dicere, surge \& ambula?
+Vt autem sciatis, quia filius hominis habet potestatem in terra dimittendi peccata (ait paralytico) tibi dico, surge, tolle lectum tuum, \& vade in domum tuam.
+Et confestim consurgens coram illis, tulit lectum in quo iacebat, \& abijt in domum suam magnificans Deum.
+Et stupor apprehendit omnes, \& magnificabant Deum.
+Et repleti sunt timore, dicentes: quia vidimus mirabilia hodie.]
+Et post h\ae c exijt, \& vidit publicanum nomine Leui, sedentem ad telonium, \& ait illi: Sequere me. Et relictis omnibus, surgens secutus est eum: \& fecit ei conuiuium magnum Leui in domo sua, \& erat turba multa Publicanorum \& aliorum qui cum illis erant discumbentes.
+Et murmurabant Pharis\ae i \& Scrib\ae \ eorum, dicentes ad discipulos eius: Quare cum publicanis \& peccatoribus manducatis \& bibitis?
+Et respondens Iesus, dixit ad illos: Non egent qui sani sunt, medico: sed qui male habent.
+Non veni vocare iustos, sed peccatores ad p\oe nitentiam.
+\newline \color{red} Tertia lectio quando fit de fer. \color{black} Certe si te rex. \color{red} \&c. vt supra. \color{black} \hyperlink{page.107}{fo. 107.}
+\newline \textswab{C} \color{red} \hypertarget{FRI-SECUNDA-ADV}{Feria sexta} ex Isaia. \hfill Lectio. j. \color{black}
+\bookmark[dest=FRI-SECUNDA-ADV]{FERIA SEXTA}
+\vspace{-.25em}
+\yinipar{A}Vdite me\rightmarginnote{c. 51.} qui sequimini quod iustum est, \& qu\ae ritis dominum: attendite ad petram vnde excisi estis, \& ad cauernam laci de qua pr\ae cisi estis.
+Attendite ad Abraham patrem vestrum, \& ad Saram qu\ae \ peperit vos: quia vnum vocaui eum, \& benedixi ei, \& multiplicaui eum.
+Consolabitur ergo dominus Sion, \& consolabitur omnes ruinas eius: \& ponet desertum eius quasi delitias, \& solitudinem eius quasi hortum domini.
+Gaudium \& l\ae titia inuenietur in ea: gratiarum actio, \& vox laudis.
+%pp234
+Attendite ad me popule meus, \& tribus mea me audite: quia lex a me exiet: \& iudicium meum in lucem populorum requiescet.
+Prope est iustus meus, egressus est saluator meus, \& brachia mea populos iudicabunt.
+Me insul\ae \ exspectabunt, \& brachium meum sustinebunt.
+Leuate in c\oe lum oculos vestros, \& videte sub terra deorsum: quia c\oe li sicut fumus liquescent, \& terra sicut vestimentum atteretur, \& habitatores eius sicut h\ae c interibunt.
+Salus autem mea in sempiternum erit, \& iustitia mea non deficiet.
+Audite me qui scitis iustum, populus meus lex mea in corde eorum.
+Nolite timere opprobrium hominum, \& blasphemias eorum ne metuatis.
+Sicut enim vestimentum, sic comedet eos vermis: \& sicut lanam, sic deuorabit eos tinea.
+Salus autem mea in sempiternum erit, \& iustitia mea in generationes generationum.
+Consurge, consurge, induere fortitudinem brachium domini: consurge sicut in diebus antiquis, in generationibus seculorum.
+Nunquid non tu percussisti superbum, vulnerasti draconem?
+Nunquid non tu siccasti mare aquam abyssi vehementis: qui posuisti profundum maris viam, vt transirent liberati?
+Et nunc qui redempti sunt a domino, reuertentur, \& venient in Sion laudantes, \& l\ae titia sempiterna super capita eorum: gaudium \& l\ae titiam tenebunt, fugiet dolor \& gemitus.
+\newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
+\vspace{-.25em}
+\lettrine[lines=2]{\bfseries \color{red} A}{}T illi\leftmarginnote{ca. 5.} dixerunt ad eum Quare discipuli Ioannis ieiunant frequenter, \& obsecrationes faciunt, similiter \& Pharis\ae orum: tui autem edunt \& bibunt?
+Quibus ipse ait: Nunquid potestis filios sponsi, dum cum illis est sponsus, facere ieiunare?
+Venient autem dies, cum ablatus fuerit ab illis sponsus, tunc ieiunabunt in illis diebus.
+Dicebat autem \& similitudinem ad illos: Quia nemo commissuram a nouo vestimento immittit in vestimentum vetus: alioquin \& nouum rumpit, \& veteri non conuenit commissura a nouo Et nemo mittit vinum nouum in vtres veteres: alioquin rumpet vinum nouum vtres, \& vinum effundetur. \& vtres peribunt: sed vinum nouum in vtres nouos mittendum est: \& vtraque conseruantur: Et nemo bibens vetus, statim vult nouum: dixit enim, Vetus melius est.\rightmarginnote{ca. 6.}
+Factum est autem in sabbato secundo primo, cum transiret per sata, vellebant
+%pp235
+discipuli eius spicas, \& manducabant confricantes manibus, Quidam autem Pharis\ae orum dicebant illis: Quid facitis, quod non licet in sabbatis? Et respondens Iesus, ad eos dixit: Non hoc legistis quod fecit Dauid, cum esurisset ipse \& qui cum illo erant: quomodo intrauit in domum Dei, \& panes propositionis sumpsit, \& manducauit, \& dedit his qui cum ipso erant, quos non licet manducare nisi tantum sacerdotibus?
+Et dicebat illis: Quia dominus est filius hominis, etiam sabbati.
+Factum est autem \& in alio sabbato, vt intraret in synagogam, \& doceret: Et erat ibi homo: \& manus eius dextera erat arida.
+Obseruabant autem Scrib\ae \ \& Pharis\ae i si in sabbato curaret: vt inuenirent vnde accusarent eum.
+Ipse vero sciebat cogitationes eorum: \& ait homini qui habebat manum aridam, Surge, \& sta in medium.
+Et surgens stetit. Ait autem ad illos Iesus: Interrogo vos, si licet sabbatis benefacere an male? animam saluam facere, an perdere?
+Et circunspectis omnibus, dixit homini, extende manum tuam.
+Et extendit: \& restituta est manus eius.
+Ipsi autem repleti sunt insipientia: \& colloquebantur ad inuicem quidnam facerent Iesu.
+\newline \color{red} Tertia lectio quando fit de fer. \color{black} Satis abundeque. \color{red} \&c. vt supra. \color{black} \hyperlink{page.109}{fo. 109.}
+\newline \textswab{C} \color{red} \hypertarget{SAT-SECUNDA-ADV}{Sabbato} ex Isaia. \hfill Lectio. j. \color{black}
+\bookmark[dest=SAT-SECUNDA-ADV]{SABBATO}
+\vspace{-.25em}
+\yinipar{C}Onsurge,\leftmarginnote{c. 52.} consurge, induere fortitudini tua Sion: induere vestimentis glori\ae \ tu\ae \ Ierusalem ciuitas sancti, quia non adijciet vltra vt pertranseat per te incircuncisus \& immandus.
+Excutere de puluere, consurge, sede Ierusalem: Solue vincula colli tui captiua filia Sion, quia h\ae c dicit dominus: Gratis venundati estis \& sine argento redimemini.
+Quia h\ae c dicit dominus Deus: In \AE gyptum descendit populus meus in principio, vt colonus esset ibi: \& Assur absque vlla causa calumniatus est eum.
+Et nunc quid mihi est hic, dicit dominus? quoniam ablatus est populus meus gratis.
+Dominatores eius inique agunt, dicit dominus: \& iugiter tota die nomen meum blasphematur.
+Propter hoc sciet populus meus nomen meum in die illa: quia ego ipse qui loquebar, ecce adsum.
+Quam pulchri super montes pedes annuntiantis, \& pr\ae dicantis pacem, annuntiantis bonum, pr\ae dicantis salutem, dicentis Sion: Regnabit Deus tuus.
+Vox speculatorum tuorum leuauerunt
+%pp236
+vocem, simul laudabunt: quia oculo ad oculum videbunt, cum conuerterit dominus Sion.
+Gaudete \& laudate simul deserta Ierusalem: quia consolatus est dominus populum suum, redemit Ierusalem.
+Parauit dominus brachium: sanctum suum in oculis omnium gentium: \& videbunt omnes fines terr\ae \ salutare Dei nostri.
+Recedite, recedite, exite inde, pollutum nolite tangere.
+Exite de medio eius, mundamini qui fertis vasa domini.
+Quoniam non in tumultu exibitis, nec in fuga properabitis.
+Pr\ae cedet enim vos dominus, \& congregabit vos Deus Israel.
+Ecce intelliget seruus meus, exaltabitur, \& eleuabitur, \& sublimis erit valde.
+Sicut obstupuerunt super te multi: sic inglorius erit inter viros aspectus eius, \& forma eius inter filios hominum.
+Iste asperget gentes multas, super ipsum continebunt reges os suum: quia quibus non est narratum de eo, viderunt: \& qui non audierunt, contemplati sunt.
+\newline \color{red} Secundum Lucam. \hfill Lectio. ij. \color{black}
+\vspace{-.25em}
+\lettrine[lines=2]{\bfseries \color{red} F}{}Actum\rightmarginnote{ca. 6.} est autem in illis diebus, exijt in montem orare, \& erat pernoctans in oratione Dei. [13] Et cum dies factus esset, vocauit discipulos suos: \& elegit duodecim ex ipsis ( quos \& apostolos nominauit): [14] Simonem, quem cognominauit Petrum, \& Andream fratrem eius, Iacobum, \& Ioannem, Philippum, \& Bartholom\ae um, [15] Matth\ae um, \& Thomam, Iacobum Alph\ae i, \& Simonem, qui vocatur Zelotes,
+[16] \& Iudam Iacobi, \& Iudam Iscariotem, qui fuit proditor. [17] Et descendens cum illis, stetit in loco campestri, \& turba discipulorum eius, \& multitudo copiosa plebis ab omni Iud\ae a, \& Ierusalem, \& maritima, \& Tyri, \& Sidonis, [18] qui venerant vt audirent eum, \& sanarentur a languoribus suis. Et qui vexabantur a spiritibus immundis, curabantur. [19] Et omnis turba qu\ae rebat eum tangere: quia virtus de illo exibat, \& sanabat omnes. [20] Et ipse eleuatis oculis in discipulis suis, dicebat: Beati pauperes, quia vestrum est regnum Dei.
+[21] Beati qui nunc esuritis, quia saturabimini. Beati qui nunc fletis, quia ridebitis. [22] Beati eritis cum vos oderint homines, \& cum separauerint vos, \& exprobrauerint, \& eijcerint nomen vestrum tamquam malum propter Filium hominis. [23] Gaudete in illa die, \& exsultate: ecce enim merces vestra multa est in c\oe lo: secundum h\ae c enim faciebant prophetis patres eorum. [24] Veruntamen v\ae \ vobis diuitibus, quia habetis consolationem vestram. [25] V\ae \ vobis, qui saturati estis: quia esurietis. V\ae \ vobis, qui ridetis nunc: quia lugebitis \& flebitis.
+[26] V\ae \ cum benedixerint vobis homines: secundum h\ae c enim faciebant pseudoprophetis patres eorum. [27] Sed vobis dico, qui auditis: diligite inimicos vestros, benefacite his qui oderunt vos. [28] Benedicite maledicentibus vobis, \& orate pro calumniantibus vos. [29] Et qui te percutit in maxillam, pr\ae be \& alteram. Et ab eo qui aufert tibi vestimentum, etiam tunicam noli prohibere. [30] Omni autem petenti te, tribue: \& qui aufert qu\ae \ tua sunt, ne repetas.
+[31] Et prout vultis vt faciant vobis homines, \& vos facite illis similiter.
 % \newline \color{red} B\color{black}
 % \newline \color{red} L\color{black}
 % \newline \color{red} L\color{black}
