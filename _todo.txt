@@ -6,4 +6,5 @@ Implement Margin notes.
 	[ ]	Invitatorium
 	[ ]	Evangelorium (all incorrect)
 	[x]	Psalmorum
-Page Headers?
+Page Headers
+	[x] Ability added
