@@ -1,6 +1,6 @@
 \documentclass[a5paper,10pt]{book}
 
-\usepackage{amsfonts}
+% \usepackage{amsfonts}
 \usepackage{hyperref}
 \usepackage{bookmark}
 % \usepackage[utf8]{inputenc}
@@ -12,6 +12,8 @@
 \usepackage{yfonts}
 \usepackage{lettrine}
 \usepackage{multicol}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
 
 \makeatletter
 \def\leftmarginnote{%
@@ -68,6 +70,14 @@
 \newpage
 
 %pp7
+\thispagestyle{empty}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{22pt}
+\setlength{\headsep}{6pt}
+\fancyhead[RO]{\small\rightmark\hspace{1cm}\thepage}
+\fancyhead[LE]{\small\thepage\hspace{1cm}\leftmark}
 \begin{center} \color{red} \hypertarget{Preface} \Large
 A D \ \ S A N C T I S S I M V M \ \ P A T R E M \\ \& Dominum nostrum Paulum tertium \\ Pontificem Maximum,
 \end{center}
@@ -104,6 +114,7 @@ enim valet deprecatio iusti assidua.
 Altera causa est, vt qui reliquo populo exemplo debent esse virtutis \& sanctimoni\ae , assidua precatione Deum alloquentes, minus opportuni reddantur tentatori diabolo, si eos inuenerit, vt Hieronymus ait, occupatos, \& a cogitationibus caducarum rerum subinde auocati, contemplationi diuinarum assuescant.
 Tertia, vt religionis quoque futuri magistri quotidiana sacr\ae \ scriptur\ae \ \& ecclesiasticum historiarum lectione erudiantur, complectanturque (vt Paulos ait) eum, qui secundum doctrinam est, fidelem 
 %pp9
+\fancyhead[C]{\color{red} Pr\ae fatio}
 sermonem, \& potentes sint exhortari in doctrina sana, \& eos, qui contradicunt, arguere.
 Et profecto si quis modum precandi olim a maioribus traditum diligenter confideret, plane intelligat horum omnium pr\ae cipuam ab ipsis habitam esse rationem.
 Sed factum est nescio quo pacto precantium negligentia, vt paulatim a sanctissimis illis veterum patrum institutis discederetur.
@@ -203,6 +214,7 @@ Superest vt quemadmodum c\oe pisti, aspires c\oe ptis nostris, labori faueas, pu
 
 % pp14
 \newpage
+\thispagestyle{empty}
 \begin{center} \color{red} \hypertarget{Letter} \Large
 Tabula literarum Dominicalium. 1564.
 \end{center}
@@ -261,6 +273,7 @@ Item in quibusdam diebus assignantur terti\ae \ lectiones repetend\ae \ ex epist
 \newpage
 
 %pp15
+\thispagestyle{empty}
 \begin{center} \hypertarget{Kalendar} \Large
 IANVARIVS HABET DIES XXXI.
 \end{center}
@@ -306,7 +319,7 @@ xiiij & b & iij & cal. & 30 & Iginius papa mar. \color{red} Fuit. 11. hu. \color
 
 %pp16
 \newpage
-
+\thispagestyle{empty}
 \begin{center} \hypertarget{FEBRVA} \Large
 FEBRVA. HABET DIES XXVIII.
 \end{center}
@@ -352,6 +365,7 @@ xiiii & c & \color{red} prid. & \color{red} cal. & 28 & Ex epist. Pauli ad Phili
 
 %pp17
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{MARTIVS} \Large
 MARTIVS HABET DIES XXXI.
@@ -399,6 +413,7 @@ iii & f & \color{red} prid. & \color{red} cal. & 31 & Ex epist. ad Coloss. \colo
 
 %pp18
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{APRILIS} \Large
 APRILIS HABET DIES XXX.
@@ -447,6 +462,7 @@ iij & g & iij & cal. & 29 & Petrus ordinis pr\ae dica. mart. \#\#.\\
 
 %pp19
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{MAIVS} \Large
 MAIVS HABET DIES XXXI.
@@ -495,6 +511,7 @@ xi & d & \color{red} prid. & cal. & 31 & Petronilla virgo. \color{black} \\
 
 %pp20
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{IVNIVS} \Large
 IVNIVS HABET DIES XXX.
@@ -542,6 +559,7 @@ xi & e & iii & cal. & 29 & \color{red} Petri \& Pauli apostoli dup. ma. \color{b
 
 %pp21
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{IVLIVS} \Large
 IVLIVS HABET DIES XXXI.
@@ -590,6 +608,7 @@ xix & \color{red} A & iii & cal. & 30 & Abdon \& Sennen martyres. \\
 
 %pp22
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{AVGVSTVS} \Large
 AVGVSTVS HABET DIES XXXI.
@@ -638,6 +657,7 @@ viii & d & iii & cal. & 30 & Felix \& Adauctus martyr. \\
 
 %pp23
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{SEPTEMBER} \Large
 SEPTEMBER HABET DIES XXX.
@@ -685,6 +705,7 @@ viii & f & iii & cal. & 29 & \color{red} Dedicatio Mich. archan. dup. ma. \color
 
 %pp24
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{OCTOBER} \Large
 OCTOBER HABET DIES XXXI.
@@ -733,6 +754,7 @@ v & c & \color{red} prid. & cal. & 31 & Ex epist. j. ad Cor. \color{red} E\color
 
 %pp25
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{NOVEMBER} \Large
 NOVEMBER HABET DIES XXX.
@@ -780,6 +802,7 @@ v & e & \color{red} prid. & cal. & 30 & \color{red} Andreas apostolus duplex mai
 
 %pp26
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \hypertarget{DECEMBER} \Large
 DECEMBER HABET DIES XXXI.
@@ -828,6 +851,7 @@ xiii & \color{red} A & \color{red} prid. & cal. & 31 & Syluester papa confessor.
 
 %pp27
 \newpage
+\thispagestyle{empty}
 
 \begin{center} \color{red} \hypertarget{Canon} \Large
 Canon sequentis Tabul\ae \ ad festa mobilia\\ perpetuo inuenienda.
@@ -854,6 +878,7 @@ qui est a 1564, vsque ad 1593.
 
 %pp28
 \newpage
+\thispagestyle{empty}
 \color{red}
 \begin{center} \large \hypertarget{TABVLAFESTORVM}
 Tabula festorum mobilium iuxta vsum Roman\ae \ ecclesi\ae .
@@ -910,6 +935,7 @@ Tabula festorum mobilium iuxta vsum Roman\ae \ ecclesi\ae .
 
 %pp29
 \newpage
+\thispagestyle{empty}
 \color{red}
 \begin{center} \large \hypertarget{INDEXFESTORVM}
 Index festorum mobilium
@@ -969,6 +995,7 @@ Index festorum mobilium
 
 %pp30
 \newpage
+\thispagestyle{empty}
 \begin{center} \color{red} \hypertarget{INDEXLIBRORVM} \Large
 I N D E X \ \ L I B R O R V M \ \ V E T E R I S
 \end{center}
@@ -1056,6 +1083,7 @@ leguntur integri pr\ae ter Apocalypsim.
 
 % pp31
 \newpage
+\thispagestyle{empty}
 \begin{center} \color{red} \hypertarget{Regulae} \Large
 R E G V L \AE \ \ \ G E N E R A L E S
 \end{center}
@@ -1123,6 +1151,8 @@ debet fieri commemoratio de festo simplici, aut de Feria in Laudibus \& Vesperis
 Et similiter quando infra aliquam octauam celebratur aliud festum duplex, fit commemoratio de octaua per Orationem tantum, nisi in aliqua earum aliud specialiter ordinetur.
 %pp33
 
+\pagestyle{fancy}
+\fancyhead[C]{\color{red} Regul\ae \ Generales.}
 \vspace{+1em}
 \begin{center} \hypertarget{Tertia} \large
 T E R T I A \ \ R E G V L A.
@@ -1339,6 +1369,7 @@ Deinde inspiciat, quid eo die occurrat in Calendario vel in Dominicali:
 
 %pp40
 \newpage
+\thispagestyle{empty}
 \begin{center} \color{red} \hypertarget{INVITATORIVM} \Large
 I N D E X \ \ I N V I T A T O R I V M\\
 \large \& Hymnorum, qui dicendi sunt per totum annum, \\quando fit Officium de Dominica \\vel de Feria.
@@ -1378,6 +1409,9 @@ qu\ae \ tamen nonnunquam mutand\ae \ dunt, vt suis locis videbitur.
 
 % pp41
 \newpage
+\thispagestyle{empty}
+\fancyhead[CE]{\color{red} Index epist.}
+\fancyhead[CO]{\color{red} \& euangeli.}
 \begin{center} \color{red} \hypertarget{EVANGELIORVM} \Large
 I N D E X \ \ E V A N G E L I O R V M,
 \end{center}
@@ -1387,7 +1421,7 @@ I N D E X \ \ E V A N G E L I O R V M,
 \begin{center} \large
 \& Epistolarum, qu\ae \ in ecclesia recitantur: \& in hoc\\Breuiario continentur, quorum initium erit\\vbi fuerit \textdagger \ intus: cum litera foris in\\margine assignata, \&  finis,\\hoc signum.]
 \end{center}
-\vspace{+.5em}
+\vspace{+4.5em}
 
 \begin{multicols}{2}
 \begin{center}
@@ -2705,6 +2739,9 @@ I N D E X \ \ P S A L M O R V M.
 \newline Ego dixi in dimidio. \hfill \hyperlink{Ezekiel}{33.}
 \newline Exultauit cor meum. \hfill \hyperlink{Anna}{45.}
 \newline \vspace{-1.75em}
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\fancyhead[CE]{\color{red} Index psalmorum}
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 \begin{center}
 \color{red} F
 \end{center}
@@ -2842,6 +2879,8 @@ I N D E X \ \ P S A L M O R V M.
 \end{center}
 \end{multicols}
 
+\fancyhead[CO]{\color{red} \& canticorum}
+
 \begin{multicols}{2}
 \noindent \color{red} Oratio ante inchoationem officij. \color{black}
 \lettrine[lines=2]{\color{red} \bfseries L}{}Iberator animarum mundi redemptor Iesu Christe rex \ae terne \& immortalis:
@@ -2865,6 +2904,7 @@ vt ad gaudia paradisi peruenire valeam. Amen.
 
 \newpage
 \thispagestyle{empty}
+\includegraphics[width=4.5in]{Picture52.png}
 
 \mainmatter
 
@@ -2874,6 +2914,8 @@ vt ad gaudia paradisi peruenire valeam. Amen.
 
 %pp53
 \newpage
+\thispagestyle{empty}
+\fancyhead[CO,CE]{}
 \begin{center} \color{red} \hypertarget{DAVID} \LARGE
 P \ S \ A \ L \ T \ E \ R \ I \ V \ M \ \ \ D \ A \ V \ I \ D
 \end{center}
@@ -2948,6 +2990,7 @@ faciet, prosperabuntur.
 \newline \color{red} S\color{black}icut erat in principio, \& nunc, \& semper, \& in secula seculorum. Amen. %sic no hooked e
 \newline
 \color{red} Pr\ae dicto modo dicitur \color{black} Gloria patri. \color{red} \&c. in fine omnium Psalmorum, \& canticorum per totum annum, pr\ae terquam in triduo ante Pascha, \& in officio defunctorum, \& in cantico trium puerorum. \quad psalmus. \hypertarget{ps9}{9.} \color{black}
+\fancyhead[C]{\color{red} Dominica}
 \lettrine[lines=2]{\bfseries \color{red} C}{}Onfitebor tibi domine in toto corde meo: narrabo omnia mirabilia tua.
 \newline \color{red} L\color{black}\ae tabor et exultabo in te, psallam nomini tuo altissime.
 \newline \color{red} I\color{black}n conuertendo inimicum meum retrorsum, infirmabuntur, \& peribunt a facie tua.
@@ -2995,6 +3038,7 @@ faciet, prosperabuntur.
 \lettrine[lines=2]{\bfseries \color{red} D}{}Iligam te domine fortitudo mea: dominus firmamentum meum, \& refugium meum, \& liberator meus.
 \newline \color{red} D\color{black}eus meus adiutor meus: \& sperabo in eum.
 %pp57
+\fancyhead[C]{\color{red} Dominica ad matutinum}
 \newline \color{red} P\color{black}rotector meus, \& cornu salutis me\ae , \& susceptor meus.
 \newline \color{red} L\color{black}audans inuocabo dominum: \& ab inimicis meis saluus ero.
 \newline \color{red} C\color{black}ircundederunt me dolores mortis: \& torrentes iniquitatis conturbauerunt me.
@@ -3087,6 +3131,7 @@ finitis tribus lectionibus ad matu. per totum annum pr\ae terquam in aduentu, \&
 \begin{center} \color{red} \large \hypertarget{DOMLAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad laudes}
 \bookmark[dest=DOMLAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiuto. \color{red} Antiph. Psalmus \hypertarget{ps65}{65.} \color{black}
@@ -3166,6 +3211,7 @@ AD LAVDES.
 \begin{center} \color{red} \large \hypertarget{DOMPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad primam}
 \bookmark[dest=DOMPRIME]{AD PRIMAM}
 \vspace{-.5em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Deus in adiutorium meum. \color{red} \hypertarget{Iamlucis}{Hym.} \color{black}
@@ -3283,6 +3329,7 @@ Vide num de sancto sit facienda\\commemoratio.
 \begin{center} \large \hypertarget{DOMTERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad tertiam}
 \bookmark[dest=DOMTERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Deus in adiutorium meum. \color{red} \hypertarget{Nuncsancte}{Hym.} \color{black}
@@ -3348,6 +3395,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{DOMSEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad sextam}
 \bookmark[dest=DOMSEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent Pater noster. Aue maria. Deus in adiutorium meum. \color{red} \hypertarget{Rectorpo}{Hym.} \color{black}
@@ -3410,6 +3458,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{DOMNONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad nonam}
 \bookmark[dest=DOMNONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent Pater noster. Aue maria. Deus in adiutorium meum. \color{red} \hypertarget{Rerumdeus}{Hym.} \color{black}
@@ -3475,6 +3524,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{DOMVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad vesperas}
 \bookmark[dest=DOMVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiu. \color{red} Hym. antiphona. Psalmus. \hypertarget{ps109}{109.} \color{black}
@@ -3545,6 +3595,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{DOMCOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Dominica ad completorium}
 \bookmark[dest=DOMCOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Conuerte nos deus saluatoris noster. \color{red} \Rbar . \color{black} Et auerte iram tuam a nobis. \color{red} \Vbar . \color{black} Deus in adiutorium. \color{red} \hypertarget{Telucis}{Hym.} \color{black}
@@ -3603,6 +3654,7 @@ AD COMPLETORIVM.
 FERIA SECVNDA.\\
 \normalsize ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad matutinum}
 \bookmark[rellevel=-1,dest=MONMATIN]{FERIA SECVNDA}
 \bookmark[rellevel=1,dest=MONMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -3727,6 +3779,7 @@ FERIA SECVNDA.\\
 \begin{center} \large \color{red} \hypertarget{MONLAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad laudes}
 \bookmark[dest=MONLAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiu. \color{red} Antiphona. Psalmus. \hypertarget{ps97}{97.} \color{black}
@@ -3797,6 +3850,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{MONPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad primam}
 \bookmark[dest=MONPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis orto. 7.} \color{red} Antiphona. \color{black} Vias tuas. \color{red} Psalmus. \hypertarget{ps22}{22.} \color{black}
@@ -3877,6 +3931,7 @@ Symbolum Apostolorum.
 \begin{center} \large \color{red} \hypertarget{MONTERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad tertiam}
 \bookmark[dest=MONTERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Deus in adiuto. \hyperlink{Nuncsancte}{Nunc sancte. 10.} \color{red} Antiphona. \color{black} Ab occultis. \color{red} Psalmus. \hypertarget{ps13}{13.} \color{black}
@@ -3922,6 +3977,7 @@ AD TERTIAM.
 \newline \color{red} D\color{black}omine saluum fac regem: \& exaudi nos in die, qua inuocauerimus te.
 \newline \color{red} Antiphona. \color{black} Ab occultis meis munda me, \& ab alienis parce seruuo tuo. \quad \color{red} Oratio. \color{black}
 \vspace{-1em}
+\fancyhead[C]{\color{red} Feria. ij. ad sextam}
 \begin{center} \large \color{red} \hypertarget{MONSEXT}
 AD SEXTAM.
 \end{center}
@@ -3978,6 +4034,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{MONNONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad nonam}
 \bookmark[dest=MONNONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rerumdeus}{Rerum deus. 13.}
@@ -4030,6 +4087,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{MONVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Feria. ij. ad vesperas}
 \bookmark[dest=MONVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Deus in adiuto. \color{red} Hymn. Antiphona. Psalmus. \hypertarget{ps76}{76.} \color{black}
@@ -4084,6 +4142,7 @@ AD VESPERAS.
 \newline \color{red} Antiphona. Oratio. \& Commemoratio. \color{black}
 %pp93
 \vspace{-2em}
+\fancyhead[C]{\color{red} Feria. ij. ad completorium}
 \begin{center} \large \color{red} \hypertarget{MONCOMP}
 AD COMPLETORIVM.
 \end{center}
@@ -4130,6 +4189,7 @@ AD COMPLETORIVM.
 FERIA TERTIA.\\
 \normalsize Ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad matutinum}
 \bookmark[rellevel=-1,dest=TUEMATIN]{FERIA TERTIA}
 \bookmark[rellevel=1,dest=TUEMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -4247,6 +4307,7 @@ FERIA TERTIA.\\
 \begin{center} \large \color{red} \hypertarget{TUELAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad laudes}
 \bookmark[dest=TUELAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiu. \color{red} Antiphona. Psalmus. \hypertarget{ps94}{94.} \color{black}
@@ -4314,6 +4375,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{TUEPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad primam}
 \bookmark[dest=TUEPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis orto. 7.} \color{red} Antiphona. \color{black} Mane astabo. \color{red} Psalmus. \hypertarget{ps5}{5.} \color{black}
@@ -4372,6 +4434,7 @@ AD PRIMAM.
 \begin{center} \large \color{red} \hypertarget{TUETERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad tertiam}
 \bookmark[dest=TUETERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Nuncsancte}{Nunc sancte. 10.} \color{red} Antiphona. \color{black} Cantabimus. \color{red} Psalmus. \hypertarget{ps20}{20.} \color{black}
@@ -4424,6 +4487,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{TUESEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad sextam}
 \bookmark[dest=TUESEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rectorpo}{Rector potens. 12.} \color{red} Antiphona. \color{black} Sit nomen. \color{red} Psalmus. \hypertarget{ps52}{52.} \color{black}
@@ -4473,6 +4537,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{TUENONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad nonam}
 \bookmark[dest=TUENONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rerumdeus}{Rerum deus tenax. 13.} \color{red} Antiphona. \color{black} Sit splendor. \color{red} Psalmus. \hypertarget{ps89}{89.} \color{black}
@@ -4524,6 +4589,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{TUEVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad vesperas}
 \bookmark[dest=TUEVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiu. \color{red} Hym. Antiphona. Psalmus. \hypertarget{ps33}{33.} \color{black}
@@ -4582,6 +4648,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{TUECOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iij. ad completorium}
 \bookmark[dest=TUECOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Conuerte nos. Deus in adiu. \hyperlink{Telucis}{Te lucis ante. 16.} \color{red} Antiphona. \color{black} Salua nos. \color{red} Psalmus. \hypertarget{ps10}{10.} \color{black}
@@ -4632,6 +4699,7 @@ AD COMPLETORIVM.
 FERIA QVARTA.\\
 \normalsize Ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad matutinum}
 \bookmark[rellevel=-1,dest=WEDMATIN]{FERIA QVARTA}
 \bookmark[rellevel=1,dest=WEDMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -4768,6 +4836,7 @@ FERIA QVARTA.\\
 \begin{center} \color{red} \large \hypertarget{WEDLAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad laudes}
 \bookmark[dest=WEDLAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiu. \color{red} Antiphona. Psalmus \hypertarget{ps80}{80.} \color{black}
@@ -4839,6 +4908,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{WEDPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad primam}
 \bookmark[dest=WEDPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis orto. 7.} \color{red} Antiphona. \color{black} Deus. \color{red} Psalmus. \hypertarget{ps6}{6.} \color{black}
@@ -4898,6 +4968,7 @@ AD PRIMAM.
 \begin{center} \large \color{red} \hypertarget{WEDTERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad tertiam}
 \bookmark[dest=WEDTERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \hyperlink{Nuncsancte}{Nunc sancte nobis. 10.} \color{red} Antiphona. \color{black} Emitte. \color{red} Psalmus. \hypertarget{ps42}{42.} \color{black}
@@ -4950,6 +5021,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{WEDSEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad sextam}
 \bookmark[dest=WEDSEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rectorpo}{Rector potens. 12.} \color{red} Antiphona. \color{black} Spera. \color{red} Psalmus. \hypertarget{ps41}{41.} \color{black}
@@ -5002,6 +5074,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{WEDNONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad nonam}
 \bookmark[dest=WEDNONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rerumdeus}{Rerum deus. 13.} \color{red} Antiphona. \color{black} Gloriosa. \color{red} Psalmus. \hypertarget{ps81}{81.} \color{black}
@@ -5054,6 +5127,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{WEDVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad vesperas}
 \bookmark[dest=WEDVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiu. \color{red} Hym. Antiphona. Psalmus. \hypertarget{ps32}{32.} \color{black}
@@ -5112,6 +5186,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{WEDCOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. iiij. ad completorium}
 \bookmark[dest=WEDCOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Conuerte nos. Deus in adiuto. \hyperlink{Telucis}{Te lucis. 16.} Salua nos. \color{red} Psalmus. \hypertarget{ps39}{39.} \color{black}
@@ -5155,12 +5230,12 @@ AD COMPLETORIVM.
 \newline \color{red} I\color{black}n noctibus extollite manus vestras in sancta: \& benedicite dominum.
 \newline \color{red} B\color{black}enedicat te dominus ex Sion, qui fecit c\oe lum, \& terram.
 \newline \color{red} Deinde. \color{black} \hyperlink{Nunc}{Nunc dimittis fo 17.} Salua nos. Domine exau. Oremus Visita qu\ae sumus domi. Benedica. Fidelium. Salue regina.
-%pp111
 \vspace{-1em}
 \begin{center} \large \color{red} \hypertarget{THVMATIN}
 FERIA QVINTA.\\
 \normalsize Ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad matutinum}
 \bookmark[rellevel=-1,dest=THVMATIN]{FERIA QVINTA}
 \bookmark[rellevel=1,dest=THVMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -5295,6 +5370,7 @@ FERIA QVINTA.\\
 \begin{center} \color{red} \large \hypertarget{THULAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad laudes}
 \bookmark[dest=THULAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiu. \color{red} Antiphona. Psalmus. \hypertarget{ps99}{99.} \color{black}
@@ -5364,6 +5440,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{THUPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad primam}
 \bookmark[dest=THUPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis. 7.} \color{red} Antiphona. \color{black} Dominus. \color{red} Psalmus. \hypertarget{ps8}{8.} \color{black}
@@ -5418,6 +5495,7 @@ AD PRIMAM.
 \begin{center} \large \color{red} \hypertarget{THUTERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad tertiam}
 \bookmark[dest=THUTERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \hyperlink{Nuncsancte}{Nunc sancte nobis. 10.} \color{red} Antiphona. \color{black} Confitebor. \color{red} Psalmus. \hypertarget{ps91}{91.} \color{black}
@@ -5468,6 +5546,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{THUSEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad sextam}
 \bookmark[dest=THUSEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rectorpo}{Rector potens. 12.} \color{red} Antipho. \color{black} Immola. \color{red} Psalmus. \hypertarget{ps49}{49.} \color{black}
@@ -5520,6 +5599,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{THUNONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad nonam}
 \bookmark[dest=THUNONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \hyperlink{Rerumdeus}{Rerum deus tenax. 13.} \color{red} Antipho. \color{black} Apud te. \color{red} Psalmus. \hypertarget{ps35}{35.} \color{black}
@@ -5576,6 +5656,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{THUVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad vesperas}
 \bookmark[dest=THUVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \color{red} Hym. Antiphona. Psalmus. \hypertarget{ps131}{131.} \color{black}
@@ -5630,6 +5711,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{THUCOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. v. ad completorium}
 \bookmark[dest=THUCOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Conuerte nos. Deus in adiu. \hyperlink{Telucis}{Te lucis ante. 16.} Salua nos. \color{red} Psalmus. \hypertarget{ps45}{45.} \color{black}
@@ -5677,6 +5759,7 @@ AD COMPLETORIVM.
 FERIA SEXTA.\\
 \normalsize Ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad matutinum}
 \bookmark[rellevel=-1,dest=FRIMATIN]{FERIA SEXTA}
 \bookmark[rellevel=1,dest=FRIMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -5794,6 +5877,7 @@ FERIA SEXTA.\\
 \begin{center} \color{red} \large \hypertarget{FRILAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad laudes}
 \bookmark[dest=FRILAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiuto. \color{red} Ant. Psalmus. \hypertarget{ps148}{148.} \color{black}
@@ -5867,6 +5951,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{FRIPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad primam}
 \bookmark[dest=FRIPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis orto. 7.} \color{red} Antiphona. \color{black} Cor mundum. \color{red} Psalmus. \hypertarget{ps2}{2.} \color{black}
@@ -5922,6 +6007,7 @@ AD PRIMAM.
 \begin{center} \large \color{red} \hypertarget{FRITERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad tertiam}
 \bookmark[dest=FRITERCE]{AD TERTIAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \hyperlink{Nuncsancte}{Nunc sancte nobis. 10.} \color{red} Antiphona. \color{black} Ne derelinquas. \color{red} Psalmus. \hypertarget{ps3}{3.} \color{black}
@@ -5978,6 +6064,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{FRISEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad sextam}
 \bookmark[dest=FRISEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rectorpo}{Rector potens. 12.} \color{red} Antiphona. \color{black} Clamabo. \color{red} Psalmus. \hypertarget{ps56}{56.} \color{black}
@@ -6029,6 +6116,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{FRINONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad nonam}
 \bookmark[dest=FRINONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiut. \hyperlink{Rerumdeus}{Rerum deus tenax. 13.} \color{red} Antiphona. \color{black} Rex noster. \color{red} Psalmus. \hypertarget{ps60}{60.} \color{black}
@@ -6080,6 +6168,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{FRIVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad vesperas}
 \bookmark[dest=FRIVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiu. \color{red} Hym. Antiphona. Psalmus. \hypertarget{ps137}{137.} \color{black}
@@ -6136,6 +6225,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{FRICOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Feria. vj. ad completorium}
 \bookmark[dest=FRICOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Conuerte. Deus in adiu. \hyperlink{Telucis}{Te lucis. 16.} \color{red} Antiphona. \color{black} Salua nos. \color{red} Psalmus. \hypertarget{ps12}{12.} \color{black}
@@ -6183,6 +6273,7 @@ AD COMPLETORIVM.
 S A B B A T O.\\
 \normalsize Ad matutinum.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad matutinum}
 \bookmark[rellevel=-1,dest=SATMATIN]{SABBATO}
 \bookmark[rellevel=1,dest=SATMATIN]{AD MATVTINVM}
 \vspace{-1em}
@@ -6318,6 +6409,7 @@ S A B B A T O.\\
 \begin{center} \color{red} \large \hypertarget{SATLAUD}
 AD LAVDES.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad laudes}
 \bookmark[dest=SATLAUD]{AD LAVDES}
 \vspace{-1em}
 \par \noindent Deus in adiu. \color{red} An. Psalmus. \hypertarget{ps116}{116.} \color{black}
@@ -6408,6 +6500,7 @@ AD LAVDES.
 \begin{center} \large \color{red} \hypertarget{SATPRIME}
 AD PRIMAM.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad primam}
 \bookmark[dest=SATPRIME]{AD PRIMAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Iamlucis}{Iam lucis orto 7.} \color{red} Antiphona. \color{black} Deus. \color{red} Psalmus. \hypertarget{ps62}{62.} \color{black}
@@ -6465,6 +6558,7 @@ AD PRIMAM.
 \begin{center} \large \color{red} \hypertarget{SATTERCE}
 AD TERTIAM.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad tertiam}
 \bookmark[dest=SATTERCE]{AD TERTIAM}
 \vspace{-.75em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiuto. \hyperlink{Nuncsancte}{Nunc sancte no. 10.} \color{red} Antiphona. \color{black} Inclina. \color{red} Psalmus. \hypertarget{ps51}{51.} \color{black}
@@ -6515,6 +6609,7 @@ AD TERTIAM.
 \begin{center} \large \color{red} \hypertarget{SATSEXT}
 AD SEXTAM.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad sextam}
 \bookmark[dest=SATSEXT]{AD SEXTAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiutorium. \hyperlink{Rectorpo}{Rector po. 12.} \color{red} Antipho. \color{black} Adiuua. \color{red} Psalmus. \hypertarget{ps75}{75.} \color{black}
@@ -6565,6 +6660,7 @@ AD SEXTAM.
 \begin{center} \large \color{red} \hypertarget{SATNONE}
 AD NONAM.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad nonam}
 \bookmark[dest=SATNONE]{AD NONAM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiut. \hyperlink{Rerumdeus}{Rerum Deus tenax. 13.} \color{red} Ant. \color{black} Non auertas. \color{red} Psalmus. \hypertarget{ps101}{101.} \color{black}
@@ -6620,6 +6716,7 @@ AD NONAM.
 \begin{center} \large \color{red} \hypertarget{SATVESPER}
 AD VESPERAS.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad vesperas}
 \bookmark[dest=SATVESPER]{AD VESPERAS}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black}ater noster. Aue maria. Deus in adiu. \color{red} Hym. Antiphona. Psalmus. \hypertarget{ps143}{143.} \color{black}
@@ -6671,6 +6768,7 @@ AD VESPERAS.
 \begin{center} \large \color{red} \hypertarget{SATCOMP}
 AD COMPLETORIVM.
 \end{center}
+\fancyhead[C]{\color{red} Sabbato ad completorium}
 \bookmark[dest=SATCOMP]{AD COMPLETORIVM}
 \vspace{-1em}
 \par \noindent \color{red} P\color{black} ater noster. Aue maria. Conuerte nos deus. Deus in adiu. \hyperlink{Telucis}{Te lucis ante 16.} Salua nos. \color{red} Psalmus. \hypertarget{ps84}{84.} \color{black}
@@ -6715,7 +6813,7 @@ Finis Psalterij.
 
 \newpage
 \thispagestyle{empty}
-\mbox{}
+\includegraphics[width=4.5in]{Picture180.png}
 
 
 %pp181
@@ -6788,6 +6886,7 @@ in fine autem psalmi omnes simul dicunt inuitatorium semel tantum. Psalmus. \col
 \newline \textswab{C} \color{red} Deinde repetitur inuitato. \color{black} Domine pr\ae stolamur. \color{red} \&c. \color{black}
 \newline \color{red} Pr\ae dictus psalmus modo pr\ae dicto dicitur per totum annum cum Inuitatorio tempori, vel festo accommodato, pr\ae terquam in triduo ante Pascha. Deinde dicitur Hymnus tempori, seu festo conueniens. Hymnus. \color{black}
 \vspace{-.25em}
+\fancyhead[C]{\color{red} Dominica prima aduentus}
 \lettrine[lines=2]{\bfseries \color{red} V}{}Ox clara ecce intonat, Obscura qu\ae que increpat: pellantur eminus somnia: Ab \ae there Christus promicat.
 \newline \color{red} M\color{black}ens iam resurgat torpida, Qu\ae \ sorde extat saucia: Sydus refulget iam nouum, Vt tollat omne noxium.
 \newline \color{red} E\color{black}\ sursum agnus mittitur, Laxare gratis debitum: Omnes pro indulgentia, vocem demus cum lachrymis.
