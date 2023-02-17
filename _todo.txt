@@ -3,8 +3,10 @@ Implement Margin notes.
 	[x] Ability added
 [Eventually] Ensure all Indexes are correct:
 	[ ]	Librorum
-	[ ]	Invitatorium
+	[x]	Invitatorium
 	[ ]	Evangelorium (all incorrect)
 	[x]	Psalmorum
 Page Headers
 	[x] Ability added
+More Images?
+	[ ] Ability added
