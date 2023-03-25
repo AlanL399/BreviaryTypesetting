@@ -10,3 +10,4 @@ Page Headers
 	[x] Ability added
 More Images?
 	[ ] Ability added
+Rework Title page
