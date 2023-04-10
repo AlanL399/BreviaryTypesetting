@@ -11,3 +11,5 @@ Page Headers
 More Images?
 	[ ] Ability added
 Rework Title page
+Rework Drop Caps
+	[ ] Zallman Caps
