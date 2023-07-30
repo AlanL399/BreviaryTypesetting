@@ -2,7 +2,7 @@ Translate to English
 Implement Margin notes.
 	[x] Ability added
 [Eventually] Ensure all Indexes are correct:
-	[ ]	Librorum
+	[x]	Librorum
 	[x]	Invitatorium
 	[ ]	Evangelorium (all incorrect)
 	[x]	Psalmorum
@@ -11,5 +11,6 @@ Page Headers
 More Images?
 	[ ] Ability added
 Rework Title page
+	[ ] English
 Rework Drop Caps
-	[ ] Zallman Caps
+	[ ] Zallman Caps - English
