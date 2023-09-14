@@ -7,45 +7,45 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[margin=0.5in,hmarginratio=1:1]{geometry}% equal left and right margins
 % \usepackage{book-of-common-prayer}
-\usepackage{yfonts}
-\usepackage{lettrine}
-\usepackage{multicol}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
+% \usepackage{yfonts}
+% \usepackage{lettrine}
+% \usepackage{multicol}
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
 
-\makeatletter
-\def\leftmarginnote{%
-	\lrmarginnote{\hskip -\marginparsep \hskip -6.25em}}
+% \makeatletter
+% \def\leftmarginnote{%
+	% \lrmarginnote{\hskip -\marginparsep \hskip -6.25em}}
 	% \lrmarginnote{\hskip -\marginparsep \hskip -3.5em}}
 	% \xymarginnote{\hskip -\marginparsep \hskip -\marginparwidth}}
 
-\def\rightmarginnote{%
-	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
+% \def\rightmarginnote{%
+	% \lrmarginnote{\hskip\columnwidth \hskip -1em}}
 	% \xymarginnote{\hskip\columnwidth \hskip\marginparsep}}
 
-\long\def\lrmarginnote#1#2{%
-\vadjust{#1%
-\smash{\vtop{{%
-		\hsize\marginparwidth
-        \@parboxrestore
-        \@marginparreset
-#2}}}}}
-\makeatother
+% \long\def\lrmarginnote#1#2{%
+% \vadjust{#1%
+% \smash{\vtop{{%
+		% \hsize\marginparwidth
+        % \@parboxrestore
+        % \@marginparreset
+% #2}}}}}
+% \makeatother
 
 % \usepackage{gregoriotex}%2.5x longer
-\makeatletter
-\DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
-\DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
-\newcommand{\vers@resp@sym}{\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}}
-\newcommand{\vers@resp}[2]{%
-  {\ooalign{\hidewidth\kern#1\vers@resp@sym\hidewidth\cr#2\cr}}%
-}%
-\makeatother
+% \makeatletter
+% \DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+% \DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+% \newcommand{\vers@resp@sym}{\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}}
+% \newcommand{\vers@resp}[2]{%
+  % {\ooalign{\hidewidth\kern#1\vers@resp@sym\hidewidth\cr#2\cr}}%
+% }%
+% \makeatother
 
-\def\ae{æ}
-\def\AE{Æ}
-\def\oe{œ}
-\def\OE{Œ}
+% \def\ae{æ}
+% \def\AE{Æ}
+% \def\oe{œ}
+% \def\OE{Œ}
 
 
 \begin{document}
