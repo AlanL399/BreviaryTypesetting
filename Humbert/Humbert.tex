@@ -1,0 +1,857 @@
+\documentclass[11pt,french,openany]{book}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{%twoside,
+	inner=.75in,
+	outer=1in,
+	top=1in,
+	bottom=1in,
+	bindingoffset=0in
+	}
+\usepackage{titling}
+\usepackage{lettrine}
+\usepackage{multicol}
+\usepackage{titlesec}
+\usepackage{xstring}% For string manipulation
+\usepackage{fancyhdr}
+
+\input{Zallman.fd}
+\newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
+
+% Adjust headheight and topmargin
+\setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
+\addtolength{\topmargin}{-1.6pt} % Adjust topmargin to compensate
+
+\makeatletter
+\def\leftmarginnote{%
+	\lrmarginnote{\hskip -\marginparsep \hskip -12.25em}}
+
+\def\rightmarginnote{%
+	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
+
+\long\def\lrmarginnote#1#2{%
+\vadjust{#1%
+\smash{\vtop{{%
+		\hsize\marginparwidth
+        \@parboxrestore
+        \@marginparreset
+		\small
+#2}}}}}
+% \makeatother
+
+% \makeatletter
+\DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+\DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+\newcommand{\vers@resp}[2]{%
+  {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
+}%
+\makeatother
+
+\def\V{\color{Red}\Vbar. \color{black}}
+\def\R{\color{Red}\Rbar. \color{black}}
+
+\newcommand{\doxology}{%
+	Glória Patri, et Fílio, * et Spirítui Sancto. \\
+	Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+}
+
+\newcommand{\requiem}{%
+	Réquiem ætérnam * dona eis, Dómine. \\
+	Et lux perpétua * lúceat eis. \\
+}
+
+\input{psalms}
+
+% Add Venite command
+
+% Controls how to display Psalms.
+\newcommand{\psalm}[1]{%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	\vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	\csname psalm#1Text\endcsname%
+}
+
+% Define the responsory environment
+\NewDocumentEnvironment{responsory}{O{} m m}{%
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	\StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+% The format of the Responsories
+	\noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+}
+
+% Remove space before chapter and section title
+\titlespacing*{\chapter}{0pt}{-50pt}{0pt}
+\titlespacing*{\section}{0pt}{-5pt}{0pt}
+
+% Define chapter format
+\titleformat{\chapter}[display]
+{\normalfont\bfseries}{}{0pt}{}
+
+% Define the bookmark text for unnumbered chapters
+\newcommand{\ubchapter}[1]{%
+	\chapter*{}% Empty chapter
+	\addcontentsline{toc}{chapter}{#1}%
+	\renewcommand{\leftmark}{#1}%
+	\phantomsection%
+	\hypertarget{#1}{}%
+}
+
+% Define section format
+\titleformat{\section}
+{\normalfont\Large\bfseries}{}{0pt}{}
+
+% Define the bookmark text for unnumbered sections
+\newcommand{\ubsection}[1]{%
+	\section*{}%
+	\addcontentsline{toc}{section}{#1}%
+	\renewcommand{\rightmark}{#1}%
+}
+
+% Define subsection format
+\titleformat{\subsection}
+{\normalfont\large\bfseries}{}{0pt}{}
+
+% Define the bookmark text for unnumbered subsections
+\newcommand{\ubsubsection}[1]{%
+	\subsection*{#1}%
+	\addcontentsline{toc}{subsection}{#1}%
+}
+
+% Define the command for centered sections, in particular the Kalendar
+\newcommand{\csection}[2]{%
+	\section*{\centering\makebox[\linewidth]{\normalfont\Large\bfseries #1}}%
+	{\centering\large #2\par}%
+	\addcontentsline{toc}{section}{#1}%
+	\renewcommand{\rightmark}{#1}%
+}
+
+% Clear default fancyhdr settings
+\fancyhf{}
+
+\fancyhead[C]{\leftmark} % Display chapter in the center
+\fancyhead[RO,LE]{\rightmark}
+
+\pagestyle{fancy} % Activate the custom headers and footers
+
+\renewcommand{\contentsname}{Index}
+
+\pretitle{\begin{center}\bfseries\huge Ecclesiasticum Officium\\
+\large Secundum Ordinem
+\end{center}}
+\title{\begin{center}\bfseries\huge Fratrum Predicatorum\\
+\large In Hoc Volumine
+\end{center}}
+\posttitle{\begin{center}\bfseries\Large Per Quatuor Decim Libros\\
+\normalsize Distinctum Hoc Ordine Continetur
+\end{center}}
+
+\author{Humbert}
+
+\date{1259}
+
+\begin{document}
+
+\frontmatter
+
+\maketitle
+
+\phantomsection
+\addcontentsline{toc}{section}{Index}
+\tableofcontents
+% \thispagestyle{empty}
+\let\cleardoublepage\clearpage % Suppresses blank page
+
+\ubchapter{INCIPIT}
+
+\thispagestyle{fancy}
+
+\ubsection{Divine Office Responsories}
+
+\subsection*{Divine Office Responsories}
+
+Here is a sample responsory.
+
+\begin{responsory}[incipit1]
+{This is the main responsory verse * with a second part.}{This is the versicle.}
+\end{responsory}
+
+We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
+
+\mainmatter
+
+\ubchapter{Kalendarium Sanctorum}
+
+\thispagestyle{fancy}
+
+%pp41
+\vspace{+20pt}
+\color{Red}\csection{Januarius}{\color{Red} habet dies. xxxi. luna. xxx.}\color{black}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & \color{Red} Kal. & & & \\
+\color{Red}numer. & & & & & \\
+\color{Red} iii & \color{Red} A & & 1 & \color{Red} Circumcisio domini. \color{Red} duplex. \\
+ & b & \color{Red} iiii & 2 & Oct. Sancti Stephani. & \color{Red} \\
+\color{Red} xj & c & \color{Red} iii & 3 & Oct. Sancti Johannis. \qquad \color{Red} Incipit Quartus Embolismus.\\
+& d & \color{Red} ii & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
+\color{Red} xix & e & Nonis & 5 & & \color{Red} \\
+\color{Red} viii & f & \color{Red} viii & 6 & Epiphania Domini. totum duplex. \\
+ & g & \color{Red} vii & 7 & \qquad \color{Red} Claves. lxx. & \\
+\color{Red} xvi & \color{Red} A & \color{Red} vi & 8 & & \\
+\color{Red} v & b & \color{Red} v & 9 & & \\
+ & c & \color{Red} iiii & 10 & Pauli Heremite. \color{Red} memoria. \\
+\color{Red} xiii & d & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} ii & e & \color{Red} ii. & 12 & & \color{Red} \\
+ & f & Idibus. & 13 & Oct. Epiphanie. \color{Red} simplex. \ \color{black} Hylarii et Remigii. \color{Red} memoria. & \\
+\color{Red} x & g & \color{Red} xix & 14 & Felicis presbiteri et confessoris. iii. lect. \\
+ & \color{Red} A & \color{Red} xviii & 15 & \color{Red} Mauri abbatis. iii. lect. \\
+\color{Red} xviii & b & \color{Red} xvii & 16 & Marcelli pape et martyris. iii. lect. \\
+\color{Red} vii & c & \color{Red} xvi & 17 & \color{Red} Anthonii abbatis. iii. lect. \\
+ & d & \color{Red} xv & 18 & Prisce virginis et martyris. iii. lect. \qquad \color{Red} Sol in aquario. Initium lxx. \\
+\color{Red} xv & e & \color{Red} xiv & 19 & \color{Red} \\
+\color{Red} iiii & f & \color{Red} xiii & 20 & Fabiani et Sebastiani martyres. simplex. \\
+ & g & \color{Red} xii & 21 & Agnetis virginis et martyris. simplex. \\
+\color{Red} xii & \color{Red} A & \color{Red} xj & 22 & Vincentii martyris. semiduplex. \\
+\color{Red} j & b & \color{Red} x & 23 & \color{Red} Emerentiane virginis et martyris. memoria. \\
+ & c & \color{Red} ix & 24 & & \color{Red} \\
+\color{Red} ix & d & \color{Red} viii & 25 & Conversio sancti Pauli. semiduplex. \\
+& e & \color{Red} vii & 26 & & \color{Red} \\
+\color{Red} xvii & f & \color{Red} vi & 27 & \color{Red} Juliani episcopi et confessoris. memoria. \\
+\color{Red} vi & g & \color{Red} v & 28 & \color{Red} Agnetis secundo. iii. lect. \qquad Claves xl. \\
+ & \color{Red} A & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red} xiv & b & \color{Red} iii & 30 & & \color{Red} \\
+\color{Red} iii & c & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\color{Red} Hore noctis. xvj. Diei. viii.
+\end{center}
+
+
+
+%pp40
+\newpage
+\color{Red}\csection{Februarius}{\color{Red} habet dies. xxviii. luna. xxix.}\color{black}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+ & d & \color{Red} Kal. & 1 & \color{Red} Ignatii episcopi et martyr. memoria. \quad Finis. iiii. embolismi. \\
+\color{Red} xj & e & \color{Red} iiii & 2 & Purificatio sancte Marie virginis. totum duplex. \\
+\color{Red} xix & f & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red} viii & g & \color{Red} ii & 4 & & \color{Red} \\
+ & \color{Red} A & Nonis & 5 & Agath\ae \ virginis \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} xvi & b & \color{Red} viii & 6 & & \color{Red} \\
+\color{Red} v & c & \color{Red} vii & 7 & Dorothe\ae \ virginis \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & d & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red} xiii & e & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} ii & f & \color{Red} iiii & 10 & & \color{Red} \\
+\color{Red}  & g & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} x & \color{Red} A & \color{Red} ii & 12 & Eulali\ae \ virginis Barchinonensis. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & b & Idibus. & 13 & & \color{Red} \\
+\color{Red} xviii & c & \color{Red} xvi & 14 & \quad \color{Red} Kalendas Martii. & \color{Red} \\
+\color{Red} vii & d & \color{Red} xv & 15 & \qquad \color{Red} Sol in piscibus. & \color{Red} \\
+\color{Red}  & e & \color{Red} xiv & 16 & & \color{Red} \\
+\color{Red} xv & f & \color{Red} xiii & 17 & & \color{Red} \\
+\color{Red} iiii & g & \color{Red} xii & 18 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} xj & 19 & & \color{Red} \\
+\color{Red} xii & b & \color{Red} x & 20 & & \color{Red} \\
+\color{Red} j & c & \color{Red} ix & 21 & & \color{Red} \\
+\color{Red}  & d & \color{Red} viii & 22 & \color{Red} Cathedra Sancti Petri. \color{black} sex capparum. & \color{Red} \\
+\color{Red} ix & e & \color{Red} vii & 23 & & \color{Red} \\
+\color{Red}  & f & \color{Red} vi & 24 & \color{Red} MATHI\AE \ Apostoli. \color{black} sex capparum. & \color{Red} \\
+\color{Red} xvii & g & \color{Red} v & 25 & & \color{Red} \\
+\color{Red} vi & \color{Red} A & \color{Red} iiii & 26 & & \color{Red} \\
+\color{Red}  & b & \color{Red} iii & 27 & & \color{Red} \\
+\color{Red} xvi & c & \color{Red} ii & 28 & & \color{Red} \\
+\hline
+\end{tabular}
+\end{center}
+\par \color{Red} Locus bissexti in anno bissextili quacumque die evenerit Festum sancti Mathi\ae \ in tali jejunetur Vigilia ejus, \& in sequenti die celebretur, \& servetur Festum; et si Sabbato evenerit, ipso Sabbato celebretur et jejunetur Vigilia ejus, et servetur in sequenti die Dominico. \color{black}
+
+
+
+%pp41
+\newpage
+% \thispagestyle{empty}
+\begin{center} \hypertarget{MARTIUS} \bfseries \LARGE
+M A R T I U S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 12.}\\
+dies vero {\color{black} 12.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=MARTIUS]{MARTIUS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} iii & d & & 1 & & \color{Red} \\
+\color{Red}  & e & \color{Red} vi & 2 & & \color{Red} \\
+\color{Red} xj & f & \color{Red} v & 3 & Hemeterii \& Celedonii martyrum. \color{Red} quatuor capparum. & \color{Red} \\
+\color{Red}  & g & \color{Red} iiii & 4 & & \color{Red} \\
+\color{Red} xix & \color{Red} A & \color{Red} iii & 5 & & \color{Red} \\
+\color{Red} viii & b & \color{Red} ii & 6 & & \color{Red} \\
+\color{Red}  & c & Nonis & 7 & & \color{Red} \\
+\color{Red} xvi & d & \color{Red} viii & 8 & & \color{Red} \\
+\color{Red} v & e & \color{Red} vii & 9 & & \color{Red} \\
+\color{Red}  & f & \color{Red} vi & 10 & & \color{Red} \\
+\color{Red} xiii & g & & 11 & & \color{Red} \\%sic empty
+\color{Red} ii & \color{Red} A & \color{Red} iv. & 12 & & \color{Red} \\
+\color{Red}  & b & \color{Red} iii & 13 & & \color{Red} \\
+\color{Red} x & c & \color{Red} ii & 14 & & \color{Red} \\
+\color{Red}  & d & Idibus. & 15 & & \color{Red} \\
+\color{Red} xviii & e & \color{Red} xvii & 16 & \qquad \color{Red} Kalendas Aprilis. & \color{Red} \\
+\color{Red} vii & f & \color{Red} xvi & 17 & & \color{Red} \\
+\color{Red}  & g & \color{Red} xv & 18 & & \color{Red} \\
+\color{Red} xv & \color{Red} A & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red} iiii & b & \color{Red} xiii & 20 & & \color{Red} \\
+\color{Red}  & c & \color{Red} xii & 21 & & \color{Red} \\
+\color{Red} xii & d & \color{Red} xj & 22 & & \color{Red} \\
+\color{Red} j & e & \color{Red} x & 23 & & \color{Red} \\
+\color{Red}  & f & \color{Red} ix & 24 & & \color{Red} \\
+\color{Red} ix & g & \color{Red} viii & 25 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} vii & 26 & & \color{Red} \\
+\color{Red} xvii & b & \color{Red} vi & 27 & & \color{Red} \\
+\color{Red} vi & c & \color{Red} v & 28 & & \color{Red} \\
+\color{Red}  & d & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red} xiv & e & \color{Red} iii & 30 & & \color{Red} \\
+\color{Red} iii & f & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+%pp42
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{APRILIS} \bfseries \LARGE
+A P R I L I S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 30.} LUNA {\color{black} 29.} NOX HABET HORAS {\color{black} 10.}\\
+dies vero {\color{black} 14.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=APRILIS]{APRILIS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red}  & g & \color{Red} Kal. & 1 & & \color{Red} \\
+\color{Red} xj & \color{Red} A & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red}  & b & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red} xix & c & \color{Red} ii & 4 & & \color{Red} \\
+\color{Red} viii & d & Nonis & 5 & & \color{Red} \\
+\color{Red} xvi & e & \color{Red} viii & 6 & & \color{Red} \\
+\color{Red} v & f & \color{Red} vii & 7 & & \color{Red} \\
+\color{Red}  & g & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red} xiii & \color{Red} A & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} ii & b & \color{Red} iiii & 10 & & \color{Red} \\
+\color{Red}  & c & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} x & d & \color{Red} ii & 12 & & \color{Red} \\
+\color{Red}  & e & Idibus. & 13 & & \color{Red} \\
+\color{Red} xviii & f & \color{Red} xviii & 14 & \qquad \color{Red} Kalendas Maii. & \color{Red} \\
+\color{Red} vii & g & \color{Red} xvii & 15 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} xvi & 16 & Sanct\ae \ Engrati\ae , vel decem \& octo martyrum. & \color{Red} \\
+\color{Red} xv & b & \color{Red} xv & 17 & & \color{Red} \\
+\color{Red} iiii & c & \color{Red} xiv & 18 & & \color{Red} \\
+\color{Red}  & d & \color{Red} xiii & 19 & & \color{Red} \\
+\color{Red} xii & e & \color{Red} xii & 20 & & \color{Red} \\
+\color{Red} j & f & \color{Red} xj & 21 & & \color{Red} \\
+\color{Red}  & g & \color{Red} x & 22 & & \color{Red} \\
+\color{Red} ix & \color{Red} A & \color{Red} ix & 23 & & \color{Red} \\
+\color{Red}  & b & \color{Red} viii & 24 & & \color{Red} \\
+\color{Red} xvii & c & \color{Red} vii & 25 & & \color{Red} \\
+\color{Red} vi & d & \color{Red} vi & 26 & & \color{Red} \\
+\color{Red}  & e & \color{Red} v & 27 & & \color{Red} \\
+\color{Red} xiv & f & \color{Red} iiii & 28 & & \color{Red} \\
+\color{Red} iii & g & \color{Red} iii & 29 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} ii & 30 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp43
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{MAJUS} \bfseries \LARGE
+M A J U S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 8.}\\
+dies vero {\color{black} 16.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=MAJUS]{MAJUS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} xj & b & \color{Red} Kal. & 1 & Torquati \& comitum ejus Episcoporum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & c & \color{Red} vi & 2 & Felicis Diaconi Hispalensis. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xix & d & \color{Red} v & 3 & Inventio sanct\ae \ Crucis. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} viii & e & \color{Red} iiii & 4 & & \color{Red} \\
+\color{Red}  & f & \color{Red} iii & 5 & & \color{Red} \\
+\color{Red} xvi & g & \color{Red} ii & 6 & & \color{Red} \\
+\color{Red} v & \color{Red} A & Nonis & 7 & & \color{Red} \\
+\color{Red}  & b & \color{Red} viii & 8 & & \color{Red} \\
+\color{Red} xiii & c & \color{Red} vii & 9 & & \color{Red} \\
+\color{Red} ii & d & \color{Red} vi & 10 & & \color{Red} \\
+\color{Red}  & e & \color{Red} v & 11 & & \color{Red} \\
+\color{Red} x & f & \color{Red} iiii & 12 & & \color{Red} \\
+\color{Red}  & g & \color{Red} iii & 13 & & \color{Red} \\
+\color{Red} xviii & \color{Red} A & \color{Red} ii & 14 & & \color{Red} \\
+\color{Red} vii & b & Idibus. & 15 & & \color{Red} \\
+\color{Red}  & c & \color{Red} xvii & 16 & \qquad \color{Red} Kalendas Junii. & \color{Red} \\
+\color{Red} xv & d & \color{Red} xvi & 17 & & \color{Red} \\
+\color{Red} iiii & e & \color{Red} xv & 18 & & \color{Red} \\
+\color{Red}  & f & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red} xii & g & \color{Red} xiii & 20 & Sanctorum Cyriaci \& Paul\ae \ martyrum. & \color{Red} \\
+\color{Red} j & \color{Red} A & \color{Red} xii & 21 & & \color{Red} \\
+\color{Red}  & b & \color{Red} xj & 22 & & \color{Red} \\
+\color{Red} ix & c & \color{Red} x & 23 & & \color{Red} \\
+\color{Red}  & d & \color{Red} ix & 24 & & \color{Red} \\
+\color{Red} xvii & e & \color{Red} viii & 25 & & \color{Red} \\
+\color{Red} vi & f & \color{Red} vii & 26 & & \color{Red} \\
+\color{Red}  & g & \color{Red} vi & 27 & & \color{Red} \\
+\color{Red} xiv & \color{Red} A & \color{Red} v & 28 & & \color{Red} \\
+\color{Red} iii & b & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red}  & c & \color{Red} iii & 30 & & \color{Red} \\
+\color{Red} xj & d & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp44
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{JUNIUS} \bfseries \LARGE
+J U N I U S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 30.} LUNA {\color{black} 29.} NOX HABET HORAS {\color{black} 6.}\\
+dies vero {\color{black} 18.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=JUNIUS]{JUNIUS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red}  & e & \color{Red} Kal. & 1 & & \color{Red} \\
+\color{Red} xix & f & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red} viii & g & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red} xvi & \color{Red} A & \color{Red} ii & 4 & & \color{Red} \\
+\color{Red} v & b & Nonis & 5 & & \color{Red} \\
+\color{Red}  & c & \color{Red} viii & 6 & & \color{Red} \\
+\color{Red} xiii & d & \color{Red} vii & 7 & & \color{Red} \\
+\color{Red} ii & e & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red}  & f & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} x & g & \color{Red} iiii & 10 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} xviii & b & \color{Red} ii & 12 & & \color{Red} \\
+\color{Red} vii & c & Idibus. & 13 & & \color{Red} \\
+\color{Red}  & d & \color{Red} xviii & 14 & \qquad \color{Red} Kalendas Julii. & \color{Red} \\
+\color{Red} xv & e & \color{Red} xvii & 15 & & \color{Red} \\
+\color{Red} iiii & f & \color{Red} xvi & 16 & & \color{Red} \\
+\color{Red}  & g & \color{Red} xv & 17 & Adriani atque Natali\ae . \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xii & \color{Red} A & \color{Red} xiv & 18 & & \color{Red} \\
+\color{Red} j & b & \color{Red} xiii & 19 & Gervasii \& Protasii martyrum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & c & \color{Red} xii & 20 & & \color{Red} \\
+\color{Red} ix & d & \color{Red} xj & 21 & & \color{Red} \\
+\color{Red}  & e & \color{Red} x & 22 & & \color{Red} \\
+\color{Red} xvii & f & \color{Red} ix & 23 & Dominica pro adventu Sancti Joannis Baptist\ae . & \color{Red} \\
+\color{Red} vi & g & \color{Red} viii & 24 & \color{Red} Nativitas sancti Joannis Baptist\ae . \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} vii & 25 & & \color{Red} \\
+\color{Red} xiv & b & \color{Red} vi & 26 & & \color{Red} \\
+\color{Red} iii & c & \color{Red} v & 27 & Sancti Zoïli martyris. & \color{Red} \\
+\color{Red}  & d & \color{Red} iiii & 28 & & \color{Red} \\
+\color{Red} xj & e & \color{Red} iii & 29 & \color{Red} Apostolorum Petri \& Pauli. \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & f & \color{Red} ii & 30 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp45
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{JULIUS} \bfseries \LARGE
+J U L I U S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 8.}\\
+dies vero {\color{black} 16.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=JULIUS]{JULIUS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} xix & g & \color{Red} Kal. & 1 & & \color{Red} \\
+\color{Red} viii & \color{Red} A & \color{Red} vi & 2 & & \color{Red} \\
+\color{Red}  & b & \color{Red} v & 3 & & \color{Red} \\
+\color{Red} xvi & c & \color{Red} iiii & 4 & & \color{Red} \\
+\color{Red} v & d & \color{Red} iii & 5 & & \color{Red} \\
+\color{Red}  & e & \color{Red} ii & 6 & & \color{Red} \\
+\color{Red} xiii & f & Nonis & 7 & & \color{Red} \\
+\color{Red} ii & g & \color{Red} viii & 8 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} vii & 9 & & \color{Red} \\
+\color{Red} x & b & \color{Red} vi & 10 & & \color{Red} \\
+\color{Red}  & c & \color{Red} v & 11 & & \color{Red} \\
+\color{Red} xviii & d & \color{Red} iiii & 12 & Sanct\ae \ Martian\ae \ Virginis. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} vii & e & \color{Red} iii & 13 & & \color{Red} \\
+\color{Red}  & f & \color{Red} ii & 14 & & \color{Red} \\
+\color{Red} xv & g & Idibus. & 15 & & \color{Red} \\
+\color{Red} iiii & \color{Red} A & \color{Red} xvii & 16 & \color{Red} Kal. Augusti. \color{black} Just\ae \ \& Rufin\ae \ virginum \& martyrum. \color{Red} quatuor capparum. & \color{Red} \\
+\color{Red}  & b & \color{Red} xvi & 17 & & \color{Red} \\
+\color{Red} xii & c & \color{Red} xv & 18 & \color{Red} \\
+\color{Red} j & d & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red}  & e & \color{Red} xiii & 20 & & \color{Red} \\
+\color{Red} ix & f & \color{Red} xii & 21 & Sperati vel comitum ejus. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & g & \color{Red} xj & 22 & & \color{Red} \\
+\color{Red} xvii & \color{Red} A & \color{Red} x & 23 & & \color{Red} \\
+\color{Red} vi & b & \color{Red} ix & 24 & Christin\ae \ virginis \& martyris. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & c & \color{Red} viii & 25 & Christophori \& comitum ejus martyrum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xiv & d & \color{Red} vii & 26 & & \color{Red} \\
+\color{Red} iii & e & \color{Red} vi & 27 & & \color{Red} \\
+\color{Red}  & f & \color{Red} v & 28 & & \color{Red} \\
+\color{Red} xj & g & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red} xix & \color{Red} A & \color{Red} iii & 30 & Sancti Cucufati martyris. & \color{Red} \\
+\color{Red}  & b & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp46
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{AUGUSTUS} \bfseries \LARGE
+A U G U S T U S.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 10.}\\
+dies vero {\color{black} 14.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=AUGUSTUS]{AUGUSTUS}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} viii & c & & 1 & Felicis martyris. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xvi & d & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red} v & e & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red}  & f & \color{Red} ii & 4 & & \color{Red} \\
+\color{Red} xiii & g & Nonis & 5 & & \color{Red} \\
+\color{Red} ii & \color{Red} A & \color{Red} viii & 6 & Sanctorum Justi \& Pastoris martyrum. & \color{Red} \\
+\color{Red}  & b & \color{Red} vii & 7 & & \color{Red} \\
+\color{Red} x & c & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red}  & d & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} xviii & e & \color{Red} iiii & 10 & \color{Red} Sancti Laurentii martyris. \color{black} sex capparum. & \color{Red} \\
+\color{Red} vii & f & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red}  & g & \color{Red} ii & 12 & & \color{Red} \\
+\color{Red} xv & \color{Red} A & Idibus. & 13 & Hyppolyti Martyris. \color{Red} quatuor capparum. & \color{Red} \\
+\color{Red} iiii & b & \color{Red} xix & 14 & \qquad \color{Red} Kalendas Septembris. & \color{Red} \\
+\color{Red}  & c & \color{Red} xviii & 15 & \color{Red} ASSUMPTIO SANCT\AE \ MARI\AE . \color{black} sex capparum. & \color{Red} \\
+\color{Red} xii & d & \color{Red} xvii & 16 & & \color{Red} \\
+\color{Red} j & e & \color{Red} xvi & 17 & & \color{Red} \\
+\color{Red}  & f & \color{Red} xv & 18 & & \color{Red} \\
+\color{Red} ix & g & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} xiii & 20 & & \color{Red} \\
+\color{Red} xvii & b & \color{Red} xii & 21 & & \color{Red} \\
+\color{Red} vi & c & \color{Red} xi & 22 & & \color{Red} \\
+\color{Red}  & d & \color{Red} x & 23 & & \color{Red} \\
+\color{Red} xiv & e & \color{Red} ix & 24 & \color{Red} Bartholom\ae i Apostoli. \color{black} sex capparum. & \color{Red} \\
+\color{Red} iii & f & \color{Red} viii & 25 & Genesii martyris. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & g & \color{Red} vii & 26 & Gerontii Episcopi. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xj & \color{Red} A & \color{Red} vi & 27 & & \color{Red} \\
+\color{Red} xix & b & \color{Red} v & 28 & Augustini Episcopi \& Doctores. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & c & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red} viii & d & \color{Red} iii & 30 & & \color{Red} \\
+\color{Red}  & e & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp47
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{SEPTEMBER} \bfseries \LARGE
+S E P T E M B E R.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 30.} LUNA {\color{black} 29.} NOX HABET HORAS {\color{black} 12.}\\
+dies vero {\color{black} 12.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=SEPTEMBER]{SEPTEMBER}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} xvi & f & & 1 & & \color{Red} \\
+\color{Red} v & g & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red} xiii & b & \color{Red} ii & 4 & & \color{Red} \\
+\color{Red} ii & c & Nonis & 5 & & \color{Red} \\
+\color{Red}  & d & \color{Red} viii & 6 & & \color{Red} \\
+\color{Red} x & e & \color{Red} vii & 7 & & \color{Red} \\
+\color{Red}  & f & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red} xviii & g & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} vii & \color{Red} A & \color{Red} iiii & 10 & Officium jejuniorum Kalendarum Septembrium ante festum Sancti & \color{Red} \\
+\color{Red}  & & & & \quad Cypriani observatur his tribus diebus. & \color{Red} \\
+\color{Red}  & b & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} xv & c & \color{Red} ii & 12 & & \color{Red} \\
+\color{Red} iiii & d & Idibus. & 13 & \qquad \color{Red} Kalendas Octobris. \color{black} Cypriani. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & e & \color{Red} xviii & 14 & & \color{Red} \\
+\color{Red} xii & f & \color{Red} xvii & 15 & Euphemi\ae \ virginis \& martyris. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} j & g & \color{Red} xvi & 16 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} xv & 17 & & \color{Red} \\
+\color{Red} ix & b & \color{Red} xiv & 18 & & \color{Red} \\
+\color{Red}  & c & \color{Red} xiii & 19 & & \color{Red} \\
+\color{Red} xvii & d & \color{Red} xii & 20 & \color{Red} Matth\ae i Apostoli. \color{black} sex capparum. & \color{Red} \\
+\color{Red} vi & e & \color{Red} xj & 21 & & \color{Red} \\
+\color{Red}  & f & \color{Red} x & 22 & & \color{Red} \\
+\color{Red} xiv & g & \color{Red} ix & 23 & Decollatio Sancti Joannis Baptist\ae . \color{Red} sex capparum. & \color{Red} \\
+\color{Red} iii & \color{Red} A & \color{Red} viii & 24 & & \color{Red} \\
+\color{Red}  & b & \color{Red} vii & 25 & & \color{Red} \\
+\color{Red} xj & c & \color{Red} vi & 26 & & \color{Red} \\
+\color{Red} xix & d & \color{Red} v & 27 & & \color{Red} \\
+\color{Red}  & e & \color{Red} iiii & 28 & \color{Red} Michaelis Archangeli. \color{black} sex capparum. & \color{Red} \\
+\color{Red} viii & f & \color{Red} iii & 29 & Hieronymi Presbyteri \& Confessoris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & g & \color{Red} ii & 30 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp48
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{OCTOBER} \bfseries \LARGE
+O C T O B E R.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 14.}\\
+dies vero {\color{black} 10.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=OCTOBER]{OCTOBER}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} xvi & \color{Red} A & \color{Red} Kal. & 1 & Sanctorum Verissimi, Maxim\ae , \& Juli\ae \ martyrum. & \color{Red} \\
+\color{Red} v & b & \color{Red} vi & 2 & & \color{Red} \\
+\color{Red} xiii & c & \color{Red} v & 3 & & \color{Red} \\
+\color{Red} ii & d & \color{Red} iiii & 4 & & \color{Red} \\
+\color{Red}  & e & \color{Red} iii & 5 & & \color{Red} \\
+\color{Red} x & f & \color{Red} ii & 6 & & \color{Red} \\
+\color{Red}  & g & Nonis & 7 & & \color{Red} \\
+\color{Red} xviii & \color{Red} A & \color{Red} viii & 8 & & \color{Red} \\
+\color{Red} vii & b & \color{Red} vii & 9 & & \color{Red} \\
+\color{Red}  & c & \color{Red} vi & 10 & & \color{Red} \\
+\color{Red} xv & d & \color{Red} v & 11 & & \color{Red} \\
+\color{Red} iiii & e & \color{Red} iiii & 12 & & \color{Red} \\
+\color{Red}  & f & \color{Red} iii & 13 & Sanctorum Fausti, Januarii \& Martialis martyrum. & \color{Red} \\
+\color{Red} xii & g & \color{Red} ii & 14 & & \color{Red} \\
+\color{Red} j & \color{Red} A & Idibus. & 15 & & \color{Red} \\
+\color{Red}  & b & \color{Red} xvii & 16 & \qquad \color{Red} Kalendas Novembris. & \color{Red} \\
+\color{Red} ix & c & \color{Red} xvi & 17 & Sanctorum Cosm\ae \ \& Damiani martyrum. & \color{Red} \\
+\color{Red}  & d & \color{Red} xv & 18 & \color{Red} Luc\ae \ Evangelist\ae . \color{black} sex capparum. & \color{Red} \\
+\color{Red} xvii & e & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red} vi & f & \color{Red} xiii & 20 & & \color{Red} \\
+\color{Red}  & g & \color{Red} xii & 21 & & \color{Red} \\
+\color{Red} xiv & \color{Red} A & \color{Red} xj & 22 & & \color{Red} \\
+\color{Red} iii & b & \color{Red} x & 23 & Servandi \& Germani martyri. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & c & \color{Red} ix & 24 & & \color{Red} \\
+\color{Red} xj & d & \color{Red} viii & 25 & & \color{Red} \\
+\color{Red} xix & e & \color{Red} vii & 26 & & \color{Red} \\
+\color{Red}  & f & \color{Red} vi & 27 & Vincentii \& Sabin\ae \ \& Chrystet\ae \ martyrum. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} viii & g & \color{Red} v & 28 & \color{Red} Apostolorum Simonis \& Jud\ae . \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} iiii & 29 & & \color{Red} \\
+\color{Red} xii & b & \color{Red} iii & 30 & Sancti Marceli martyris. & \color{Red} \\
+\color{Red} v & c & \color{Red} ii & 31 & & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp49
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{NOVEMBER} \bfseries \LARGE
+N O V E M B E R.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 30.} LUNA {\color{black} 29.} NOX HABET HORAS {\color{black} 10.}\\
+dies vero {\color{black} 14.}\\ \vspace{+.5em}%def a typo
+
+\end{center}
+\bookmark[dest=NOVEMBER]{NOVEMBER}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red}  & d & \color{Red} Kal. & 1 & & \color{Red} \\
+\color{Red} xiii & e & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red} ii & f & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red}  & g & \color{Red} ii & 4 & & \color{Red} \\
+\color{Red} x & \color{Red} A & Nonis & 5 & & \color{Red} \\
+\color{Red}  & b & \color{Red} viii & 6 & & \color{Red} \\
+\color{Red} xviii & c & \color{Red} vii & 7 & Officium jejuniorum Kalendarum Novembreium ante festum Sancti & \color{Red} \\
+\color{Red}  &  &  &  & \quad Martini observatur his tribus diebus. & \color{Red} \\
+\color{Red} vii & d & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red}  & e & \color{Red} v & 9 & & \color{Red} \\
+\color{Red} xv & f & \color{Red} iiii & 10 & & \color{Red} \\
+\color{Red} iiii & g & \color{Red} iii & 11 & Martini Episcopi \& Confessoris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} ii & 12 & \AE miliani Abbatis. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xii & b & Idibus. & 13 & & \color{Red} \\
+\color{Red} j & c & \color{Red} xviii & 14 & \qquad Kalendar Decembris. & \color{Red} \\
+\color{Red}  & d & \color{Red} xvii & 15 & & \color{Red} \\
+\color{Red} ix & e & \color{Red} xvi & 16 & & \color{Red} \\
+\color{Red}  & f & \color{Red} xv & 17 & Aciscli \& Victori\ae \ martyrum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xvii & g & \color{Red} xiv & 18 & Sancti Romani martyris. & \color{Red} \\
+\color{Red} vi & \color{Red} A & \color{Red} xiii & 19 & Sancti Crispini Episcopi \& Confessoris. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & b & \color{Red} xii & 20 & & \color{Red} \\
+\color{Red} xiv & c & \color{Red} xj & 21 & & \color{Red} \\
+\color{Red} iii & d & \color{Red} x & 22 & C\ae cili\ae \ virginis \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & e & \color{Red} ix & 23 & Clementis Pap\ae \ \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} xj & f & \color{Red} viii & 24 & & \color{Red} \\
+\color{Red} xix & g & \color{Red} vii & 25 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} vi & 26 & & \color{Red} \\
+\color{Red} viii & b & \color{Red} v & 27 & & \color{Red} \\
+\color{Red}  & c & \color{Red} iiii & 28 & & \color{Red} \\
+\color{Red} xvi & d & \color{Red} iii & 29 & Saturnini martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} v & e & \color{Red} ii & 30 & \color{Red} Sancti Andre\ae \ Apostoli. \color{black} sex capparum. & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+
+%pp50
+\newpage
+\thispagestyle{empty}
+\begin{center} \hypertarget{DECEMBER} \bfseries \LARGE
+D E C E M B E R.\\ \vspace{+.5em}
+\large \mdseries \color{Red} HABET DIES {\color{black} 31.} LUNA {\color{black} 30.} NOX HABET HORAS {\color{black} 16.}\\
+dies vero {\color{black} 8.}\\ \vspace{+.5em}
+
+\end{center}
+\bookmark[dest=DECEMBER]{DECEMBER}
+
+\begin{center}
+\begin{tabular}{l | l | l | r | l r}
+\color{Red}Aureus & & & & \color{Red} \\
+\color{Red}numer. & & & & \color{Red} \\
+\color{Red} xiii & f & \color{Red} Kal. & 1 & & \color{Red} \\
+\color{Red} ii & g & \color{Red} iiii & 2 & & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} iii & 3 & & \color{Red} \\
+\color{Red} x & b & \color{Red} ii & 4 & Barbar\ae \ virginis \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & c & Nonis & 5 & & \color{Red} \\
+\color{Red} xviii & d & \color{Red} viii & 6 & Sancti Nicolai Episcopi \& martyris. \color{Red} sex capparum. & \color{Red} \\
+\color{Red} vii & e & \color{Red} vii & 7 & & \color{Red} \\
+\color{Red}  & f & \color{Red} vi & 8 & & \color{Red} \\
+\color{Red} xv & g & \color{Red} v & 9 & \color{Red} Leocadi\ae \ virginis. \color{black} sex capparum. & \color{Red} \\
+\color{Red} iiii & \color{Red} A & \color{Red} iiii & 10 & \color{Red} Eulali\ae \ virginis. \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & b & \color{Red} iii & 11 & & \color{Red} \\
+\color{Red} xii & c & \color{Red} ii & 12 & Eugeni\ae \ virginis \& martyris. & \color{Red} \\
+\color{Red} j & d & Idibus. & 13 & & \color{Red} \\
+\color{Red}  & e & \color{Red} xix & 14 & \qquad \color{Red} Kalendas Januarii. \color{black} Justi \& Abundi martyrum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} ix & f & \color{Red} xviii & 15 & & \color{Red} \\
+\color{Red}  & g & \color{Red} xvii & 16 & & \color{Red} \\
+\color{Red} xvii & \color{Red} A & \color{Red} xvi & 17 & & \color{Red} \\
+\color{Red} vi & b & \color{Red} xv & 18 & ANNUNTIATIO SANCT\AE \ MARI\AE \ VIRGINIS. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & c & \color{Red} xiv & 19 & & \color{Red} \\
+\color{Red} xiv & d & \color{Red} xiii & 20 & & \color{Red} \\
+\color{Red} iii & e & \color{Red} xii & 21 & \color{Red} Thom\ae \ Apostoli. \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & f & \color{Red} xj & 22 & & \color{Red} \\
+\color{Red} xj & g & \color{Red} x & 23 & & \color{Red} \\
+\color{Red} xix & \color{Red} A & \color{Red} ix & 24 & & \color{Red} \\
+\color{Red}  & b & \color{Red} viii & 25 & \color{Red} Nativitas Domini nostri Jesu Christi. \color{black} sex capparum. & \color{Red} \\
+\color{Red} viii & c & \color{Red} vii & 26 & \color{Red} Stephani martyris. \color{black} sex capparum. & \color{Red} \\
+\color{Red}  & d & \color{Red} vi & 27 & \color{Red} Joannis Apostoli \& Evangelist\ae . \color{black} sex capparum. & \color{Red} \\
+\color{Red} xvi & e & \color{Red} v & 28 & \color{Red} Sanctorum Innocentum. \color{black} sex capparum. & \color{Red} \\
+\color{Red} v & f & \color{Red} iiii & 29 & Jacobi Fratris Domini. \color{Red} sex capparum. & \color{Red} \\
+\color{Red}  & g & \color{Red} iii & 30 & Jacobi Fratris Apostoli \& Evangelist\ae . \color{Red} sex capparum. & \color{Red} \\
+\color{Red} xiii & \color{Red} A & \color{Red} ii & 31 & Columb\ae \ virginis. \color{Red} novem lectionum. & \color{Red} \\
+\end{tabular}
+\end{center}
+
+
+\ubchapter{Breviarium}
+
+\ubsection{Rubric\ae }
+
+\thispagestyle{fancy}
+
+\begin{multicols*}{2}
+
+
+{\color{Red} \ubsubsection{De Quo Officium Sit Agendum.}}
+\lettrine[lines=3]{\zallmancaps \color{Blue} N}{otandum} quod per totum annum Officium tam diei quam noctis ad Horas faciendun est de Tempore nisi in festis Sanctorum et per octavas et in octavis eorum et nisi in Sabbatis quando de Beata Virgine agitur in conventu. Quando igitur de Tempore fuerit faciendum: omnibus Dominicis extra Tempus Pascale faciende sunt novem lectiones in Matutinis. In profestis autem diebus per totum annum fiant tantum tres nisi in Triduo ante Pasca. Tempus autem Paschale vocatur missa de vigilia Pasche et deinceps usque ad primas Vesperas Trinitatis exclusive.
+
+{\color{Red} \ubsubsection{De Responsorio in Primis Vesperis Dominice.}}
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{mni} tempore quando hystoria dominicalis in sua prima Dominica inchoatur, responsorium dicendun est in primis Vesperis. Quando vero propter aliquod impedimentum Dominica non habet prinrns Vesperas, vel hystoria dominicalis non cantatur in Dominica in qua primo debuit inchoari: responsoriurn in Vesperis decetero non dicatur.
+
+{\color{Red} \ubsubsection{De Oratione Dominicali.}}
+\lettrine[lines=2]{\zallmancaps \color{Blue} N}{otandum} est quod oratio dominicalis semper dicenda est in Sabbato precedenti ad Vesperas, et in ipsa Dominica ad omnes Horas tam diei quam noctis quando de Dominica agitur, preterquam in Prima et in Completorio. Et hoc sciendum quod ubicumque dicitur lex oratio dicatur ad Horas nunquam intelligitur de Prima neque de Completorio nisi specialiter exprimatur. Dicenda est etiam oratio Dominicalis per ferias sequentis hehdomade usque ad Vesperas Sabbati exclusive ad onmes Horas tam diei quam noctis quando de Tempore agitur: nisi in jejuniis Quatuor Temporum Adventus et in quarta feria Cinerum et deinceps usque ad Dominicam in Albis exclusive, et nisi in tribus diebus Rogationum, et nisi in hebdomada Pentecostes, et nisi due aut plures orationes Dominicales infra hebdomadam sint dicende. Quando vero due vel plures orationes infra unam hebdomadam dicende fuerint, postquam una infra hebdomadam fuerit incepta, dicatur quando de Tempore agitur usque dum alia inchoetur: et sic deinceps si plures dicende fuerint.
+Ille autem orationes que infra hebdomadam inchoantur, semper sunt in Laudibus inchoande. Hoc etiam sciendum quod oratio que dicitur ad Laudes semper dicenda est ad Tertiam, Sextam et Nonam nisi in jejuniis Quatuor Temporum Adventus et in duobus diebus Rogationum. Dicitur etiam ad Vesperas quando agitur de eodem de quo in Laudibus, nisi per ferias in Quadragesima et in duobus diebus Rogationum.
+
+{\color{Red} \ubsubsection{De Homelia Dominicali Quando Legenda vel Transferenda vel Officio Dimittenda Sit.}}
+\lettrine[lines=2]{\zallmancaps \color{Red} I}{n} omni Dominica, nisi festnm vel oct.ava dies fosti
+h3;bentis octavam impediat., tres ultimae lectiones de expositione
+Evangelii dominicalis legantnr, praeterquarn. in vigilia Natalis Domini quando in Dominica evenerit.: tune enim homilia clominicalis
+omittitur illo auno. Et nisi quando aliqna vigilia habens propriam
+homiliam in Dominica evenerit: tune enim tres ultimae lectiones
+Brunt de homili11. vigiliae, et homilia dom.inicalis in aliquam foriam
+t.ransfe.retur; praeterqnam in vigilia Sancti Anclreae quando in Dominica evenerit: tune enim homilia dominicalis legenda est, et homilia d8 vigilia illo anno penitus dimittenda. Quando vero proptcr
+aliquod impedimentum dominicalis homilia non legitur in Dominica,
+semper infra, hebclomadam suam in aliqua feria est legenda; nisi
+quando festum Sancti Silvestri in Dominica evenerit, et quando festum Beati Petri Martyris, vel Apostolorum Philippi et Jacobi, vel
+Sanctae Orncis, vel Coronae Domini in Dominica ante Ascensionem
+evenerint: tune enim horn.ilia dominicalis dimittitur illo anno. Dimitt.untur etiam duae ultimae homiliae dominicales quae sunt post
+Domine ne in fra, qnando inter octavam Epiphaniae et. Septnagesimam non sunt foriae vacantes in qnibus possint legi. Simi.liter et
+homilia Evangelii Loquente Jesu dimittitnr quando tantum viginti
+<lnae septimanae fuerint inter Deus omnium et Adventnm, si in
+
+
+% {\color{Red} \ubsection{.}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
+
+% {\color{Red} \ubsection{.}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}
+
+% {\color{Red} \ubsection{.}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
+
+% {\color{Red} \ubsection{.}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}
+
+% {\color{Red} \ubsection{.}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
+
+\psalm1
+% \psalm2
+% \psalm3
+% \psalm4
+\psalm{17}
+
+\psalm{77}
+
+\psalm{88}
+
+\psalm{118}
+\doxology
+
+\end{multicols*}
+
+\end{document}
