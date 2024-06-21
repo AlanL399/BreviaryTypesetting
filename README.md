@@ -8,4 +8,4 @@
  Compile with LuaLaTeX
  
  
- Work on [1256 Dominican Breviary](https://archive.org/details/bub_gb_JxRaJVPlH5EC/mode/2up) has begun.
+ Work on [1256 Dominican Breviary](https://archive.org/details/rome_santa_sabina_xiv_l1) has begun.

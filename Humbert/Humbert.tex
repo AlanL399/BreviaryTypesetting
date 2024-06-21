@@ -6,12 +6,13 @@
 \usepackage{graphicx}
 \usepackage{geometry}
 \geometry{%twoside,
-	inner=.75in,
-	outer=1in,
+	inner=1in,
+	outer=.75in,
 	top=1in,
 	bottom=1in,
 	bindingoffset=0in
 	}
+\usepackage{xparse}
 \usepackage{titling}
 \usepackage{lettrine}
 \usepackage{multicol}
@@ -80,13 +81,47 @@
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
-	\StrBefore{\firstline}{*}[\partone]%
+	% \StrBefore{\firstline}{*}[\partone]%
 	\StrBehind{\firstline}{*}[\rawparttwo]%
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-% The format of the Responsories
-	\noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	\unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	\noindent \R \firstline \ \V \versicle \ \secondword. \ Gloria. \secondword.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the invitatory environment
+\NewDocumentEnvironment{invitatory}{O{} m}{%
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	\unskip\ignorespaces% Prevent paragraph break
+% The format of the invitatory: firstline or all
+	\firstline
+	% \par \noindent {\color{Red} Invit.} \firstline \\
+	% {\color{Red} Invit.} \firstline
+	% \lettrine[lines=2]{\zallmancaps \color{Red} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	% {\color{Red} Invit.} \firstline \\
+	% \doxology
+	% {\color{Red} Invit.} \parttwo \\
+	% {\color{Red} Invit.} \firstline \\
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
 }
 
 % Remove space before chapter and section title
@@ -136,10 +171,11 @@
 }
 
 % Clear default fancyhdr settings
-\fancyhf{}
+\fancyhead{}
 
 \fancyhead[C]{\leftmark} % Display chapter in the center
 \fancyhead[RO,LE]{\rightmark}
+\fancyhead[RE,LO]{S. O. P.}
 
 \pagestyle{fancy} % Activate the custom headers and footers
 
@@ -151,7 +187,7 @@
 \title{\begin{center}\bfseries\huge Fratrum Predicatorum\\
 \large In Hoc Volumine
 \end{center}}
-\posttitle{\begin{center}\bfseries\Large Per Quatuor Decim Libros\\
+\posttitle{\begin{center}\bfseries\Large Per Quatuordecim Libros\\
 \normalsize Distinctum Hoc Ordine Continetur
 \end{center}}
 
@@ -277,7 +313,7 @@ We can refer to the first responsory using its label. For example, see the respo
 \hline
 \end{tabular}
 \end{center}
-\par \color{Red} Locus bissexti in anno bissextili quacumque die evenerit Festum sancti Mathi\ae \ in tali jejunetur Vigilia ejus, \& in sequenti die celebretur, \& servetur Festum; et si Sabbato evenerit, ipso Sabbato celebretur et jejunetur Vigilia ejus, et servetur in sequenti die Dominico. \color{black}
+\par \color{Red} Locus bissexti in anno bissextili quacumque die evenerit Festum sancti Mathi\ae \ in tali jejunetur Vigilia eius, \& in sequenti die celebretur, \& servetur Festum; et si Sabbato evenerit, ipso Sabbato celebretur et jejunetur Vigilia eius, et servetur in sequenti die Dominico. \color{black}
 
 
 
@@ -396,7 +432,7 @@ dies vero {\color{black} 16.}\\ \vspace{+.5em}
 \begin{tabular}{l | l | l | r | l r}
 \color{Red}Aureus & & & & \color{Red} \\
 \color{Red}numer. & & & & \color{Red} \\
-\color{Red} xj & b & \color{Red} Kal. & 1 & Torquati \& comitum ejus Episcoporum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} xj & b & \color{Red} Kal. & 1 & Torquati \& comitum eius Episcoporum. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red}  & c & \color{Red} vi & 2 & Felicis Diaconi Hispalensis. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red} xix & d & \color{Red} v & 3 & Inventio sanct\ae \ Crucis. \color{Red} sex capparum. & \color{Red} \\
 \color{Red} viii & e & \color{Red} iiii & 4 & & \color{Red} \\
@@ -517,11 +553,11 @@ dies vero {\color{black} 16.}\\ \vspace{+.5em}
 \color{Red} xii & c & \color{Red} xv & 18 & \color{Red} \\
 \color{Red} j & d & \color{Red} xiv & 19 & & \color{Red} \\
 \color{Red}  & e & \color{Red} xiii & 20 & & \color{Red} \\
-\color{Red} ix & f & \color{Red} xii & 21 & Sperati vel comitum ejus. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red} ix & f & \color{Red} xii & 21 & Sperati vel comitum eius. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red}  & g & \color{Red} xj & 22 & & \color{Red} \\
 \color{Red} xvii & \color{Red} A & \color{Red} x & 23 & & \color{Red} \\
 \color{Red} vi & b & \color{Red} ix & 24 & Christin\ae \ virginis \& martyris. \color{Red} novem lectionum. & \color{Red} \\
-\color{Red}  & c & \color{Red} viii & 25 & Christophori \& comitum ejus martyrum. \color{Red} novem lectionum. & \color{Red} \\
+\color{Red}  & c & \color{Red} viii & 25 & Christophori \& comitum eius martyrum. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red} xiv & d & \color{Red} vii & 26 & & \color{Red} \\
 \color{Red} iii & e & \color{Red} vi & 27 & & \color{Red} \\
 \color{Red}  & f & \color{Red} v & 28 & & \color{Red} \\
@@ -796,61 +832,122 @@ dies vero {\color{black} 8.}\\ \vspace{+.5em}
 \begin{multicols*}{2}
 
 
-{\color{Red} \ubsubsection{De Quo Officium Sit Agendum.}}
+{\color{Red} \ubsubsection{De Quo Officium Sit Agendum}}
 \lettrine[lines=3]{\zallmancaps \color{Blue} N}{otandum} quod per totum annum Officium tam diei quam noctis ad Horas faciendun est de Tempore nisi in festis Sanctorum et per octavas et in octavis eorum et nisi in Sabbatis quando de Beata Virgine agitur in conventu. Quando igitur de Tempore fuerit faciendum: omnibus Dominicis extra Tempus Pascale faciende sunt novem lectiones in Matutinis. In profestis autem diebus per totum annum fiant tantum tres nisi in Triduo ante Pasca. Tempus autem Paschale vocatur missa de vigilia Pasche et deinceps usque ad primas Vesperas Trinitatis exclusive.
 
 {\color{Red} \ubsubsection{De Responsorio in Primis Vesperis Dominice.}}
-\lettrine[lines=2]{\zallmancaps \color{Red} O}{mni} tempore quando hystoria dominicalis in sua prima Dominica inchoatur, responsorium dicendun est in primis Vesperis. Quando vero propter aliquod impedimentum Dominica non habet prinrns Vesperas, vel hystoria dominicalis non cantatur in Dominica in qua primo debuit inchoari: responsoriurn in Vesperis decetero non dicatur.
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{mni} tempore quando hystoria dominicalis in sua prima Dominica inchoatur, responsorium dicendun est in primis Vesperis. Quando vero propter aliquod impedimentum Dominica non habet priurns Vesperas, vel hystoria dominicalis non cantatur in Dominica in qua primo debuit inchoari: responsoriurn in Vesperis decetero non dicatur.
 
-{\color{Red} \ubsubsection{De Oratione Dominicali.}}
-\lettrine[lines=2]{\zallmancaps \color{Blue} N}{otandum} est quod oratio dominicalis semper dicenda est in Sabbato precedenti ad Vesperas, et in ipsa Dominica ad omnes Horas tam diei quam noctis quando de Dominica agitur, preterquam in Prima et in Completorio. Et hoc sciendum quod ubicumque dicitur lex oratio dicatur ad Horas nunquam intelligitur de Prima neque de Completorio nisi specialiter exprimatur. Dicenda est etiam oratio Dominicalis per ferias sequentis hehdomade usque ad Vesperas Sabbati exclusive ad onmes Horas tam diei quam noctis quando de Tempore agitur: nisi in jejuniis Quatuor Temporum Adventus et in quarta feria Cinerum et deinceps usque ad Dominicam in Albis exclusive, et nisi in tribus diebus Rogationum, et nisi in hebdomada Pentecostes, et nisi due aut plures orationes Dominicales infra hebdomadam sint dicende. Quando vero due vel plures orationes infra unam hebdomadam dicende fuerint, postquam una infra hebdomadam fuerit incepta, dicatur quando de Tempore agitur usque dum alia inchoetur: et sic deinceps si plures dicende fuerint.
-Ille autem orationes que infra hebdomadam inchoantur, semper sunt in Laudibus inchoande. Hoc etiam sciendum quod oratio que dicitur ad Laudes semper dicenda est ad Tertiam, Sextam et Nonam nisi in jejuniis Quatuor Temporum Adventus et in duobus diebus Rogationum. Dicitur etiam ad Vesperas quando agitur de eodem de quo in Laudibus, nisi per ferias in Quadragesima et in duobus diebus Rogationum.
+{\color{Red} \ubsubsection{De Oratione Dominicali}}
+\lettrine[lines=2]{\zallmancaps \color{Blue} N}{otandum} est quod oratio dominicalis semper dicenda est in Sabbato precedenti ad Vesperas, et in ipsa Dominica ad omnes Horas tam diei quam noctis quando de Dominica agitur, preterquam in Prima et in Completorio. Et hoc sciendum quod ubicumque dicitur lex oratio dicatur ad Horas nunquam intelligitur de Prima neque de Completorio nisi specialiter exprimatur. Dicenda est etiam oratio Dominicalis per ferias sequentis ebdomade usque ad Vesperas Sabbati exclusive ad omnes Horas tam diei quam noctis quando de Tempore agitur: nisi in jejuniis Quatuor Temporum Adventus et in quarta feria Cinerum et deinceps usque ad Dominicam in Albis exclusive, et nisi in tribus diebus Rogationum, et nisi in ebdomada Pentecostes, et nisi due aut plures orationes Dominicales infra ebdomadam sint dicende. Quando vero due vel plures orationes infra unam ebdomadam dicende fuerint, postquam una infra ebdomadam fuerit incepta, dicatur quando de Tempore agitur usque dum alia inchoetur: et sic deinceps si plures dicende fuerint.
+Ille autem orationes que infra ebdomadam inchoantur, semper sunt in Laudibus inchoande. Hoc etiam sciendum quod oratio que dicitur ad Laudes semper dicenda est ad Tertiam, Sextam et Nonam nisi in jejuniis Quatuor Temporum Adventus et in duobus diebus Rogationum. Dicitur etiam ad Vesperas quando agitur de eodem de quo in Laudibus, nisi per ferias in Quadragesima et in duobus diebus Rogationum.
 
-{\color{Red} \ubsubsection{De Homelia Dominicali Quando Legenda vel Transferenda vel Officio Dimittenda Sit.}}
-\lettrine[lines=2]{\zallmancaps \color{Red} I}{n} omni Dominica, nisi festnm vel oct.ava dies fosti
-h3;bentis octavam impediat., tres ultimae lectiones de expositione
-Evangelii dominicalis legantnr, praeterquarn. in vigilia Natalis Domini quando in Dominica evenerit.: tune enim homilia clominicalis
-omittitur illo auno. Et nisi quando aliqna vigilia habens propriam
-homiliam in Dominica evenerit: tune enim tres ultimae lectiones
-Brunt de homili11. vigiliae, et homilia dom.inicalis in aliquam foriam
-t.ransfe.retur; praeterqnam in vigilia Sancti Anclreae quando in Dominica evenerit: tune enim homilia dominicalis legenda est, et homilia d8 vigilia illo anno penitus dimittenda. Quando vero proptcr
-aliquod impedimentum dominicalis homilia non legitur in Dominica,
-semper infra, hebclomadam suam in aliqua feria est legenda; nisi
-quando festum Sancti Silvestri in Dominica evenerit, et quando festum Beati Petri Martyris, vel Apostolorum Philippi et Jacobi, vel
-Sanctae Orncis, vel Coronae Domini in Dominica ante Ascensionem
-evenerint: tune enim horn.ilia dominicalis dimittitur illo anno. Dimitt.untur etiam duae ultimae homiliae dominicales quae sunt post
-Domine ne in fra, qnando inter octavam Epiphaniae et. Septnagesimam non sunt foriae vacantes in qnibus possint legi. Simi.liter et
-homilia Evangelii Loquente Jesu dimittitnr quando tantum viginti
-<lnae septimanae fuerint inter Deus omnium et Adventnm, si in
+{\color{Red} \ubsubsection{De Omelia Dominicali Quando Legenda vel Transferenda vel Officio Dimittenda Sit}}
+\lettrine[lines=2]{\zallmancaps \color{Red} I}{n} omni Dominica, nisi festum vel octava dies festi habentis octavam impediat, tres ultime lectiones de expositione Evangelii dominicalis legantur preterquam in vigilia Natalis Domini, quando in Dominica evenerit, tunc enim omelia dominicalis omittitur illo anno. Et nisi quando aliqua vigilia habens propriam omeliam in Dominica evenerit. Tunc enim tres ultime lectiones erunt de omelia vigilie et omelia dominicalis in aliquam feriam transferetur, preterquam in vigilia Sancti Andree, quando in Dominica evenerit. Tunc enim omelia dominicalis legenda est, et omelia de vigilia illo anno penitus dimittenda. Quando vero propter aliquod impedimentum dominicalis omelia non legitur in Dominica, semper infra ebdomadam suam in aliqua feria est legenda, nisi quando festum Sancti Silvestri in Dominica evenerit, et quando festum Beati Petri Martyris, vel Apostolorum Philippi et Iacobi vel Sancte Crucis vel Corone Domini, in Dominica ante Ascensionem evenerint. Tunc enim omelia dominicalis dimittitur illo anno. Dimittuntur etiam due ultime omelie dominicales que sunt post \textit{Domine ne in ira}, quando inter octavas Epiphanie et Septuagesimam non sunt ferie vacantes in quibus possint legi. Similiter et omelia Evangelii \textit{Loquente Ihesu} dimittitur quando tantum viginti due septimane fuerint inter \textit{Deus omnium} et Adventum, si in vicesima secunda septimana non fuerint tot ferie vacante quod omnia Evangelia legi possint.
+\textit{Te Deum} dicatur omnibus Dominicis, preterquam in Adventu et in Septuagesima et deinceps usque ad Pascha exclusive, nisi quando festum Purificationis in Septuagesima vel Sexagesima vel Quinquagesima evenerit.
+
+{\color{Red} \ubsubsection{De Divisione Hystorie Dominicalis per Ferias}}
+\lettrine[lines=2]{\zallmancaps \color{Blue} S}{ciendum} quod per totum annum responsoria de hystoria dominicali per ebdomadam, quando de Tempore agitur hoc ordine sunt dicenda. Videlicet in secunda et quinta feria, tria prima. In tertia et sexta feria tria media. In quarta feria et Sabbato, tria ultima, et hoc observandum est nisi aliter sint signata. Quando autem festum aliquod infra ebdomadam celebratur, nihilominus ordo predictus in reliquis feriis observetur.
+
+{\color{Red} \ubsubsection{Ubi Adventus Domini Celebrandus Sit}}
+\lettrine[lines=2]{\zallmancaps \color{Red} A}{dventus} Domini semper celebrari debet in Dominica que vicinior est diei Sancti Andree, sive precedat sive sequatur, vel in ipso die Sancti Andree quando in Dominica evenerit.
+Omnia que ad Horas tam diei quam noctis per totum Adventum dicenda sunt, que in Breviario non sunt notata, dicenda sunt secundum quod in Dominica \textit{Domine ne in ira} et in eius feriis sunt signata.
+
+{\color{Red} \ubsection{Proprium de Tempore}}
+
+{\color{Red} \ubsubsection{Dominica Prima in Adventu Domini Sabbato Precedenti}}
+\par \noindent {\color{Red} Ad Vesperas Ant.} Benedictus. {\color{Red} Psalmi.} Superpsalmos. {\color{Red} Cetere ad ceteros. Capitulum.}
+\lettrine[lines=2]{\zallmancaps \color{Blue} E}{cce} die veniunt dicit dominus et suscitabo David germen iustum, et regnabit rex et sapiens erit, et faciet iudicium et iustitiam in terra.
+\hyperlink{missus-est}{\R Missus est.} {\color{Red} Ymnus.}
+\phantomsection
+\label{conditor}
+\lettrine[lines=2]{\zallmancaps \color{Red} C}{onditor} alme syderum,
+eterna lux credentium,
+Christe redmptor omnium,
+exaudi preces supplicum.
+\newline {\bfseries \color{Blue} Q}ui condolens interitu
+mortis perire seculum,
+salvasti mundum languidum,
+donans reis remedium.
+\newline {\bfseries \color{Red} V}ergente mundi vespere
+uti sponsus de thalamo,
+egressus honestissima
+virginis matris clausula.
+\newline {\bfseries \color{Blue} C}uius forti potentie
+genu curvantur omnia,
+celestia terrestria
+fatentur nutu subdita. %sic
+\newline {\bfseries \color{Red} T}e deprecamur Agyie
+venture iudex seculi
+conserva nos in tempore
+hostis a telo perfidi.
+\newline {\bfseries \color{Blue} L}aus honor virtus gloria
+Deo Patri et Filio,
+Sancto simul Paraclito
+in sempiterna secula. Amen.
+\newline \V Rorate celi desuper et nubes pluant iustum.
+\newline \R Aperiatur terra et germinet salvatorem.
+\newline {\color{Red} Ad Magnificat Ant.} Ecce nomen domini venite de longinquo, et claritas eius replet orbem terrarum. {\color{Red} Oratio.}
+\lettrine[lines=2]{\zallmancaps \color{Blue} E}{xcita} quesumus domine potentiam tuam et veni, ut ab imminentibus peccatorum nostrorum periculis te mereamur protegente eripi, te liberante salvari. Qui vivis.
+\newline {\color{Red} Ad Matutinis Invitat.} 
+\begin{invitatory}[ecce-venite]
+{Ecce venit rex * Occurramus obviam salvatori nostro.}
+\end{invitatory}
+{\color{Red} Ymnus.}
+\phantomsection
+\label{verbum}
+\lettrine[lines=2]{\zallmancaps \color{Red} V}{erbum} supernum prodiens
+a patre olim exiens,
+qui natus orbi subvenis
+cursu declivi temporis.
+\newline {\bfseries \color{Red} I}llumina nunc pectora
+tuoque amore concrema,
+audito ut preconio
+sint pulsa tandem lubrica.
+\newline {\bfseries \color{Blue} I}udexque cum post aderis
+rimari facta pectoris
+reddens vicem per abditis
+iustisque regnum per bonis.
+% \newline {\color{Red} }
+% \newline {\color{Blue} }
+% \newline {\color{Red} }
+% \newline {\color{Blue} }
+% \newline {\color{Red} }
+% \newline {\color{Blue} }
+% \newline {\color{Red} }
+% \newline {\color{Blue} }
 
 
-% {\color{Red} \ubsection{.}}
-% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
 
-% {\color{Red} \ubsection{.}}
+% \begin{responsory}{missus-est}%not written here, missing folio
+% {Missus est Gabriel angelus ad Mariam virginem desponsatam Ioseph nuntians ei verbum et expavescit virgo de lumine. Ne timeas Maria invenisti gratiam apud Dominum, ecce concipies et paries * Et vocabitur altissimi filius.}{Dabit ei dominus deus sedem David patris eius et regnabit in domo Iacob in eternum.}
+% \end{responsory}
+
+
+
 % \lettrine[lines=2]{\zallmancaps \color{Red} I}{}
 
-% {\color{Red} \ubsection{.}}
 % \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
 
-% {\color{Red} \ubsection{.}}
 % \lettrine[lines=2]{\zallmancaps \color{Red} I}{}
 
-% {\color{Red} \ubsection{.}}
-% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}
+% {\color{Red} \ubsubsection{}.}
+% {\color{Red} \ubsubsection{}.}
+% {\color{Red} \ubsubsection{}.}
 
-\psalm1
+% \psalm1
 % \psalm2
 % \psalm3
 % \psalm4
-\psalm{17}
+% \psalm{17}
 
-\psalm{77}
+% \psalm{77}
 
-\psalm{88}
+% \psalm{88}
+% \pageref{conditor}
 
-\psalm{118}
-\doxology
+% \psalm{118}
+% \doxology
 
 \end{multicols*}
 
