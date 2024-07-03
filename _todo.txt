@@ -14,3 +14,6 @@ Rework Title page
 	[ ] English
 Rework Drop Caps
 	[ ] Zallman Caps - English
+Page Numbers
+	[ ] Kalendar
+	[ ] Gospels
