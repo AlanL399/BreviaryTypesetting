@@ -1,0 +1,20 @@
+Language
+	[x] Latin
+	[ ] English
+Implement Margin notes.
+	[x] Ability added
+[Eventually] Ensure all Indexes Page Numbers are correct:
+	[x]	Librorum
+	[x]	Invitatorium
+	[x]	Evangelorium
+	[x]	Psalmorum
+	[x] Kalendar
+	[ ] Labels - English
+Page Headers
+	[x] Ability added
+More Images?
+	[ ] Ability added
+Rework Title page
+	[ ] English
+Rework Drop Caps
+	[ ] Zallman Caps - English.
