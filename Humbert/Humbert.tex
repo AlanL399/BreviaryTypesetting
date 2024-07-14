@@ -181,19 +181,21 @@
 
 \renewcommand{\contentsname}{Index}
 
-\pretitle{\begin{center}\bfseries\huge Ecclesiasticum Officium\\
-\large Secundum Ordinem
+\pretitle{\begin{center}\bfseries\Large Excerpta De\\
+\Huge Ecclesiasticum Officium
 \end{center}}
-\title{\begin{center}\bfseries\huge Fratrum Predicatorum\\
-\large In Hoc Volumine
+\title{\begin{center}\bfseries\LARGE Secundum\\
+\Huge Ordinem Fratrum Predicatorum\\
+\Large In Hoc Volumine
 \end{center}}
-\posttitle{\begin{center}\bfseries\Large Per Quatuordecim Libros\\
-\normalsize Distinctum Hoc Ordine Continetur
+\posttitle{\begin{center}\bfseries\huge Per Quatuordecim Libros\\
+\large Distinctum Hoc Ordine Continetur
 \end{center}}
 
-\author{Humbert}
 
-\date{1259}
+\author{\ \\ \bfseries\LARGE Humberti de Romanis}
+\date{\ \\ \bfseries\Huge 1259}
+%1256
 
 \begin{document}
 
@@ -223,7 +225,55 @@ Here is a sample responsory.
 
 We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
 
+
 \mainmatter
+
+\ubchapter{Ordinarium}
+
+\thispagestyle{fancy}
+
+\vspace{+20pt}
+\begin{center}\color{Red}\bfseries\Large Incipit Ordinarium\end{center}
+\vspace{-10pt}
+
+\begin{multicols*}{2}
+
+\fancyhead[RO,LE]{Ordinarium}
+
+{\color{Red} \ubsubsection{De Pulsationibus}}
+\lettrine[lines=4]{\zallmancaps \color{Blue} Q}{uando} fratres debent ad divinum officium convenire, duo fiant. Cum autem una hora immediate post aliam est dicenda, ad secundam horam non fiat signum, preterqum ad Vesperas in quadragesima, ad quas semper faciendum est signum sive post Nonam immediate, sive Missa mediante dicantur.
+Ad Landes vero post matutinas, et ad gratias post comestionem, nullo tempore pulsetur.
+Ad Missam vero semper est faciendum signum, similiter et ad horam que dicitur immediate post Missam, nisi quando dicta Missa post Primam, Tercia continuatur Misse. Tunc enim non est signum pro Tercia faciendum.
+
+{\color{Red} \ubsubsection{De Quo Officium Sit Agendum}}
+\lettrine[lines=2]{\zallmancaps \color{Red} N}{otandum} quod per totum annum Officium tam diei quam noctis ad Horas, faciendun est de Tempore, nisi in festis Sanctorum, et per Octavas et in Octavis eorum, et nisi in Sabbatis quando de Beata Virgine agitur in conventu.
+Quando igitur de Tempore fuerit faciendum, omnibus Dominicis extra Tempus Paschale, faciende sunt novem lectiones in Matutinis. In profestis autem diebus per totum annum fiant tantum tres, nisi in Triduo ante Pascha. Tempus autem Paschale vocatur Missa de vigilia Pasche, et deinceps usque ad primas Vesperas Trinitatis exclusive.
+
+{\color{Red} \ubsubsection{De Prostrationibus Dimittendis}}
+\lettrine[lines=2]{\zallmancaps \color{Blue} I}{n} omnibus
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} }{}
+
+% {\color{Red} \ubsubsection{}}
+% \lettrine[lines=2]{\zallmancaps \color{Red} }{}
+
+\end{multicols*}
 
 \ubchapter{Kalendarium Sanctorum}
 
@@ -831,7 +881,6 @@ dies vero {\color{black} 8.}\\ \vspace{+.5em}
 
 \begin{multicols*}{2}
 
-
 {\color{Red} \ubsubsection{De Quo Officium Sit Agendum}}
 \lettrine[lines=3]{\zallmancaps \color{Blue} N}{otandum} quod per totum annum Officium tam diei quam noctis ad Horas faciendun est de Tempore nisi in festis Sanctorum et per octavas et in octavis eorum et nisi in Sabbatis quando de Beata Virgine agitur in conventu. Quando igitur de Tempore fuerit faciendum: omnibus Dominicis extra Tempus Pascale faciende sunt novem lectiones in Matutinis. In profestis autem diebus per totum annum fiant tantum tres nisi in Triduo ante Pasca. Tempus autem Paschale vocatur missa de vigilia Pasche et deinceps usque ad primas Vesperas Trinitatis exclusive.
 
@@ -863,7 +912,7 @@ Omnia que ad Horas tam diei quam noctis per totum Adventum dicenda sunt, que in 
 \label{conditor}
 \lettrine[lines=2]{\zallmancaps \color{Red} C}{onditor} alme syderum,
 eterna lux credentium,
-Christe redmptor omnium,
+Christe redemptor omnium,
 exaudi preces supplicum.
 \newline {\bfseries \color{Blue} Q}ui condolens interitu
 mortis perire seculum,
