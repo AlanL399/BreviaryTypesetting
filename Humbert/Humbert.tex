@@ -21,7 +21,9 @@
 \usepackage{xstring}% For string manipulation
 \usepackage{fancyhdr}
 \usepackage{fontspec}
-\setmainfont{Georgia}
+% \setmainfont{Georgia}
+% \setmainfont{Times New Roman}
+\setmainfont{Libre Caslon Text}
 
 \input{Zallman.fd}
 \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
@@ -87,6 +89,11 @@
 		\renewcommand{\\}{\par\hspace*{1em}} % Redefine \\ to end the line and add indentation
 		\csname psalm#1Text\endcsname % Display the psalm text
 	\endgroup % End local group
+}
+
+% Same but no indent for credo litanie
+\newcommand{\noindentpsalm}[1]{%
+	\csname psalm#1Text\endcsname % No indent
 }
 
 % Same but Hymns
@@ -204,6 +211,7 @@
 	% \hypertarget{#1}{}%
 	\addcontentsline{toc}{section}{#1}%
 	\hypertarget{#2}{}%
+	\vspace{-\baselineskip}% Adjust the value as needed
 }
 
 

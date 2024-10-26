@@ -24,8 +24,9 @@
 \usepackage{fancyhdr}
 \usepackage{setspace}
 \usepackage{fontspec}
-\setmainfont{Georgia}
+% \setmainfont{Georgia}
 % \setmainfont{Times New Roman}
+\setmainfont{Libre Caslon Text}
 
 
 \input{Zallman.fd}
@@ -107,6 +108,11 @@
 		\renewcommand{\\}{\par\hspace*{.5em}} % Redefine \\ to end the line and add indentation
 		\csname psalm#1Text\endcsname % Display the psalm text
 	\endgroup % End local group
+}
+
+% Same but no indent for credo litanie
+\newcommand{\noindentpsalm}[1]{%
+	\csname psalm#1Text\endcsname % No indent
 }
 
 % Same but Hymns
@@ -229,6 +235,7 @@
 	% \hypertarget{#1}{}%
 	\addcontentsline{toc}{section}{#1}%
 	\hypertarget{#2}{}%
+	\vspace{-\baselineskip}% Adjust the value as needed
 }
 
 % Define subsection format
@@ -289,7 +296,7 @@
 
 % Baseline skip is the distance from one line's baseline to the next. It should typically be 1.2 to 1.3 times the font size
 % \fontsize{14pt}{18pt}\selectfont
-\fontsize{13pt}{17pt}\selectfont
+\fontsize{12pt}{16pt}\selectfont
 
 \frontmatter
 
