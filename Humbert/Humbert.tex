@@ -61,8 +61,8 @@
 \def\R{\color{Red}\Rbar. \color{black}}
 
 \newcommand{\doxology}{%
-	Glória Patri, et Fílio, * et Spirítui Sancto. \\
-	Sicut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+	{\bfseries \color{Red} G}lória Patri, et Fílio, * et Spirítui Sancto. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
 }
 
 \newcommand{\requiem}{%
@@ -104,6 +104,7 @@
 }
 
 % Define the responsory environment
+% Note that in the Dominican rite, responsories are repeated in semiduplex and higher, so three lessons and simples, the first line is not repeated.
 \NewDocumentEnvironment{responsory}{O{} m m}{%
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
@@ -116,7 +117,61 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
-	\noindent \R \firstline \ \V \versicle \ \secondword. \ Gloria. \secondword.
+	\noindent \R \firstline \ \V \versicle \ \secondword.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-doxology environment
+\NewDocumentEnvironment{responsory-doxology}{O{} m m}{%
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	\unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	\noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-prolix environment allows us to add a word after the doxology
+\NewDocumentEnvironment{responsory-prolix}{O{} m m m}{%
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	\unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	\noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-breve environment
+\NewDocumentEnvironment{responsory-breve}{O{} m m}{%
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	\unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	\noindent \R \firstline \ \V \versicle \ \secondword. \ Gloria. \firstword.
 }{%
 	\unskip\ignorespaces% Prevent paragraph break
 }
@@ -162,21 +217,21 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the invitatory: firstline or all
 	% \firstline
-	\par \noindent {\color{Red} Invit.} \firstline \\
-	{\color{Red} Invit.} \firstline
-	\lettrine[lines=2]{\zallmancaps \color{Red} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
-	{\color{Red} Invit.} \firstline \\
-	{\bfseries \color{Blue} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
-	{\color{Red} Invit.} \parttwo \\
-	{\bfseries \color{Red} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
-	{\color{Red} Invit.} \firstline \\
-	{\bfseries \color{Blue} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
-	{\color{Red} Invit.} \parttwo \\
-	{\bfseries \color{Red} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
-	{\color{Red} Invit.} \firstline \\
+	\par \noindent {\color{Red} Invito.} \firstline \
+	% {\color{Red} Invit.} \firstline
+	{\color{Red} Psalmus.}
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
+	\firstword . \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
+	\secondword . \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
+	\firstword . \\
+	{\bfseries \color{Red} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	\secondword . \\
+	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	\firstword . \\
 	\doxology
-	{\color{Red} Invit.} \parttwo \\
-	{\color{Red} Invit.} \firstline \\
+	\secondword . \firstword .
 }{%
 	\unskip\ignorespaces% Prevent paragraph break
 }
@@ -215,10 +270,15 @@
 }
 
 
-
 % Define subsection format
 \titleformat{\subsection}
 {\normalfont\large\bfseries}{}{0pt}{}
+
+% Adjust spacing before and after the subsection title
+\titlespacing*{\subsection}
+  {0pt}     % Left margin
+  {5pt}    % Space before (adjust as needed)
+  {3pt}     % Space after (adjust as needed)
 
 % Define the bookmark text for unnumbered subsections
 \newcommand{\ubsubsection}[2]{%
