@@ -161,8 +161,8 @@
 	\unskip\ignorespaces% Prevent paragraph break
 }
 
-% Define the responsory-prolix environment allows us to add another word after doxology
-\NewDocumentEnvironment{responsory-prolix}{O{} m m m}{%
+% Define the responsory-final environment allows us to add another word after doxology
+\NewDocumentEnvironment{responsory-final}{O{} m m m}{%
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
@@ -365,21 +365,29 @@
 % \thispagestyle{empty}
 \let\cleardoublepage\clearpage % Suppresses blank page
 
-\ubchapter{INCIPIT}
+% \ubchapter{INCIPIT}
+
+% \thispagestyle{fancy}
+
+% \ubsection{Divine Office Responsories}{divine-office-responsories}
+
+% \subsection*{Divine Office Responsories}
+
+% Here is a sample responsory.
+
+% \begin{responsory}[incipit1]
+% {This is the main responsory verse * with a second part.}{This is the versicle.}
+% \end{responsory}
+
+% We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
+
+
+\ubchapter{Foreword}
 
 \thispagestyle{fancy}
 
-\ubsection{Divine Office Responsories}{divine-office-responsories}
+\ubsection{Introduction}{intro}
 
-\subsection*{Divine Office Responsories}
-
-Here is a sample responsory.
-
-\begin{responsory}[incipit1]
-{This is the main responsory verse * with a second part.}{This is the versicle.}
-\end{responsory}
-
-We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
 
 
 \mainmatter
