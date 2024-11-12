@@ -17,7 +17,7 @@
 ---
 
 ### Project Overview
-The Breviary Typesetting Project is dedicated to typesetting and translating historical breviaries with LaTeX.
+The Breviary Typesetting Project is dedicated to typesetting and translating historical breviaries with LaTeX. More details at the [GitHub page](https://alanl399.github.io/BreviaryTypesetting/).
 
 ### Projects
 This repository contains work on the following breviaries:
