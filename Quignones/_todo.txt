@@ -15,6 +15,6 @@ Page Headers
 More Images?
 	[ ] Ability added
 Rework Title page
-	[ ] English
+	[x] English
 Rework Drop Caps
-	[ ] Zallman Caps - English.
+	[x] Zallman Caps - English.
