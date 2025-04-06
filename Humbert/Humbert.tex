@@ -17,6 +17,7 @@
 \usepackage{lettrine}
 \usepackage{multicol}
 \usepackage{titlesec}
+\usepackage{soul}
 \usepackage{pifont}
 % \usepackage{etoolbox}
 \usepackage{xstring}% For string manipulation
@@ -75,22 +76,49 @@
 
 % Controls how to display Psalms.
 \newcommand{\psalm}[1]{%
-	\noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	\noindent{\csname psalm#1Incipit\endcsname}.%
 	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
 	% \csname psalm#1Text\endcsname%
 }
 
-% Same but full Psalms
+% Define full Psalms with alternately colored, bold firstletters
 \newcommand{\fullpsalm}[1]{%
-	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
-	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
-	% \csname psalm#1Text\endcsname % No indent
 	\begingroup % Start local group to limit scope
 		\setlength{\parindent}{1em} % Set paragraph indentation
-		\renewcommand{\\}{\par\hspace*{1em}} % Redefine \\ to end the line and add indentation
-		\csname psalm#1Text\endcsname % Display the psalm text
-	\endgroup % End local group
+		\let\psalmtext\empty % define command
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname % Display the psalm text
+		\newif\ifblue
+		\bluetrue
+		\newcommand{\processline}[1]{%
+			\StrLeft{##1}{1}[\firstletter]%
+			\StrGobbleLeft{##1}{1}[\restofline]%
+			\par\hspace*{1em}%
+			\ifblue
+				{\color{Blue}\textbf{\firstletter}}%
+				\bluefalse
+			\else
+				{\color{Red}\textbf{\firstletter}}%
+				\bluetrue
+			\fi
+			\restofline%
+		}
+		\renewcommand{\\}{\processline} % Redefine \\ to use line processor
+		\psalmtext
+	\endgroup
 }
+
+% Same but full Psalms
+% \newcommand{\fullpsalm}[1]{%
+	% % \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% % \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% % \csname psalm#1Text\endcsname % No indent
+	% \begingroup % Start local group to limit scope
+		% \setlength{\parindent}{1em} % Set paragraph indentation
+		% \renewcommand{\\}{\par\hspace*{1em}} % Redefine \\ to end the line and add indentation
+		% \csname psalm#1Text\endcsname % Display the psalm text
+	% \endgroup % End local group
+% }
 
 % Same but no indent for credo litanie
 \newcommand{\noindentpsalm}[1]{%
@@ -118,9 +146,11 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
-	\noindent \R \firstline \ \V \versicle \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword.
+	\linebreak \R \firstline \ \V \versicle \ \secondword.
 }{%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-doxology environment
@@ -136,9 +166,11 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
-	\noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	\linebreak \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
 }{%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-final environment allows us to change the word after the doxology
@@ -154,9 +186,11 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
-	\noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	\linebreak \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
 }{%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-breve environment
@@ -172,9 +206,11 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
-	\noindent \R \firstline \ \V \versicle \ \secondword. \ Gloria. \firstword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. \ Gloria. \firstword.
+	\newline \R \firstline \ \V \versicle \ \secondword. \ Gloria. \firstword.
+	% \linebreak \R \firstline \ \V \versicle \ \secondword. \ Gloria. \firstword.
 }{%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the invitatory environment
@@ -218,7 +254,7 @@
 	\unskip\ignorespaces% Prevent paragraph break
 % The format of the invitatory: firstline or all
 	% \firstline
-	\par \noindent {\color{Red} Invito.} \firstline \
+	\par \noindent {\color{Red} Invitato.} \firstline \
 	% {\color{Red} Invit.} \firstline
 	{\color{Red} Psalmus.}
 	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
@@ -329,6 +365,19 @@
 \author{\ \\ \bfseries\LARGE Humberti de Romanis}
 \date{\ \\ \bfseries\Huge 1259}
 %1256
+
+\setulcolor{Red}
+
+% Redefine the underline depth to adjust its position
+\makeatletter
+\def\SOUL@uldepth{.8pt} % Adjust this value as needed
+\makeatother
+
+% Doesnt seem to make a difference
+% \sloppy
+
+% \let\oldnewline\newline
+% \renewcommand{\newline}{\linebreak}
 
 \begin{document}
 
