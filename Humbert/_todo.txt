@@ -1,3 +1,8 @@
+Formatting
+	[x] Pocket Format
+	[ ] Split Rubrics to Ordinary & Kalendar
+	[ ] Lectionary (Future)
+	[ ] Versicle Command (if necessary)
 Language
 	[ ] Excerpts from 1256
 	[ ] Style of 1909
