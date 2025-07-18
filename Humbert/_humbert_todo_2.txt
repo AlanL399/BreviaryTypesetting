@@ -1,20 +1,3 @@
-Humbert Todo
-1. Augmnet to existing todo
-2. \newline vs \linebreak
-3. The default values for hyphenpenalty, tolerance, and emergencystretch in LaTeX are:
-
-    hyphenpenalty: 50 - lower it
-    tolerance: 200 - increase it
-    emergencystretch: 0pt - increase it
-
-	It's important to note that these values can be influenced by the document class and packages used. For example, different classes might set different tolerances. Also, emergencystretch being 0pt by default means that if LaTeX really can't find a good way to break a line within the given tolerances, it will produce overfull boxes (lines sticking out into the margin) rather than stretching the inter-word spacing beyond its normal limits. Setting emergencystretch to a small positive value (e.g., \emergencystretch=3em) can often improve the appearance of a document with difficult line breaks, at the cost of slightly uneven spacing.
-	
-4. \usepackage[tracking]{microtype}
-	\SetTracking{encoding=*}{50}  % applies 50% letter-spacing to entire document
-5. polyglossia - latin. or babel
-6. Font choices, related to 4.
-That's a solid set of free fonts to evaluate. Let me quickly characterize them:
-
 ET Book:
 - Designed for scholarly text
 - Very precise, clean design
@@ -41,7 +24,12 @@ EB Garamond:
 - Open-source recreation of classic Garamond
 - Potentially good for tight spacing
 
-Linux Libertine offers good compact design
+Baskervald
+	https://arkandis.tuxfamily.org/adffonts.html
 
-Based on your previous comments about tight letter spacing, EB Garamond or ET Book might be your best candidates. Would you like to discuss their specific characteristics further?
-X. Second thoughts on newline of Resp
+Cormorant Garamond
+	Too big; for display
+
+Gelasio
+
+

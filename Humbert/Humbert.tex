@@ -12,23 +12,45 @@
 	bottom=1in,
 	bindingoffset=0in
 	}
-\usepackage{xparse}
+% \usepackage{xparse}
 \usepackage{titling}
 \usepackage{lettrine}
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{soul}
 \usepackage{pifont}
-% \usepackage{etoolbox}
+\usepackage{etoolbox}
 \usepackage{xstring}% For string manipulation
 \usepackage{fancyhdr}
+% \usepackage[tracking]{microtype}
+	% \SetTracking{encoding=*}{50}  % applies 50% letter-spacing to entire document
 \usepackage{fontspec}
 % \setmainfont{Georgia}
 % \setmainfont{Times New Roman}
-\setmainfont{Libre Caslon Text}
+% \setmainfont{Libre Caslon Text}
+\setmainfont{Charis}
 
 \input{Zallman.fd}
 \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
+
+% Automatically use zallmancaps in lettrine
+% \renewcommand{\LettrineFontHook}{\zallmancaps}
+
+% Adjust font spacing
+\AtBeginEnvironment{multicols}{%
+% \BeforeBeginEnvironment{multicols}{%
+	% \hyphenpenalty=50
+	% lower it
+	\hyphenpenalty=20
+	% \tolerance=200
+	% increase it, but not noticeable here
+	% \tolerance=1000
+	% \emergencystretch=0pt
+	% increase it
+	% \emergencystretch=20pt
+	% Doesnt seem to make a difference
+	% \sloppy
+}
 
 % Adjust headheight and topmargin
 \setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
@@ -133,7 +155,7 @@
 }
 
 % Define the responsory environment
-% Note that in the Dominican rite, responsories are repeated in semiduplex and higher, so three lessons and simples, the first line is not repeated.
+% Note that in the Dominican rite, responsories are repeated only in semiduplex and higher, so three lessons and simples, the first line is not repeated.
 \NewDocumentEnvironment{responsory}{O{} m m}{%
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
@@ -373,9 +395,7 @@
 \def\SOUL@uldepth{.8pt} % Adjust this value as needed
 \makeatother
 
-% Doesnt seem to make a difference
-% \sloppy
-
+% Change behvior of newline
 % \let\oldnewline\newline
 % \renewcommand{\newline}{\linebreak}
 
