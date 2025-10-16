@@ -19,16 +19,16 @@
 \usepackage{titlesec}
 \usepackage{soul}
 \usepackage{pifont}
-\usepackage{etoolbox}
+% \usepackage{etoolbox}
 \usepackage{xstring}% For string manipulation
 \usepackage{fancyhdr}
-% \usepackage[tracking]{microtype}
-	% \SetTracking{encoding=*}{50}  % applies 50% letter-spacing to entire document
 \usepackage{fontspec}
 % \setmainfont{Georgia}
 % \setmainfont{Times New Roman}
 % \setmainfont{Libre Caslon Text}
 \setmainfont{Charis}
+% \usepackage{lua-ul}
+% \usepackage{luacolor}
 
 \input{Zallman.fd}
 \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
@@ -395,6 +395,11 @@
 \def\SOUL@uldepth{.8pt} % Adjust this value as needed
 \makeatother
 
+% For lua-ul underlining
+% \newcommand{\ul}[1]{%
+    % \underLine[color=Red]{#1}%
+% }
+
 % Change behvior of newline
 % \let\oldnewline\newline
 % \renewcommand{\newline}{\linebreak}
@@ -451,8 +456,8 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & \color{Red} Kal. & & & \\
-\color{Red}numer. & & & & & \\
+\multicolumn{2}{l}{\color{Red}Aureus} & \color{Red} Kal. & & & \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & & \\
 \color{Red} iii & \color{Red} A & & 1 & \color{Red} Circumcisio domini. \color{Red} duplex. \\
  & b & \color{Red} iiii & 2 & Oct. Sancti Stephani. & \color{Red} \\
 \color{Red} xj & c & \color{Red} iii & 3 & Oct. Sancti Johannis. \qquad \color{Red} Incipit Quartus Embolismus.\\
@@ -496,8 +501,8 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
  & d & \color{Red} Kal. & 1 & \color{Red} Ignatii episcopi et martyr. memoria. \quad Finis. iiii. embolismi. \\
 \color{Red} xj & e & \color{Red} iiii & 2 & Purificatio sancte Marie virginis. totum duplex. \\
 \color{Red} xix & f & \color{Red} iii & 3 & & \color{Red} \\
@@ -546,8 +551,8 @@ dies vero {\color{black} 12.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & \color{Red} Kal. & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} iii & d & & 1 & & \color{Red} \\
 \color{Red}  & e & \color{Red} vi & 2 & & \color{Red} \\
 \color{Red} xj & f & \color{Red} v & 3 & Hemeterii \& Celedonii martyrum. \color{Red} quatuor capparum. & \color{Red} \\
@@ -596,8 +601,8 @@ dies vero {\color{black} 14.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red}  & g & \color{Red} Kal. & 1 & & \color{Red} \\
 \color{Red} xj & \color{Red} A & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red}  & b & \color{Red} iii & 3 & & \color{Red} \\
@@ -646,8 +651,8 @@ dies vero {\color{black} 16.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} xj & b & \color{Red} Kal. & 1 & Torquati \& comitum eius Episcoporum. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red}  & c & \color{Red} vi & 2 & Felicis Diaconi Hispalensis. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red} xix & d & \color{Red} v & 3 & Inventio sanct\ae \ Crucis. \color{Red} sex capparum. & \color{Red} \\
@@ -697,8 +702,8 @@ dies vero {\color{black} 18.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red}  & e & \color{Red} Kal. & 1 & & \color{Red} \\
 \color{Red} xix & f & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red} viii & g & \color{Red} iii & 3 & & \color{Red} \\
@@ -747,8 +752,8 @@ dies vero {\color{black} 16.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} xix & g & \color{Red} Kal. & 1 & & \color{Red} \\
 \color{Red} viii & \color{Red} A & \color{Red} vi & 2 & & \color{Red} \\
 \color{Red}  & b & \color{Red} v & 3 & & \color{Red} \\
@@ -798,8 +803,8 @@ dies vero {\color{black} 14.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & \color{Red} Kal. & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} viii & c & & 1 & Felicis martyris. \color{Red} novem lectionum. & \color{Red} \\
 \color{Red} xvi & d & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red} v & e & \color{Red} iii & 3 & & \color{Red} \\
@@ -849,8 +854,8 @@ dies vero {\color{black} 12.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & \color{Red} Kal. & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & \color{Red} Kal. & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} xvi & f & & 1 & & \color{Red} \\
 \color{Red} v & g & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} iii & 3 & & \color{Red} \\
@@ -900,8 +905,8 @@ dies vero {\color{black} 10.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} xvi & \color{Red} A & \color{Red} Kal. & 1 & Sanctorum Verissimi, Maxim\ae , \& Juli\ae \ martyrum. & \color{Red} \\
 \color{Red} v & b & \color{Red} vi & 2 & & \color{Red} \\
 \color{Red} xiii & c & \color{Red} v & 3 & & \color{Red} \\
@@ -951,8 +956,8 @@ dies vero {\color{black} 14.}\\ \vspace{+.5em}%def a typo
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red}  & d & \color{Red} Kal. & 1 & & \color{Red} \\
 \color{Red} xiii & e & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red} ii & f & \color{Red} iii & 3 & & \color{Red} \\
@@ -1002,8 +1007,8 @@ dies vero {\color{black} 8.}\\ \vspace{+.5em}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l r}
-\color{Red}Aureus & & & & \color{Red} \\
-\color{Red}numer. & & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}Aureus} & & & \color{Red} \\
+\multicolumn{2}{l}{\color{Red}numer.} & & & \color{Red} \\
 \color{Red} xiii & f & \color{Red} Kal. & 1 & & \color{Red} \\
 \color{Red} ii & g & \color{Red} iiii & 2 & & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} iii & 3 & & \color{Red} \\
