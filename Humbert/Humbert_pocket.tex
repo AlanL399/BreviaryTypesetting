@@ -20,7 +20,8 @@
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{soul}
-\usepackage{pifont}
+% \usepackage{pifont}
+\usepackage{gregoriosyms}
 % \usepackage{etoolbox}
 \usepackage{xstring}% For string manipulation
 \usepackage{fancyhdr}
@@ -31,11 +32,49 @@
 % \setmainfont{Times New Roman}
 % \setmainfont{Libre Caslon Text}
 \setmainfont{Charis}
+% \setmainfont{Gentium}
+% \setmainfont{EB Garamond}% Too thin
 % \usepackage{lua-ul}
 % \usepackage{luacolor}
+\usepackage[latin]{babel}
+\babelprovide[hyphenrules=latin]{latin}
+% \usepackage{polyglossia}
+% \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
+\usepackage[final]{microtype}
 
+% \microtypecontext{spacing=nonfrench} % Slightly expands text spacing
+\SetProtrusion{encoding=*,family=*}{. = {,500}}
+\SetExpansion{encoding=*,family=*}{A = 500}
+\SetExtraKerning[unit=space]{encoding={*},family={*}}{
+  \textquoteleft = {500, }, % adjust quotes
+  : = {100,100}
+}
 
-\input{Zallman.fd}
+% https://tug.org/FontCatalogue/otherfonts.html#initials
+% \usepackage{Acorn}% humanist
+% \usepackage{AnnSton}% not appropriate
+% \usepackage{ArtNouv}% more gothic
+% \usepackage{ArtNouvc}% not appropriate
+% \usepackage{Carrickc}% not medieval
+% \usepackage{Eichenla}
+% \usepackage{Eileen}% same as EileenBl but inverted, white lettering
+% \usepackage{EileenBl}% identical to Romantik except for more spacing
+% \usepackage{Elzevier}% humanist, very thin
+% \usepackage{GotIn}% gothic blackletter
+% \usepackage{GoudyIn}% humanist
+% \usepackage{Kinigcap}% not appropriate
+% \usepackage{Konanur}% not appropriate
+% \usepackage{Kramer}% too modern block
+% \usepackage{MorrisIn}% identical to Eichenla but slightly larger and rougher leaves
+% \usepackage{Nouveaud}% too square
+% \usepackage{Romantik}
+% \usepackage{Rothdn}% looks like yfonts yinipar
+% \usepackage{Royal}% gothic blackletter
+% \usepackage{Sanremo}% not appropriate
+% \usepackage{Starburst}% not appropriate
+% \usepackage{Typocaps}% not appropriate
+\usepackage{Zallman}% humanist
+% \input{Zallman.fd}
 \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
 
 % Automatically use zallmancaps in lettrine
@@ -50,11 +89,25 @@
 	% \tolerance=200
 	% increase it, but not noticeable here
 	% \tolerance=500
+	% shoudnt it be decreased?
+	% \tolerance=50
+	% \pretolerance=100
+	% lower it to increase hyphens; increase to allow for wider gaps
+	% \pretolerance=50
 	% \emergencystretch=0pt
 	% increase it
 	% \emergencystretch=3em
 	% Doesnt seem to make a difference
 	% \sloppy
+	\emergencystretch=1em  % Allow some stretch
+	\hfuzz=0.5pt          % Don't complain about small overfulls
+    \raggedcolumns  % Instead of balanced columns
+    \clubpenalty=10000
+    \widowpenalty=10000  
+    \brokenpenalty=4991
+    \predisplaypenalty=10000
+    \postdisplaypenalty=1549
+    \displaywidowpenalty=1602
 }
 
 % Adjust headheight and topmargin
@@ -93,15 +146,21 @@
         \@marginparreset
 		\small
 #2}}}}}
-% \makeatother
+\makeatother
 
 % \makeatletter
-\DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
-\DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
-\newcommand{\vers@resp}[2]{%
-  {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
-}%
-\makeatother
+% \DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+% \DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+% \newcommand{\vers@resp}[2]{%
+  % {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
+% }%
+% \makeatother
+
+% Defined by gregoriosyms
+% \newcommand{\Vbar}{℣}
+% \newcommand{\Rbar}{℟}
+
+\frenchspacing
 
 \def\V{\color{Red}\Vbar. \color{black}}
 \def\R{\color{Red}\Rbar. \color{black}}
@@ -151,6 +210,7 @@
 		}
 		\renewcommand{\\}{\processline} % Redefine \\ to use line processor
 		\psalmtext
+		\par % Add explicit paragraph break after psalm
 	\endgroup
 }
 
@@ -182,6 +242,8 @@
 % Define the responsory environment
 % Note that in the Dominican rite, responsories are repeated in only semiduplex and higher, so three lessons and simples, the first line is not repeated.
 \NewDocumentEnvironment{responsory}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
@@ -190,17 +252,21 @@
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword.
-	\newline \R \firstline \ \V \versicle \ \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \secondword.%
+	% \linebreak \R \firstline \ \V \versicle \ \secondword.
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-doxology environment
 \NewDocumentEnvironment{responsory-doxology}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
@@ -209,17 +275,20 @@
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
-	\newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.%
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-final environment allows us to change the word after doxology
 \NewDocumentEnvironment{responsory-final}{O{} m m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
@@ -228,17 +297,20 @@
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
-	\newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the responsory-breve environment
 \NewDocumentEnvironment{responsory-breve}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\def\versicle{#3}%
@@ -247,24 +319,28 @@
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
-	\newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
 
 % Define the invitatory environment
 \NewDocumentEnvironment{invitatory}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\StrBehind{\firstline}{*}[\rawparttwo]%
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
+	\space% Adds space
 % The format of the invitatory: firstline or all
 	\firstline
 	% \par \noindent {\color{Red} Invit.} \firstline \\
@@ -288,18 +364,20 @@
 
 % Define the invitatory-full environment
 \NewDocumentEnvironment{invitatory-full}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
 	\hypertarget{#1}{\label{#1}}
 	\def\firstline{#2}%
 	\StrBehind{\firstline}{*}[\rawparttwo]%
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
-	\unskip\ignorespaces% Prevent paragraph break
+	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the invitatory: firstline or all
 	% \firstline
-	\par \noindent {\color{Red} Invitato.} \firstline \
+	\par \noindent {\color{Red} Invitato.} \firstline
 	% {\color{Red} Invit.} \firstline
-	{\color{Red} Psalmus.}
+	\par \noindent {\color{Red} Psalmus.}
 	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
 	\firstword . \\
 	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
@@ -311,7 +389,7 @@
 	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
 	\firstword . \\
 	\doxology
-	\secondword . \firstword .
+	\secondword . \firstword .%
 }{%
 	\unskip\ignorespaces% Prevent paragraph break
 }
@@ -345,19 +423,19 @@
 
 % Define the bookmark text for unnumbered sections
 \newcommand{\ubsection}[2]{%
-	\section*{}%
+	% \section*{}%
 	\renewcommand{\rightmark}{#1}%
 	\phantomsection%
 	% \hypertarget{#1}{}%
 	\addcontentsline{toc}{section}{#1}%
 	\hypertarget{#2}{}%
-	\vspace{-\baselineskip}% Adjust the value as needed
+	% \vspace{-\baselineskip}% Adjust the value as needed
 }
 
 % Define subsection format
 \titleformat{\subsection}
 % {\normalfont\large\bfseries}{}{0pt}{}
-{\normalfont}{}{0pt}{}
+{\normalfont\centering}{}{0pt}{}
 
 % Define the bookmark text for unnumbered subsections
 \newcommand{\ubsubsection}[2]{%
@@ -396,10 +474,10 @@
 \Huge Ecclesiasticum Officium
 \end{center}}
 \title{\begin{center}\bfseries\LARGE Secundum\\
-\Huge Ordinem Fratrum Predicatorum\\
-\Large In Hoc Volumine
+\Huge Ordinem Fratrum Predicatorum
 \end{center}}
-\posttitle{\begin{center}\bfseries\huge Per Quatuordecim Libros\\
+\posttitle{\begin{center}\bfseries\Large In Hoc Volumine\\
+\huge Per Quatuordecim Libros\\
 \large Distinctum Hoc Ordine Continetur
 \end{center}}
 
@@ -421,14 +499,29 @@
     % \underLine[color=Red]{#1}%
 % }
 
-% \let\oldnewline\newline
-\renewcommand{\newline}{\linebreak}
+% Change behvior of newline
+\let\oldnewline\newline
+% \renewcommand{\newline}{\linebreak}
+\renewcommand{\newline}{\par \noindent}
+
+% Page colors
+% \pagecolor[rgb]{0.98,0.94,0.82} % Soft cream
+% \pagecolor[rgb]{0.99,0.95,0.84} % Antique cream, whitest
+% \pagecolor[rgb]{0.93,0.89,0.75} % Warm old paper
+\pagecolor[rgb]{0.90,0.85,0.70} % Aged book, more yellow than 1906
+% \pagecolor[rgb]{0.85,0.81,0.69} % 1906
+
+% Too bright
+% \pagecolor[rgb]{0.95,0.91,0.80} % 1942
+% \pagecolor[rgb]{1.0,0.98,0.90} % Light parchment
+% \pagecolor[rgb]{0.96,0.96,0.86} % Soft beige
 
 \begin{document}
 
 % Baseline skip is the distance from one line's baseline to the next. It should typically be 1.2 to 1.3 times the font size
 % \fontsize{14pt}{18pt}\selectfont
-\fontsize{12pt}{16pt}\selectfont
+% \fontsize{12pt}{16pt}\selectfont % Comparable to Psalterium Tridentinum with Charis
+\fontsize{11pt}{14pt}\selectfont
 
 \frontmatter
 

@@ -24,7 +24,7 @@ This repository contains work on the following breviaries:
 
 - **1563 Breviary of the Holy Cross** (*Quignones*): There are Latin and English versions.
 - **1256 Dominican Breviary** (*Humbert*): The Breviary excerpts from Humbert's Ordinal. There are two versions, a regular and a pocket-sized PDF.
-- **1775 Mozarabic Breviary** (*Gothicum*)
+- **1775 Mozarabic Breviary** (*Gothicum*): A LaTeX reproduction of the 1775 Breviary.
 
 ### Project Notes
 
@@ -33,7 +33,6 @@ This repository contains work on the following breviaries:
   - **Abbreviations**: Words are expanded where marked by tildes.
 
 - **Humbert**:
-  - **Font**: Uses [Libre Caslon Text](https://fonts.google.com/specimen/Libre+Caslon+Text).
   - **Typography**: Uses modern u/v conventions.
   - **Abbreviations**: Words are expanded where marked by tildes.
 
@@ -53,3 +52,4 @@ This project is licensed under the **[Creative Commons Attribution-ShareAlike (C
 Special thanks to:
 - [Monumenta.ch](https://monumenta.ch) for patristic sources.
 - [Wikisource](https://wikisource.org/) for additional patristic sources.
+- [jgabc](https://github.com/bbloomf/jgabc) for the Psalter

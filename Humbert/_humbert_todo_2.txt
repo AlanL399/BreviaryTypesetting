@@ -1,35 +1,77 @@
-ET Book:
-- Designed for scholarly text
-- Very precise, clean design
-- Optimized for readability
-- Slightly narrow letterforms
+# Font Summary for LuaLaTeX Latin Breviary
+**Goal: Compactness at small sizes + readability**
 
-Libre Baskerville:
-- Web-optimized version of classic Baskerville
-- Wider spacing than traditional Baskerville
-- Might not meet your tight spacing requirement
+---
 
-Cardo:
-- Scholarly/biblical text focus
-- Unicode-rich
-- Good for academic/religious texts
+## **LIBRE/FREE FONTS**
 
-Libre Caslon Text:
-- Derived from classic Caslon
-- More open spacing
-- Might be too wide for your needs
+### **Top Tier for Readability at Small Sizes:**
 
-EB Garamond:
-- Closest to traditional book typography
-- Open-source recreation of classic Garamond
-- Potentially good for tight spacing
+**Charis SIL** ⭐
+- **Best practical choice** - specifically designed for small-size readability
+- Higher x-height, sturdy letterforms, excellent contrast
+- Extensive glyphs for multilingual texts
+- Less traditional/ecclesiastical appearance
 
-Baskervald
-	https://arkandis.tuxfamily.org/adffonts.html
+**Gentium Plus** (SIL)
+- Similar readability to Charis but more elegant
+- Calligraphic touch while maintaining clarity
+- Good for older eyes at small sizes
 
-Cormorant Garamond
-	Too big; for display
+**Junicode**
+- Purpose-built for medieval Latin
+- More robust than Garamond at small sizes
+- Extensive specialized characters
 
-Gelasio
+### **Moderate - Trade-offs Required:**
 
+**ET Book** - Narrow letterforms aid compactness, but may be too fine for distance/older eyes
 
+**Cardo** - Scholarly focus, but not optimized for tiny sizes
+
+**Source Serif Pro** - Clear but **too wide** for compact layouts
+
+**Merriweather** - Good x-height aids readability BUT **too wide** for two-column breviary
+
+**Utopia** - Balanced, but not specifically optimized for small sizes
+
+### **Poor Choice for Stated Use Case:**
+
+**EB Garamond**
+- Low contrast, small x-height, delicate serifs
+- **Difficult to read at small sizes or for older eyes**
+- Beautiful but functionally wrong for this application
+
+**Libre Baskerville / Baskervald** - Too wide + readability issues
+
+**Libre Caslon Text** - Too wide
+
+**Cormorant Garamond** - Display font, not for body text
+
+---
+
+## **PROPRIETARY FONTS**
+
+**Minion Pro** ⭐⭐
+- **Best overall choice if budget allows**
+- Specifically designed for small-size book typography
+- Better readability than Garamond while maintaining refinement
+- Compact + clear
+
+**Arno Pro**
+- Excellent for compact books
+- Refined but maintains readability
+
+**Iowan Old Style**
+- Explicitly designed for small-size legibility
+- Warmer, more readable than Garamond
+
+---
+
+## **REVISED RECOMMENDATION:**
+
+**Free:** Charis SIL (readability priority) → Gentium Plus (readability + beauty) → Junicode (specialized Latin)
+
+**Paid:** Minion Pro → Arno Pro → Iowan Old Style
+
+**Avoid:** Garamond variants, Cormorant, overly wide fonts (Caslon, Baskerville, Merriweather)
