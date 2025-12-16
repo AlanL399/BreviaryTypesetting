@@ -33,7 +33,7 @@ This repository contains work on the following breviaries:
   - **Abbreviations**: Words are expanded where marked by tildes.
 
 - **Humbert**:
-  - **Typography**: Uses modern u/v conventions.
+  - **Typography**: Uses modern u/v conventions, but keeps the medieval variant spellings.
   - **Abbreviations**: Words are expanded where marked by tildes.
 
 ### Usage & Installation
@@ -52,4 +52,5 @@ This project is licensed under the **[Creative Commons Attribution-ShareAlike (C
 Special thanks to:
 - [Monumenta.ch](https://monumenta.ch) for patristic sources.
 - [Wikisource](https://wikisource.org/) for additional patristic sources.
+- [Corpus Corporum](https://mlat.uzh.ch/home) for Patrologia Latina (Migne)
 - [jgabc](https://github.com/bbloomf/jgabc) for the Psalter
