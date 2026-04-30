@@ -3,3 +3,6 @@
 /Quignones/_no
 *.aux
 *.toc
+*.idx
+*.ilg
+*.ind
