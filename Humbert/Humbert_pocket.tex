@@ -12,7 +12,7 @@
 	outer=0.1in, % Outer margin
 	top=0.4in, % Top margin
 	bottom=0.5in, % Bottom margin
-	bindingoffset=0in
+	bindingoffset=0in % at least 0.75" to 0.875" inner margins.
 	}
 % \usepackage{xparse}
 \usepackage{titling}
@@ -40,6 +40,37 @@
 \babelprovide[hyphenrules=latin]{latin}
 % \usepackage{polyglossia}
 % \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
+\usepackage{imakeidx}
+
+\indexsetup{
+	level=\section*,
+	toclevel=section,
+	noclearpage,
+	% othercode=\footnotesize\thispagestyle{empty}
+    % othercode={%
+		% This forces the index entries to start at the absolute edge of the column
+		% \setlength{\leftskip}{0pt}%
+		% Adjust this if you want a hanging indent for long entries
+		% \everypar{\hangindent=1em \hangafter=1}% 
+    % }
+}
+
+\makeindex[name=H, title=Index Hymnorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+\makeindex[name=R, title=Index Responsoriorum, columns=2, columnseprule, columnsep=0.1in]
+\makeindex[name=S, title=Index Responsoriorum Breve, columns=2, columnseprule, columnsep=0.1in]
+\makeindex[name=P, title=Index Psalmorum et Canticorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+\makeindex[name=I, title=Index Invitatorium, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+
+\newcommand{\cprintindex}[2]{%
+    % #1 = index name (e.g., P, H, R)
+    % #2 = display title (e.g., Index Psalmorum et Canticorum)
+    \phantomsection%
+    \addcontentsline{toc}{section}{#2}%
+    \hypertarget{#2}{}%
+    \renewcommand{\rightmark}{#2}%
+    \printindex[#1]%
+}
+
 \usepackage[final]{microtype}
 
 % \microtypecontext{spacing=nonfrench} % Slightly expands text spacing
@@ -119,12 +150,10 @@
 \setlength{\headsep}{10pt}      % Space between header and text body
 \setlength{\footskip}{12pt}     % Space between text body and footer
 
-\setlength{\columnsep}{0.2in} % Adjust the space between columns
-\setlength{\columnseprule}{0.4pt} % Add a rule between columns and set its thickness
-
 % Reduce padding and whitespace
 \setlength{\parskip}{0.1em} % Reduce space between paragraphs
 \setlength{\parindent}{1em} % Adjust paragraph indentation
+% \setlength{\columnsep}{0.2in} % Adjust the space between columns
 \setlength{\columnsep}{0.1in} % Reduce space between columns
 \setlength{\columnseprule}{0.4pt} % Add a rule between columns and set its thickness
 
@@ -189,6 +218,7 @@
 % Track the verses
 
 \newcommand{\fullpsalm}[1]{%
+	\index[P]{\csname psalm#1Incipit\endcsname}
 	\begingroup % Start local group to limit scope
 		\setlength{\parindent}{.2em} % Set paragraph indentation
 		\let\psalmtext\empty % define command
@@ -232,15 +262,16 @@
 }
 
 % Same but Hymns
-\newcommand{\hymn}[2]{%
+\newcommand{\hymn}[3]{%
+	% \index[H]{\csname #2\endcsname}
+	\index[H]{#2}
 	\hypertarget{#1}{\label{#1}}
 		\setlength{\parindent}{.2em} % Set paragraph indentation
 		% \setlength{\parindent}{1em} % Set paragraph indentation
-	#2 %
+	#3 %
 }
 
 % Define the responsory environment
-% Note that in the Dominican rite, responsories are repeated in only semiduplex and higher, so three lessons and simples, the first line is not repeated.
 \NewDocumentEnvironment{responsory}{O{} m m}{%
 	\leavevmode% forces horizontal mode
 	\unskip% Remove any previous spacing
@@ -259,6 +290,7 @@
 	% \newline \R \firstline \ \V \versicle \ \secondword.
 	\oldnewline \R \firstline \ \V \versicle \ \secondword.%
 	% \linebreak \R \firstline \ \V \versicle \ \secondword.
+	\index[R]{\firstline}
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
@@ -281,6 +313,7 @@
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
 	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
 	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.%
+	\index[R]{\firstline}
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
@@ -303,6 +336,7 @@
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
 	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
 	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
+	\index[R]{\firstline}
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
@@ -325,6 +359,7 @@
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
 	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
 	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
+	\index[S]{\firstline}
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
 }
@@ -343,6 +378,7 @@
 	\space% Adds space
 % The format of the invitatory: firstline or all
 	\firstline
+	\index[I]{\firstline}
 	% \par \noindent {\color{Red} Invit.} \firstline \\
 	% {\color{Red} Invit.} \firstline
 	% \lettrine[lines=2]{\zallmancaps \color{Red} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
@@ -679,7 +715,7 @@ dies vero {\color{black} 12.}\\ \vspace{+.5em}
 \color{Red} xvi & d & \color{Red} viii & 8 & & \color{Red} \\
 \color{Red} v & e & \color{Red} vii & 9 & & \color{Red} \\
 \color{Red}  & f & \color{Red} vi & 10 & & \color{Red} \\
-\color{Red} xiii & g & & 11 & & \color{Red} \\%sic empty
+\color{Red} xiii & g & & 11 & v & \color{Red} \\
 \color{Red} ii & \color{Red} A & \color{Red} iv. & 12 & & \color{Red} \\
 \color{Red}  & b & \color{Red} iii & 13 & & \color{Red} \\
 \color{Red} x & c & \color{Red} ii & 14 & & \color{Red} \\
@@ -1160,5 +1196,29 @@ dies vero {\color{black} 8.}\\ \vspace{+.5em}
 \end{center}
 
 \input{main_humbert}
+
+% \backmatter
+
+% \thispagestyle{fancy}
+
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Indices}
+% \hypertarget{Indices}{}
+% \fancyhead[C]{}
+% \fancyhead[RE,LO]{Indices}
+% Optional: change headers for index pages
+% \renewcommand{\leftmark}{Indices}
+% \renewcommand{\rightmark}{Index Hymnorum}
+
+% Print each index
+% \cprintindex{P}{Index Psalmorum et Canticorum}
+% \newpage
+% \cprintindex{H}{Index Hymnorum}
+% \newpage
+% \cprintindex{R}{Index Responsoriorum}%It does not index manual labels of responsories
+% \newpage
+% \cprintindex{S}{Index Responsoriorum Breve}
+% \newpage
+% \cprintindex{I}{Index Invitatorium}
 
 \end{document}

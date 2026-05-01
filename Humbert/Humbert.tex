@@ -28,6 +28,12 @@
 % \setmainfont{Times New Roman}
 % \setmainfont{Libre Caslon Text}
 \setmainfont{Charis}
+% \setmainfont{Junicode}
+% [
+	% Width=SemiCondensed, % or Condensed if desperate
+	% Ligatures={Common, Rare, Historic}, % Turn on the medieval ligatures
+	% Numbers=OldStyle
+% ]
 % \usepackage{lua-ul}
 % \usepackage{luacolor}
 \usepackage[latin]{babel}
@@ -107,6 +113,8 @@
 % Adjust headheight and topmargin
 \setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
 \addtolength{\topmargin}{-1.6pt} % Adjust topmargin to compensate
+% \setlength{\headheight}{14.5pt} % Set to at least 14.49999pt
+% \addtolength{\topmargin}{-.9pt} % Adjust topmargin to compensate
 
 \makeatletter
 \def\leftmarginnote{%
@@ -207,14 +215,13 @@
 }
 
 % Same but Hymns
-\newcommand{\hymn}[2]{%
+\newcommand{\hymn}[3]{%
 	\hypertarget{#1}{\label{#1}}
 		% \setlength{\parindent}{1em} % Set paragraph indentation
-	#2 %
+	#3 %
 }
 
 % Define the responsory environment
-% Note that in the Dominican rite, responsories are repeated only in semiduplex and higher, so three lessons and simples, the first line is not repeated.
 \NewDocumentEnvironment{responsory}{O{} m m}{%
 	\leavevmode% forces horizontal mode
 	\unskip% Remove any previous spacing
@@ -655,7 +662,7 @@ dies vero {\color{black} 12.}\\ \vspace{+.5em}
 \color{Red} xvi & d & \color{Red} viii & 8 & & \color{Red} \\
 \color{Red} v & e & \color{Red} vii & 9 & & \color{Red} \\
 \color{Red}  & f & \color{Red} vi & 10 & & \color{Red} \\
-\color{Red} xiii & g & & 11 & & \color{Red} \\%sic empty
+\color{Red} xiii & g & & 11 & v & \color{Red} \\
 \color{Red} ii & \color{Red} A & \color{Red} iv. & 12 & & \color{Red} \\
 \color{Red}  & b & \color{Red} iii & 13 & & \color{Red} \\
 \color{Red} x & c & \color{Red} ii & 14 & & \color{Red} \\
