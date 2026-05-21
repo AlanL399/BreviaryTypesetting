@@ -75,3 +75,11 @@
 **Paid:** Minion Pro → Arno Pro → Iowan Old Style
 
 **Avoid:** Garamond variants, Cormorant, overly wide fonts (Caslon, Baskerville, Merriweather)
+
+---
+
+
+Libertinus Serif: A fork of Linux Libertine that feels more substantial and "blacker" on the page than Charis.
+
+Cinzel (for Headings): If you want the sharp, stone-carved look for titles like "FERIA SECUNDA," Cinzel provides that classic Roman weight.
+

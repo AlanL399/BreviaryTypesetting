@@ -1,0 +1,11 @@
+% Minimalist Index Style
+headings_flag 0
+
+% What happens between the Entry and the Page Number
+delim_0 "\\leavevmode\\kern3pt\\leaders\\hbox{. }\\hfill "
+
+% Remove the extra vertical space between letter groups (A, B, C)
+group_skip "\n"
+
+% Force every item to start on a new line (standard index behavior)
+item_0 "\n\\item "
