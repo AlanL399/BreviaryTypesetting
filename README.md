@@ -40,6 +40,7 @@ This repository contains work on the following breviaries:
 To compile:
 1. Clone the repository
 2. Ensure LuaLaTeX is installed.
+	- Also ensure the fonts are installed. Most fonts are sourced from Google Fonts. 
 3. Navigate to the directory and compile with `lualatex [filename].tex`.
 
 ### Contributing
