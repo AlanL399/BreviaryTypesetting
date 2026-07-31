@@ -1,0 +1,121 @@
+\documentclass[openany]{book}
+
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{geometry}
+\geometry{
+	paperwidth=5.0in,
+	paperheight=7.5in,% Could be taller, 7.75
+	twoside,
+	%
+	% --- HORIZONTAL MARGINS ---
+	% KDP minimum for a ~500 page book is 0.625in.
+	% We use 0.65in to protect the text from disappearing into the deep glue spine.
+	% inner=0.65in,
+	inner=0.75in,
+	% inner=0.85in,
+	% KDP minimum is 0.25in. We use 0.3in to give the text a beautiful,
+	% balanced frame on the wider 5.0" page.
+	outer=0.30in,
+	%
+	% --- VERTICAL MARGINS ---
+	% Since you removed the tall header, 0.35in is tight, clean, and safe.
+	% top=0.35in,
+	top=0.28in,
+	% Gives your footer page number breathing room above the 0.25" KDP cutting floor.
+	% bottom=0.35in,
+	% bottom=0.28in,
+	% bottom=0.26in,
+	% bottom=0.25in,
+	bottom=0.2in,
+	%
+	% --- MEASUREMENT OVERRIDES ---
+	% Tells geometry to compute margins from the top of the actual header line
+	includehead,
+	nomarginpar,
+	}
+
+\usepackage{titling}
+\usepackage{fontspec}
+
+\pagecolor[rgb]{0,0,0}
+% \pagecolor[rgb]{.5,.5,.5}
+
+% \color{Goldenrod}
+
+\setmainfont{Merriweather}[
+	SmallCapsFeatures={Ligatures=NoCommon}
+]
+
+
+% Controls the space from the top of the page
+\setlength{\droptitle}{-1.5in}
+
+% \pretitle{BREVIARIUM}
+% \title{CUM}
+% \posttitle{PSALTERIO}
+
+% \preauthor{Iuxta Ecclesiasticum Officium}
+% \author{Sacri Ordinis Fratrum}
+% \postauthor{Predicatorum}
+
+% \predate{Ex Exemplari Prothotypo}
+% \date{V\={e}n. M\={a}g. N\={r}i. Humberti}
+% \postdate{Excerptum et Dispositum}
+
+\pretitle{\begin{center}\bfseries \fontsize{28}{24}\selectfont \color{white} B R E V I A R I U M\\ \vspace{+.5em}
+\fontsize{14}{12}\selectfont \color{Dandelion} C U M\\ \vspace{+.75em}}
+\title{\fontsize{28}{24}\selectfont \color{white} P S A L T E R I O \vspace{+.5em}}
+\posttitle{\Large \par \itshape \color{Dandelion} I U X T A \ \ E C C L E S I A S T I C U M\\ \vspace{+.5em}
+\upshape \LARGE \color{white} O F F I C I U M \end{center}}
+% 5
+
+\preauthor{\vspace{-1em} \begin{center}
+\Large {\bfseries \itshape \color{Dandelion} SACRI ORDINIS FRATRUM}\\ \vspace{+.5em}
+\fontsize{26}{24}\selectfont \bfseries \color{white} P R E D I C A T O R U M\\ \vspace{+.5em}}
+\author{\color{Dandelion} {\itshape \large Nova Typographya Restitutum et Impressum}\\ \vspace{+.5em}}
+\postauthor{\large \color{white} \upshape {\Large E}X {\Large E}XEMPLARI {\Large P}ROTHOTYPO\\ \vspace{+.5em}
+\end{center}}
+% 5
+
+\predate{\vspace{-1em} \begin{center}
+\large \itshape {\color{Dandelion} {V}enerabilis {M}agistri {N}ostri}\\ \vspace{+.5em}
+\upshape \fontsize{26}{22}\selectfont \bfseries \color{white} H U M B E R T I\\ \vspace{+.25em}
+\Huge \color{Dandelion} D E \ \ R O M A N I S\\ \vspace{+.5em}}
+\date{\color{Dandelion} \large \mdseries \underline{\color{white} {\Large E}x \normalsize {\Large C}ODICE {\Large R}OME {\Large S}ANCTE {\Large S}ABINE {\Large XIV L1}}\\ \vspace{+.5em}}
+\postdate{\color{Dandelion} \itshape \bfseries EXCERPTUM ET DISPOSITUM\end{center}}
+% 4
+
+% \pretitle{\begin{center}\bfseries \fontsize{36}{28}\selectfont \color{Red} B R E V I A R I U M\\ \vspace{+.25em}}
+% \title{\fontsize{32}{28}\selectfont \color{black} G O T H I C U M}
+% \posttitle{\huge \par \itshape \color{Red} S E C U N D U M \ \ R E G U L A M \end{center}}
+
+% \preauthor{\vspace{-1em} \begin{center}
+% \fontsize{32}{28}\selectfont \bfseries
+% BEATISSIMI ISIDORI\\ \vspace{+.25em}
+% \Large {\itshape \color{Red} A R C H I E P I S C O P I \ \ H I S P A L E N S I S}\\ \vspace{+.5em}
+% \normalsize \mdseries {\Large J}USSU {\Large C}ARDINALIS {\Large F}RANCISCI {\Large X}IMENII DE {\Large C}ISNEROS PRIUS EDITUM\bfseries ;\\ \vspace{+.5em}
+% \color{Red} \large \itshape N U N C \ \ O P E R A\\ \vspace{+.5em}}
+% \author{\Large \color{black} \mdseries \upshape EXC.\textsuperscript{MI} D. FRANCISCI ANTONII LORENZANA \\ \vspace{+.5em}}
+% \postauthor{\itshape {\color{Red} SANCT\AE \ ECCLESI\AE \ TOLETAN\AE \ HISPANIARUM PRIMATIS}\\
+% {\color{Red} Archiepiscopi recognitum}\\ \vspace{+.5em}
+% \upshape AD USUM SACELLI MOZARABUM.\\ \vspace{+.5em}
+% \end{center}}
+
+% \predate{\vspace{-1em} \begin{center} \LARGE \bfseries \underline{\underline{\color{Red}MATRITI ANNO MDCCLXXV.}}\\ \vspace{+.5em}}
+% \date{\color{black} \large \mdseries \underline{{\Large A}pud \normalsize {\Large J}OACHIMUM {\Large I}BARRA {\Large S.C.R.M. \& Dignit. Archiep. Typog.}}\\ \vspace{+.5em}}
+% \postdate{\color{Red} \itshape \bfseries REGIO PERMISSU.\end{center}}
+
+\begin{document}
+
+%pp6 placeholder
+
+%pp7
+% \title{\bfseries {\Huge \color{Red} B R E V I A R I U M} \\ \huge G O T H I C U M \\ \LARGE {\mdseries \itshape \color{Red} S E C U N D U M \ \ R E G U L A M} \\ \Huge BEATISSIMI ISIDORI \\ \large \mdseries {\itshape \color{Red} A R C H I E P I S C O P I \ \ H I S P A  L E N S I S} \\ \small {\large J}USSU {\large C}ARDINALIS {\large F}RANCISCI {\large X}IMENII DE {\large C}ISNEROS PRIUS EDITUM; \\ {\color{Red} \itshape N U N C \ \ O P E R A} \\ \large EXC.\textsuperscript{MI} D. FRANCISCI ANTONII LORENZANA \\ \normalsize \itshape {\color{Red} SANCT\AE \ ECCLESI\AE \ TOLETAN\AE \ HISPANIARUM PRIMATIS} \\ {\color{Red} Archiepiscopi recognitum} \\ \upshape AD USUM SACELLI MOZARABUM.}
+
+
+\maketitle
+
+
+
+\end{document}

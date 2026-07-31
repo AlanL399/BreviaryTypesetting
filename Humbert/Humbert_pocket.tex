@@ -13,33 +13,7 @@
 	top=0.4in, % Top margin
 	bottom=0.5in, % Bottom margin
 	bindingoffset=0in % at least 0.75" to 0.875" inner margins.
-% No text can exist within 0.25 inches of the physical edge of the book (The Safe Zone). If your margins are 0.1in, their automated uploader will reject
-% 4.25" x 7.0" or 5" x 8". For an 800-page book, a 5" x 8" size is highly recommended
-	% paperwidth=5in,       % Shift to a standard industry pocket trim
-	% paperheight=8in,      % Standard pocket height
-	% inner=0.4in,          % Gives you room to actually read without text spilling off the edge
-	% outer=0.4in,          % Safe from the 0.25" printer rejection zone
-	% top=0.4in, 
-	% bottom=0.5in, 
-	% bindingoffset=0in     % Keep at 0 for editing; adjust later for the final spine glue
-% Or these:	
-	% paperwidth=5in,       % Standard available pocket trim size
-	% paperheight=8in,      
-	% inner=0.375in,        % Gives the thick 800-page spine some breathing room
-	% outer=0.3in,          % Looks incredibly tight and "Dessain-esque", but safely clear of the 0.25" failure limit
-	% top=0.35in, 
-	% bottom=0.4in, 
-	% bindingoffset=0in     % Keep at 0 for editing; adjust later for the final spine glue
-% Production margins
-	% paperwidth=5in,
-    % paperheight=8in,
-    % twoside,                 % Crucial: alternates margins for left/right pages
-    % inner=0.375in,           % Visual whitespace from text to the gutter curve
-    % bindingoffset=0.5in,     % The "sacrifice zone" swallowed by the glue/curve
-    % outer=0.3125in,          % Tight, old-school Dessain look (safely over the 0.25" POD limit)
-    % top=0.375in,
-    % bottom=0.4in
-	}
+}
 % \usepackage{xparse}
 \usepackage{titling}
 \usepackage{lettrine}
@@ -58,7 +32,9 @@
 % \setmainfont{Times New Roman}
 % \setmainfont{Libre Caslon Text}
 % \setmainfont{Charis}
-\setmainfont{Merriweather}
+\setmainfont{Merriweather}[
+	SmallCapsFeatures={Ligatures=NoCommon}
+]
 % \setmainfont{Libertinus Serif}
 % \setmainfont{Gentium}% 93% of Charis, thinner
 % \setmainfont{Source Serif 4 Regular}% too wide
@@ -83,7 +59,6 @@
 	% level=\section*,
 	% toclevel=section,
 	% noclearpage,
-	
 	% othercode=\footnotesize\thispagestyle{empty}
     % othercode={%
 		% This forces the index entries to start at the absolute edge of the column
@@ -203,7 +178,7 @@
 \setlength{\columnseprule}{0.4pt} % Add a rule between columns and set its thickness
 
 % Reduce line spacing
-\setstretch{0.85} % Reduce line spacing slightly
+\setstretch{0.85} % Reduce line spacing slightly; should adjust before publishing
 
 \makeatletter
 \def\leftmarginnote{%
@@ -241,11 +216,13 @@
 
 \newcommand{\doxology}{%
 	{\bfseries \color{Red} G}lória Patri, et Fílio, * et Spirítui Sancto. \\
-	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+	% {\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sécula seculórum. Amen. \\
 }
 
 \newcommand{\requiem}{%
-	Réquiem ætérnam * dona eis, Dómine. \\
+	% Réquiem ætérnam * dona eis, Dómine. \\
+	Réquiem etérnam * dona eis, Dómine. \\
 	Et lux perpétua * lúceat eis. \\
 }
 
@@ -332,7 +309,8 @@
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword.
 	% \newline \R \firstline \ \V \versicle \ \secondword.
-	\oldnewline \R \firstline \ \V \versicle \ \secondword.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword.%
+	\oldnewline \R \firstline \ \V \versicle \ \secondword.
 	% \linebreak \R \firstline \ \V \versicle \ \secondword.
 	% \index[R]{\firstline}
 }{%
@@ -350,7 +328,19 @@
 	\StrBehind{\firstline}{*}[\rawparttwo]%
 	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
 	\StrBefore{\firstline}{ }[\firstword]%
-	\StrBefore{\parttwo}{ }[\secondword]%
+	% \StrBefore{\parttwo}{ }[\secondword]%
+	% Check if \parttwo contains a space.
+	\IfSubStr{\parttwo}{ }{%
+		% If it has a space, just take everything before the space
+		\StrBefore{\parttwo}{ }[\secondword]%
+	}{%
+		% Check if it has a period, and strip it if it does.
+		\IfSubStr{\parttwo}{.}{%
+			\StrBefore{\parttwo}{.}[\secondword]%
+		}{%
+			\let\secondword\parttwo%
+		}%
+	}%
 	% \unskip\ignorespaces% Prevent paragraph break
 % The format of the responsory
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
@@ -379,7 +369,8 @@
 	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
 	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
 	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
-	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
 	% \index[R]{\firstline}
 }{%
 	% \unskip\ignorespaces% Prevent paragraph break
@@ -458,11 +449,11 @@
 	\par \noindent {\color{Red} Invitato.} \firstline
 	% {\color{Red} Invit.} \firstline
 	\par \noindent {\color{Red} Psalmus.}
-	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exultémus Dómino, iubilémus Deo, salutári nostro: preoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
 	\firstword . \\
-	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
 	\secondword . \\
-	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscue eius. \\
 	\firstword . \\
 	{\bfseries \color{Red} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
 	\secondword . \\
@@ -591,6 +582,20 @@
 % \cftsetindents{subsection}{1.0in}{0.5in}
 \cftsetindents{subsection}{.2in}{0in}
 
+% Redefine the plain style so it copies your fancyhdr layout
+\fancypagestyle{plain}{%
+	\fancyhf{} % clear all header and footer fields
+	\fancyhead[C]{\leftmark} % Display chapter in the center
+	\fancyhead[RO,LE]{\rightmark}
+	\fancyhead[RE,LO]{S. O. P.}
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+\usepackage{etoolbox}
+
+% This injects a half-inch of vertical space right before the TOC title is printed
+\patchcmd{\tableofcontents}{\contentsname}{\vspace*{0.5in}\contentsname}{}{}
+
 % Page colors
 % \pagecolor[rgb]{0.98,0.94,0.82} % Soft cream
 % \pagecolor[rgb]{0.99,0.95,0.84} % Antique cream, whitest
@@ -629,11 +634,31 @@
 
 % \subsection*{Divine Office Responsories}
 
-% Here is a sample responsory.
+% Here is a sample responsory..
+
+% \begin{multicols*}{2}
 
 % \begin{responsory}[incipit1]
-% {This is the main responsory verse * with a second part.}{This is the versicle.}
-% \end{responsory}
+% {This Is the main responsory Verse * with a second part.}{This Is the Versicle.}Text here that is very long and takes a long time to read, wasting your time.
+% \end{responsory}%
+% \V Notice this
+
+
+% \newline Another one, manual
+
+
+% \begin{responsory-final}[in-odoris-mira]
+% {In odoris mira fragrantia populorum currit frequentia, * Ubi passim Christi clementia * Sana reddit membra languentia * Alleluya.}{Sidus quondam oppressum nebula veri solis pandunt miracula.}{Alleluya}\ul{Vel} Sana. \ul{post Trinitatem}
+% \end{responsory-final}%
+% \newline \V Ora pro nobis.
+
+% \begin{responsory-final}
+% {Quodcumque ligaveris super terram erit ligatum et in celis, * Et quodcumque solveris super terram erit solutum et * In celis.}{Et ego dico tibi quia tu es Petrus et super hanc petram edificabo ecclesiam meam.}{In celis}%typo so-solutum
+% \end{responsory-final}%
+% \V Tu es Petrus.
+
+% \end{multicols*}
+
 
 % We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
 
@@ -648,6 +673,7 @@
 
 \mainmatter
 
+% removed as superfluous to private recitation
 \input{rubricae_humbert}
 
 %pp013
@@ -918,7 +944,7 @@
 % \color{Red} XVIII & E & \color{Red} IIII & 10 & \color{Red} Laurentii Martyris. Semid. & \color{Red} \\
 % \color{Red} VII & F & \color{Red} III & 11 & Tiburtii Martyris. Mem. & \color{Red} \\
 \color{Red}  & G & \color{Red} II & 12 & Ob. F. Hemericus Mag. Ord. XII. & \color{Red} \\
-% \color{Red} XV & \color{Red} A & \color{Red} Idus & 13 & Ypoliti Sociorumque eius . Simplex. & \color{Red} \\
+% \color{Red} XV & \color{Red} A & \color{Red} Idus & 13 & Ypoliti Sociorumque eius. Simplex. & \color{Red} \\
 % \color{Red} IIII & B & \color{Red} XIX & 14 & Eusebii Presbiteri et Conf. Mem. & \color{Red} Vigilia. \\
 % \color{Red}  & C & \color{Red} XVIII & 15 & \multicolumn{2}{l}{\color{Red} Assumptio Beate Marie Virginis. Totum Dupl.} \color{Red} \\
 % \color{Red} XII & D & \color{Red} XVII & 16 & & \color{Red} \\
@@ -1091,10 +1117,10 @@
 
 {\color{Red} \ubsubsection{De Officio Legende De Kalendario et Luna et Martyrologyo et Aliis His Annexis}{de-officio-legende-de-kalendario-et-luna-et-martyrologyo-et-aliis-his-annexis}}
 \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{116} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: Capitulum? Qui si dixerit Non: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit Post Primam: tunc reservande sunt usque ad Primam. Si autem dixerit Sic: legende erunt in capitulo post Matutinas.}
-% \newline \ul{Cum ergo legende erunt in capitulo post matutinas: debet cum incipitur Benedictus pulsare capitulum, tam prolixe quod fratres possint commode advertere quod ad capitulum pulsetur. Qui modus pulsandi, semper est servandus in convocatione capituli. Debet uatem lumen in capitulo tam diligenter parare: quod durante capitulo non oporteat circa ideam iterum aliquem occupari. Debet etiam providere: ne iurge pro discplinis desint. Prato autem libro, et lumine pro se ad legendum, et tabula pro tempore, et aliis pertinentibus ad officium suum: stans ante pulpitum in quo debet legere, dum intrat conventus in capitulum, divertat aliquantulum transeunte prelato ob reverentiam eius. Deinde rediens ad locum illum, cum conventus intraverit: incipiat legere in voce mediocri que legenda fuerint, secundum  modum infrascriptum. Perlectis autem omnibus, et clauso libro, et aliis faciendis breviter expeditis: vadat ad locum suum, finito capitulo reportaturus que fuerint alibi reportanda.}
-% \newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmis in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit sic: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, pretquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit Non: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
+% \newline \ul{Cum ergo legende erunt in capitulo post matutinas: debet cum incipitur Benedictus pulsare capitulum, tam prolixe quod fratres possint commode advertere quod ad capitulum pulsetur. Qui modus pulsandi, semper est servandus in convocatione capituli. Debet autem lumen in capitulo tam diligenter parare: quod durante capitulo non oporteat circa idem iterum aliquem occupari. Debet etiam providere: ne iurge pro disciplinis desint. Parato autem libro, et lumine pro se ad legendum, et tabula pro tempore, et aliis pertinentibus ad officium suum: stans ante pulpitum in quo debet legere, dum intrat conventus in capitulum, divertat aliquantulum transeunte prelato ob reverentiam eius. Deinde rediens ad locum illum, cum conventus intraverit: incipiat legere in voce mediocri que legenda fuerint, secundum  modum infrascriptum. Perlectis autem omnibus, et clauso libro, et aliis faciendis breviter expeditis: vadat ad locum suum, finito capitulo reportaturus que fuerint alibi reportanda.}
+% \newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmus in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit sic: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, preterquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit Non: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
 % \newline \ul{De supradictis autem: legendum est sic.}
-% \newline Decimonono Kalendas \ul{vel} Sextodecimo Kalendas \ul{vel} Pridie Kalendas \ul{vel} Kalendis Ianuarii: \ul{vel} Quarto Nonas \ul{vel} Pridie Nonas \ul{vel}  \ul{vel} Nonis Ianuarii: \ul{vel} Octavo Idus \ul{vel} Pridie Idus \ul{vel} Idibus Ianuarii: Luna prima, \ul{vel} luna sextadecima; \ul{vel} tricesima. Rome: via apia: natalis sancti talis et cetera. Et alilorum plurimorum sanctorum: martyum, confessorum, atque virginum. \ul{Hec autem clausula semper addatur in fine lectionis de martyologio. Deinde dicta oratione} Dirigere et sanctificare etc: \ul{sequitur} Iube domne. \ul{Data autem benedictione: sequitur lectio de constitutionibus, vel de evangelio: sic} Secundum Matheum; \ul{vel} Secundum Marcum; \ul{vel} Secundum Lucam; \ul{vel} Secundum Iohannem; \ul{Et legatur de evangelio totum illud quod infrascriptum est in hoc libro. In fine vero lectionis tam de evangelio quam de constitutionibus dicatur semper} Tu autem.
+% \newline Decimonono Kalendas \ul{vel} Sextodecimo Kalendas \ul{vel} Pridie Kalendas \ul{vel} Kalendis Ianuarii: \ul{vel} Quarto Nonas \ul{vel} Pridie Nonas \ul{vel}  \ul{vel} Nonis Ianuarii: \ul{vel} Octavo Idus \ul{vel} Pridie Idus \ul{vel} Idibus Ianuarii: Luna prima, \ul{vel} luna sextadecima; \ul{vel} tricesima. Rome: via apia: natalis sancti talis et cetera. Et aliorum plurimorum sanctorum: martryum, confessorum, atque virginum. \ul{Hec autem clausula semper addatur in fine lectionis de martryologio. Deinde dicta oratione} Dirigere et sanctificare etc: \ul{sequitur} Iube domne. \ul{Data autem benedictione: sequitur lectio de constitutionibus, vel de evangelio: sic} Secundum Matheum; \ul{vel} Secundum Marcum; \ul{vel} Secundum Lucam; \ul{vel} Secundum Iohannem; \ul{Et legatur de evangelio totum illud quod infrascriptum est in hoc libro. In fine vero lectionis tam de evangelio quam de constitutionibus dicatur semper} Tu autem.
 \newline \ul{De evangelio autem legendum est omnibus diebus Dominicis, et festis simplicibus et supra. Item in vigilia Nativitatis Domini evangelium de vigilia: sive fuerit in Dominica: sive non. Et in omni vigilia que proprium habet officium in Missa, si in Dominica evenerit: evangelium de ipsa vigilia legendum est, preterquam in vigilia Beati Andree cum in Prima Dominica Adventus evenerit: qua tunc evangelium de Dominica est legendum. Item in crastino sancti Thome martyris. Item feria quarta in capite ieiunii, et in Cena Domini. Item in vigilia Pasche, et cotidie per Octavas Pasche et Pentecostes. Item in commemoratione omnium fidelium defunctorum. Ceteris vero diebus legendum est de constitutionibus. In varietatibus autem que occurrunt in huiusmodi lectionibus: servandus est modus qui in lectionario est notatus.}
 \newline \ul{Dicto igitur} Tu autem \ul{et facta responsione sequitur} Commemoratio fratrum, familiarium, benefactorum, defunctorum: ordinis nostri.
 \newline \ul{Si vero recitandus fuerit obitus alicuius, vel anniversarium aliquod fuerit in crastino: tunc antequam dicatur} Commemoratio \ul{dicendum est} Obiit talis, \ul{vel} Anniversarium Patrum et Matrum.
@@ -1104,7 +1130,7 @@
 
 %pp041
 \ubchapter{Collectarium}
-% Liber iste qui collectarius dicitur eo quo propter collectas sive orationes habendas in promptu principaliter scriptus est, vel quia in unum sunt in eo collecta ea que dicenda sunt a sacerdote extra officium Misse: contient ista per ordinem.
+% Liber iste qui collectarius dicitur eo quo propter collectas sive orationes habendas in promptu principaliter scriptus est, vel quia in unum sunt in eo collecta ea que dicenda sunt a sacerdote extra officium Misse: continent ista per ordinem.
 
 \ubsection{Kalendarium Sanctorum}{kalendarium-sanctorum}
 
@@ -1259,7 +1285,7 @@
 \color{Red}  & C & \color{Red} III & 11 & & \color{Red} \\
 \color{Red} X & D & \color{Red} II & 12 & & \color{Red} \\
 \color{Red}  & E & \color{Red} Idus & 13 & & \color{Red} \\
-\color{Red} XVIII & F & \color{Red} XVIII & 14 & \multicolumn{2}{l}{Tyburtii Valeriani, et Maximi} \\
+\color{Red} XVIII & F & \color{Red} XVIII & 14 & \multicolumn{2}{l}{Tyburcii Valeriani, et Maximi} \\
  & & & & \quad \color{Red} Martyrum. \color{black} III. Lect. \color{Red} \\
 \color{Red} VII & G & \color{Red} XVII & 15 & \qquad \color{Red} Claves Rogationum. \\
 \color{Red}  & \color{Red} A & \color{Red} XVI & 16 & \\
@@ -1438,7 +1464,7 @@
 \color{Red} XVIII & E & \color{Red} IIII & 10 & \color{Red} Laurentii Martyris. Semid. & \color{Red} \\
 \color{Red} VII & F & \color{Red} III & 11 & Tiburtii Martyris. Mem. & \color{Red} \\
 \color{Red}  & G & \color{Red} II & 12 & Octava Sancti Dominici. Simplex. & \color{Red} \\
-\color{Red} XV & \color{Red} A & \color{Red} Idus & 13 & Ypoliti Sociorumque eius . Simplex. & \color{Red} \\
+\color{Red} XV & \color{Red} A & \color{Red} Idus & 13 & Ypoliti Sociorumque eius. Simplex. & \color{Red} \\
 \color{Red} IIII & B & \color{Red} XIX & 14 & Eusebii Presbiteri et Conf. Mem. & \\
  &  & &  & \qquad \color{Red} Vigilia. \\
 \color{Red}  & C & \color{Red} XVIII & 15 & \multicolumn{2}{l}{\color{Red} Assumptio B. Marie Virg. Tot. Dupl.} \color{Red} \\
