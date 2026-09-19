@@ -2,7 +2,7 @@
 
 \usepackage{hyperref}
 \usepackage{bookmark}
-\usepackage[dvipsnames]{xcolor}
+\usepackage[svgnames, x11names]{xcolor}
 % \usepackage{graphicx}
 \usepackage{geometry}
 \geometry{
@@ -110,18 +110,21 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{soul}
+\usepackage{enumitem}
 % \usepackage{pifont}
 \usepackage{gregoriosyms}
 % \usepackage{etoolbox}
 \usepackage{xstring}% For string manipulation
 \usepackage{fancyhdr}
 \usepackage{setspace}
+\usepackage{colortbl}
 % \usepackage{lua-widow-control}
 \usepackage{fontspec}
 % \setmainfont{Georgia}
 % \setmainfont{Times New Roman}
 % \setmainfont{Libre Caslon Text}
 % \setmainfont{Charis}
+% \setmainfont{Amazon Endure Book}
 \setmainfont{Merriweather}[
 	SmallCapsFeatures={Ligatures=NoCommon}
 ]
@@ -137,7 +140,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % ]
 % \usepackage{lua-ul}
 % \usepackage{luacolor}
-\usepackage[latin]{babel}
+\usepackage[latin,english]{babel}
 \babelprovide[hyphenrules=latin]{latin}
 % \usepackage{polyglossia}
 % \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
@@ -210,7 +213,20 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
 % \newcommand*\zallmancaps{\usefont{TU}{Georgia}{b}{n}}
 % third is ul/xl/l/m/sb/b/eb/bx fourth is n/it/sl/sc
-\newcommand*\zallmancaps{\fontspec[Weight=Bold]{Libre Caslon Text}}
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Libre Caslon Text}}
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Decorated Roman Initials}}%
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Aneirin}}%
+\newcommand*\zallmancaps{\fontspec{Aneirin}}%
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Sentinel}}%oversized
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Gingerbread Initials}}%wrong style
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Napoli Initialen}}%undersized and wrong style
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Fabliaux}}%wrong style
+% \newcommand*\zallmancaps{\fontspec[Scale=.9]{Erbar Initialen}}%oversized
+% \newcommand*\zallmancaps{\fontspec{Zierinitialen}}%faint and not appropriate
+% \newcommand*\zallmancaps{\fontspec{Westminster Gotisch}}%like Aneirin but more compact; n overhangs
+% \newcommand*\zallmancaps{\fontspec{Lombardic}}%wrong style
+% \newcommand*\zallmancaps{\fontspec{Pfeffer Mediæval}}%not appropriate
+% \newcommand*\zallmancaps{\fontspec{Celtic Hand}}%ugly
 % \newcommand*\zallmancaps{\fontspec[Weight=700]{Georgia}}
 % [Instance=Condensed Bold] % Name of size
 % 300 = Light; 400 = Regular; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black
@@ -239,13 +255,31 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 	% \sloppy
 	\emergencystretch=1em  % Allow some stretch
 	\hfuzz=0.5pt          % Don't complain about small overfulls
-    \raggedcolumns  % Instead of balanced columns
-    \clubpenalty=10000
-    \widowpenalty=10000  
-    \brokenpenalty=4991
-    \predisplaypenalty=10000
-    \postdisplaypenalty=1549
-    \displaywidowpenalty=1602
+	\raggedcolumns  % Instead of balanced columns
+	\clubpenalty=10000
+	\widowpenalty=10000  
+	\brokenpenalty=4991
+	\predisplaypenalty=10000
+	\postdisplaypenalty=1549
+	\displaywidowpenalty=1602
+}
+
+% Resolves hanging lettrine
+% \clubpenalty=10000
+% \widowpenalty=10000
+
+% Syntax: <number of rules> <penalty after line 1> <penalty after line 2> <default penalty>
+% \clubpenalties 3 10000 10000 150
+
+% Save the original macro
+\let\oldlettrine\lettrine
+
+% Override \lettrine to protect only lettrine-initiated paragraphs
+\renewcommand{\lettrine}[3][]{%
+	\clubpenalty=10000
+	% Prevent page break after 1st and 2nd lines of THIS paragraph only:
+	% \clubpenalties 3 10000 10000 150\relax
+	\oldlettrine[#1]{#2}{#3}%
 }
 
 % Adjust headheight and topmargin
@@ -306,13 +340,13 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \newcommand{\doxology}{%
 	{\bfseries \color{Red} G}lória Patri, et Fílio, * et Spirítui Sancto. \\
 	% {\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
-	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sécula seculórum. Amen. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sécula seculórum. Amen.
 }
 
 \newcommand{\requiem}{%
 	% Réquiem ætérnam * dona eis, Dómine. \\
 	Réquiem etérnam * dona eis, Dómine. \\
-	Et lux perpétua * lúceat eis. \\
+	Et lux perpétua * lúceat eis.
 }
 
 \input{psalms}
@@ -326,20 +360,30 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 }
 
 % Define full Psalms with alternately colored, bold firstletters
-% Track the verses
+\newif\iffirstverse
 
 \newcommand{\fullpsalm}[1]{%
 	\index[P]{\csname psalm#1Incipit\endcsname}
 	\begingroup % Start local group to limit scope
-		\setlength{\parindent}{.2em} % Set paragraph indentation
-		\let\psalmtext\empty % define command
-		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname % Display the psalm text
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{.2em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
 		\newif\ifblue
 		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
 		\newcommand{\processline}[1]{%
 			\StrLeft{##1}{1}[\firstletter]%
 			\StrGobbleLeft{##1}{1}[\restofline]%
-			\par\hspace*{.1em}%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{.1em}% Start the new verse
 			\ifblue
 				{\color{Blue}\textbf{\firstletter}}%
 				\bluefalse
@@ -349,11 +393,39 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 			\fi
 			\restofline%
 		}
-		\renewcommand{\\}{\processline} % Redefine \\ to use line processor
+		\renewcommand{\\}{\processline}
 		\psalmtext
-		\par % Add explicit paragraph break after psalm
+		\par 
 	\endgroup
 }
+
+% \newcommand{\fullpsalm}[1]{%
+	% \index[P]{\csname psalm#1Incipit\endcsname}
+	% \begingroup % Start local group to limit scope
+		% \clubpenalty=150
+		% \setlength{\parindent}{.2em} % Set paragraph indentation
+		% \let\psalmtext\empty % define command
+		% \expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname % Display the psalm text
+		% \newif\ifblue
+		% \bluetrue
+		% \newcommand{\processline}[1]{%
+			% \StrLeft{##1}{1}[\firstletter]%
+			% \StrGobbleLeft{##1}{1}[\restofline]%
+			% \par\hspace*{.1em}%
+			% \ifblue
+				% {\color{Blue}\textbf{\firstletter}}%
+				% \bluefalse
+			% \else
+				% {\color{Red}\textbf{\firstletter}}%
+				% \bluetrue
+			% \fi
+			% \restofline%
+		% }
+		% \renewcommand{\\}{\processline} % Redefine \\ to use line processor
+		% \psalmtext
+		% \par % Add explicit paragraph break after psalm
+	% \endgroup
+% }
 
 % Same but full Psalms
 % \newcommand{\fullpsalm}[1]{%
@@ -372,11 +444,14 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 	\csname psalm#1Text\endcsname % No indent
 }
 
+\setlength{\parindent}{.3em} % Set paragraph indentation
+
 % Same but Hymns
 \newcommand{\hymn}[3]{%
 	\index[H]{#2}
 	\hypertarget{#1}{\label{#1}}
-		\setlength{\parindent}{.2em} % Set paragraph indentation
+		% \setlength{\parindent}{.2em} % Set paragraph indentation
+		\setlength{\parindent}{.3em} % Set paragraph indentation
 		% \setlength{\parindent}{1em} % Set paragraph indentation
 	#3 %
 }
@@ -523,6 +598,9 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 	\unskip\ignorespaces% Prevent paragraph break
 }
 
+% Fix invitatory-full
+\def\clearparshape{\parshape=0 \hangindent=0pt \hangafter=1 \relax}
+
 % Define the invitatory-full environment
 \NewDocumentEnvironment{invitatory-full}{O{} m}{%
 	\leavevmode% forces horizontal mode
@@ -534,24 +612,29 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
 	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{.1em} % Set paragraph indentation
+	\renewcommand{\\}{\par\hspace*{.1em}} % Redefine \\ to end the line and add indentation
 % The format of the invitatory: firstline or all
 	% \firstline
 	\par \noindent {\color{Red} Invitato.} \firstline
 	% {\color{Red} Invit.} \firstline
 	\par \noindent {\color{Red} Psalmus.}
-	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exultémus Dómino, iubilémus Deo, salutári nostro: preoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
-	\firstword . \\
-	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte} exultémus Dómino, iubilémus Deo salutári nostro, preoccupémus fáciem eius in confessióne et in psalmis iubilémus ei. \\
+	\firstword , etc. \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus et rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
 	\secondword . \\
-	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscue eius. \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius, veníte adorémus et procidámus ante Deum, plorémus coram Dómino qui fecit nos, quia ipse est Dóminus Deus noster, nos autem pópulus eius et oves páscue eius. \\
 	\firstword . \\
-	{\bfseries \color{Red} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	{\bfseries \color{Red} H}ódie si vocem eius audiéritis nolíte obduráre corda vestra sicut in exacerbatióne secúndum diem temptatiónis in desérto, ubi temptavérunt me patres vestri probavérunt et vidérunt ópera mea. \\
 	\secondword . \\
-	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi semper hi errant corde, ipsi vero non cognovérunt vias meas quibus iurávi in ira mea si introíbunt in réquiem meam. \\
 	\firstword . \\
-	\doxology
+	% \doxology \\
+	{\bfseries \color{Red} G}lória Patri et Fílio et Spirítui Sancto. \\
+	{\bfseries \color{Blue} S}icut erat in princípio et nunc et semper et in sécula seculórum. Amen. \\
 	\secondword . \firstword .%
 }{%
+	\aftergroup\clearparshape%
 	\unskip\ignorespaces% Prevent paragraph break
 }
 
@@ -597,7 +680,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % Define subsection format
 \titleformat{\subsection}
 % {\normalfont\large\bfseries}{}{0pt}{}
-{\normalfont\centering}{}{0pt}{}
+{\normalfont\centering\color{Red}}{}{0pt}{}
 
 % Define the bookmark text for unnumbered subsections
 \newcommand{\ubsubsection}[2]{%
@@ -634,7 +717,8 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \renewcommand{\contentsname}{Index}
 
 % Controls the space from the top of the page
-\setlength{\droptitle}{-1.5in}
+% \setlength{\droptitle}{-1.5in}
+\setlength{\droptitle}{-1.1in}
 
 \pretitle{\begin{center}\bfseries \fontsize{28}{24}\selectfont \color{Red} B R E V I A R I U M\\ \vspace{+.5em}
 \fontsize{14}{12}\selectfont \color{black} C U M\\ \vspace{+.75em}}
@@ -655,7 +739,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \large \itshape {\color{black} Venerabilis Magistri Nostri}\\ \vspace{+.5em}
 \upshape \fontsize{26}{22}\selectfont \bfseries \color{Blue} H U M B E R T I\\ \vspace{+.25em}
 \Huge \color{Blue} D E \ \ R O M A N I S\\ \vspace{+.5em}}
-\date{\color{Red} \large \mdseries \underline{\underline{\color{black} {\Large E}x \normalsize {\Large C}ODICE {\Large R}OME {\Large S}ANCTE {\Large S}ABINE {\Large XIV L1}}}\\ \vspace{+.5em}}
+\date{\color{Red} \large \mdseries \underline{\underline{\color{black} {\Large E}x \normalsize {\Large C}ODICE {\Large R}OME {\Large S}ANCTE {\Large S}ABINE {\Large XIV L1}}}\\ \vspace{+.85em}}
 \postdate{\color{Red} \itshape \bfseries EXCERPTUM ET DISPOSITUM\end{center}}
 % 4
 
@@ -726,6 +810,9 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \pagecolor[rgb]{1.0,0.98,0.90} % Light parchment
 % \pagecolor[rgb]{0.96,0.96,0.86} % Soft beige
 
+% \colorlet{Red}{black}
+\colorlet{Blue}{MidnightBlue}
+
 \begin{document}
 
 % Baseline skip is the distance from one line's baseline to the next. It should typically be 1.2 to 1.3 times the font size
@@ -737,7 +824,84 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 
 \frontmatter
 
+\selectlanguage{english}
+
 \maketitle
+
+\clearpage
+\phantomsection
+\thispagestyle{empty}
+
+
+\vspace{+7em}
+\begin{center}
+\large
+Breviarium Cum Psalterio
+\newline Iuxta Ecclesiasticum Officium
+\newline Sacri Ordinis Fratrum
+\newline Predicatorum
+\end{center}
+\begin{center}
+
+\end{center}
+\begin{center}
+
+\newline Digitally edit, transcribed and prepared
+\newline for \LaTeX \ by \emph{Alan Liang}
+\end{center}
+\begin{center}
+
+\newline Published by \emph{BreviaryTypesetting}
+\end{center}
+\begin{center}
+
+\newline Copyright © 2026 by \emph{BreviaryTypesetting}
+\newline All rights reserved.
+\end{center}
+\begin{center}
+
+\newline ISBN: 979-8-188456-33-7
+\end{center}
+\begin{center}
+
+The underlying medieval liturgical text and 
+\newline manuscript sources contained in this
+\newline volume are in the public domain.
+\end{center}
+\begin{center}
+
+
+This diplomatic transcription, liturgical layout, and 
+\newline digital compilation are licensed under the
+\newline Creative Commons Attribution-ShareAlike 4.0
+\newline International License
+\newline (CC BY-SA 4.0).
+\end{center}
+\begin{center}
+
+\newline To view a copy of this license, visit:
+\newline https://creativecommons.org/licenses/by-sa/4.0/
+\end{center}
+\begin{center}
+
+You are free to share, adapt, and build
+\newline upon this material for any purpose,
+\newline provided proper attribution is
+\newline given and derivative works are
+\newline distributed under the same license.
+\end{center}
+\begin{center}
+
+\newline The \LaTeX source code and transcription files
+\newline for this work are publicly available and
+\newline open for collaboration on GitHub:
+\newline www.GitHub.com/AlanL399/BreviaryTypesetting
+\end{center}
+\begin{center}
+
+First Edition, 2026
+\end{center}
+
 
 \phantomsection
 \addcontentsline{toc}{section}{Table of Contents}
@@ -762,11 +926,17 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
 
 
-\ubchapter{Foreword}
+\selectlanguage{latin}
+
+\ubchapter{Front Matter}
 
 \thispagestyle{fancy}
 
-\input{foreward}
+\input{preface}
+
+\input{introduction}
+
+\input{table}
 
 \mainmatter
 
@@ -787,10 +957,10 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-& & & & \color{Red} Januarius. \\
+& & & & \color{Red} Ianuarius. \\
  % \color{Red} III & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} \\
  % & B & \color{Red} IIII & 2 & Oct. Sancti Stephani. & \color{Red} \\
-% \color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Johannis. & \color{Red} Incipit Quartus Embolismus.\\
+% \color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \color{Red} Incipit Quartus Embolismus.\\
 % & D & \color{Red} II & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
 % \color{Red} XIX & E & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red} VIII & F & \color{Red} VIII & 6 & Obiit Frater Raymundus Ordinis \\
@@ -799,6 +969,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \color{Red} XVI & \color{Red} A & \color{Red} VI & 8 & & \\
 % \color{Red} V & B & \color{Red} V & 9 & & \\
  & C & \color{Red} IIII & 10 & Ob. F. Barnabas Mag. Ord. XV. \\
+% 1909 has him on Jan 18, XV until the Kalends of Feb. Did they misread IIII has XV?
 % \color{Red} XIII & D & \color{Red} III & 11 & & \color{Red} \\
 % \color{Red} II & E & \color{Red} II. & 12 & & \color{Red} \\
  % & F & \color{Red} Idus & 13 & \multicolumn{2}{l}{Oct. Epiphanie. \color{Red} Simplex. \color{black} Hylarii et Remigii. \color{Red} Mem.} \\
@@ -815,7 +986,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
  % & C & \color{Red} IX & 24 & & \color{Red} \\
 % \color{Red} IX & D & \color{Red} VIII & 25 & Conversio Sancti Pauli. Semid. \\
 % & E & \color{Red} VII & 26 & & \color{Red} \\
-% \color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Juliani Episcopi et Confessoris. Mem. \\
+% \color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Confessoris. Mem. \\
 % \color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. & Claves XL. \\
  % & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
 % \color{Red} XIIII & B & \color{Red} III & 30 & & \color{Red} \\
@@ -924,7 +1095,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apostolorum. Semid. \\
 % \color{Red}  & C & \color{Red} VI & 2 & \\
 % \color{Red} XIX & D & \color{Red} V & 3 & Inventio Sancte Crucis. Semid. \\
- % &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Evencii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
+ % &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Eventii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
 % \color{Red} VIII & E & \color{Red} IIII & 4 & Festum Corone Domini. Simplex. & \color{Red} \\
 % \color{Red}  & F & \color{Red} III & 5 & & \color{Red} \\
 % \color{Red} XVI & G & \color{Red} II & 6 & Ob. F. Petrus Mag. Ord. XXVII. \\
@@ -970,8 +1141,8 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \color{Red} XVIII & B & \color{Red} II & 12 & \multicolumn{2}{l}{\color{Red} Basilidis Cyrini, Naboris, et Nazarii, Martyrum. III. Lect.} \\
 % \color{Red} VII & C & \color{Red} Idus & 13 & & \color{Red} \\
 % \color{Red}  & D & \color{Red} XVIII & 14 & & Solsticium Estivale. \color{Red} \\
-% \color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modest Martyrum. Mem. \\
-% \color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulice Martyrum. Mem. \\
+% \color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modesti Martyrum. Mem. \\
+% \color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulite Martyrum. Mem. \\
 % \color{Red}  & G & \color{Red} XV & 17 & & Sol in Cancio. \color{Red} \\
 % \color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Martyrum. III. Lect. \\
 % \color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii in Martyrum. Simplex. \\
@@ -998,7 +1169,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 & & & & \qquad Prius F. Nycholaus Mag. Ord. IX. & \color{Red} \\
 % \color{Red}  & E & \color{Red} II & 6 & \color{Red} Octava Apostolorum Petri et Pauli. Simplex. \\
 \color{Red} XIII & F & \color{Red} Non. & 7 & Anniversarium Universorum \\
-& & & & \qquad Sepultorum in Cimiteriis Nos. & \color{Red} \\
+& & & & \qquad Sepultorum in Cimiteriis Nostri. & \color{Red} \\
 % \color{Red} II & G & \color{Red} VIII & 8 & & \color{Red} \\
 % \color{Red}  & \color{Red} A & \color{Red} VII & 9 & & \color{Red} \\
 % \color{Red} X & B & \color{Red} VI & 10 & Septem Fratrum. III. Lect. & \color{Red} \\
@@ -1184,7 +1355,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 % \color{Red} IIII & \color{Red} A & \color{Red} IIII & 10 &  & \color{Red} \\
 % \color{Red}  & B & \color{Red} III & 11 & Damasi Pape et Confess. Mem. & \color{Red} \\
 % \color{Red} XII & C & \color{Red} II & 12 &  & \color{Red} \\
-% \color{Red} I & D & \color{Red} Idus & 13 & Luce Virginis et Martyris. Simplex. & \color{Red} \\
+% \color{Red} I & D & \color{Red} Idus & 13 & Lucie Virginis et Martyris. Simplex. & \color{Red} \\
 % \color{Red}  & E & \color{Red} XIX & 14 &  & \color{Red} \\
 % \color{Red} IX & F & \color{Red} XVIII & 15 & Ob. F. Conradus Mag. Ord. XXX. & \\
 % \color{Red}  & G & \color{Red} XVII & 16 & & \color{Red} \\
@@ -1213,14 +1384,15 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \ubsection{Rubrice}{martyrologium-rubrice}
 
 {\color{Red} \ubsubsection{De Officio Legende De Kalendario et Luna et Martyrologyo et Aliis His Annexis}{de-officio-legende-de-kalendario-et-luna-et-martyrologyo-et-aliis-his-annexis}}
-\lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{116} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: Capitulum? Qui si dixerit Non: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit Post Primam: tunc reservande sunt usque ad Primam. Si autem dixerit Sic: legende erunt in capitulo post Matutinas.}
+\lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{148} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: \emph{Capitulum?} Qui si dixerit \emph{Non}: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit \emph{Post Primam}: tunc reservande sunt usque ad Primam. Si autem dixerit \emph{Sic}: legende erunt in capitulo post Matutinas.}
 % \newline \ul{Cum ergo legende erunt in capitulo post matutinas: debet cum incipitur Benedictus pulsare capitulum, tam prolixe quod fratres possint commode advertere quod ad capitulum pulsetur. Qui modus pulsandi, semper est servandus in convocatione capituli. Debet autem lumen in capitulo tam diligenter parare: quod durante capitulo non oporteat circa idem iterum aliquem occupari. Debet etiam providere: ne iurge pro disciplinis desint. Parato autem libro, et lumine pro se ad legendum, et tabula pro tempore, et aliis pertinentibus ad officium suum: stans ante pulpitum in quo debet legere, dum intrat conventus in capitulum, divertat aliquantulum transeunte prelato ob reverentiam eius. Deinde rediens ad locum illum, cum conventus intraverit: incipiat legere in voce mediocri que legenda fuerint, secundum  modum infrascriptum. Perlectis autem omnibus, et clauso libro, et aliis faciendis breviter expeditis: vadat ad locum suum, finito capitulo reportaturus que fuerint alibi reportanda.}
-% \newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmus in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit sic: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, preterquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit Non: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
+\newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmus in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit \emph{Sic}: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, preterquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit \emph{Non}: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
 % \newline \ul{De supradictis autem: legendum est sic.}
 % \newline Decimonono Kalendas \ul{vel} Sextodecimo Kalendas \ul{vel} Pridie Kalendas \ul{vel} Kalendis Ianuarii: \ul{vel} Quarto Nonas \ul{vel} Pridie Nonas \ul{vel}  \ul{vel} Nonis Ianuarii: \ul{vel} Octavo Idus \ul{vel} Pridie Idus \ul{vel} Idibus Ianuarii: Luna prima, \ul{vel} luna sextadecima; \ul{vel} tricesima. Rome: via apia: natalis sancti talis et cetera. Et aliorum plurimorum sanctorum: martryum, confessorum, atque virginum. \ul{Hec autem clausula semper addatur in fine lectionis de martryologio. Deinde dicta oratione} Dirigere et sanctificare etc: \ul{sequitur} Iube domne. \ul{Data autem benedictione: sequitur lectio de constitutionibus, vel de evangelio: sic} Secundum Matheum; \ul{vel} Secundum Marcum; \ul{vel} Secundum Lucam; \ul{vel} Secundum Iohannem; \ul{Et legatur de evangelio totum illud quod infrascriptum est in hoc libro. In fine vero lectionis tam de evangelio quam de constitutionibus dicatur semper} Tu autem.
 \newline \ul{De evangelio autem legendum est omnibus diebus Dominicis, et festis simplicibus et supra. Item in vigilia Nativitatis Domini evangelium de vigilia: sive fuerit in Dominica: sive non. Et in omni vigilia que proprium habet officium in Missa, si in Dominica evenerit: evangelium de ipsa vigilia legendum est, preterquam in vigilia Beati Andree cum in Prima Dominica Adventus evenerit: qua tunc evangelium de Dominica est legendum. Item in crastino sancti Thome martyris. Item feria quarta in capite ieiunii, et in Cena Domini. Item in vigilia Pasche, et cotidie per Octavas Pasche et Pentecostes. Item in commemoratione omnium fidelium defunctorum. Ceteris vero diebus legendum est de constitutionibus. In varietatibus autem que occurrunt in huiusmodi lectionibus: servandus est modus qui in lectionario est notatus.}
 \newline \ul{Dicto igitur} Tu autem \ul{et facta responsione sequitur} Commemoratio fratrum, familiarium, benefactorum, defunctorum: ordinis nostri.
 \newline \ul{Si vero recitandus fuerit obitus alicuius, vel anniversarium aliquod fuerit in crastino: tunc antequam dicatur} Commemoratio \ul{dicendum est} Obiit talis, \ul{vel} Anniversarium Patrum et Matrum.
+% \newline \ul{Si vero tabula legenda fuerit. Legatur ante recitationem obitus vel anniversarii, et antequam dicatur} Commemoratio.
 % \newline \ul{Solet autem tabula septimana semper legi cum Kalendis. Tabula vero pro diebus aliis in mensa, vel in choro post gratiarum actiones dicto} Fidelium anime \ul{et} Pater noster, \ul{et fratribus sedentibus in locis suis.} 
 
 \end{multicols*}
@@ -1234,13 +1406,13 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \thispagestyle{fancy}
 
 \vspace{+.5em}
-\color{Red}\csection{Januarius}{\color{Red} habet dies. XXXI. luna. XXX.}\color{black}
+\color{Red}\csection{Ianuarius}{\color{Red} habet dies. XXXI. luna. XXX.}\color{black}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
  \color{Red} III & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Circumcisio domini. \color{Red} Duplex. \\
  & B & \color{Red} IIII & 2 & Oct. Sancti Stephani. & \color{Red} \\
-\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Johannis. & \\
+\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \\
  &  & & & \multicolumn{2}{l}{\qquad \color{Red} Incipit Quartus Embolismus.} \\
 & D & \color{Red} II & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
 \color{Red} XIX & E & \color{Red} Non. & 5 & & \color{Red} \\
@@ -1267,7 +1439,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
  & C & \color{Red} IX & 24 & & \color{Red} \\
 \color{Red} IX & D & \color{Red} VIII & 25 & Conversio Sancti Pauli. Semid. \\
 & E & \color{Red} VII & 26 & & \color{Red} \\
-\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Juliani Episcopi et Conf. Mem. \\
+\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Conf. Mem. \\
 \color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. \\
  &  & & & \qquad Claves XL. \\
  & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
@@ -1290,7 +1462,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \color{Red} XIX & F & \color{Red} III & 3 & \color{Red} Blasii Episcopi et Martyris. III. Lect. \\
 \color{Red} VIII & G & \color{Red} II & 4 & Anniversarium Patrum et Matrum. \\
  & \color{Red} A & \color{Red} Non. & 5 & \color{Red} Agathe Virginis et Mart. Simplex. \\
-\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Epis. Memor. \\
+\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Epis. Memoria. \\
 \color{Red} V & C & \color{Red} VII & 7 & \\
 \color{Red}  & D & \color{Red} VI & 8 & \qquad \color{Red} Initium. XL. \\
 \color{Red} XIII & E & \color{Red} V & 9 & & \color{Red} \\
@@ -1417,11 +1589,11 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apos. Semid. \\
 \color{Red}  & C & \color{Red} VI & 2 & \\
 \color{Red} XIX & D & \color{Red} V & 3 & Inventio Sancte Crucis. Semid. \\
- &  &  &  & \multicolumn{2}{l}{\quad Alexandri Evencii, et Theodoli.} \\
+ &  &  &  & \multicolumn{2}{l}{\quad Alexandri Eventii, et Theodoli.} \\
  &  &  &  & \quad \color{Red} Martyrum. \color{black} Mem. \\
 \color{Red} VIII & E & \color{Red} IIII & 4 & Festum Corone Domini. Simplex. & \color{Red} \\
 \color{Red}  & F & \color{Red} III & 5 & & \color{Red} \\
-\color{Red} XVI & G & \color{Red} II & 6 & \color{Red} Iohannis Ante Portam Lati. Semid. \\
+\color{Red} XVI & G & \color{Red} II & 6 & \color{Red} Iohannis Ante Portam Latinam. Semid. \\
 \color{Red} V & \color{Red} A & \color{Red} Non. & 7 & & \color{Red} \\
 \color{Red}  & B & \color{Red} VIII & 8 & & \color{Red} \\
 \color{Red} XIII & C & \color{Red} VII & 9 & & \color{Red} \\
@@ -1474,8 +1646,8 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
  &  &  &  & \quad \color{Red} Nazarii, Martyrum. III. Lect. \\
 \color{Red} VII & C & \color{Red} Idus & 13 & & \color{Red} \\
 \color{Red}  & D & \color{Red} XVIII & 14 & \qquad Solsticium Estivale. \color{Red} \\
-\color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modest Martyrum. Mem. \\
-\color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulice Martyrum. Mem. \\
+\color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modesti Martyrum. Mem. \\
+\color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulite Martyrum. Mem. \\
 \color{Red}  & G & \color{Red} XV & 17 & \qquad Sol in Cancio. \color{Red} \\
 \color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Mart. III. Lect. \\
 \color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii Mart. Simplex. \\
@@ -1548,7 +1720,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
 \color{Red} VIII & C & \textbf{\color{Red} K\color{Blue}L} & 1 & Ad Vincula Sancti Petri. Simplex. & \color{Red} \\
- &  & &  & \multicolumn{2}{l}{\qquad S. Machabeorum Mart. Mem. \color{Red}} \\
+ &  & &  & \multicolumn{2}{l}{\quad S. Machabeorum Mart. Mem. \color{Red}} \\
 \color{Red} XVI & D & \color{Red} IIII & 2 & \color{Red} Stephani Pape et Martyris. III. Lect. \\
 \color{Red} V & E & \color{Red} III & 3 & \color{Red} Inventio Sancti Stephani. Simplex. \\
 \color{Red}  & F & \color{Red} II & 4 & & \color{Red} \\
@@ -1600,9 +1772,9 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \color{Red} V & G & \color{Red} IIII & 2 & \qquad \color{Red} Incipit. II. Embolismus. \\
 \color{Red}  & \color{Red} A & \color{Red} III & 3 & & \color{Red} \\
 \color{Red} XIII & B & \color{Red} II & 4 & Octava Sancti Augustini. Simplex. & \color{Red} \\
-& & & & \qquad Marcelli Martyris. Mem. \\
+& & & & \quad Marcelli Martyris. Mem. \\
 \color{Red} II & C & \color{Red} Non. & 5 & Anniversarium Familiarium et & \color{Red} \\
-& & & & \qquad Benefactorum Ordinis Nostri. \\
+& & & & \quad Benefactorum Ordinis Nostri. \\
 \color{Red}  & D & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} X & E & \color{Red} VII & 7 & & \color{Red} \\
 \color{Red}  & F & \color{Red} VI & 8 & \multicolumn{2}{l}{\color{Red} Nativitas S. Marie Virg. Tot. Dup.} \\
@@ -1698,7 +1870,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \color{Red} X & \color{Red} A & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red}  & B & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} XVIII & C & \color{Red} VII & 7 & & \color{Red} \\
-\color{Red} VII & D & \color{Red} VI & 8 & XL. Coronatorum Mart. III. Lect. & \color{Red} \\
+\color{Red} VII & D & \color{Red} VI & 8 & IV. Coronatorum Mart. III. Lect. & \color{Red} \\
 \color{Red}  & E & \color{Red} V & 9 & Theodori Martyris. III. Lect. & \color{Red} \\
 \color{Red} XV & F & \color{Red} IIII & 10 & & \color{Red} \\
 \color{Red} IIII & G & \color{Red} III & 11 & \multicolumn{2}{l}{\color{Red} Martini Episcopi et Conf. Semid. } \\
@@ -1747,7 +1919,7 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 \color{Red} IIII & \color{Red} A & \color{Red} IIII & 10 &  & \color{Red} \\
 \color{Red}  & B & \color{Red} III & 11 & Damasi Pape et Confess. Mem. & \color{Red} \\
 \color{Red} XII & C & \color{Red} II & 12 &  & \color{Red} \\
-\color{Red} I & D & \color{Red} Idus & 13 & Luce Virginis et Martyris. Simplex. & \color{Red} \\
+\color{Red} I & D & \color{Red} Idus & 13 & Lucie Virginis et Martyris. Simplex. & \color{Red} \\
 \color{Red}  & E & \color{Red} XIX & 14 &  & \color{Red} \\
 \color{Red} IX & F & \color{Red} XVIII & 15 & \qquad \color{Red} Solsticium Hyemale. \\
 \color{Red}  & G & \color{Red} XVII & 16 & & \color{Red} \\
@@ -1773,7 +1945,58 @@ includefoot            % Keeps the footer inside the 0.4in bottom safety zone
 
 \input{collectarium_rubrice}
 
+\begin{center}
+\vspace{+18em}
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont B
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont C
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont D
+% \end{center}
+% \clearpage
+% \begin{center}
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont E
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont F%a lamp
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont G
+\newline
+\fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont H%top half
+\newline
+\fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont I%bottom half
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont J% a line
+\end{center}
+
 \input{main_humbert}
+
+\begin{center}
+\vspace{+10em}
+% \newline
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont B
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont C
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont D
+% \end{center}
+% \clearpage
+% \begin{center}
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont E
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont F%a lamp
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont G
+\newline
+\fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont H%top half
+\newline
+\fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont I%bottom half
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont J% a line
+\end{center}
 
 \backmatter
 

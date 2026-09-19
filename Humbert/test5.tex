@@ -1,0 +1,253 @@
+\documentclass[9pt]{article}
+
+\usepackage{geometry}
+\geometry{
+	paperwidth=5.0in,
+	paperheight=7.5in,% Could be taller, 7.75
+	twoside,
+	inner=0.765in,
+	outer=0.30in,
+	top=0.28in,
+	bottom=0.2in,
+	% includehead,
+	nomarginpar,
+    % footskip=14pt,
+% includehead,           % Keeps the tall header inside the 0.45in top safety zone
+includefoot            % Keeps the footer inside the 0.4in bottom safety zone
+}
+\usepackage[svgnames, x11names]{xcolor}
+\usepackage{lettrine}
+\usepackage{multicol}
+\usepackage{microtype}
+\usepackage{fontspec}
+\setmainfont{Merriweather}[
+	SmallCapsFeatures={Ligatures=NoCommon}
+]
+\usepackage{soul}
+\makeatletter
+\def\SOUL@uldepth{.8pt}	% Adjust this value as needed
+\makeatother
+
+% Save the original macro
+\let\oldlettrine\lettrine
+
+% Override \lettrine to protect only lettrine-initiated paragraphs
+\renewcommand{\lettrine}[3][]{%
+	\clubpenalty=10000
+	% Prevent page break after 1st and 2nd lines of THIS paragraph only:
+	% \clubpenalties 3 10000 10000 150\relax
+	\oldlettrine[#1]{#2}{#3}%
+}
+
+% Custom Lettrine Font
+\renewcommand{\LettrineFontHook}{\fontspec{Aneirin}}
+
+% ==============================================================================
+% DESCRIPTIVE CUSTOM COLOR DEFINITIONS
+% ==============================================================================
+
+% Custom Reds & Oranges
+\definecolor{kdpDeepCrimson}{HTML}{8B263E}        % Deep Muted Crimson
+\definecolor{kdpMutedBrick}{HTML}{A63A3A}         % Muted Brick Red
+\definecolor{kdpDensityOrangeRed}{HTML}{D92B00}   % High-Density Orange-Red
+\definecolor{kdpVibrantOrangeRed}{RGB}{245, 30, 2} % Vibrant DVIPS Replica Orange-Red
+\definecolor{kdpWarmCrimson}{RGB}{237, 16, 89}    % DVIPS Warm Magenta-Crimson Blend
+\definecolor{kdpFieryPureRed}{HTML}{E60000}       % Fiery High-Luminance Red
+\definecolor{kdpHighPopOrange}{HTML}{FF3300}      % High-Pop Orange-Red
+\definecolor{kdpPureCadmiumRed}{HTML}{D00000}     % Balanced Pure Cadmium Red
+\definecolor{kdpBrightScarlet}{HTML}{FF2400}      % High-Impact Scarlet Red
+\definecolor{kdpRichCarmine}{HTML}{960018}        % High-Density Deep Carmine
+\definecolor{kdpCoolRuby}{HTML}{9B111E}           % Cool-Tone Pure Ruby
+\definecolor{kdpSinglePassFire}{HTML}{E50914}     % Vibrant Solid Fire Red
+\definecolor{kdpCalibratedPrimaryRed}{HTML}{EE1C25}% Standard Primary Red Calibration
+
+% NEW: Warm Crimsons Bordering Hot Pink
+\definecolor{kdpVibrantMagentaCrimson}{HTML}{E0115F} % Ruby-Magenta Pure Crimson
+\definecolor{kdpHotRaspberryCrimson}{HTML}{DE3163} % Warm Raspberry Pop
+\definecolor{kdpSaturatedCerise}{HTML}{DE004E}     % Deep Saturated Cerise
+\definecolor{kdpElectricRoseCrimson}{HTML}{F00056}  % Electric Rose-Red Blend
+\definecolor{kdpFieryFuchsiaCrimson}{HTML}{E30B5C} % High-Luminance Fuchsia Crimson
+\definecolor{kdpVividWarmCarmine}{HTML}{D10047}     % High-Impact Warm Carmine
+\definecolor{kdpNeonCrimsonPink}{HTML}{FF0055}     % Borderline Hot Pink Punch
+\definecolor{kdpDeepShockingCrimson}{HTML}{C70039} % Deep Rich Magenta-Red
+
+% Custom Blues
+\definecolor{kdpDeepSlateNavy}{HTML}{1F3A52}      % Deep Slate Navy
+\definecolor{kdpMutedSteelBlue}{HTML}{3B6E8C}     % Muted Steel Blue
+\definecolor{kdpDarkSlateBlue}{RGB}{0,102,147}    % DVIPS Midnight Dark Slate Blue
+\definecolor{kdpElectricBlue}{HTML}{0055FF}       % Electric High-Luminance Blue
+\definecolor{kdpHighLuminanceCobalt}{HTML}{0066EE}% High-Luminance Cobalt Blue
+\definecolor{kdpPureCobaltBlue}{HTML}{0047AB}     % Pure Cobalt True Blue
+\definecolor{kdpCyanProtectedRoyal}{HTML}{0038A8} % Anti-Purple Royal Blue
+\definecolor{kdpVibrantElectricBlue}{HTML}{0052D4}% High-Vibrancy Electric Blue
+\definecolor{kdpRichSapphire}{HTML}{0F52BA}       % Rich Pure Sapphire
+\definecolor{kdpDarkClassicBlue}{HTML}{0F4C81}    % Dark Solid Classic Blue
+\definecolor{kdpBalancedMediumBlue}{HTML}{0066CC}  % Balanced Primary Medium Blue
+
+\pagestyle{empty} 
+\setlength{\columnsep}{10pt}
+
+\begin{document}
+
+% ==============================================================================
+% MULTI-COLUMN DROP CAP & TEXT TESTS (2 COLUMNS: REDS LEFT, BLUES RIGHT)
+% ==============================================================================
+\begin{multicols}{2}
+
+% --- STRICT REDS SECTION ---
+% \subsubsection*{\small Pure Reds \& Oranges}
+
+\lettrine[lines=2]{\textcolor{kdpDeepCrimson}{C}}{rimson} (\#8B263E). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDeepCrimson}{C}}olored initial inline test. \setulcolor{kdpDeepCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDeepCrimson}{Double length inline sentence in kdpDeepCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpMutedBrick}{B}}{rick} (\#A63A3A). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpMutedBrick}{B}}olored initial inline test. \setulcolor{kdpMutedBrick}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpMutedBrick}{Double length inline sentence in kdpMutedBrick to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{DarkRed}{D}}{arkRed} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{DarkRed}{D}}olored initial inline test. \setulcolor{DarkRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{DarkRed}{Double length inline sentence in DarkRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{IndianRed4}{I}}{ndian} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with an \textbf{\textcolor{IndianRed4}{I}}nitial inline test. \setulcolor{IndianRed4}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{IndianRed4}{Double length inline sentence in IndianRed4 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpFieryPureRed}{R}}{ed} (\#E60000). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpFieryPureRed}{R}}ed initial inline test. \setulcolor{kdpFieryPureRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpFieryPureRed}{Double length inline sentence in kdpFieryPureRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpHighPopOrange}{O}}{range} (\#FF3300). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with an \textbf{\textcolor{kdpHighPopOrange}{O}}range initial inline test. \setulcolor{kdpHighPopOrange}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpHighPopOrange}{Double length inline sentence in kdpHighPopOrange to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{OrangeRed}{S}}{vgOrg} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with an \textbf{\textcolor{OrangeRed}{O}}range initial inline test. \setulcolor{OrangeRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{OrangeRed}{Double length inline sentence in OrangeRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Tomato}{T}}{omato} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Tomato}{T}}omato initial inline test. \setulcolor{Tomato}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Tomato}{Double length inline sentence in Tomato to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Red2}{R}}{ed2} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Red2}{R}}ed initial inline test. \setulcolor{Red2}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Red2}{Double length inline sentence in Red2 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpVibrantOrangeRed}{D}}{vips} (RGB). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpVibrantOrangeRed}{D}}vips initial inline test. \setulcolor{kdpVibrantOrangeRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpVibrantOrangeRed}{Double length inline sentence in kdpVibrantOrangeRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpDensityOrangeRed}{K}}{dpOrg} (\#D92B00). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDensityOrangeRed}{K}}dpOrg initial inline test. \setulcolor{kdpDensityOrangeRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDensityOrangeRed}{Double length inline sentence in kdpDensityOrangeRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpWarmCrimson}{W}}{armC} (RGB). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpWarmCrimson}{W}}arm initial inline test. \setulcolor{kdpWarmCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpWarmCrimson}{Double length inline sentence in kdpWarmCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpVibrantMagentaCrimson}{V}}{ibMag} (\#E0115F). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpVibrantMagentaCrimson}{V}}ibrant initial inline test. \setulcolor{kdpVibrantMagentaCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpVibrantMagentaCrimson}{Double length inline sentence in kdpVibrantMagentaCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpHotRaspberryCrimson}{H}}{otRsp} (\#DE3163). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpHotRaspberryCrimson}{H}}ot initial inline test. \setulcolor{kdpHotRaspberryCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpHotRaspberryCrimson}{Double length inline sentence in kdpHotRaspberryCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpSaturatedCerise}{S}}{atCer} (\#DE004E). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpSaturatedCerise}{S}}aturated initial inline test. \setulcolor{kdpSaturatedCerise}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpSaturatedCerise}{Double length inline sentence in kdpSaturatedCerise to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpElectricRoseCrimson}{E}}{lecRs} (\#F00056). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with an \textbf{\textcolor{kdpElectricRoseCrimson}{E}}lectric initial inline test. \setulcolor{kdpElectricRoseCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpElectricRoseCrimson}{Double length inline sentence in kdpElectricRoseCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpFieryFuchsiaCrimson}{F}}{irFch} (\#E30B5C). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpFieryFuchsiaCrimson}{F}}iery initial inline test. \setulcolor{kdpFieryFuchsiaCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpFieryFuchsiaCrimson}{Double length inline sentence in kdpFieryFuchsiaCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpVividWarmCarmine}{V}}{ivCar} (\#D10047). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpVividWarmCarmine}{V}}ivid initial inline test. \setulcolor{kdpVividWarmCarmine}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpVividWarmCarmine}{Double length inline sentence in kdpVividWarmCarmine to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpNeonCrimsonPink}{N}}{eoPnk} (\#FF0055). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpNeonCrimsonPink}{N}}eon initial inline test. \setulcolor{kdpNeonCrimsonPink}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpNeonCrimsonPink}{Double length inline sentence in kdpNeonCrimsonPink to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpDeepShockingCrimson}{D}}{epShk} (\#C70039). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDeepShockingCrimson}{D}}eep initial inline test. \setulcolor{kdpDeepShockingCrimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDeepShockingCrimson}{Double length inline sentence in kdpDeepShockingCrimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpPureCadmiumRed}{P}}{ureR} (\#D00000). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpPureCadmiumRed}{P}}ure initial inline test. \setulcolor{kdpPureCadmiumRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpPureCadmiumRed}{Double length inline sentence in kdpPureCadmiumRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpBrightScarlet}{S}}{carl} (\#FF2400). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpBrightScarlet}{S}}carlet initial inline test. \setulcolor{kdpBrightScarlet}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpBrightScarlet}{Double length inline sentence in kdpBrightScarlet to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpRichCarmine}{C}}{armn} (\#960018). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpRichCarmine}{C}}armine initial inline test. \setulcolor{kdpRichCarmine}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpRichCarmine}{Double length inline sentence in kdpRichCarmine to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpCoolRuby}{R}}{uby} (\#9B111E). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpCoolRuby}{R}}uby initial inline test. \setulcolor{kdpCoolRuby}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpCoolRuby}{Double length inline sentence in kdpCoolRuby to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpSinglePassFire}{F}}{ire} (\#E50914). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpSinglePassFire}{F}}ire initial inline test. \setulcolor{kdpSinglePassFire}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpSinglePassFire}{Double length inline sentence in kdpSinglePassFire to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpCalibratedPrimaryRed}{P}}{rimR} (\#EE1C25). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpCalibratedPrimaryRed}{P}}rimary initial inline test. \setulcolor{kdpCalibratedPrimaryRed}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpCalibratedPrimaryRed}{Double length inline sentence in kdpCalibratedPrimaryRed to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{FireBrick}{F}}{ireB} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{FireBrick}{F}}ireBrick initial inline test. \setulcolor{FireBrick}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{FireBrick}{Double length inline sentence in FireBrick to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Crimson}{C}}{rmsn} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Crimson}{C}}rimson initial inline test. \setulcolor{Crimson}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Crimson}{Double length inline sentence in Crimson to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Red3}{R}}{ed3} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Red3}{R}}ed initial inline test. \setulcolor{Red3}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Red3}{Double length inline sentence in Red3 to test color edge sharpness and haloing.}
+\medskip
+
+% --- STRICT BLUES SECTION ---
+% \columnbreak
+% \subsubsection*{\small Pure Blues}
+
+\lettrine[lines=2]{\textcolor{kdpDeepSlateNavy}{N}}{avy} (\#1F3A52). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDeepSlateNavy}{N}}avy initial inline test. \setulcolor{kdpDeepSlateNavy}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDeepSlateNavy}{Double length inline sentence in kdpDeepSlateNavy to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpMutedSteelBlue}{S}}{teel} (\#3B6E8C). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpMutedSteelBlue}{S}}teel initial inline test. \setulcolor{kdpMutedSteelBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpMutedSteelBlue}{Double length inline sentence in kdpMutedSteelBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{SteelBlue}{S}}{vgStl} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{SteelBlue}{S}}teel initial inline test. \setulcolor{SteelBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{SteelBlue}{Double length inline sentence in SteelBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{DeepSkyBlue4}{D}}{eep} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{DeepSkyBlue4}{D}}eep initial inline test. \setulcolor{DeepSkyBlue4}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{DeepSkyBlue4}{Double length inline sentence in DeepSkyBlue4 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpDarkSlateBlue}{M}}{idnt} (RGB). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDarkSlateBlue}{M}}idnight initial inline test. \setulcolor{kdpDarkSlateBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDarkSlateBlue}{Double length inline sentence in kdpDarkSlateBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpElectricBlue}{B}}{lue} (\#0055FF). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpElectricBlue}{B}}lue initial inline test. \setulcolor{kdpElectricBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpElectricBlue}{Double length inline sentence in kdpElectricBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpHighLuminanceCobalt}{C}}{obalt} (\#0066EE). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpHighLuminanceCobalt}{C}}obalt initial inline test. \setulcolor{kdpHighLuminanceCobalt}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpHighLuminanceCobalt}{Double length inline sentence in kdpHighLuminanceCobalt to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpPureCobaltBlue}{T}}{rueB} (\#0047AB). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpPureCobaltBlue}{T}}rue initial inline test. \setulcolor{kdpPureCobaltBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpPureCobaltBlue}{Double length inline sentence in kdpPureCobaltBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpCyanProtectedRoyal}{R}}{ylB} (\#0038A8). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpCyanProtectedRoyal}{R}}oyal initial inline test. \setulcolor{kdpCyanProtectedRoyal}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpCyanProtectedRoyal}{Double length inline sentence in kdpCyanProtectedRoyal to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpVibrantElectricBlue}{U}}{ltB} (\#0052D4). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with an \textbf{\textcolor{kdpVibrantElectricBlue}{U}}ltra initial inline test. \setulcolor{kdpVibrantElectricBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpVibrantElectricBlue}{Double length inline sentence in kdpVibrantElectricBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpRichSapphire}{S}}{pph} (\#0F52BA). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpRichSapphire}{S}}apphire initial inline test. \setulcolor{kdpRichSapphire}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpRichSapphire}{Double length inline sentence in kdpRichSapphire to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpDarkClassicBlue}{C}}{lssB} (\#0F4C81). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpDarkClassicBlue}{C}}lassic initial inline test. \setulcolor{kdpDarkClassicBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpDarkClassicBlue}{Double length inline sentence in kdpDarkClassicBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{kdpBalancedMediumBlue}{P}}{rmB} (\#0066CC). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{kdpBalancedMediumBlue}{P}}rimary initial inline test. \setulcolor{kdpBalancedMediumBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{kdpBalancedMediumBlue}{Double length inline sentence in kdpBalancedMediumBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{RoyalBlue}{R}}{ylS} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{RoyalBlue}{R}}oyal initial inline test. \setulcolor{RoyalBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{RoyalBlue}{Double length inline sentence in RoyalBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{MediumBlue}{M}}{edB} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{MediumBlue}{M}}edium initial inline test. \setulcolor{MediumBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{MediumBlue}{Double length inline sentence in MediumBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{DodgerBlue}{D}}{dgB} (svg). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{DodgerBlue}{D}}odger initial inline test. \setulcolor{DodgerBlue}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{DodgerBlue}{Double length inline sentence in DodgerBlue to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{RoyalBlue3}{R}}{Bl3} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{RoyalBlue3}{R}}oyal initial inline test. \setulcolor{RoyalBlue3}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{RoyalBlue3}{Double length inline sentence in RoyalBlue3 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{DodgerBlue3}{D}}{Bl3} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{DodgerBlue3}{D}}odger initial inline test. \setulcolor{DodgerBlue3}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{DodgerBlue3}{Double length inline sentence in DodgerBlue3 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Blue2}{B}}{lu2} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Blue2}{B}}lue initial inline test. \setulcolor{Blue2}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Blue2}{Double length inline sentence in Blue2 to test color edge sharpness and haloing.}
+\medskip
+
+\lettrine[lines=2]{\textcolor{Blue3}{B}}{lu3} (x11). Extended standard black text line designed to evaluate paper opacity and ink density contrast. Black line continues here with a \textbf{\textcolor{Blue3}{B}}lue initial inline test. \setulcolor{Blue3}\ul{Underlined sentence testing soul package underline contrast.} \textcolor{Blue3}{Double length inline sentence in Blue3 to test color edge sharpness and haloing.}
+
+\end{multicols}
+
+
+\end{document}

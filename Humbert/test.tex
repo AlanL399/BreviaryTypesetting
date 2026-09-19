@@ -1,0 +1,27 @@
+\documentclass[openany]{book}
+
+\usepackage[english, french]{babel}
+\usepackage{fontspec}
+\usepackage{paracol} % Modern, simple parallel columns
+
+% Set the dividing line thickness and column spacing
+\setlength{\columnseprule}{0.4pt} % Thickness of the vertical line
+\setlength{\columnsep}{2em}       % Total space between text columns
+
+\begin{document}
+
+\chapter{Parallel Demonstration}
+
+\begin{paracol}{2}
+  \selectlanguage{french}
+  Ceci est un exemple de texte en français. Le package \texttt{paracol} 
+  permet d'aligner les paragraphes côte à côte de manière fluide.
+
+  \switchcolumn % Switch to the right column
+
+  \selectlanguage{english}
+  This is an example of text in English. The \texttt{paracol} package 
+  allows paragraphs to be aligned side by side seamlessly.
+\end{paracol}
+
+\end{document}

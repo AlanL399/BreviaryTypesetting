@@ -1,0 +1,1836 @@
+\documentclass[openany]{book}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[dvipsnames]{xcolor}
+% \usepackage{graphicx}
+\usepackage{geometry}
+\geometry{
+% Try these
+	paperwidth=5.0in,
+	paperheight=7.5in,% Could be taller, 7.75
+	twoside,
+	%
+	% --- HORIZONTAL MARGINS ---
+	% KDP minimum for a ~500 page book is 0.625in.
+	% We use 0.65in to protect the text from disappearing into the deep glue spine.
+	% inner=0.65in,
+	% inner=0.75in,
+	inner=0.765in,
+	% inner=0.85in,
+	% KDP minimum is 0.25in. We use 0.3in to give the text a beautiful,
+	% balanced frame on the wider 5.0" page.
+	outer=0.30in,
+	%
+	% --- VERTICAL MARGINS ---
+	% Since you removed the tall header, 0.35in is tight, clean, and safe.
+	% top=0.35in,
+	top=0.28in,
+	% Gives your footer page number breathing room above the 0.25" KDP cutting floor.
+	% bottom=0.35in,
+	% bottom=0.28in,
+	% bottom=0.26in,
+	% bottom=0.25in,
+	bottom=0.2in,
+	%
+	% --- MEASUREMENT OVERRIDES ---
+	% Tells geometry to compute margins from the top of the actual header line
+	includehead,
+	nomarginpar,
+    % Explicitly tightens the gap between text baseline and the page number
+    footskip=14pt,
+    % footskip=18.5pt,
+includehead,           % Keeps the tall header inside the 0.45in top safety zone
+includefoot            % Keeps the footer inside the 0.4in bottom safety zone
+}
+% \usepackage{xparse}
+\usepackage{titling}
+\usepackage{lettrine}
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage{titlesec}
+\usepackage{soul}
+\usepackage{enumitem}
+% \usepackage{pifont}
+\usepackage{gregoriosyms}
+% \usepackage{etoolbox}
+\usepackage{xstring}% For string manipulation
+\usepackage{fancyhdr}
+\usepackage{setspace}
+% \usepackage{lua-widow-control}
+\usepackage{fontspec}
+% \setmainfont{Georgia}
+% \setmainfont{Times New Roman}
+% \setmainfont{Libre Caslon Text}
+% \setmainfont{Charis}
+\setmainfont{Merriweather}[
+	SmallCapsFeatures={Ligatures=NoCommon}
+]
+% \setmainfont{Libertinus Serif}
+% \setmainfont{Gentium}% 93% of Charis, thinner
+% \setmainfont{Source Serif 4 Regular}% too wide
+% \setmainfont{EB Garamond}% Too thin
+% \setmainfont{Junicode}
+% [
+	% Width=SemiCondensed, % or Condensed if desperate
+	% Ligatures={Common, Rare, Historic}, % Turn on the medieval ligatures
+	% Numbers=OldStyle
+% ]
+% \usepackage{lua-ul}
+% \usepackage{luacolor}
+\usepackage[latin,english]{babel}
+\babelprovide[hyphenrules=latin]{latin}
+% \usepackage{polyglossia}
+% \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
+\usepackage[titles]{tocloft}
+% \usepackage{imakeidx}
+
+% Indices setup code
+% \indexsetup{
+	% level=\section*,
+	% toclevel=section,
+	% noclearpage,
+    % othercode={%
+		% \footnotesize\thispagestyle{empty}
+		% \setlength{\leftskip}{0pt}% This forces the index entries to start at the absolute edge of the column
+		% \everypar{\hangindent=1em \hangafter=1}% Adjust this if you want a hanging indent for long entries
+    % }
+% }
+
+% \makeindex[name=H, title=Index Hymnorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+% \makeindex[name=R, title=Index Responsoriorum, columns=2, columnseprule, columnsep=0.1in]
+% \makeindex[name=S, title=Index Responsoriorum Breve, columns=2, columnseprule, columnsep=0.1in]
+% \makeindex[name=P, title=Index Psalmorum et Canticorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+% \makeindex[name=I, title=Index Invitatorium, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+
+% \newcommand{\cprintindex}[2]{%
+    % #1 = index name (e.g., P, H, R)
+    % #2 = display title (e.g., Index Psalmorum et Canticorum)
+    % \phantomsection%
+    % \addcontentsline{toc}{section}{#2}%
+    % \hypertarget{#2}{}%
+    % \renewcommand{\rightmark}{#2}%
+    % \printindex[#1]%
+% }
+
+\usepackage[final]{microtype}
+
+% \microtypecontext{spacing=nonfrench} % Slightly expands text spacing
+\SetProtrusion{encoding=*,family=*}{. = {,500}}
+\SetExpansion{encoding=*,family=*}{A = 500}
+\SetExtraKerning[unit=space]{encoding={*},family={*}}{
+  \textquoteleft = {500, }, % adjust quotes
+  : = {100,100}
+}
+
+% https://tug.org/FontCatalogue/otherfonts.html#initials
+% \usepackage{Acorn}% humanist
+% \usepackage{AnnSton}% not appropriate
+% \usepackage{ArtNouv}% more gothic
+% \usepackage{ArtNouvc}% not appropriate
+% \usepackage{Carrickc}% not medieval
+% \usepackage{Eichenla}
+% \usepackage{Eileen}% same as EileenBl but inverted, white lettering
+% \usepackage{EileenBl}% identical to Romantik except for more spacing
+% \usepackage{Elzevier}% humanist, very thin
+% \usepackage{GotIn}% gothic blackletter
+% \usepackage{GoudyIn}% humanist
+% \usepackage{Kinigcap}% not appropriate
+% \usepackage{Konanur}% not appropriate
+% \usepackage{Kramer}% too modern block
+% \usepackage{MorrisIn}% identical to Eichenla but slightly larger and rougher leaves
+% \usepackage{Nouveaud}% too square
+% \usepackage{Romantik}
+% \usepackage{Rothdn}% looks like yfonts yinipar
+% \usepackage{Royal}% gothic blackletter
+% \usepackage{Sanremo}% not appropriate
+% \usepackage{Starburst}% not appropriate
+% \usepackage{Typocaps}% not appropriate
+% \usepackage{Zallman}% humanist
+% \input{Zallman.fd}
+% \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
+% \newcommand*\zallmancaps{\usefont{TU}{Georgia}{b}{n}}
+% third is ul/xl/l/m/sb/b/eb/bx fourth is n/it/sl/sc
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Libre Caslon Text}}
+\newcommand*\zallmancaps{\fontspec[Weight=Bold]{Merriweather}}
+% \newcommand*\zallmancaps{\fontspec[Weight=700]{Georgia}}
+% [Instance=Condensed Bold] % Name of size
+% 300 = Light; 400 = Regular; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black
+
+% Automatically use zallmancaps in lettrine
+% \renewcommand{\LettrineFontHook}{\zallmancaps}
+
+% Adjust font spacing
+\AtBeginEnvironment{multicols}{%
+% \BeforeBeginEnvironment{multicols}{%
+	% \hyphenpenalty=50
+	% lower it
+	\hyphenpenalty=20
+	% \tolerance=200
+	% increase it, but not noticeable here
+	% \tolerance=500
+	% shoudnt it be decreased?
+	% \tolerance=50
+	% \pretolerance=100
+	% lower it to increase hyphens; increase to allow for wider gaps
+	% \pretolerance=50
+	% \emergencystretch=0pt
+	% increase it
+	% \emergencystretch=3em
+	% Doesnt seem to make a difference
+	% \sloppy
+	\emergencystretch=1em  % Allow some stretch
+	\hfuzz=0.5pt          % Don't complain about small overfulls
+    \raggedcolumns  % Instead of balanced columns
+    \widowpenalty=10000  
+    \brokenpenalty=4991
+    \predisplaypenalty=10000
+    \postdisplaypenalty=1549
+    \displaywidowpenalty=1602
+}
+
+% Resolves hanging lettrine
+% \clubpenalty=10000
+% \widowpenalty=10000
+
+% Syntax: <number of rules> <penalty after line 1> <penalty after line 2> <default penalty>
+% \clubpenalties 3 10000 10000 150
+
+% Save the original macro
+\let\oldlettrine\lettrine
+
+% Override \lettrine to protect only lettrine-initiated paragraphs
+\renewcommand{\lettrine}[3][]{%
+	\clubpenalty=10000
+	% Prevent page break after 1st and 2nd lines of THIS paragraph only:
+	% \clubpenalties 3 10000 10000 150\relax
+	\oldlettrine[#1]{#2}{#3}%
+}
+
+% Adjust font spacing
+\AtBeginEnvironment{paracol}{%
+% \BeforeBeginEnvironment{multicols}{%
+	% \hyphenpenalty=50
+	% lower it
+	\hyphenpenalty=20
+	% \tolerance=200
+	% increase it, but not noticeable here
+	% \tolerance=500
+	% shoudnt it be decreased?
+	% \tolerance=50
+	% \pretolerance=100
+	% lower it to increase hyphens; increase to allow for wider gaps
+	% \pretolerance=50
+	% \emergencystretch=0pt
+	% increase it
+	% \emergencystretch=3em
+	% Doesnt seem to make a difference
+	% \sloppy
+	\emergencystretch=1em  % Allow some stretch
+	\hfuzz=0.5pt          % Don't complain about small overfulls
+    \raggedcolumns  % Instead of balanced columns
+    \clubpenalty=10000
+    \widowpenalty=10000  
+    \brokenpenalty=4991
+    \predisplaypenalty=10000
+    \postdisplaypenalty=1549
+    \displaywidowpenalty=1602
+}
+
+% Adjust headheight and topmargin
+% \setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
+% \setlength{\headheight}{32pt} % Set to at least 13.59999pt
+% \addtolength{\topmargin}{-1.6pt} % Adjust topmargin to compensate
+% \addtolength{\topmargin}{-11.6pt} % Adjust topmargin to compensate
+% \addtolength{\topmargin}{-14pt} % Adjust topmargin to compensate
+\setlength{\headsep}{10pt}      % Space between header and text body
+% \setlength{\footskip}{12pt}     % Space between text body and footer
+
+% Reduce padding and whitespace
+\setlength{\parskip}{0.1em} % Reduce space between paragraphs
+\setlength{\parindent}{1em} % Adjust paragraph indentation
+% \setlength{\columnsep}{0.2in} % Adjust the space between columns
+% \setlength{\columnsep}{0.1in} % Reduce space between columns
+% \setlength{\columnsep}{0.08in} % Reduce space between columns
+% \setlength{\columnseprule}{0.4pt} % Add a rule between columns and set its thickness
+
+% Reduce line spacing
+% \setstretch{0.85} % Reduce line spacing slightly; should adjust before publishing
+% \setstretch{0.95} % Reduce line spacing slightly; should adjust before publishing
+
+\makeatletter
+\def\leftmarginnote{%
+	\lrmarginnote{\hskip -\marginparsep \hskip -12.25em}}
+
+\def\rightmarginnote{%
+	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
+
+\long\def\lrmarginnote#1#2{%
+\vadjust{#1%
+\smash{\vtop{{%
+		\hsize\marginparwidth
+        \@parboxrestore
+        \@marginparreset
+		\small
+#2}}}}}
+\makeatother
+
+% \makeatletter
+% \DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+% \DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+% \newcommand{\vers@resp}[2]{%
+  % {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
+% }%
+% \makeatother
+
+% Defined by gregoriosyms
+% \newcommand{\Vbar}{℣}
+% \newcommand{\Rbar}{℟}
+
+\frenchspacing
+
+\def\V{\color{Red}\Vbar. \color{black}}
+\def\R{\color{Red}\Rbar. \color{black}}
+
+\newcommand{\doxology}{%
+	{\bfseries \color{Red} G}lória Patri, et Fílio, et Spirítui Sancto. \\
+	% {\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, et in sécula seculórum. Amen.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+\newcommand{\requiem}{%
+	% Réquiem ætérnam * dona eis, Dómine. \\
+	Réquiem etérnam * dona eis, Dómine. \\
+	Et lux perpétua * lúceat eis.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+\input{psalms}
+
+% Controls how to display Psalms.
+\newcommand{\psalm}[1]{%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% \noindent{\csname psalm#1Incipit\endcsname}.%
+	\noindent{#1, \textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% \csname psalm#1Text\endcsname%
+}
+
+% Controls how to display Psalms.
+\newcommand{\psalmincipit}[1]{%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	\noindent{\csname psalm#1Incipit\endcsname}.%
+	% \noindent{#1, \textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% \csname psalm#1Text\endcsname%
+}
+
+% Define full Psalms with alternately colored, bold firstletters
+\newif\iffirstverse
+
+\newcommand{\fullpsalm}[1]{%
+	% \index[P]{\csname psalm#1Incipit\endcsname}
+	\begingroup % Start local group to limit scope
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{.25em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
+		\newif\ifblue
+		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
+		\newcommand{\processline}[1]{%
+			\StrLeft{##1}{1}[\firstletter]%
+			\StrGobbleLeft{##1}{1}[\restofline]%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{.25em}% Start the new verse
+			\ifblue
+				{\color{Blue}\textbf{\firstletter}}%
+				\bluefalse
+			\else
+				{\color{Red}\textbf{\firstletter}}%
+				\bluetrue
+			\fi
+			\restofline%
+		}
+		\renewcommand{\\}{\processline}
+		\psalmtext
+		\par 
+	\endgroup
+}
+
+\newcommand{\fullpsalmdoxology}[1]{%
+	% \index[P]{\csname psalm#1Incipit\endcsname}
+	\begingroup % Start local group to limit scope
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{.25em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
+		\newif\ifblue
+		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
+		\newcommand{\processline}[1]{%
+			\StrLeft{##1}{1}[\firstletter]%
+			\StrGobbleLeft{##1}{1}[\restofline]%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{.25em}% Start the new verse
+			\ifblue
+				{\color{Blue}\textbf{\firstletter}}%
+				\bluefalse
+			\else
+				{\color{Red}\textbf{\firstletter}}%
+				\bluetrue
+			\fi
+			\restofline%
+		}
+		\renewcommand{\\}{\processline}
+		\psalmtext \\ Glória Patri et Fílio: * et Spirítui Sancto. \\ Sicut erat in princípio et nunc et semper: * et in sécula seculórum. Amen.
+		\par 
+	\endgroup
+}
+
+% Same but full Psalms
+% \newcommand{\fullpsalm}[1]{%
+	% % \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% % \csname psalm#1Text\endcsname% % No indent
+	% \begingroup % Start local group to limit scope
+		% % \setlength{\parindent}{.2em} % Set paragraph indentation
+		% \setlength{\parindent}{.25em} % Set paragraph indentation
+		% % \renewcommand{\\}{\par\hspace*{.1em}} % Redefine \\ to end the line and add indentation
+		% \renewcommand{\\}{\par\hspace*{.25em}} % Redefine \\ to end the line and add indentation
+		% \csname psalm#1Text\endcsname % Display the psalm text
+	% \endgroup % End local group
+% }
+
+% Same but Hymns
+\newcommand{\hymn}[3]{%
+	% \index[H]{#2}
+	\hypertarget{#1}{\label{#1}}
+		\setlength{\parindent}{.25em} % Set paragraph indentation
+		% \setlength{\parindent}{.2em} % Set paragraph indentation
+		% \setlength{\parindent}{1em} % Set paragraph indentation
+	#3 %
+}
+
+% Define the responsory environment
+\NewDocumentEnvironment{responsory}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \parttwo%
+	% \linebreak \R \firstline \ \V \versicle \ \secondword.
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-doxology environment
+\NewDocumentEnvironment{responsory-doxology}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	% \StrBefore{\parttwo}{ }[\secondword]%
+	% Check if \parttwo contains a space.
+	\IfSubStr{\parttwo}{ }{%
+		% If it has a space, just take everything before the space
+		\StrBefore{\parttwo}{ }[\secondword]%
+	}{%
+		% Check if it has a period, and strip it if it does.
+		\IfSubStr{\parttwo}{.}{%
+			\StrBefore{\parttwo}{.}[\secondword]%
+		}{%
+			\let\secondword\parttwo%
+		}%
+	}%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \parttwo \ Gloria Patri et Filio et Spiritui Sancto. \parttwo%
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-final environment allows us to change the word after doxology
+\NewDocumentEnvironment{responsory-final}{O{} m m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-breve environment
+\NewDocumentEnvironment{responsory-breve}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
+	\oldnewline \R \textcolor{Red}{br.} \firstline \ \R \firstword. \V \versicle \ \secondword. Gloria. \firstword.%
+	% \index[S]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Fix invitatory-full
+\def\clearparshape{\parshape=0 \hangindent=0pt \hangafter=1 \relax}
+
+% Define the responsory-breve-full environment
+\NewDocumentEnvironment{responsory-breve-full}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{.25em} % Set paragraph indentation
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
+	\oldnewline \R \textcolor{Red}{br.} \firstline \oldnewline \R \firstline \oldnewline \V \versicle \par \parttwo \par Gloria Patri et Filio et Spiritui Sancto. \oldnewline \R \firstline%
+	% \index[S]{\firstline}
+}{%
+	\aftergroup\clearparshape%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the invitatory environment
+\NewDocumentEnvironment{invitatory}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\space% Adds space
+% The format of the invitatory: firstline or all
+	\firstline
+	% \index[I]{\firstline}
+	% \par \noindent {\color{Red} Invit.} \firstline \\
+	% {\color{Red} Invit.} \firstline
+	% \lettrine[lines=2]{\zallmancaps \color{Red} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	% {\color{Red} Invit.} \firstline \\
+	% \doxology
+	% {\color{Red} Invit.} \parttwo \\
+	% {\color{Red} Invit.} \firstline \\
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the invitatory-full environment
+\NewDocumentEnvironment{invitatory-full}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{.25em} % Set paragraph indentation
+	\renewcommand{\\}{\par\hspace*{.25em}} % Redefine \\ to end the line and add indentation
+% The format of the invitatory: firstline or all
+	% \firstline
+	\par \noindent {\itshape \color{Red} Invitato.} \firstline
+	\newline \R \firstline
+	% {\color{Red} Invit.} \firstline
+	\par \noindent {\itshape \color{Red} Psalmus.}
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte} exultémus Dómino, iubilémus Deo salutári nostro, preoccupémus fáciem eius in confessióne et in psalmis iubilémus ei. \\
+	% \firstword , etc. \\
+	\firstline \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus et rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
+	% \secondword . \\
+	\parttwo \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius, veníte adorémus et procidámus ante Deum, plorémus coram Dómino qui fecit nos, quia ipse est Dóminus Deus noster, nos autem pópulus eius et oves páscue eius. \\
+	% \firstword . \\
+	\firstline \\
+	{\bfseries \color{Red} H}ódie si vocem eius audiéritis nolíte obduráre corda vestra sicut in exacerbatióne secúndum diem temptatiónis in desérto, ubi temptavérunt me patres vestri probavérunt et vidérunt ópera mea. \\
+	% \secondword . \\
+	\parttwo \\
+	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi semper hi errant corde, ipsi vero non cognovérunt vias meas quibus iurávi in ira mea si introíbunt in réquiem meam. \\
+	% \firstword . \\
+	\firstline \\
+	% \doxology \\
+	{\bfseries \color{Red} G}lória Patri et Fílio et Spirítui Sancto. \\
+	{\bfseries \color{Blue} S}icut erat in princípio et nunc et semper et in sécula seculórum. Amen. \\
+	\parttwo \\
+	\firstline%
+	% \secondword . \firstword .%
+}{%
+	\aftergroup\clearparshape%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+
+% Remove space before chapter and section title: left, before, after
+\titlespacing*{\chapter}{0pt}{-45pt}{0pt}
+% \titlespacing*{\section}{0pt}{-5pt}{0pt}
+\titlespacing*{\section}{0pt}{-3pt}{0pt}
+\titlespacing*{\subsection}{0pt}{-1pt}{0pt}
+
+% Adjust section title spacing
+% \titlespacing*{\section}{0pt}{0.25em}{0.25em} % Adjust the spacing before and after section titles
+
+% Define chapter format
+\titleformat{\chapter}[display]
+{\normalfont\bfseries}{}{0pt}{}
+
+% Define the bookmark text for unnumbered chapters
+\newcommand{\ubchapter}[1]{%
+	\chapter*{}
+	\addcontentsline{toc}{chapter}{#1}%
+	\renewcommand{\leftmark}{#1}%
+	\phantomsection%
+	\hypertarget{#1}{}%
+	\vspace{+\baselineskip}% Adjust the value as needed
+}
+
+% Define section format
+\titleformat{\section}
+% {\normalfont\Large\bfseries}{}{0pt}{}
+{\normalfont\bfseries\centering\large\color{Red}}{}{0pt}{}
+
+% Define the bookmark text for unnumbered sections
+\newcommand{\ubsection}[2]{%
+	\section*{#1}%
+	\renewcommand{\rightmark}{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+	\addcontentsline{toc}{section}{#1}%
+	\hypertarget{#2}{}%
+	% \vspace{-\baselineskip}% Adjust the value as needed
+}
+
+% Define subsection format
+\titleformat{\subsection}
+% {\normalfont\large\bfseries}{}{0pt}{}
+% {\normalfont\centering}{}{0pt}{}
+{\normalfont\bfseries\centering\color{Red}}{}{0pt}{}
+
+% Define the bookmark text for unnumbered subsections
+\newcommand{\ubsubsection}[2]{%
+	\subsection*{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+	\addcontentsline{toc}{subsection}{#1}%
+	\hypertarget{#2}{}%
+}
+
+% Define the command for centered subsections, in particular the Kalendar
+\newcommand{\csection}[2]{%
+	\subsection*{\centering\makebox[\linewidth]{\normalfont\Large\bfseries\color{Red} #1}}%
+	{\centering\large #2\par}%
+	\renewcommand{\rightmark}{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+%	\refstepcounter{sectionctr}% Increment the section counter
+	\addcontentsline{toc}{subsection}{#1}%
+%	\hypertarget{\thesectionctr}{}%
+	\hypertarget{#1}{}%
+}
+
+\newcommand{\osection}[1]{%
+	\par\noindent
+	% \refstepcounter{subsection}%
+	\phantomsection
+	\addcontentsline{toc}{section}{#1}%
+	\hypertarget{#1}{}%
+	\renewcommand{\rightmark}{#1}%
+	% \markright{#1}% Updates \rightmark dynamically for headers
+	{\centering\normalfont\Large\bfseries\color{Red} #1\par}%
+	\vspace{-0.5em}%
+}
+
+% Define custom subsection style macro to keep formatting consistent
+\newcommand{\parasubheadingstyle}[1]{%
+	% {\normalfont\large\bfseries\centering\color{Red} #1\par}%
+	% {\normalfont\centering\color{Red} #1\par}%
+	{\normalfont\centering\bfseries \color{Red} #1\par}%
+	\vspace{-\baselineskip}%
+}
+
+% Define \parasubsection{Title 1 (Left/ToC)}{Title 2 (Right)}{Hyperref Label}
+\newcommand{\parasubsection}[3]{%
+	% Synchronize columns and switch to column 0
+	\switchcolumn[0]*
+	% ToC entry and hyperref anchor for Title 1
+	\phantomsection
+	\addcontentsline{toc}{subsection}{#1}%
+	\hypertarget{#3}{}%
+	% Typeset left title in Column 0
+	\parasubheadingstyle{#1}%
+	\vspace{\baselineskip}%
+	% Switch to Column 1 for the right title
+	\switchcolumn
+	\parasubheadingstyle{#2}%
+	\vspace{\baselineskip}%
+	% Synchronize again so subsequent text stays aligned underneath
+	\switchcolumn[0]*
+}
+
+% Clear default fancyhdr settings
+\fancyhead{}
+
+% \fancyhead[C]{\leftmark} % Display chapter in the center
+\fancyhead[RO,LE]{\rightmark}
+% \fancyhead[RE,LO]{S. O. P.}
+\fancyhead[RE,LO]{\leftmark} % Display chapter in the inside
+
+\pagestyle{fancy} % Activate the custom headers and footers
+
+% \renewcommand{\contentsname}{Index}
+
+% Controls the space from the top of the page
+% \setlength{\droptitle}{-1.5in}
+\setlength{\droptitle}{-1in}
+
+\pretitle{\begin{center} \fontsize{48}{52}\selectfont \color{black} O R D O\\ \vspace{+.5em}}
+\title{\mdseries \fontsize{20}{16}\selectfont \color{Red} DIVINI OFFICII RECITANDI \\ \vspace{+.5em}}
+\posttitle{\large \color{black} IUXTA RITUM SACRI ORDINIS FRATRUM \\ \vspace{+.05em}\end{center}}
+% 3
+
+\preauthor{\vspace{-1em} \begin{center} \fontsize{26}{24}\selectfont \color{Blue} P R E D I C A T O R U M \\ \vspace{+.5em}}
+\author{\normalsize \color{black} \mdseries {S}ECUNDUM {L}ITURGIAM {V}ENERABILIS {M}AGISTRI {N}OSTRI \\ \vspace{+.75em}}
+\postauthor{\upshape \fontsize{26}{24}\selectfont \color{Blue} H U M B E R T I\\ \vspace{+.25em}
+D E \ \ R O M A N I S \\ \vspace{+.05em}\end{center}}
+% 4
+
+\predate{\vspace{-1em} \begin{center}
+AD COMPUTUM GREGORIANUM NOVI PASCHALIS ACCOMMODATUS \\ \vspace{+.5em}}
+\date{\large \color{black} \underline{\color{Red} CUM INSTRUCTIONE LINGUA ANGLICANA} \\ \vspace{+.5em}}
+\postdate{\Large \mdseries \color{black} Pro Anno Domini. \color{black} MMXXVII \\ \vspace{+.5em} \end{center}}
+% 3
+
+% For soul package
+\setulcolor{Red}
+
+% Redefine the underline depth to adjust its position
+\makeatletter
+\def\SOUL@uldepth{.8pt}	% Adjust this value as needed
+\makeatother
+
+% For lua-ul underlining
+% \newcommand{\ul}[1]{%
+    % \underLine[color=Red]{#1}%
+% }
+
+% Change behvior of newline
+\let\oldnewline\newline
+% \renewcommand{\newline}{\linebreak}
+% \renewcommand{\newline}{\par \noindent}
+\renewcommand{\newline}{\par}
+
+% Format: \cftsetindents{entry}{indent}{numwidth}
+% \cftsetindents{section}{0.5in}{0.5in}
+\cftsetindents{section}{0in}{0in}
+% \cftsetindents{subsection}{1.0in}{0.5in}
+\cftsetindents{subsection}{.2in}{0in}
+
+% Redefine the plain style so it copies your fancyhdr layout
+\fancypagestyle{plain}{%
+	\fancyhf{} % clear all header and footer fields
+	% \fancyhead[C]{\leftmark} % Display chapter in the center
+	\fancyhead[RO,LE]{\rightmark}
+	% \fancyhead[RE,LO]{S. O. P.}
+	\fancyhead[RE,LO]{\leftmark} % Display chapter in the inside
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+\usepackage{etoolbox}
+
+% This injects a half-inch of vertical space right before the TOC title is printed
+\patchcmd{\tableofcontents}{\contentsname}{\vspace*{0.5in}\contentsname}{}{}
+
+% Page colors
+% \pagecolor[rgb]{0.98,0.94,0.82} % Soft cream
+% \pagecolor[rgb]{0.99,0.95,0.84} % Antique cream, whitest
+% \pagecolor[rgb]{0.93,0.89,0.75} % Warm old paper
+% \pagecolor[rgb]{0.90,0.85,0.70} % Aged book, more yellow than 1906
+% \pagecolor[rgb]{0.85,0.81,0.69} % 1906
+
+% Too bright
+% \pagecolor[rgb]{0.95,0.91,0.80} % 1942
+% \pagecolor[rgb]{1.0,0.98,0.90} % Light parchment
+% \pagecolor[rgb]{0.96,0.96,0.86} % Soft beige
+
+% \colorlet{Red}{black}
+% \colorlet{Blue}{black}
+
+\begin{document}
+
+% Baseline skip is the distance from one line's baseline to the next. It should typically be 1.2 to 1.3 times the font size
+% \fontsize{14pt}{18pt}\selectfont
+% \fontsize{12pt}{16pt}\selectfont % Comparable to Psalterium Tridentinum with Charis
+% \fontsize{11pt}{14pt}\selectfont
+% \fontsize{10pt}{12pt}\selectfont %for Merriweather
+\fontsize{9pt}{11pt}\selectfont %for Merriweather
+
+\frontmatter
+
+\maketitle
+
+\clearpage
+\phantomsection
+\thispagestyle{empty}
+
+
+\vspace{+7em}
+\begin{center}
+\large
+Ordo Divini Officii Recitandi
+\newline Iuxta Ritum Sacri
+\newline Ordinis Fratrum Predicatorum
+\newline Pro Anno Domini. MMXXVII
+\end{center}
+\begin{center}
+
+\end{center}
+\begin{center}
+
+\newline Prepared for \LaTeX \ by \emph{Alan Liang}
+\end{center}
+\begin{center}
+
+\newline Published by \emph{BreviaryTypesetting}
+\end{center}
+\begin{center}
+
+\newline Copyright © 2026 by \emph{BreviaryTypesetting}
+\newline All rights reserved.
+\end{center}
+\begin{center}
+
+
+\newline ISBN: 979-8-171931-98-8
+\end{center}
+\begin{center}
+
+
+This work, including both its liturgical content,
+\newline formatting, and underlying \LaTeX \ source code
+\newline is licensed under the Creative Commons
+\newline Attribution-ShareAlike 4.0 International License
+\newline (CC BY-SA 4.0).
+\end{center}
+\begin{center}
+
+\newline To view a copy of this license, visit:
+\newline https://creativecommons.org/licenses/by-sa/4.0/
+\end{center}
+\begin{center}
+
+You are free to share, adapt, and build
+\newline upon this material for any purpose,
+\newline provided proper attribution is
+\newline given and derivative works are
+\newline distributed under the same license.
+\end{center}
+\begin{center}
+
+\newline The \LaTeX source code and files for this
+\newline work are publicly available and open for
+\newline collaboration on GitHub:
+\newline www.GitHub.com/AlanL399/BreviaryTypesetting
+\end{center}
+\begin{center}
+
+First Edition, 2026
+\end{center}
+
+\phantomsection
+\addcontentsline{toc}{section}{Table of Contents}
+\tableofcontents
+% \thispagestyle{empty}
+% \let\cleardoublepage\clearpage % Suppresses blank page
+
+% \ubchapter{INCIPIT}
+
+% \thispagestyle{fancy}
+
+% \ubsection{Divine Office Responsories}{divine-office-responsories}
+
+% \subsection*{Divine Office Responsories}
+
+% Here is a sample responsory.
+
+% \begin{responsory}[incipit1]
+% {This is the main responsory verse * with a second part.}{This is the versicle.}
+% \end{responsory}
+
+% We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
+
+
+\ubchapter{Front Matter}
+
+\thispagestyle{fancy}
+
+% \selectlanguage{English}
+\selectlanguage{latin}
+
+% \ubsection{Introduction}{}
+
+% \input{preface}%temp?
+
+% \input{introduction}%temp?
+
+\input{introduction_ordo}
+
+\mainmatter
+
+\selectlanguage{latin}
+
+\newpage
+
+\thispagestyle{fancy}
+
+\ubchapter{English}
+
+\ubsection{Rubrics}{rubrics-ordo}
+
+% Terminology: Three Lessons, Simplex, Semiduplex etc.
+
+\begin{paracol}{2}
+\parasubsection{Martyrology: On the Office of Reading the Calendar, the Moon, the Martyrology, and Other Things Annexed Thereto}{Martyrologium: De Officio Legende De Kalendario et Luna et Martyrologyo et Aliis His Annexis}{martyrologium-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} W}{hile} Psalm \psalm{148} is being said at Matins: the one who is to read the Calendar approaches the prelate, asking him softly: \emph{Chapter?} If he says \emph{No}: the Calendar shall be read in the choir, when Matins is finished. But if he says \emph{After Prime}: then it is to be reserved until Prime. But if he says \emph{Yes}: it shall be read in the chapter house after Matins.
+\newline Therefore, when it is to be read in the chapter house after Matins: when the \emph{Benedictus} is begun, he must ring for chapter, for long enough that the brothers can conveniently notice that it is being rung for chapter. This manner of ringing must always be observed in convoking the chapter. Furthermore, he must prepare the light in the chapter house so carefully that, while chapter is taking place, no one needs to be occupied with it again. He must also provide that rods for disciplines are not lacking. Having prepared the book, the light for himself to read, the tablet for the time, and other things pertaining to his duty: standing before the lectern from which he is to read, while the community enters the chapter house, he should step aside slightly as the prelate passes by out of reverence for him. Then returning to that place, when the community has entered: let him begin to read in a moderate voice what is to be read, according to the manner written below. When everything has been read, the book closed, and other necessary matters briefly dispatched: let him go to his place, and when chapter is finished, return what is to be returned elsewhere.
+\newline When, however, it is reserved until after Prime, while the last psalm is being said at Prime: let the one who is to read approach the prelate, asking him as above. And if he says \emph{Yes}: then let it quickly be rung for chapter before the end of the hour, and let him do everything as above, except regarding the lights, if it is daytime enough that light is not necessary. But if he says \emph{No}: it is to be read in the choir. When it is read in the choir, whether after Matins or after Prime: chapter is not rung, but other things are done in the manner said above, as appropriate.
+% \newline \ul{Regarding the above-mentioned matters: it is to be read thus.}
+% \newline Decimonono Kalendas \ul{or} Sextodecimo Kalendas \ul{or} Pridie Kalendas \ul{or} Kalendis Ianuarii: \ul{or} Quarto Nonas \ul{or} Pridie Nonas \ul{or}  \ul{or} Nonis Ianuarii: \ul{or} Octavo Idus \ul{or} Pridie Idus \ul{or} Idibus Ianuarii: Luna prima, \ul{or} luna sextadecima; \ul{or} tricesima. Rome: via apia: natalis sancti talis et cetera. Et aliorum plurimorum sanctorum: martryum, confessorum, atque virginum. \ul{However, this clause should always be added at the end of the reading from the martyrology. Then, having said the prayer} Dirigere et sanctificare etc: \ul{there follows} Iube domne. \ul{Having given the blessing: there follows the reading from the constitutions, or from the gospel: thus} Secundum Matheum; \ul{or} Secundum Marcum; \ul{or} Secundum Lucam; \ul{or} Secundum Iohannem; \ul{And let all of that which is written below in this book be read from the gospel. At the end of the reading, however, both from the gospel and from the constitutions, let there always be said} Tu autem.
+\newline Regarding the gospel, it is to be read on all Sundays, and on simplex feasts and above. Likewise on the vigil of the Nativity of the Lord, the gospel of the vigil [is read]: whether it falls on a Sunday or not. And on every vigil that has its own office at Mass, if it falls on a Sunday: the gospel of that vigil is to be read, except on the vigil of Saint Andrew when it falls on the First Sunday of Advent: on which the gospel of the Sunday is then to be read. Likewise on the day after Saint Thomas the martyr. Likewise on Ash Wednesday at the beginning of the fast, and on the Maundy Thursday. Likewise on the vigil of Easter, and daily through the Octaves of Easter and Pentecost. Likewise on the commemoration of all the faithful departed. On other days, however, it is to be read from the constitutions. In variations that occur in readings of this kind: the manner noted in the lectionary must be kept.
+\newline Having said therefore \emph{Tu autem} and the response having been made, there follows \emph{Commemoratio fratrum, familiarium, benefactorum, defunctorum: ordinis nostri.}
+\newline If, however, the death of someone is to be recited, or there is an anniversary on the next day: then before saying \emph{Commemoratio} there is to be said \emph{Obiit talis,} or \emph{Anniversarium Patrum et Matrum.}
+% \newline \ul{It is customary for the weekly table to always be read with the Calendar. But the table for other days at the table, or in the choir after grace, having said} Fidelium anime \ul{and} Pater noster, \ul{and with the brothers sitting in their places.}
+
+% \switchcolumn % Switch to the right column
+% 
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{148} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: Capitulum? Qui si dixerit Non: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit Post Primam: tunc reservande sunt usque ad Primam. Si autem dixerit Sic: legende erunt in capitulo post Matutinas.}
+% % \newline \ul{Cum ergo legende erunt in capitulo post matutinas: debet cum incipitur Benedictus pulsare capitulum, tam prolixe quod fratres possint commode advertere quod ad capitulum pulsetur. Qui modus pulsandi, semper est servandus in convocatione capituli. Debet autem lumen in capitulo tam diligenter parare: quod durante capitulo non oporteat circa idem iterum aliquem occupari. Debet etiam providere: ne iurge pro disciplinis desint. Parato autem libro, et lumine pro se ad legendum, et tabula pro tempore, et aliis pertinentibus ad officium suum: stans ante pulpitum in quo debet legere, dum intrat conventus in capitulum, divertat aliquantulum transeunte prelato ob reverentiam eius. Deinde rediens ad locum illum, cum conventus intraverit: incipiat legere in voce mediocri que legenda fuerint, secundum  modum infrascriptum. Perlectis autem omnibus, et clauso libro, et aliis faciendis breviter expeditis: vadat ad locum suum, finito capitulo reportaturus que fuerint alibi reportanda.}
+% % \newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmus in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit sic: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, preterquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit Non: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
+% % \newline \ul{De supradictis autem: legendum est sic.}
+% % \newline Decimonono Kalendas \ul{vel} Sextodecimo Kalendas \ul{vel} Pridie Kalendas \ul{vel} Kalendis Ianuarii: \ul{vel} Quarto Nonas \ul{vel} Pridie Nonas \ul{vel}  \ul{vel} Nonis Ianuarii: \ul{vel} Octavo Idus \ul{vel} Pridie Idus \ul{vel} Idibus Ianuarii: Luna prima, \ul{vel} luna sextadecima; \ul{vel} tricesima. Rome: via apia: natalis sancti talis et cetera. Et aliorum plurimorum sanctorum: martryum, confessorum, atque virginum. \ul{Hec autem clausula semper addatur in fine lectionis de martryologio. Deinde dicta oratione} Dirigere et sanctificare etc: \ul{sequitur} Iube domne. \ul{Data autem benedictione: sequitur lectio de constitutionibus, vel de evangelio: sic} Secundum Matheum; \ul{vel} Secundum Marcum; \ul{vel} Secundum Lucam; \ul{vel} Secundum Iohannem; \ul{Et legatur de evangelio totum illud quod infrascriptum est in hoc libro. In fine vero lectionis tam de evangelio quam de constitutionibus dicatur semper} Tu autem.
+% \newline \ul{De evangelio autem legendum est omnibus diebus Dominicis, et festis simplicibus et supra. Item in vigilia Nativitatis Domini evangelium de vigilia: sive fuerit in Dominica: sive non. Et in omni vigilia que proprium habet officium in Missa, si in Dominica evenerit: evangelium de ipsa vigilia legendum est, preterquam in vigilia Beati Andree cum in Prima Dominica Adventus evenerit: qua tunc evangelium de Dominica est legendum. Item in crastino sancti Thome martyris. Item feria quarta in capite ieiunii, et in Cena Domini. Item in vigilia Pasche, et cotidie per Octavas Pasche et Pentecostes. Item in commemoratione omnium fidelium defunctorum. Ceteris vero diebus legendum est de constitutionibus. In varietatibus autem que occurrunt in huiusmodi lectionibus: servandus est modus qui in lectionario est notatus.}
+% \newline \ul{Dicto igitur} Tu autem \ul{et facta responsione sequitur} Commemoratio fratrum, familiarium, benefactorum, defunctorum: ordinis nostri.
+% \newline \ul{Si vero recitandus fuerit obitus alicuius, vel anniversarium aliquod fuerit in crastino: tunc antequam dicatur} Commemoratio \ul{dicendum est} Obiit talis, \ul{vel} Anniversarium Patrum et Matrum.
+% % \newline \ul{Solet autem tabula septimana semper legi cum Kalendis. Tabula vero pro diebus aliis in mensa, vel in choro post gratiarum actiones dicto} Fidelium anime \ul{et} Pater noster, \ul{et fratribus sedentibus in locis suis.} 
+
+\begin{paracol}{2}
+\parasubsection{Collectary: On the Variations of Conclusions in Prayers}{Collectarium: De Varietatibus Terminationum in Orationibus}{collectarium-de-varietatibus-terminationum-in-orationibus-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} N}{ote} that prayers which are directed to the Father without mentioning another Person conclude as follows:
+\newline \emph{Per dominum nostrum Ihesum Christum filium tuum, Qui tecum vivit et regnat in unitate spiritus sancti deus: per omnia secula seculorum.} Such as is in that of the Blessed Virgin, \emph{Concede nos,} and similar ones. Likewise, when mention is made of the Trinity, \emph{Omnipotens sempiterne deus qui dedisti.}
+\newline Likewise, prayers directed to the Father that make mention of the Son conclude in different ways. Some conclude thus:
+\newline \emph{Per eumdem dominum nostrum Ihesum Christum filium tuum, Qui tecum. etc.} Such is the prayer for the Nativity, \emph{Concede quesumus omnipotens deus ut nos unigeniti.} Others continue with \emph{Qui tecum vivit, etc.} as above, such as the prayer for the Circumcision, \emph{Deus qui nobis nati,} and similar ones. There are also other prayers directed to the Father in which mention of the Son occurs at the end. This is done either in the nominative case, as follows:
+\newline \emph{Ihesus Christus dominus noster, Qui tecum vivit, etc.} as above, such as in the postcommunion for the Vigil of the Ascension, \emph{Tribue.} Or in an oblique case, as follows:
+\newline \emph{Dominum nostrum Ihesum Christum filium tuum, Qui tecum, etc.} as in the prayer for Saint Stephen, \emph{Da nobis quesumus domine imitari. etc.}, and in \emph{Deus qui salutis eterne,} and similar ones. Prayers directed to the Son, however, should conclude thus:
+\newline \emph{Qui vivis et regnas cum deo patre, in unitate spiritus sancti deus per omnia secula seculorum.} Such is the prayer for the first Sunday of Advent, \emph{Excita quesumus,} and similar ones. Prayers directed to the Father or to the Son that mention the Holy Spirit conclude at the end as follows:
+\newline \emph{In unitate eiusdem spiritus sancti deus, Per omnia secula seculorum.} Prayers directed to the Holy Trinity itself, however, conclude thus:
+\newline \emph{Qui vivis et regnas deus: Per omnia secula seculorum.} Such is the prayer \emph{Placeat tibi sancta trinitas.}
+\newline When, however, another commemoration is to follow a given commemoration, the preceding prayer, if directed to the Father, ends thus:
+\newline \emph{Per Christum dominum nostrum.} Or,
+\newline \emph{Per eundem Christum dominum nostrum.} Or,
+\newline \emph{Christum dominum nostrum.} Examples of these are clearly shown above. But if the prayer is directed to the Son, let it conclude thus:
+\newline \emph{Qui vivis et regnas per omnia secula seculorum.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} N}{}\ul{\textsc{otandum} quod orationes que ad Patrem sine persone alterius expressione diriguntur, sic concluduntur.}
+% \newline Per dominum nostrum Ihesum Christum filium tuum, Qui tecum vivit et regnat in unitate spiritus sancti deus: per omnia secula seculorum. \ul{Ut est illa de Beata Virgine,} Concede nos, \ul{et consimiles. Similiter et illa in qua fit mentio de Trinitate,} Omnipotens sempiterne deus qui dedisti.
+% \newline \ul{Item orationes que ad patrem cum expressione filii diriguntur: quedam sic concluduntur.}
+% \newline Per eumdem dominum nostrum Ihesum Christum filium tuum, Qui tecum. \ul{et cetera. Ut illa in die Natalis,} Concede quesumus omnipotens deus ut nos unigeniti. \ul{Quedam per,} Qui tecum vivit, \ul{etc ut prius sicut est illa in die Circumcisionis.} Deus qui nobis nati, \ul{et consimiles. Sunt et alie orationes que ad patrem diriguntur, in fine quarum fit mentio de filio, et hoc vel per rectum hoc modo.}
+% \newline Ihesus Christus dominus noster, Qui tecum vivit, \ul{etc ut supra sicut in post communione in vigilia Ascensionis,} Tribue. \ul{Vel per obliquum sic.}
+% \newline Dominum nostrum Ihesum Christum filium tuum, Qui tecum, \ul{etc, sicut in oratione de sancto Stephano,} Da nobis quesumus domine imitari. \ul{etc, et in illa,} Deus qui salutis eterne, \ul{et consimilibus. Orationes vero que ad filium diriguntur: sic concludantur.}
+% \newline Qui vivis et regnas cum deo patre, in unitate spiritus sancti deus per omnia secula seculorum. \ul{Ut est illa, in prima Dominica Adventus,} Excita quesumus, \ul{et consimiles. Orationes vero que ad patrem vel filium cum expressione spiritus sancti diriguntur: sic concluduntur in fine}
+% \newline In unitate eiusdem spiritus sancti deus, Per omnia secula seculorum. \ul{Orationes autem que ad ipsam trinitatem diriguntur sic concluduntur,}
+% \newline Qui vivis et regnas deus: Per omnia secula seculorum. \ul{Ut est illa,} Placeat tibi sancta trinitas.
+% \newline \ul{Quando vero post aliquam memoriam alia facienda est, prior oratio si ad patrem dirigitur, terminetur sic}
+% \newline Per Christum dominum nostrum. \ul{Vel,}
+% \newline Per eundem Christum dominum nostrum. \ul{Vel,}
+% \newline Christum dominum nostrum. \ul{Horum exempla patent supra. Si autem ad filium oratio dirigitur: concludatur sic,}
+% \newline Qui vivis et regnas per omnia secula seculorum.
+
+\begin{paracol}{2}
+\parasubsection{Collectary: On How the Confiteor Is to Be Said}{Collectarium: De Confiteor Quomodo Sit Dicenda}{collectarium-de-confiteor-quomodo-sit-dicenda-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline Whenever the \emph{Confiteor} is said in the choir by the prelate or by the officiant, or outside of choir by one beginning the hours, or by the priest about to celebrate Mass, whether in community or in a private Mass, even if only one person is present, let it be said thus.
+\lettrine[lines=2]{\zallmancaps \color{Blue} C}{\itshape onfiteor} \emph{deo et beate Marie et omnibus sanctis, et vobis fratres, quia peccavi nimis cogitatione, locutione, opere et omissione, mea culpa precor vos orate pro me.}
+\newline The respondent or respondents, however, who respond in choir or outside, or in a conventual or private Mass, must always say, even to a prelate:
+\lettrine[lines=2]{\zallmancaps \color{Red} M}{\itshape isereatur} \emph{tui omnipotens deus, et dimittat tibi omnia peccata tua, liberet te ab omni malo salvet et confirmet in omni opere bono, et perducat ad vitam eternam.} \R \emph{Amen.}
+\newline The Misereatur having been said, the same person or persons add:
+\lettrine[lines=2]{\zallmancaps \color{Blue} C}{\itshape onfiteor} \emph{deo et beate Marie et omnibus sanctis et tibi pater, quia peccavi nimis, cogitatione, locutione, opere, et omissione, mea culpa, precor te ora pro me.}
+\newline And the one who first said the \emph{Confiteor} shall add, even if there is only one person to whom it is addressed:
+\lettrine[lines=2]{\zallmancaps \color{Red} M}{\itshape isereatur} \emph{vestri omnipotens deus, et dimittat vobis omnia peccata vestra, liberet vos ab omni malo salvet, etc.} \R \emph{Amen.}
+\newline When, however, one begins the hours is not a priest, let the response be \emph{Confiteor, etc. et tibi frater, etc.} When, however, a brother says Prime or Compline alone, and has no one with whom to say the \emph{Confiteor,} let him say thus:
+\lettrine[lines=2]{\zallmancaps \color{Blue} C}{\itshape onfiteor} \emph{deo et beate Marie et omnibus sanctis: quia peccavi nimis cogitatione, locutione, opere et omissione, mea culpa precor beatam Mariam et omnes sanctos orare pro me.} Afterwards let him add:
+\lettrine[lines=2]{\zallmancaps \color{Red} M}{\itshape isereatur} \emph{michi omnipotens deus et dimittat michi omnia peccata mea, liberet me, etc.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Quandocumque dicitur,} Confiteor. \ul{in choro a prelato vel ab incipiente officium, vel extra ab illo qui incepit horas, vel a sacerdote Missam celebraturo, sive in conventu, sive in Missa privata, eciam uno solo astante dicatur sic.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} C}{onfiteor} deo et beate Marie et omnibus sanctis, et vobis fratres, quia peccavi nimis cogitatione, locutione, opere et omissione, mea culpa precor vos orate pro me.
+% \newline \ul{Ille vero sive illi qui respondent in choro vel extra, vel in Missa conventuali, vel privata semper dicere debent eciam prelato.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} M}{isereatur} tui omnipotens deus, et dimittat tibi omnia peccata tua, liberet te ab omni malo salvet et confirmet in omni opere bono, et perducat ad vitam eternam. \R Amen.
+% \newline \ul{Dicto misereatur subiungatur ab eodem, vel ab eisdem.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} C}{onfiteor} deo et beate Marie et omnibus sanctis et tibi pater, quia peccavi nimis, cogitatione, locutione, opere, et omissione, mea culpa, precor te ora pro me.
+% \newline \ul{Et ille qui primo dixit} Confiteor. \ul{subiungat, eciam si unus solus sit cui dicitur.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} M}{isereatur} vestri omnipotens deus, et dimittat vobis omnia peccata vestra, liberet vos ab omni malo salvet, \ul{etc.} \R Amen.
+% \newline \ul{Quando vero qui incipit horas non est sacerdos, respondeatur,} Confiteor. \ul{etc, et tibi frater, etc. Quando vero frater solus dicit Primam vel Completorium: nec habet cum quo dicat} Confiteor: \ul{dicat sic.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} C}{onfiteor} deo et beate Marie et omnibus sanctis: quia peccavi nimis cogitatione, locutione, opere et omissione, mea culpa precor beatam Mariam et omnes sanctos orare pro me. \ul{Postea subiungat.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} M}{isereatur} michi omnipotens deus et dimittat michi omnia peccata mea, liberet me, \ul{etc.}
+
+% not a rubric
+% \begin{paracol}{2}
+% \parasubsection{Collectary: On the Blessing of Travelers}{Collectarium: De Benedictione Itinerantium}{collectarium-de-benedictione-itinerantium-ordo}
+% \end{paracol}
+% \selectlanguage{english}
+% \lettrine[lines=2]{\zallmancaps \color{Red} F}{or} departing brothers, let Psalm \psalm{120} be said with \emph{Gloria patri.} Then \emph{Kyrie eleyson. Christe eleyson. Kyrie eleyson. Pater noster.} Afterwards, \emph{Et ne nos.} \V \emph{Salvos fac. Dominus vobiscum. Oremus.} {\color{Red} Prayer.}
+% % {\color{Blue} A}desto domine. Ut supra.
+% \lettrine[lines=2]{\zallmancaps \color{Blue} A}{desto} domine supplicationibus nostris, et viam famulorum tuorum in salute tue prosperitate dispone, ut inter omnes vie et vite huius varietates, tuo semper protegantur auxilio. Per Christum.
+% \newline Regarding those returning from a journey, let the same be observed, except that for them Psalm \psalm{122} is said and the Prayer:
+% \lettrine[lines=2]{\zallmancaps \color{Blue} M}{iserere} quesumus domine his famulis tuis, et quicquid eis in via subripuit visus, vel auditus male rei aut ociosi sermonis, totum ineffabili pietate tua deleas et abstergas: Per Christum.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} P}{}\ul{\textsc{ro} fratribus egredientibus dicatur Ps.} \psalm{120} \ul{cum} Gloria patri. \ul{Deinde} Kyrie eleyson. Christe eleyson. Kyrie eleyson. Pater noster. \ul{Postea,} Et ne nos. \V Salvos fac. Dominus vobiscum. Oremus. {\color{Red} Oratio.}
+% % {\color{Blue} A}desto domine. Ut supra.
+% \lettrine[lines=2]{\zallmancaps \color{Blue} A}{desto} domine supplicationibus nostris, et viam famulorum tuorum in salute tue prosperitate dispone, ut inter omnes vie et vite huius varietates, tuo semper protegantur auxilio. Per Christum.
+% \newline \ul{Circa venientes de via idem observetur: excepto quod pro eis dicatur Ps.} \psalm{122} \ul{et Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} M}{iserere} quesumus domine his famulis tuis, et quicquid eis in via subripuit visus, vel auditus male rei aut ociosi sermonis, totum ineffabili pietate tua deleas et abstergas: Per Christum.
+
+% not a rubric
+% \parasubsection{Collectary: On the Precious}{Collectarium: De Preciosa}{collectarium-de-preciosa-ordo}
+% \selectlanguage{english}
+% \newline \ul{In chapter, when} Requiescant in pace. \ul{has been said, and the response} Amen. \ul{has been made, let the one who holds chapter say:} Benedicite. \ul{And having responded:} Dominus. \ul{and after reciting the benefactions, let there be said:}
+% \lettrine[lines=2]{\zallmancaps \color{Red} R}{etribue} dignare domine omnibus nobis bona facientibus propter nomen sanctum tuum vitam eternam. \V Amen.
+% \newline \ul{Afterwards there follows the psalm in this manner.} \psalm{122} \ul{And let it be ended} per Gloria. \ul{Then follows the psalm} \psalm{129} \ul{to be said in the same manner, and to be ended} per Requiem. \ul{Afterwards there follows:} Kyrie eleyson. Christe eleyson. Kyrie eleyson. \ul{as above.} \psalm{pater} Et ne nos. \ul{Then:} \V Oremus pro domino papa. \R Dominus conservet eum et vivificet eum, et beatum faciat eum in terra, et non tradat eum in animam inimicorum eius. \V Salvos fac servos tuos et ancillas tuas. \R Deus meus. Requiescant in pace. \R Amen. Dominus vobiscum. Oremus. {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} O}{mnipotens} sempiterne deus qui facis mirabilia solus, pretende super famulum tuum papam nostrum, et super cunctas congregationes illi commissas spiritum gratie salutaris, et ut in veritate tibi complaceant, perpetuum eis rorem tue benedictionis infunde. {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} P}{retende} domine famulis et famulabus tuis dexteram celestis auxilii, ut te toto corde perquirant, et que digne postulant assequantur: {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} F}{idelium} deus omnium conditor \ul{et cetera.}
+% \newline \ul{The three aforesaid prayers are to be said in the same manner as the prayers at the hours, and let them be concluded under one:} Qui vivis et regnas per omnia secula seculorum. Amen.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{In capitulo dicto} Requiescant in pace. \ul{et responso} Amen. \ul{dicat qui tenet capitulum.} Benedicite. \ul{Et responso.} Dominus. \ul{et recitatis beneficiis dicatur.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} R}{etribue} dignare domine omnibus nobis bona facientibus propter nomen sanctum tuum vitam eternam. \V Amen.
+% \newline \ul{Postea sequitur psalmus hoc modo.} \psalm{122} \ul{Et terminetur,} per Gloria. \ul{Deinde sequitur Ps.} \psalm{129} \ul{Dicendus eodem modo: et terminandus,} per Requiem. \ul{Postea sequitur.} Kyrie eleyson. Christe eleyson. Kyrie eleyson. \ul{ut supra.} \psalm{pater} Et ne nos. \ul{Deinde.} \V Oremus pro domino papa. \R Dominus conservet eum et vivificet eum, et beatum faciat eum in terra, et non tradat eum in animam inimicorum eius. \V Salvos fac servos tuos et ancillas tuas. \R Deus meus. Requiescant in pace. \R Amen. Dominus vobiscum. Oremus. {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} O}{mnipotens} sempiterne deus qui facis mirabilia solus, pretende super famulum tuum papam nostrum, et super cunctas congregationes illi commissas spiritum gratie salutaris, et ut in veritate tibi complaceant, perpetuum eis rorem tue benedictionis infunde. {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} P}{retende} domine famulis et famulabus tuis dexteram celestis auxilii, ut te toto corde perquirant, et que digne postulant assequantur: {\color{Red} Oratio.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} F}{idelium} deus omnium conditor \ul{et cetera.}
+% \newline \ul{Predicte tres orationes dicantur eo modo quo dicuntur Orationes ad horas et terminentur sub uno.} Qui vivis et regnas per omnia secula seculorum. Amen.
+
+\begin{paracol}{2}
+\parasubsection{Collectary: On the Collation}{Collectarium: De Collatione}{collectarium-de-collatione-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline During the time of fasting, let the blessing be given to the reader at the collation: \emph{Noctem quietam et finem perfectum, tribuat nobis omnipotens et misericors dominus.} During the reading, when there has been said: \emph{Benedicite.} Let the blessing for the drink be given to the superior: \emph{Largitor omnium bonorum,} {\color{Red} \grecross } \emph{benedicat potum servorum suorum.} Having said \emph{Tu autem.} At the end of the reading let there be added: \V \emph{Adiutorium nostrum.}
+\newline When, however, collation is not held: let the blessing be given in choir: \emph{Noctem quietam etc.} Then let the reading be begun: \emph{Fratres sobrii.} When this is finished and the response \emph{Deo gratias.} has been made, let the one who is prior, or if he is absent, the priest of the week, add: \emph{Adiutorium nostrum.} Then, having said \emph{Pater noster.} let there be said \emph{Confiteor.} Afterwards let Compline be started. After Compline let the blessing be given sonorously and in a humble voice:
+\lettrine[lines=2]{\zallmancaps \color{Red} B}{\itshape enedictio} \emph{dei omnipotentis, patris, et filii et spiritus sancti descendat super vos et maneat semper. Amen.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Tempore ieiunii in collatione detur lectori benedictio.} Noctem quietam et finem perfectum, tribuat nobis omnipotens et misericors dominus. \ul{Infra lectionem dicto:} Benedicite. \ul{Detur superiori potum benedictio.} Largitor omnium bonorum, {\color{Red} \grecross } benedicat potum servorum suorum. \ul{Dicto} Tu autem. \ul{In fine lectionis subiungatur.} \V Adiutorium nostrum. %superiori from sr
+% \newline \ul{Quando vero non fit collatio: detur in choro benedictio.} Noctem quietam etc. \ul{Deinde subiugatur lectio.} Fratres sobrii. \ul{Qua finita et responso.} Deo gratias. \ul{subiungat qui prior est, vel si ipse defuerit ebdomadarius.} Adiutorium nostrum. \ul{Deinde dicto.} Pater noster. \ul{dicatur,} Confiteor. \ul{Postea Completorium inchoetur. Post Completorium detur benedictio sonore et humili voce}
+% \lettrine[lines=2]{\zallmancaps \color{Red} B}{enedictio} dei omnipotentis, patris, et filii et spiritus sancti descendat super vos et maneat semper. Amen.
+
+\begin{paracol}{2}
+\parasubsection{Psalter: On the Daily Office of the Blessed Virgin}{Psalterium: De Officio Beate Virginis Cotidiano}{breviarium-de-officio-beate-virginis-cotidiano-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} T}{he} entire daily Office of the Blessed Virgin is said outside of choir, except Compline. It is customary, however, to say it between the two ringings of the canonical hours. It must be observed, however, that when Mass is sung immediately after Prime and Terce is continued from Mass, Terce of the Blessed Virgin is not to be said before Prime of the day, but rather Terce first; likewise on Sundays when None is said immediately after thanksgiving, if Vespers or the Vigils of the Dead are to be continued from None of the day, None of the Blessed Virgin should be said after Vespers or the Vigils of the Dead. Similarly in Lent, Vespers of the Blessed Virgin are not to be said before None of the day, but after Vespers, whether None and Vespers are continued, or Vespers are said after Mass. Before all hours, however, let there be said \emph{Ave Maria gratia plena Dominus tecum,} and let the one who begins say up to \emph{Dominus tecum} loudly enough that it can be heard, and let the others, whether one or several, continue \emph{Benedicta tu in mulieribus et benedictus fructus ventris tui.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} O}{fficium} cotidianum beate virginis totum dicitur extra chorum, preter Completorium. Consuerunt autem dici inter duo signa horarum canonicarum. Attendendum tamen quod quando Missa cantatur immediate post Primam et Tertia continuatur Misse, non est dicenda Tertia de Beata Virgine ante Primam diei, sed prius Tertiam similiter in Dominicis quando Nona dicitur immediate post gratiarum actiones, si Vespere vel vigilie defunctorum continuande fuerint None diei, Nona de Beata Virgine dicatur post Vesperas, vel vigilias defunctorum. Similiter in Quadragesima non sunt dicende Vespere de Beata Virgine ante Nonam diei, sed post Vesperas sive Nona et Vespere continuentur, seu Vespere post Missam dicantur. Ante omnes autem horas dicatur {\color{black} Ave Maria gratia plena Dominus tecum} et qui incipit dicat usque {\color{black} Dominus tecum} ita alte quod audiri possit, et alii sive unus, sive plures prosequantur {\color{black} Benedicta tu in mulieribus et benedictus fructus ventris tui.} \color{black}%typo: in mediate, twice
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On What the Office Is to Be Done For}{Breviarium: De Quo Officium Sit Agendum}{breviarium-de-quo-officium-sit-agendum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} N}{ote} that throughout the entire year the Office, both of the day and of the night, is to be done for the Season at the Hours, except on feasts of Saints and during their octaves and on their octave days, and except on Saturdays when the conventual [office] of the Blessed Virgin is celebrated.
+\newline Therefore, when it is to be done for the Season: on all Sundays outside of Paschaltide, nine lessons are to be done at Matins. On ferial days, however, throughout the entire year, let only three be done, except in the Triduum before Easter. Now Paschaltide is called from the Mass of the Vigil of Easter onward up to the first Vespers of Trinity Sunday exclusive.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=3]{\zallmancaps \color{Blue} N}{}\ul{\textsc{otandum} quod per totum annum Officium tam diei quam noctis ad Horas faciendum est de Tempore nisi in festis Sanctorum et per octavas et in octavis eorum et nisi in Sabbatis quando de Beata Virgine agitur in conventu.
+% \newline Quando igitur de Tempore fuerit faciendum: omnibus Dominicis extra Tempus Pascale faciende sunt novem lectiones in Matutinis. In profestis autem diebus per totum annum fiant tantum tres nisi in Triduo ante Pasca. Tempus autem Paschale vocatur missa de vigilia Pasche et deinceps usque ad primas Vesperas Trinitatis exclusive.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Responsory in First Vespers of Sunday}{Breviarium: De Responsorio in Primis Vesperis Dominice}{breviarium-de-responsorio-in-primis-vesperis-dominice-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{n} every occasion when the Sunday history [scriptural series] is begun on its first Sunday, the responsory is to be said at first Vespers. When, however, on account of some impediment Sunday does not have first Vespers, or the Sunday history is not sung on the Sunday on which it ought first to have been begun: the responsory is henceforth not to be said at Vespers.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}\ul{\textsc{mni} tempore quando hystoria dominicalis in sua prima Dominica inchoatur, responsorium dicendum est in primis Vesperis. Quando vero propter aliquod impedimentum Dominica non habet primas Vesperas, vel hystoria dominicalis non cantatur in Dominica in qua primo debuit inchoari: responsorium in Vesperis de cetero non dicatur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Collect of the Sunday}{Breviarium: De Oratione Dominicali}{breviarium-de-oratione-dominicali-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} N}{ote} that the Sunday collect is always to be said on the preceding Saturday at Vespers, and on the Sunday itself at all Hours both of the day and of the night when it is celebrated for the Sunday, except at Prime and at Compline. And this must be known, that wherever it is said \emph{this collect is said at the Hours,} it is never understood of Prime or of Compline unless specifically expressed. The Sunday collect is also to be said through the weekdays of the following week up to Vespers of Saturday exclusive at all Hours both of the day and of the night when it is celebrated for the Season: except in the fasts of the Ember Days of Advent, and on Ash Wednesday and onward up to Low Sunday exclusive, and except on the three days of Rogations, and except in the week of Pentecost, and except when two or more Sunday collects are to be said within the week. When, however, two or more collects are to be said within one week, after one has been begun within the week, let it be said when it is celebrated for the Season until the other is begun: and so on if several are to be said.
+Now those collects which are begun within the week are always to be begun at Lauds. This also must be known, that the collect which is said at Lauds is always to be said at Terce, Sext, and None, except in the fasts of the Ember Days of Advent and on the two days of Rogations. It is also said at Vespers when it is celebrated for the same as at Lauds, except on weekdays in Lent and on the two days of Rogations.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} N}{}\ul{\textsc{otandum} est quod oratio Dominicalis semper dicenda est in Sabbato precedenti ad Vesperas, et in ipsa Dominica ad omnes Horas tam diei quam noctis quando de Dominica agitur, preterquam in Prima et in Completorio. Et hoc sciendum quod ubicumque dicitur hec oratio dicatur ad Horas nunquam intelligitur de Prima neque de Completorio nisi specialiter exprimatur. Dicenda est eciam oratio Dominicalis per ferias sequentis ebdomade usque ad Vesperas Sabbati exclusive ad omnes Horas tam diei quam noctis quando de Tempore agitur: nisi in ieiuniis Quatuor Temporum Adventus et in quarta feria Cinerum et deinceps usque ad Dominicam in Albis exclusive, et nisi in tribus diebus Rogationum, et nisi in ebdomada Pentecostes, et nisi due aut plures orationes Dominicales infra ebdomadam sint dicende. Quando vero due vel plures orationes infra unam ebdomadam dicende fuerint, postquam una infra ebdomadam fuerit incepta, dicatur quando de Tempore agitur usque dum alia inchoetur: et sic deinceps si plures dicende fuerint.
+% Ille autem orationes que infra ebdomadam inchoantur, semper sunt in Laudibus inchoande. Hoc eciam sciendum quod oratio que dicitur ad Laudes semper dicenda est ad Tertiam, Sextam et Nonam nisi in ieiuniis Quatuor Temporum Adventus et in duobus diebus Rogationum. Dicitur eciam ad Vesperas quando agitur de eodem de quo in Laudibus, nisi per ferias in Quadragesima et in duobus diebus Rogationum.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On When the Sunday Homily Is to Be Read, Transferred, or Omitted from the Office}{Breviarium: De Omelia Dominicali Quando Legenda vel Transferenda vel Officio Dimittenda Sit}{breviarium-de-omelia-dominicali-quando-legenda-vel-transferenda-vel-officio-dimittenda-sit-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{n} every Sunday, unless a feast or octave day of a feast having an octave prevents it, the last three lessons are to be read from the exposition of the Sunday gospel, except on the Vigil of the Nativity of the Lord when it falls on a Sunday; for then the Sunday homily is omitted in that year. And except when any vigil having its own homily falls on a Sunday. For then the last three lessons shall be from the homily of the vigil, and the Sunday homily shall be transferred to some weekday, except on the Vigil of Saint Andrew when it falls on a Sunday. For then the Sunday homily is to be read, and the homily of the vigil in that year is utterly omitted. When, however, on account of some impediment the Sunday homily is not read on Sunday, it is always to be read on some weekday within its week, except when the feast of Saint Sylvester falls on a Sunday, and when the feast of Blessed Peter Martyr, or of the Apostles Philip and James, or of the Holy Cross, or of the Crown of the Lord falls on the Sunday before the Ascension. For then the Sunday homily is omitted in that year. Likewise, the last two Sunday homilies which are after \emph{Domine ne in ira} are omitted when between the octave of Epiphany and Septuagesima there are no vacant weekdays on which they can be read. Similarly, the homily of the gospel \emph{Loquente Ihesu} is omitted when there are only twenty-two weeks between \emph{Deus omnium} and Advent, if in the twenty-second week there are not enough vacant weekdays that all the Gospels can be read.
+\newline The \emph{Te Deum.} is to be said on all Sundays, except in Advent and in Septuagesima onward up to Easter exclusive, unless when the feast of the Purification falls on Septuagesima, Sexagesima, or Quinquagesima.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}\ul{\textsc{n} omni Dominica, nisi festum vel octava dies festi habentis octavam impediat, tres ultime lectiones de expositione evangelii dominicalis legantur preterquam in vigilia Natalis Domini, quando in Dominica evenerit, tunc enim omelia dominicalis omittitur illo anno. Et nisi quando aliqua vigilia habens propriam omeliam in Dominica evenerit. Tunc enim tres ultime lectiones erunt de omelia vigilie et omelia dominicalis in aliquam feriam transferetur, preterquam in vigilia Sancti Andree, quando in Dominica evenerit. Tunc enim omelia dominicalis legenda est, et omelia de vigilia illo anno penitus dimittenda. Quando vero propter aliquod impedimentum dominicalis omelia non legitur in Dominica, semper infra ebdomadam suam in aliqua feria est legenda, nisi quando festum Sancti Silvestri in Dominica evenerit, et quando festum Beati Petri Martiris, vel Apostolorum Philippi et Iacobi vel Sancte Crucis vel Corone Domini, in Dominica ante Ascensionem evenerint. Tunc enim omelia dominicalis dimittitur illo anno. Dimittuntur eciam due ultime omelie dominicales que sunt post,} Domine ne in ira, \ul{quando inter octavas Epiphanie et Septuagesimam non sunt ferie vacantes in quibus possint legi. Similiter et omelia evangelii} Loquente Ihesu \ul{dimittitur quando tantum viginti due septimane fuerint inter} Deus omnium, \ul{et Adventum, si in vicesima secunda septimana non fuerint tot ferie vacantes, quod omnia Evangelia legi possint.}
+% \newline \psalm{tedeum} \ul{dicatur omnibus Dominicis, preterquam in Adventu et in Septuagesima et deinceps usque ad Pascha exclusive, nisi quando festum Purificationis in Septuagesima vel Sexagesima vel Quinquagesima evenerit.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Division of the Sunday History Through the Weekdays}{Breviarium: De Divisione Hystorie Dominicalis per Ferias}{breviarium-de-divisione-hystorie-dominicalis-per-ferias-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} K}{now} that throughout the entire year the responsories of the Sunday history through the week, when it is celebrated for the Season [Advent, Pre-Lent, Lent], are to be said in this order: Namely, on Monday and Thursday, the first three. On Tuesday and Friday, the middle three. On Wednesday and Saturday, the last three; and this is to be observed unless they are marked otherwise. When, however, any feast is celebrated within the week, nevertheless let the aforesaid order be observed on the remaining weekdays.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{}\ul{\textsc{ciendum} quod per totum annum responsoria de hystoria dominicali per ebdomadam, quando de Tempore agitur hoc ordine sunt dicenda. Videlicet in secunda et quinta feria, tria prima. In tertia et sexta feria tria media. In quarta feria et Sabbato, tria ultima, et hoc observandum est nisi aliter sint signata. Quando autem festum aliquod infra ebdomadam celebratur, nichilominus ordo predictus in reliquis feriis observetur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: When Advent of the Lord Is to Be Celebrated}{Breviarium: Ubi Adventus Domini Celebrandus Sit}{breviarium-ubi-adventus-domini-celebrandus-sit-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} T}{he} Advent of the Lord must always be celebrated on the Sunday which is nearest to the day of Saint Andrew, whether it precedes or follows, or on the day itself of Saint Andrew when it falls on a Sunday.
+\newline All things which are to be said at the Hours, both of the day and of the night, throughout the whole of Advent, which are not marked in the Breviary, are to be said according to what is marked on the Sunday \emph{Domine ne in ira} and on its weekdays.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} A}{}\ul{\textsc{dventus} Domini semper celebrari debet in Dominica que vicinior est diei Sancti Andree, sive precedat sive sequatur, vel in ipso die Sancti Andree quando in Dominica evenerit.
+% \newline Omnia que ad Horas tam diei quam noctis per totum Adventum dicenda sunt, que in Breviario non sunt notata, dicenda sunt secundum quod in Dominica,} Domine ne in ira \ul{et in eius feriis sunt signata.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Ferial Lessons}{Breviarium: De Lectiones Feriales}{breviarium-de-lectiones-feriales-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline Note that those who do not have Bibles may repeat through the weekdays the Sunday lessons as given above. Those who do have them may repeat or, better yet, read from the aforementioned chapters. And let this similarly be observed in all that follows.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Nota quod illi qui non habent Biblias possunt repetere per ferias lectiones dominicales prenotatas. Qui vero habent possunt repetere vel quod melius est legere in capitulis predictis. Et hoc similiter in sequentibus observetur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Antiphons of Lauds Before the Vigil of the Nativity}{Breviarium: Antiphone Laudum Ante Vigiliam Nativitatis}{breviarium-antiphone-laudum-ante-vigiliam-nativitatis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline It should be known that the antiphons of Lauds which are noted below before the antiphons that begin with \emph{O antiphone,} must be said throughout the six weekdays next before the Vigil of the Nativity of the Lord on their proper days: namely, those which pertain to Monday on Monday, and so for the rest. However, Lauds for the weekday on which the feast of Saint Thomas is celebrated shall be omitted in that year.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Sciendum est quod antiphone Laudum que infra notate sunt ante antiphonas que incipiunt per} O antiphone, \ul{debent dici per sex ferias proximas ante Vigiliam Nativitatis Domini suis propriis diebus. Ille scilicet que pertinent ad secundam feriam in secunda feria et sic de aliis. Laudes autem de feria in qua celebrabitur festum Sancti Thome intermittentur illo anno.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Singing the History}{Breviarium: De Hystoria Cantanda}{breviarium-de-hystoria-cantanda-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} N}{ote} that the history, \emph{Domine ne in ira} must be sung on Sundays up to Septuagesima exclusive; the ferial responsories, however, unless impeded by feasts, are to be sung on all days within the week up to Septuagesima, except on Saturdays when it is to be celebrated for the Blessed Virgin.
+Provision must nevertheless be made that when the first Saturday after the Octave of Epiphany is completely vacant, when there is no feast of three lessons or greater on it, then on that Saturday let the ferial Office be said and let the responsories marked for Saturday be sung.
+Now this happens whenever the Octave of Epiphany falls on a Sunday, unless Septuagesima falls on the next Sunday immediately, namely on the feast of Fabian and Sebastian, because then the feast of the aforesaid martyrs is to be celebrated on Saturday. Otherwise, however, it never happens.
+\newline Furthermore, it must be considered carefully whether between the Octaves of Epiphany and Septuagesima there are as many Sundays as there are Sunday Offices and collects, so that they may be said on them. If, however, there are not as many Sundays, let them be said throughout the weekdays on such a day, if possible, on which there is no festivity. But if necessity compels that the Sunday Office be said on that day on which a feast of three lessons occurs, let a commemoration only be made of the feast.
+At Matins, however, the homily, and the antiphon at the Ben., and at the Mag., and the Mass of the day, shall be of the Sunday.
+When, however, between the Octave of Epiphany and Septuagesima there is no vacant Sunday on which it can be sung, then the history, \emph{Domine ne in ira} the responsories from the Psalms which are noted throughout the weekdays, or even the Office for feasts of three lessons, if other weekdays are not vacant, are to be omitted, and the history, \emph{Domine ne in ira} shall be sung throughout those weekdays.
+On account of the collects and Gospels which are placed after the two offices, however, a feast of three lessons should not be omitted, nor on Saturday the Office of the Blessed Virgin.
+\newline It should be known, therefore, that if Septuagesima falls on the fifteenth day before the Kalends of February [January 18], namely on the feast of Prisca, then on the preceding Wednesday, which is immediately after the Octaves of Epiphany, that is, on the day of Felix, the homily on the wedding is to be read, and the last three responsories of the Sunday history are to be sung; and on the following day, namely on the feast of Maurus, which will be Thursday, the first three lessons from Paul to the Romans are to be read, and the first three responsories of the Sunday history are to be sung. On Friday, however, namely on the day of Marcellus, the homily, \emph{Cum descendisset} is to be read, and the middle three responsories of the aforesaid history are to be sung. On Saturday, that is, on the day of Anthony, it shall be said for the Blessed Virgin.
+\newline When, however, Septuagesima falls on the fourteenth day before the Kalends of February [January 19], then on the preceding Tuesday, which will be immediately after the Octave of Epiphany, that is, on the day of Felix, let the first three lessons from Paul be read, and let the middle three responsories of the Sunday history be sung. On the following Wednesday, that is, on the day of Maurus, let the homily on the wedding be read, and let the last three responsories of the Sunday history be sung. On Thursday, that is, on the day of Marcellus, let the homily, \emph{Cum descendisset,} be read, and let the first three responsories of the aforesaid history be sung. On Friday let the feast of Anthony be said. On Saturday, however, let it be said for the Blessed Virgin.
+When, however, Septuagesima falls on the thirteenth day before the Kalends of February [January 20], then on the preceding Monday, which will be immediately after the Octave of Epiphany, let the first three lessons from the epistle of Paul to the Romans be read, and let the first three responsories of the Sunday history be sung. On Tuesday let the feast of Maurus be said. On Wednesday, that is, on the day of Marcellus, let the homily on the wedding be read, and let the last three responsories of the Sunday history be sung. On Thursday let the feast of Anthony be said. On Friday, that is, on the day of Prisca, let the homily, \emph{Cum descendisset} be read, and let the middle three responsories of the aforesaid history be sung. On Saturday the feast of Fabian and Sebastian shall be said.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} N}{}\ul{\textsc{otandum} quod hystoria,} Domine ne in ira \ul{debet cantari in diebus dominicis usque ad Septuagesimam exclusive responsoria vero ferialia, nisi festivitates impediant omnibus diebus infra ebdomadam sunt cantanda, usque ad Septuagesimam, preterquam in Sabbatis in quibus de Beata Virgine est agendum.
+% Providendum tamen quod quando primum Sabbatum quod est post Octavam Epiphanie fuerit omnino vacans, ita quod non sit in eo festum trium lectionum vel maius, tunc in ipso Sabbato fiat Officium feriale et cantentur responsoria que pro Sabbato sunt signata.
+% Hoc autem contingit quandocumque Octava Epiphanie est in Dominica, nisi Septuagesima fuerit in proxima Dominica immediate, videlicet in festo Fabiani et Sebastiani, quia tunc festum predictorum martirum est in Sabbato celebrandum. Alias vero nunquam contingit.}
+% \newline \ul{Considerandum est autem diligenter utrum inter Octavas Epyphanie et Septuagesimam tot sint dies Dominici quod sunt Dominicalia Officia et orationes, ut in ipsis dicantur. Si vero non sint tot dies Dominici dicantur per ferias tali quidem die si fieri potest in quo nulla sit festivitas. Quod si necessitas coegerit ut in illa die dicatur Officium Dominicale in qua festum trium lectionum occurrerit, memoria tantum fiat de festo.
+% Ad Matutinas autem omelia, et antiphona ad Ben., et ad Mag., et Missa in die, de Dominica erunt.
+% Quando vero inter Octavam Epiphanie et Septuagesimam nulla est Dominica vacans in qua possit cantari, hystoria,} Domine ne in ira \ul{tunc responsoria de Psalmis que per ferias notata sunt vel eciam Officium de festis trium lectionum, si alie ferie non vacaverint sunt intermittenda, et hystoria,} Domine ne in ira \ul{per easdem ferias cantetur.
+% Propter orationes autem et Evangelia que post duo officia posita sunt, non debet intermitti festum trium lectionum, nec in Sabbato Officium de Beata Virgine.}
+% \newline \ul{Sciendum igitur quod si Septuagesima evenerit decimo quinto kalendas Februarii, scilicet in festo Prisce, tunc in quarta feria precedenti, que est immediate post Octavas Epyphanie, hoc est in die Felicis, legendum est omelia de nuptiis et cantanda sunt tria ultima responsoria de hystoria Dominicali, et sequenti die scilicet in festo Mauri quod erit quinta feria legende sunt tres prime lectiones de Paulo ad Romanos, et cantanda tria prima responsoria hystorie Dominicalis. In sexta vero feria, scilicet in die Marcelli legenda est omelia,} Cum descendisset \ul{et cantanda sunt tria media responsoria hystorie predicte. In Sabbato autem hoc est in die Antonii fiet de Beata Virgine.}
+% \newline \ul{Quando vero Septuagesima evenerit decimo quarto kalendas Februarii, tunc in tertia feria precedenti que erit immediate post Octavam Epiphanie, hoc est in die Felicis, legantur tres prime lectiones de Paulo, et cantentur tria media responsoria hystorie Dominicalis. In quarta autem feria sequenti hoc est in die Mauri, legatur omelia de nuptiis, et cantentur tria ultima responsoria hystorie Dominicalis. In quinta vero feria hoc est in die Marcelli, legatur omelia,} Cum descendisset, \ul{et cantentur tria prima responsoria hystorie predicte. In sexta feria fiat festum Antonii. In Sabbato vero fiat de Beata Virgine.
+% Quando autem Septuagesima evenerit decimo tertio kalendas Februarii, tunc in secunda feria precedenti que erit immediate post Octavam Epyphanie, legantur prime tres lectiones de epistola Pauli ad Romanos, et cantentur tria prima responsoria hystorie Dominicalis. In tertia feria fiat festum Mauri. In quarta feria hoc est in die Marcelli legatur omelia de nuptiis, et cantentur tria ultima responsoria hystorie Dominicalis. In quinta feria fiat festum Antonii. In sexta feria hoc est in die Prisce legatur omelia,} Cum descendisset \ul{et cantentur tria media responsoria hystorie predicte. In Sabbato fiet festum Fabiani et Sebastiani.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Vespers}{Breviarium: De Vesperis}{breviarium-de-vesperis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} T}{hus} let Vespers begin: \emph{Deus in adiutorium meum intende.} {The response:} \emph{Domine ad adiuvandum me festina. Gloria Patri. Sicut erat. Alleluya.} In this manner let all the Hours and Lauds begin, except that at Compline the versicle \emph{Converte nos deus salutaris noster. Et averte iram tuam a nobis} is to be prefixed, and at Matins, \Vbar . \emph{Domine labia mea aperies. Et os meum annunciabit laudem tuam,} and before Lauds the versicle is said. Excluded is the entire Triduum before Easter, and All Souls', and Vespers on Easter Day, and henceforth all Vespers up to the Vespers of Low Saturday exclusive; and the \emph{Alleluya} after \emph{Sicut Erat} is not said at Compline of the Saturday before Septuagesima Sunday, and henceforth up to Compline of Holy Saturday exclusive.
+\newline Having finished the antiphon after the Magnificat, there follows: \emph{Dominus vobiscum. Oremus.}
+\newline Having finished the prayer and response \emph{Amen,} there follows \emph{Dominus vobiscum,} unless a commemoration is to be made, for then at the response \emph{Amen,} \emph{Dominus vobiscum} is not said, nor \emph{Benedicamus,} but immediately let the antiphon for the commemoration begin; when it is finished, let the \Vbar . be said, then without \emph{Dominus vobiscum} prefixed, let \emph{Oremus} be said, followed by the prayer. And if another commemoration is to be made, let the prayer be ended with \emph{Per Christum,} or \emph{Per eundem,} or \emph{Qui vivis et regnas per omnia, etc.,} according to the variation of conclusions; but if no other commemoration is to be made, let the final prayer end like the first, and when it is finished, let there be added \emph{Dominus vobiscum} and \emph{Benedicamus.} Let this same order be observed at Lauds, with the response \emph{Deo gratias.} After \emph{Benedicamus,} let \emph{Fidelium anime per misericordiam dei requiescant in pace} be said, which is always to be said after any Hour, except on Maundy Thursday and henceforth up to Compline of Saturday exclusive, and except after the Office of the Dead. When, however, several Hours are to be said together, then only at the end of the last Hour is \emph{Fidelium} said, except, as has been said, after the Office of the Dead. Having said \emph{Fidelium} or \emph{Requiescant in pace,} let \emph{Pater noster} be said.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{\color{Red} ic} {\color{Red} inchoetur Vespere.} Deus in adiutorium meum intende. {\color{Red} Responsio.} Domine ad adiuvandum me festina. Gloria Patri. Sicut erat. Alleluya. \ul{Hoc modo inchoentur omnes hore et laudes, nisi quod ad Completorium premittendus est versiculus,} Converte nos deus salutaris noster. Et averte iram tuam a nobis, \ul{et ad Matutinas, \Vbar .} Domine labia mea aperies. Et os meum annunciabit laudem tuam, \ul{et ante Laudes dicitur versiculus. Excipitur totum triduum ante Pascha, et dies animarum et Vespere in die Pasche, et deinceps omnes Vespere usque ad Vesperas Sabbati in Albis exclusive, et quod Alleluya post Sicut Erat non dicitur in Completorio Sabbati ante Dominicam Septuagesime et deinceps usque ad Completorio Sabbati Pasche exclusive.}
+
+% \newline \ul{Finita antiphona post Mag. sequitur,} Dominus vobiscum. Oremus. 
+% \newline \ul{Finita oratione et responso,} Amen, \ul{sequitur.} Dominus vobiscum, \ul{nisi memoria fierit facienda tunc enim responso,} Amen \ul{non dicatur,} Dominus vobiscum \ul{nec} Benedicamus \ul{sed immediate inchoetur antiphona ad memoriam, qua finita dicatur \Vbar , deinde absque,} Dominus vobiscum \ul{premisso,} Oremus, \ul{dicatur oracio, et si alia memoria fuerit faciendi terminetur oracio,} Per Christum, \ul{vel} Per eundem, \ul{vel} Qui vivis et regnas per omnia, etc. \ul{Secundum varietatem terminationum, si vero non fuerit alia memoria facienda ultima oracio terminetur sicut prima et ea finita subiungatur,} Dominus vobiscum, \ul{et,} Benedicamus. \ul{Hoc idem in Laudibus observetur, responso,} Deo gratias. \ul{Post} Benedicamus \ul{dicatur} Fidelium anime per misericordiam dei requiescant in pace. \ul{Quod semper dicendum est post quamlibet horam nisi in die Cene et deinceps usque ad Completorium Sabbati exclusive, et nisi post officium defunctorum. Quando vero plures, hore pariter sunt dicende, tunc solum in fine ultime hore dicatur} Fidelium \ul{nisi ut dictum est post officium defunctorum. Dicto} Fidelium \ul{vel} Requiescant in pace, \ul{dicatur,} Pater noster.
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Compline}{Breviarium: De Completorio}{breviarium-de-completorio-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline Let the aforesaid antiphon \emph{Miserere} be said at Compline over the psalms throughout the whole year, except on Maundy Thursday and henceforth up to Compline of the Saturday before Trinity Sunday exclusive, and except on the Vigil of the Nativity of the Lord and henceforth up to the morrow of the Octave of the Epiphany exclusive, and except when the Office is of the Blessed Virgin in convent.
+\newline The [Compline] psalms [of \psalm{4} \psalm{30} \psalm{90} \psalm{133}] are said throughout the whole year, except that on the Vigil of Easter and henceforth up to Compline of Low Saturday exclusive, and on the Vigil of Pentecost and henceforth up to Compline of the Saturday before the Feast of the Trinity exclusive, Psalm \psalm{90} is omitted.
+\newline Let the Chapter \emph{Tu in nobis} always be said, except on Maundy Thursday and henceforth up to Compline of Low Saturday exclusive.
+\newline Let the responsory \emph{In manus,} however, be said throughout the whole year, except on Sundays and feast days of saints at both Complines in Lent up to Compline of the Saturday before Passion Sunday exclusive, and except on Maundy Thursday and henceforth up to Compline of Low Saturday exclusive.
+\newline Let the hymn \emph{Te lucis} always be said, except on the Saturday before the First Sunday of Lent, and henceforth up to the Saturday before the Feast of the Trinity exclusive.
+\newline Let the versicle \emph{Custodi nos} always be said, except on Maundy Thursday and henceforth up to Compline of Low Saturday exclusive.
+\newline Let the canticle \emph{Nunc dimittis} always be said.
+\newline Let the antiphon \emph{Salva nos} be said throughout the whole year, except on the Saturday before the First Sunday of Lent, and henceforth up to the Saturday before Trinity Sunday exclusive, and except on the Vigil of the Nativity of the Lord, and henceforth up to the morrow of the Octave of the Epiphany exclusive, and except when the Office is of the Blessed Virgin in convent.
+\newline The \emph{Preces} indeed are to be said daily, except on Maundy Thursday and henceforth up to the Monday after Low Sunday exclusive, and except during the week of Pentecost, and except within the Octave of the Nativity of the Lord, and except on duplexes and totum duplexes.
+\newline The versicle \emph{Dignare domine} before \emph{Dominus vobiscum} is not said when the \emph{Preces} are not said, nor likewise at Prime.
+\newline Let the prayer \emph{Visita quesumus} always be said, except on Maundy Thursday and henceforth up to the Tuesday after Easter inclusive.
+\newline Let the Blessing always be given, except on Maundy Thursday and Good Friday.
+
+% \newline \ul{Predicta Ant.} Miserere \ul{dicatur ad Completorium super psalmos per totum annum nisi in die Cene et deinceps usque ad Completorium Sabbati ante Trinitatem exclusive, et nisi in vigilia Natalis Domini et deinceps usque in crastinum octavarum Epyphanie exclusive, et nisi quando de Beata Virgine agitur in conventu.}
+% \newline \ul{Psalmi vero dicantur per totum annum, nisi quod in vigilia Pasche deinceps usque ad Completorium Sabbati in Albis exclusive, et in vigilia Pentecostes et deinceps usque ad Completorium Sabbati ante festum Trinitatis exclusive intermittitur psalmus,} \psalm{90}
+% \newline \ul{Capitulum,} Tu in nobis \ul{semper dicatur nisi in Cena Domini, et deinceps usque ad Completorium Sabbati in Albis exclusive.}
+% \newline \ul{Responsorium autem,} \hyperlink{in-manus-tuas-breve}{In manus,} \ul{per totum annum dicatur, nisi in Dominicis et in festis sanctorum ad utrunque Completorium in Quadragesima usque ad Completorium Sabbati ante Dominicam in Passione exclusive, et nisi in Cena Domini et deinceps usque ad Completorium Sabbati in Albis exclusive.}
+% \newline \ul{Ymnus,} \hyperlink{te-lucis}{Te lucis,} \ul{semper dicatur nisi in Sabbato ante prima Dominicam Quadragesime, et deinceps usque ad Sabbatum ante festum Trinitatis exclusive.}
+% \newline \ul{Versiculus,} Custodi nos, \ul{dicatur semper nisi in Cena Domini et deinceps usque ad Completorium Sabbati in Albis exclusive.}
+% \newline \ul{Canticum,} \psalm{nunc} \ul{semper dicatur.}
+% \newline \ul{Antiphona,} Salva nos, \ul{per totum annum dicatur, nisi in Sabbato ante primam Dominicam Quadragesime, et deinceps usque ad Sabbatum ante Trinitatem exclusive, et nisi in vigilia Natalis Domini, et deinceps usque in crastinum octavarum Epyphanie exclusive, et nisi quando de Beata Virgine agitur in conventu.}
+% \newline \ul{Preces vero cotidie dicantur nisi in Cena Domini et deinceps usque ad secundam feriam post Dominicam in Albis exclusive, et nisi in ebdomada Pentecostes, et nisi infra Octavam Nativitatis Domini, et nisi duplicibus et in totis duplicibus.}
+% \newline \ul{Versiculus,} Dignare domine \ul{ante} Dominus vobiscum, \ul{non dicatur quando preces non dicuntur, similiter nec in Prima.}
+% \newline \ul{Oracio,} \hyperlink{visita-quesumus}{Visita,} \ul{semper dicatur, nisi in Cena Domini et deinceps usque ad terciam feriam post Pascha inclusive.}
+% \newline \ul{Benedictio semper detur nisi in die Cene et Parascheves.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Matins and Lauds}{Breviarium: De Matutinis et Laudibus}{breviarium-de-matutinis-et-laudibus-ordo}
+\end{paracol}
+\selectlanguage{english}
+% \newline [Psalm \psalm{94}] having been said, there follows the versicle \emph{Preoccupemus.} Let the aforesaid Invitatory be said on Sundays up to Septuagesima exclusive, when the Office is of the Sunday. Whenever, moreover, the Invitatory is said, let there also be said Psalm \psalm{94}
+\newline Let the aforesaid hymns \emph{Nocte surgentes} and \emph{Ecce iam noctis} be said on all Sundays and ferias throughout the whole year when the Office is of the season at Matins and Lauds, except in Lent, and in Eastertide, and in Advent.
+\newline Let the antiphons of the Nocturns with the psalms be said on Sundays up to Passion Sunday exclusive, when the Office is of the Sunday.
+\newline Let the versicles of the Nocturns and the versicle before Lauds be said on Sundays up to Lent exclusive.
+\newline Let the antiphon over the psalms at Lauds, and the \Vbar , be said on Sundays up to Septuagesima exclusive, when the Office is of the Sunday.
+\newline Let the Chapter \emph{Benedictio,} be said on all Sundays when the Office is of the Sunday, up to Lent exclusive.
+\newline After the aforesaid history \emph{Domine ne in ira} has been sung on the Sunday, on the remaining Sundays, if there be any up to Septuagesima exclusive, in place of the ninth responsory let \Rbar . \emph{Honor virtus} of the Trinity be said.
+
+% \ul{Quo dicto sequitur versus,} Preoccupemus. \ul{Predictum, Invit., dicatur Dominicis diebus usque ad Septuagesimam exclusive quando de Dominica agitur. Quandocumque autem Invit., dicitur, dicatur eciam psalmus,} \psalm{94} {\color{Red} Ymnus.}
+
+% \newline \ul{Predicti ymni,} \hyperlink{nocte-surgentes}{Nocte surgentes} \ul{et} \hyperlink{ecce-iam-noctis}{Ecce iam noctis,} \ul{dicantur omnibus dominicis et feriis per totum annum quando de tempore agitur ad Matutinas et ad Laudes nisi in Quadragesima, et in Paschali tempore et in Adventu Domini.}
+% \newline \ul{Antiphone nocturnorum cum psalmis, dicantur dominicis diebus usque ad Dominicam in Passione exclusive, quando de dominica agitur.}
+% \newline \ul{Versiculi nocturnorum, et versiculus ante Laudes dicantur in dominicis usque ad Quadragesimam exclusive.}
+% \newline \ul{Antiphona super psalmos, in Laudibus, et \Vbar , dicantur in Dominicis usque ad Septuagesimam exclusive quando de Dominica agitur.}
+% \newline \ul{Capitulum vero,} Benedictio, \ul{dicatur omnibus dominicis quando de Dominica agitur usque ad Quadragesimam exclusive.}
+% \newline \ul{Postquam predicta hystoria,} \hyperlink{domine-ne-in-ira}{Domine ne in ira} \ul{in Dominica fuerit cantata, in reliquis Dominicis si alique fuerint usque ad Septuagesimam exclusive, loco noni responsorii dicatur,} \Rbar . \hyperlink{honor-virtus}{Honor} \ul{de Trinitate.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Minor Hours}{Breviarium: De Horis Minoribus}{breviarium-de-horis-minoribus-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline Let the aforesaid hymn \emph{Iam lucis} be said throughout the whole year at Prime, except on Maundy Thursday and henceforth up to Low Sunday exclusive, and except on All Souls' Day.
+% \newline Let these psalms always be said, except that in Septuagesima and henceforth on Sundays up to Easter exclusive, others are added according as they are noted on Septuagesima Sunday.
+\newline Let the \emph{Quicumque vult} always be said on Sundays, unless a totum duplex feast should occur.
+\newline Let the Chapter \emph{Regi} be said at Prime on all Sundays and feasts, even of three lessons, and through all octaves, except on Maundy Thursday and in Easter Week when no Chapter is said, and except on All Souls' Day. It is also said on Saturdays when the Office is of the Blessed Virgin.
+\newline Let the responsory \emph{Ihesu Christe} always be said, except on Passion Sunday and henceforth up to Low Sunday exclusive, when the Office is of the season.
+\newline Let \Vbar . \emph{Qui sedes} always be said, except on Passion Sunday and henceforth up to Pentecost Sunday exclusive, and except in Advent and henceforth up to the morrow of the Octave of the Epiphany exclusive, and except when the Office is of the Blessed Virgin in convent, and not on All Souls' Day.
+\newline Let the versicle \emph{Exurge} always be said, except on Maundy Thursday and henceforth up to Low Sunday exclusive, and except on All Souls' Day.
+\newline The \emph{Preces} also are to be said daily, except on Maundy Thursday and henceforth up to the Monday after Low Sunday exclusive, and except during the week of Pentecost, and except within the Octave of the Nativity of the Lord, and on duplexes and totum duplexes, and except on All Souls' Day.
+\newline Let the \emph{Confiteor} at Prime always be said, except during the Triduum before Easter.
+\newline Let the prayer \emph{In hac hora} always be said when the Chapter \emph{Regi seculorum} is said. It is also said on the last four days in Easter Week.
+\newline Let the aforesaid three hymns at Terce, Sext, and None always be said, except on Maundy Thursday and henceforth up to Low Sunday exclusive, and except that during the week of Pentecost at Terce, in place of \emph{Nunc sancte,} \emph{Veni creator} is said; and except on All Souls' Day.
+\newline Let these psalms [at the minor hours] always be said.
+\newline Let the antiphon \emph{Gloria tibi trinitas} at Prime, and the three placed above at Terce, Sext, and None, be said on all Sundays up to Septuagesima exclusive, when the Office is of the Sunday.
+\newline Let the three preceding Chapters at Terce, Sext, and None be said on Sundays up to the First Sunday of Lent exclusive, when the Office is of the Sunday.
+\newline Let the responsories of the Hours be said on Sundays up to Septuagesima exclusive, when the Office is of the Sunday.
+\newline Let the versicles, however, be said on Sundays and ferias when the Office is of the season, up to the First Sunday of Lent exclusive.
+\newline Let the Chapter \emph{Dominus dirigat} be said on all Sundays at Second Vespers and on ferias when the Office is of the season, up to Ash Wednesday exclusive.
+\newline Let the hymn \emph{Lucis creator} and the versicle \emph{Dirigatur} be said on all Sundays at Second Vespers, and on ferias when the Office is of the season, up to the Vespers of the Saturday before the First Sunday of Lent exclusive.
+
+
+% \newline \ul{Predictus ymnus,} \hyperlink{iam-lucis}{Iam lucis} \ul{dicatur per totum annum ad Primam, nisi in Cena domini et deinceps usque ad Dominicam in Albis exclusive et nisi die animarum.}
+% \newline \ul{Psalmi vero semper dicantur nisi quod in Septuagesima et deinceps in Dominicis usque ad Pascha exclusive adduntur alii secundum quod in Dominica Septuagesime sunt notati.}
+% \newline \psalm{quicumque} \ul{dicatur semper in Dominicis, nisi festum totum duplex evenerit.}
+% \newline \ul{Capitulum} Regi \ul{dicatur ad Primam omnibus Dominicis et festis eciam trium lectionum, et per omnes octavas, nisi in Cena Domini et in ebdomada Pasche quando nullum capitulum dicitur, et nisi in die animarum. Dicitur eciam in Sabbatis quando de Beata Virgine agitur in conventu.}
+% \newline \ul{Responsorium,} \hyperlink{ihesu-christe-fili}{Ihesu Christe} \ul{semper dicatur, nisi in Dominica in Passione et deinceps usque ad Dominican in Albis exclusive: quando de tempore agitur.}
+% \newline \ul{\Vbar .} Qui sedes, \ul{semper dicatur nisi in Dominica in Passione et deinceps usque ad diem Pentecostes exclusive, et nisi in Adventu Domini et deinceps usque in crastinum oct. Epiphanie exclusive, et nisi quando de Beata Virgine agitur in conventu et non in die animarum.}
+% \newline \ul{Versiculus,} Exurge \ul{semper dicatur nisi in die Cene et deinceps usque ad Dominicam in Albis exclusive, et nisi in die animarum.}
+% \newline \ul{Preces eciam cotidie dicende sunt nisi in Cena Domini et deinceps usque ad secundam feriam post Dominicam in Albis exclusive, et nisi in ebdomada Pentecostes et nisi infra Octavam Natalis Domini, et in duplicibus et totis duplicibus, et nisi in die animarum.}
+% \newline Confiteor \ul{in Prima semper dicatur, nisi in triduo ante Pascha.}
+% \newline \ul{Oratio} In hac hora \ul{semper dicatur quando dicitur Capitulum.} Regi seculorum. \ul{Dicitur eciam in quatuor diebus ultimis in ebdomada Pasche.}
+
+% \newline \ul{Predicti tres ymni ad Terciam, Sextam et Nonam semper dicantur, nisi in Cena Domini et deinceps usque ad Dominicam in Albis exclusive, et nisi quod in ebdomada Pentecostes ad Terciam loco de,} \hyperlink{nunc-sancte}{Nunc sancte} \ul{dicitur} \hyperlink{veni-creator-spiritus}{Veni creator.} \ul{Et preterquam in die animarum.}
+% \newline \ul{Psalmi vero semper dicantur.}
+% \newline \ul{Antiphona,} Gloria tibi trinitas \ul{ad Primam, et tres supra posite ad Terciam, Sextam et Nonam, dicantur omnibus Dominicis usque ad Septuagesimam exclusive, quando de Dominica agitur.}
+% \newline \ul{Tria vero Capitula precedentia ad Terciam, Sextam et Nonam dicantur in Dominicis usque ad Primam Dominicam Quadragesime exclusive, quando de Dominica agitur.}
+% \newline \ul{Responsoria autem horarum dicantur in Dominicis usque ad Septuagesimam exclusive, quando de Dominica agitur.}
+% \newline \ul{Versiculi autem dicantur in Dominicis et feriis quando de tempore agitur, usque ad Primam Dominicam in Quadragesima exclusive.}
+
+% \newline \ul{Capitulum} Dominus dirigat, \ul{dicatur omnibus Dominicis in Secundis Vesperis et per ferias quando de tempore agitur usque ad diem Cinerum exclusive.}
+% \newline \ul{Ymnus} \hyperlink{lucis-creator}{Lucis creator} \ul{et Versiculus} Dirigatur, \ul{dicantur omnibus Dominicis in Secundis Vesperis, et per ferias quando de tempore agitur, usque ad Vesperas Sabbati ante Primam Dominicam Quadragesime exclusive.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On \emph{Preces}}{Breviarium: De Precibus}{breviarium-de-precibus-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline After the [Ben.] antiphon let there be subjoined: \emph{Kyrie eleyson. Christe eleyson. Kyrie eleyson. Pater noster. Et ne nos. Dominus vobiscum.} Then the Prayer.
+\newline In this manner let the \emph{Preces} be said at Terce, Sext, None, and Vespers when prostrations are made, except on Good Friday and Holy Saturday.
+
+% \newline \ul{Dicta antiphone subiungatur.} Kyrie eleyson. Christe eleyson. Kyrie eleyson. Pater noster. Et ne nos. Dominus vobiscum. \ul{Deinde Oracio.}
+% \newline \ul{Hoc modo dicantur preces ad Terciam, Sextam, Nonam, et Vesperas quando fiunt prostrationes, nisi in Parascheve et Sabbato Pasche.}
+
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Ferial Office}{Breviarium: De Officii Ferialis}{breviarium-de-officii-ferialis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} I}{t} is to be known that the order of the preceding week concerning the Invitatory, antiphons, psalms, and canticles, the Chapter, the Versicle, and the Responsories of the hours is to be observed in this manner when an office of a feria is celebrated. Namely, that the Invitatories are said from the Octave of the Epiphany until Passion Sunday; the Chapters up to Wednesday at the beginning of the fast, exclusive; the Versicles and Responsories for the hours up to the First Sunday of Lent; each of the aforementioned four from \emph{Deus omnium} up to Advent. Likewise, the antiphons and psalms of the nocturns up to the Lord's Supper, exclusive, and from \emph{Deus omnium} until the Nativity of the Lord. Likewise, the antiphons of Lauds up to Palm Sunday, and from \emph{Deus omnium} up to the feria on which the noted Lauds antiphons are begun before the Vigil of the Nativity of the Lord, exclusive. Likewise, the psalms and canticles of Lauds up to Easter Saturday, exclusive, and from \emph{Deus omnium} up to the Vigil of the Nativity, exclusive. Likewise, the antiphons and psalms at Vespers up to the Lord's Supper, exclusive, and from \emph{Deus omnium} up to the Vigil of the Nativity of the Lord. Likewise, the antiphons at the Ben. and at the Mag. are said up to Septuagesima and from \emph{Deus omnium} up to Advent.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{}\ul{ciendum quod ordo precedentis ebdomade de Invitat., antiphonis, psalmis, et canticis. Capitulum, Versiculum, et horarum Responsoriis ita servandus est, quando de feria agitur. Videlicet ut Invitatoria dicantur ab Octava Epyphanie usque ad Dominicam in Passione. Capitula usque ad feriam quartam in capite ieiunii exclusive. Versiculi et Responsoria ad horas usque ad Dominicam Primam Quadragesime. Singula predictorum quatuor. A} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad Adventum. Item antiphone et psalmi de nocturnis usque ad Cenam Domini exclusive, et a} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad Nativitatem Domini. Item antiphone Laudum usque ad Ramos Palmarum et a} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad feriam in qua incipiuntur antiphone Laudum notate ante Vigiliam Natalis Domini exclusive. Item psalmi et cantica Laudum usque ad Sabbatum Pasche exclusive, et a} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad Vigiliam Natalis exclusive. Item antiphone et psalmi ad Vesperis usque ad Cenam Domini exclusive, et a} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad Vigiliam Natalis domini. Item antiphone Ad} Ben. et ad Mag. \ul{dicuntur usque ad Septuagesimam et a} \hyperlink{deus-omnium}{Deus omnium.} \ul{usque ad Adventum.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Sunday Responsories}{Breviarium: Responsoria De Dominica}{breviarium-responsoria-de-dominica-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline On any Sunday from \emph{Deus omnium.} up to Advent exclusive, when it is celebrated for the Sunday: the responsory, \emph{Honor virtus.} is to be said in place of the ninth responsory, after the Sunday history has been fully sung, whether on weekdays or on Sunday.
+\newline At Lauds, the antiphon, Psalms, Cap., Hymn, \Vbar , as on the Sunday \emph{Domine ne in ira.} The antiphons, however, at the Ben. and at the Mag. are to be said according to what is noted below in the series of Gospels with the collects. At Prime and at the other hours, the antiphons, Cap., Responsories, \Vbar , are to be said as they are in the history \emph{Domine ne in ira.} And this order at Lauds and at the Hours is to be kept on all Sundays when it is celebrated for the Sunday up to Advent of the Lord exclusive.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Inqualibet Dominica a} Deus omnium. \ul{usque ad Adventum exclusive quando de Dominica agitur: Responsorium,} Honor virtus. \ul{loco noni responsorii dicatur: postquam Dominicales hystoria sive in feriis sive in Dominica fuerit percantanta.}
+% \newline \ul{In Laudibus antiphona, Psalmi, Cap., Ymnus, \Vbar , sicut in Dominica} Domine ne in ira. \ul{Antiphone vero ad Ben., et ad Mag., secundum quod infra in serie evangeliorum cum orationibus sunt notate dicantur. Ad Primam et ad alias horas antiphone, Cap., Responsoria, \Vbar , dicantur sicut sunt in hystoria} Domine ne in ira. \ul{Et hic ordo In Laudibus et in Horis servetur omnibus Dominicis quando de Dominica agitur usque ad Adventum Domini exclusive.}%typo noni for novi
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Sundays of August}{Breviarium: Dominice Augusti}{breviarium-dominice-augusti-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the first Sunday of August and thereafter up to the first Sunday of September exclusive, let the history \emph{In principio.} be sung when it is celebrated for the Season, and let the lessons from the Books of Solomon and from the Books of Wisdom be read. And it is to be noted that the first Sunday of the month is called that which is nearest to the Kalends, whether it precedes the Kalends, or follows them, or is on the Kalends themselves. If, therefore, the Kalends fall on a Sunday, the history assigned to that Sunday is to be begun there, unless a feast prevents it. If, however, the Kalends fall on Monday, Tuesday, or Wednesday, then on the preceding Sunday let the history be begun. But if the Kalends fall on Thursday, Friday, or Saturday, it ought to be begun on the following Sunday.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{ominica} prima Augusti et deinceps usque ad primam Dominicam Septembris exclusive cantetur hystoria,} In principio. \ul{quando de tempore agitur, et legantur lectiones de Libris Salomonis et de Libris Sapientie Et notandum quod Dominica prima mensis appellatur illa que propinquior est Kalendis, sive precedat Kalendas, sive sequatur, sive sit in ipsis Kalendis. Si igitur Kalende fuerunt in Dominica ibi est hystoria que illi Dominice assignatur nisi festum impediat inchoanda. Si vero Kalende fuerunt secunda, tercia, vel quarta feria, tunc in precedenti Dominica hystoria inchoetur. Si autem quinta vel sexta feria vel Sabbato Kalende fuerint, inchoari debet in sequenti Dominica.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Sundays of September}{Breviarium: Dominice Septembris}{breviarium-dominice-septembris-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the first Sunday of September and thereafter up to the third Sunday of the same month exclusive, that is, for fifteen days only, when it is celebrated for the Season, let the history \emph{Si bona.} be sung, and let it be read from the Book of Job.
+\newline If this Sunday falls on the Kalends, let it be done as noted within the Octave of Blessed Augustine on the feast of Saint Giles.
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the third Sunday of September and thereafter up to the first Sunday of October exclusive, let the history of Tobit, Judith, and Esther be sung when it is celebrated for the Season, and let the lessons be read from the same Books.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{ominica} prima Septembris et deinceps usque ad terciam Dominicam eiusdem mensis exclusive idest per quindecim dies tantum quando de tempore agitur cantetur hystoria,} Si bona. \ul{et legatur de Libro Iob.}
+% \newline \ul{Si hec Dominica in Kalendis occurrerit fiat sicut infra octavam Beati Augustini in festo sancti Egidii est notatum.}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{ominica} tercia Septembris et deinceps usque ad primam Dominicam Octobris exclusive cantetur hystoria de Thobia, Iudith et Hester quando de tempore agitur et legantur lectiones de eisdem Libris.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Sundays of October}{Breviarium: Dominice Octobris}{breviarium-dominice-octobris-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the first Sunday of October and thereafter up to the first Sunday of November exclusive, let the history \emph{Adaperiat.} be sung, and let it be read from the Books of Maccabees when it is celebrated for the Season.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{ominica} prima Octobris et deinceps usque ad primam Dominicam Novembris exclusive cantetur hystoria,} Adaperiat. \ul{et legatur de Libris Machabeorum quando de tempore agitur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Sundays of November}{Breviarium: Dominice Novembris}{breviarium-dominice-novembris-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the first Sunday of November and thereafter up to the first Sunday of Advent exclusive, when it is celebrated for the Season, let the history \emph{Vidi dominum.} be sung, and let Ezekiel, Daniel, and the twelve prophets be read. And it is to be noted that when the Book of Ezekiel is read, lessons from the first chapter are ended with \emph{Tu autem.} and from the second chapter onward with \emph{Hec dicit dominus.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{ominica} prima Novembris et deinceps usque ad primam Dominicam Adventus exclusive quando de tempore agitur cantetur hystoria,} Vidi dominum. \ul{et legantur Ezechiel et Daniel et duodecim prophete. Et notandum quod cum legitur Liber Ezechielis lectiones de primo capitulo per.} Tu autem. \ul{a secundo et deinceps per.} Hec dicit dominus. \ul{finiuntur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Sundays after Trinity}{Breviarium: Dominice Post Trinitatis}{breviarium-dominice-post-trinitatis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} S}{eeing} that from the Sunday \emph{Deus omnium.} up to Advent exclusive there are twenty-seven weeks when the space of time is longer, but when shorter, twenty-two. Now the Sunday Gospels with collects are twenty-five, and as many antiphons at the Ben., and as many at the Mag. When, therefore, there are only twenty-two weeks, the last homilies of the three Gospels are to be read throughout the weekdays of the twenty-second week if they are vacant, and the collects with antiphons at the Ben. and at the Mag. are to be said. But if there are not as many vacant weekdays as there are homilies, the homily of the Gospel \emph{Loquente Ihesu.} with its collect and antiphons is to be omitted. If, however, there are twenty-three weeks, the two remaining homilies are to be read within the last week in the aforesaid manner. If twenty-four: the homily of the Gospel \emph{Cum sublevasset.} is to be read on some vacant weekday in the same manner. If twenty-five: each homily is to be read on its own Sunday. If twenty-six: the homily of the Gospel \emph{Loquente Ihesu.} is to be repeated on the twenty-fifth Sunday, when it is celebrated for the Sunday, and the homily of the Gospel \emph{Cum sublevasset.} is to be read on the twenty-sixth. But if twenty-seven: the homily of the Gospel \emph{Loquente Ihesu.} is to be read on the twenty-fourth and twenty-fifth Sundays, and the homily of the Gospel \emph{Cum sublevasset.} on the twenty-sixth and twenty-seventh. This, however, must be known: that when there are twenty-six or twenty-seven weeks, after the homily has been read in its first week, whether on Sunday or on some weekday, if on the following Sunday on which it ought to have been repeated, a feast occurs, or an octave, it is not to be repeated further.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{}\ul{\textsc{ecundum} quod a Dominica,} Deus omnium. \ul{usque ad Adventum exclusive: sunt viginti septem ebdomade quando prolixius est temporis spatium, quando vero brevius: viginti due. Evangelia vero Dominicalia cum orationibus: viginti quinque, et totidem antiphone ad Ben. et totidem ad Mag. Quando igitur tantum viginti due fuerint ebdomade, ultime omelie trium evangeliorum legantur per ferias vicesime secunde ebdomade si vacaverint, et dicantur orationes cum antiphonis ad Ben. et ad Mag. Quod si tot ferie non vacaverint, quot sunt omelie, omelia evangelii,} Loquente Ihesu. \ul{cum oratione sua et antiphonis dimittatur. Si autem viginti tres fuerint ebdomade, due residue omelie legantur infra ultimam ebdomadam predicto modo. Si vero viginti quatuor: omelia evangelii,} Cum sublevasset. \ul{legatur in aliqua feria vacante: eodem modo. Si autem viginti quinque: quelibet omelia legatur in sua Dominica. Si vero viginti sex: omelia evangelii,} Loquente Ihesu. \ul{repetatur in vicesima quinta Dominica, quando de dominica agetur, et omelia evangelii,} Cum sublevasset. \ul{Legatur in vicesima sexta. Si autem viginti septem: omelia evangelii,} Loquente Ihesu. \ul{legatur in vicesima quarta et vicesima quinta Dominica: et omelia evangelii,} Cum sublevasset. \ul{in vicesima sexta et vicesima septima. Hoc tamen sciendum quod quando sunt viginti sex vel viginti septem ebdomade, postquam omelia lecta fuerit in sua prima ebdomada, sive in Dominica sive in aliqua feria: si in sequenti Dominica in qua repeti debuerat festum occurrerit, vel octava: non est ulterius repetenda.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Dedication of a Church}{Breviarium: In Dedicatione Ecclesie}{breviarium-in-dedicatione-ecclesie-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} N}{ote} that in the first year of the dedication of a church, the office is begun at Mass. In the hour, however, which follows Mass and thereafter in all Hours up to Compline of the following day inclusive, let the office be made totum duplex, and let the collect, \emph{Deus qui invisibiliter.} be said at all hours except at Compline and Prime. At Vespers of the day on which the church was dedicated, let the responsory be sung, and on the following day at Matins let nine lessons be said, or three in Paschaltide. The octave, however, if it is to be celebrated, shall be celebrated when the week has revolved on that day on which the dedication was made, and the collect, \emph{Deus qui invisibiliter.} shall be said daily through the octave when it is to be celebrated for it. In the second year, however, and thereafter in individual years on the anniversary, let the office be made as in a totum duplex. And let octaves be celebrated, except in Advent and thereafter up to the Octave of Epiphany, and in Septuagesima and thereafter up to the Octave of Easter, and on the days of Rogations and thereafter up to the Sunday, \emph{Deus omnium.} When, however, octaves are not kept: within those eight days, let no commemoration be made of the dedication. But if this feast occurs within the octaves of any saint, while the octaves of the saint are continuing, let a commemoration be made of the octaves of the dedication. Let the brothers of the convent in which a feast of this kind is celebrated, both inside and outside, say the office of the dedication. Visiting brothers also, while they are present in any convent: let them say the office as it is said in the convent, both for the feast of the dedication and for others, although they may not generally be done throughout the order. After they have departed from the convent, however: let them return to their customary office.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} N}{}\ul{\textsc{otandum} quod in primo anno dedicationis ecclesie, officium inchoatur in Missa. In hora vero que sequitur Missam et deinceps in omnibus Horis usque ad Completorium sequentis diei inclusive fiat officium totum duplex, et dicatur oratio,} Deus qui invisibiliter. \ul{ad omnes horas preterquam ad Completorium et Primam. In Vesperis diei quo ecclesia dedicata est, cantetur, responsorium, et die sequenti in Matutinis fiat novem lectiones, vel tres tempore Paschali. Octava vero si celebranda fuerit celebrabitur revoluta ebdomada eo die quo dedicatio facta fuerit, et dicetur oratio,} Deus qui invisibiliter. \ul{cotidie per octavas, quando de ipsis agendum fuerit. Secundo autem anno et deinceps singulis annis in anniversario fiat officium sicut in toto duplici. Et octave celebrentur, preterquam in Adventu et deinceps usque ad Octavas Epyphanie, et in Septuagesima et deinceps usque ad Octavas Pasche, et in diebus Rogationum et deinceps usque ad Dominica,} Deus omnium. \ul{Quando autem octave non fiunt: infra octavas memoria non fiat de dedicatione. Quod si hoc festum infra octavas alicuius sancti evenerit durantibus octavis de sancto, fiat memoria de octavis dedicationis. Fratres de conventu in quo festum huiusmodi celebratur tam intus quam extra faciant officium de dedicatione. Fratres eciam hospites dum sunt presentes in conventu aliquo: faciant officium sicut fit in conventu, tam de festo dedicationis quam de aliis, quamvis per ordinem generaliter non fiant. Postquam vero recesserint de conventu: redeant ad officium consuetum.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Feasts in General}{Breviarium: De Festis in Communi}{breviarium-de-festis-in-communi-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{n} whatever day a simplex feast or greater occurs: on that day it shall it be celebrated, except on the Sundays of Advent, and except in Septuagesima and the following Sundays up to Palm Sunday inclusive, and except on Ash Wednesday, and except on the Monday after Palm Sunday and thereafter up to Low Sunday inclusive. And except on the day of Ascension and on its Octave, and on the vigil of Pentecost and thereafter up to the feast of Trinity inclusive. Excepted is the feast of the Purification, which is never transferred, and the feast of the Annunciation, concerning which let it be done as is noted below in the rubric \textit{On the Translation of Feasts}.
+\newline Also, a feast of three lessons shall be celebrated on whatever day it occurs, except on Sunday, or unless a simplex or greater feast is to be celebrated on it. And except when the history \emph{Domine ne in ira.} on account of the brevity of time between the Octave of Epiphany and Septuagesima must be sung on a feast of three lessons. And except on Ash Wednesday and thereafter up to the Octave of Easter inclusive. And except on the first day of Rogations, and thereafter up to the Octave of Ascension inclusive, and on the vigil of Pentecost and thereafter up to, \emph{Deus omnium.} And except on Saturdays when the conventual Office of the Blessed Virgin is celebrated and on the fasts of the Ember Days of September.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}\ul{\textsc{n} quacumque die festum simplex vel maius occurrerit: in ea celebrabitur, preterquam in Dominicis Adventus, et preterquam in Septuagesima et Dominics sequentibus usque ad Ramos inclusive, et preterquam in die Cinerum, et preterquam in secunda feria post Ramos et deinceps usque ad Dominicam in Albis inclusive. Et preterquam in die Ascensionis et in Octava eius, et in vigilia Pentecostes et deinceps usque ad festum Trinitatis inclusive. Excipitur festum Purificationis quod nunquam transfertur, et festum Annunciationis, de quo fiat sicut infra in rubrica \textit{De Translatione Festivitatum} notatum est.}
+% \newline \ul{Festum eciam trium lectionum fiat in quacumque die occurrerit nisi in Dominica, vel nisi festum simplex vel maius in eo fuerit celebrandum. Et nisi quando hystoria} Domine ne in ira. \ul{propter brevitatem temporis inter Octavas Epiphanie et Septuagesima in festo trium lectionum fuerit cantanda. Et nisi in quarta feria Cinerum et deinceps usque ad Octavas Pasche inclusive. Et nisi in prima die Rogationum, et deinceps usque ad Octavas Ascensionis inclusive, et in vigilia Pentecostes et deinceps usque ad,} Deus omnium. \ul{Et nisi in Sabbatis quando de Beata Virgine agitur in conventu et in ieiuniis Quatuor Temporum Septembris.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Concomitance of Feasts}{Breviarium: De Concomitantia Festivitatum}{breviarium-de-concomitantia-festivitatum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} I}{f} a simplex or greater feast occurs immediately after a totum duplex feast, the first feast, namely the totum duplex, shall have full Vespers on its day, and of the following feast a commemoration only shall be made. Excepted is the feast of Blessed Peter Martyr and the feast of the Translation of Blessed Dominic, when either of them occurs on the vigil of Ascension, because then it shall not have second Vespers.
+\newline If, however, a totum duplex feast occurs to be celebrated on the day after a simplex or semiduplex or duplex feast: the totum duplex feast shall be begun from the beginning at first Vespers, and of the feast of that day a commemoration only shall be made.
+\newline If, however, a semiduplex feast occurs after a semiduplex or simplex feast, on the day of the first feast at Vespers the psalms shall be of that first feast, but the antiphon upon the psalms and the chapter and the things that follow shall be of the following feast, and a commemoration shall be made of the first feast.
+\newline When, however, a simplex feast occurs after a semiduplex feast: the semiduplex feast shall have full Vespers on its day, and of the following simplex feast a commemoration only shall be made.
+\newline When, however, one simplex feast occurs after another simplex feast: the first feast on its day shall have the antiphon and psalms at Vespers. The chapter, however, and the things that follow shall be of the following feast, and a commemoration shall be made of the first feast.
+\newline What has been said above concerning a simplex and semiduplex feast is to be understood when the first feast had first Vespers. For if on account of some impediment a semiduplex or simplex feast had not had first Vespers: it ought to have second Vespers, unless a duplex or totum duplex feast follows.
+\newline If a simplex or greater feast is to be celebrated on any Saturday: the feast shall have full Vespers on that Saturday, even if the Sunday does not have second Vespers, except on the Saturdays of Advent, and on the Saturday before Septuagesima and thereafter on Saturdays up to Easter. On which a simplex or semiduplex feast shall have the psalms and antiphon at Vespers, but from the chapter it shall be begun of the Sunday, and a commemoration shall afterwards be made of the feast. A duplex or totum duplex feast, however, shall at all times have full Vespers, and of the following Sunday a commemoration only shall be made.
+\newline When, however, a simplex feast occurs after a Sunday: the psalms and antiphons shall be of the Sunday. The chapter and the things that follow of the feast. But if it is semiduplex or duplex: the psalms shall be of the Sunday, but the antiphon upon the psalms and the chapter and the things that follow shall be of the following feast. A totum duplex feast, however, shall be begun from the beginning, and shall have full Vespers, and of the Sunday a commemoration shall be made.
+\newline It should be known, moreover, that a Sunday within octaves in all respects is regarded as a simplex feast, except as regards to first Vespers when any simplex feast occurs on a Saturday within octaves.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{}\ul{\textsc{i} festum simplex vel maius post festum totum duplex immediate evenerit, primum festum scilicet totum duplex in suo die habebit totas Vesperas, et de festo sequenti memoria tantum fiet. Excipitur festum Beati Petri Martiris et festum Translationis Beati Dominici, quando aliquod eorum in vigilia Ascensionis occurrerit, quia tunc secundas Vesperas non habebit.}
+% \newline \ul{Si vero festum totum duplex in crastino festi simplicis vel semiduplicis aut duplicis occurrerit celebrandum: festum totum duplex in primis Vesperis a principio inchoabitur, et de festo illius diei memoria tantum fiet.}
+% \newline \ul{Si autem festum semiduplex occurrerit post festum semiduplex vel simplex, in die primi festi in Vesperis psalmi de ipso primo festo erunt, antiphona vero super psalmos et capitulum et que sequuntur erunt de festo sequenti et de festo illius diei fiet memoria.}
+% \newline \ul{Quando vero festum simplex post festum semiduplex evenerit: festum semiduplex habebit in die suo totas Vesperas, et de festo simplici sequenti memoria tantum fiet.}
+% \newline \ul{Quando autem unum festum simplex post aliud simplex evenerit: primum festum in die suo habebit in Vesperis antiphonam et psalmos. Capitulum vero et que sequuntur de sequenti festo erunt, et memoria fiet de primo festo.}
+% \newline \ul{Quod de festo simplici et semiduplici supradictum est: intelligendum est quando primum festum habuit primas Vesperas. Si enim propter aliquod impedimentum, festum semiduplex vel simplex, non habuisset primas Vesperas: habere debet secundas, nisi festum duplex vel totum duplex sequatur.}
+% \newline \ul{Si festum simplex vel maius in quocumque Sabbato fuerit celebrandum: habebit festum in ipso Sabbato totas Vesperas, eciam si Dominica secundas Vesperas non habeat, nisi in Sabbatis Adventus, et in Sabbato ante Septuagesimam et deinceps in Sabbatis usque ad Pascha. In quibus festum simplex vel semiduplex in Vesperis habebit psalmos et antiphonam, a capitulo vero inchoabitur de Dominica, et memoria postea de festo fiet. Festum vero duplex vel totum duplex omni tempore habebit totas Vesperas, et de Dominica sequenti memoria tantum fiet.}
+% \newline \ul{Quando autem festum simplex post Dominicam occurrerit: psalmi et antiphone de Dominica erunt. Capitulum et que sequuntur de festo. Si vero semiduplex vel duplex fuerit: psalmi de Dominica erunt, antiphona vero super psalmos et capitulum et que sequuntur de festo sequenti erunt. Festum vero totum duplex a principio inchoabitur, et habebit totas Vesperas, et de Dominica fiet memoria.}
+% \newline \ul{Sciendum autem quod Dominica infra octavas in omnibus censetur sicut festum simplex, nisi quantum ad primas vesperas quando festum aliquod simplex infra octavas in Sabbato evenerit.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Translation of Feasts}{Breviarium: De Translatione Festivitatum}{breviarium-de-translatione-festivitatum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} I}{f} a simplex or greater feast occurs on any Sunday of Advent: or on Septuagesima Sunday and thereafter on any Sunday up to Palm Sunday exclusive, let it be transferred to Monday, except the feast of the Purification, which is not transferred; and the feast of Saints Fabian and Sebastian, which is to be celebrated on the preceding Saturday; and the feast of Saint Agnes, which is to be transferred to the day after Saint Vincent, if any of them occurs on Septuagesima Sunday. Whatever simplex or greater feast occurs on Ash Wednesday, however: let it be celebrated on the preceding Tuesday.
+\newline When, however, a simplex or higher feast occurs on Palm Sunday or thereafter up to the octave of Easter inclusive: if it is simplex, in that year nothing shall be done of it except a commemoration on Sunday and on Monday and Tuesday at both Vespers and at Lauds, and on Wednesday at Lauds. A semiduplex and greater feast, however, shall be transferred to the week after the octave of Easter, except the feast of the Annunciation, which, if on a fixed day it is generally celebrated by everyone in the homeland, let it also be celebrated by the brothers on that day; otherwise, as has been said of others: let it be transferred.
+\newline Feasts, however, which are transferred to the aforesaid week shall be celebrated through the vacant weekdays of that week in that order in which they were omitted, so that nevertheless if any feast, unless it is of three lessons, occurs on any day of the aforesaid week, let it be celebrated on its day, nor on account of another feast let it be transferred outside its day. Every feast, however, which is to be celebrated on Monday and thereafter through this week shall have first Vespers, and at second Vespers a commemoration shall be made of it if another is immediately to be celebrated, unless it is a totum duplex, which shall also have second Vespers, in which only a commemoration shall be made of the feast to be celebrated immediately after it. A feast following after a totum duplex, however, shall have second Vespers, and so on: if several occur to be celebrated successively and immediately.
+\newline But if a simplex or greater feast occurs on the day of Ascension or on its Octave: let it be transferred to the following Friday. If, however, on the vigil of Pentecost: let it be celebrated on the preceding Friday. If, however, on the day of Pentecost or thereafter up to the feast of Trinity inclusive a semiduplex or greater feast occurs: let it be transferred to the following weekday after the feast of Trinity. But if it is simplex, in that year nothing shall be done of it.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} S}{}\ul{\textsc{i} festum simplex vel maius in aliqua Dominica Adventus evenerit: vel in Dominica Septuagesime et deinceps in aliqua Dominica usque ad Ramos exclusive in secundam feriam transferatur, excepto festo Purificationis quod non transfertur: et festo Sanctorum Fabiani et Sebastiani quod in precedenti Sabbato celebrandum est, et festo Sancte Agnetis quod in crastinum Sancti Vincentii transferatur, si aliquod ipsorum in Dominica Septuagesime evenerit. Quodcumque autem festum simplex vel maius in die Cinerum occurrerit: in precedenti tertia feria celebretur.}
+% \newline \ul{Quando vero festum simplex vel supra in Dominica de Ramis Palmarum vel deinceps usque ad octavas Pasche inclusive evenerit: si simplex fuerit: illo anno nichil de eo fiat nisi memoria in Dominica et in secunda et tercia feria in utrisque Vesperis et in Laudibus, et in quarta feria in Laudibus. Semiduplex autem et maius in ebdomadam post octavas Pasche transferatur, preter festum Annunciationis quod si certo die generaliter ab omnibus fuerit in Patria celebrandum, celebretur eciam a fratribus ipso die, alioquin sicut dictum est de aliis: transferatur.}
+% \newline \ul{Festivitates vero que in predictam ebdomadam transferentur, celebrentur per ferias vacantes ipsius septimane eo ordine quo fuerint intermisse, ita tamen quod si festum aliquod nisi trium fuerit lectionum, aliqua die predicte ebdomade occurrerit, in sua die celebretur, nec propter aliud festum extra suam diem transferatur. Quodlibet autem festum quod in secunda feria et deinceps per hanc ebdomadam fuerit celebrandum: habebit primas Vesperas et in secundis fiet de eo memoria, si aliud immediate fuerit celebrandum nisi sit totum duplex quod habebit eciam secundas Vesperas, in quibus fiet tantum memoria de festo celebrando post ipsum immediate. Festum vero sequens post totum duplex habebit secundas Vesperas et sic deinceps: si plura successive et immediate occurrerint celebranda.}
+% \newline \ul{Quod si festum simplex vel maius in die Ascensionis vel in Octava eius evenerit: in sequentem
+% %pp119
+% sextam feriam transferatur. Si vero in vigilia Pentecostes: in precedenti sexta feria celebretur. Si autem in die Pentecostes vel deinceps usque ad festum Trinitatis inclusive: festum semiduplex vel maius occurrerit: transferatur in sequentem feriam post festum Trinitatis. Quod si simplex fuerit illo anno nichil de eo fiat.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On a Feast of Three Lessons}{Breviarium: De Festo Trium Lectionum}{breviarium-de-festo-trium-lectionum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} L}{et} it be known that concerning a feast of three lessons, nothing is done on Maundy Thursday and thereafter up to Low Sunday inclusive, and on the day of Pentecost and thereafter up to Trinity Sunday inclusive.
+Likewise on the day of a feast of three lessons whenever a totum duplex feast is to be celebrated.
+On all Sundays, however, and when time is so short between the Octave of Epiphany and Septuagesima that on the intervening weekdays the history \emph{Domine ne in ira} must be sung; and on Ash Wednesday and thereafter up to Wednesday after Palm Sunday inclusive, and on the three days of Rogations, and within the octaves of the Ascension and on the Octave day, and on the vigil of Pentecost and within the octaves of Trinity, and within the octaves of the dedication and on the octave day, only a commemoration is made of the feast of three lessons at Vespers and at Lauds, unless during the aforesaid times a totum duplex feast is to be celebrated on the day of the feast of three lessons.
+Further, only a commemoration is made of a feast of three lessons on Saturdays when the conventual [office] of the Blessed Virgin is celebrated, and in the fasts of the Ember Days of September, and when a semiduplex feast is to be celebrated on its day on account of a translation.
+When, however, a feast of three lessons ought to be celebrated on the day after a Sunday or a simplex or semiduplex feast, at first Vespers only a commemoration shall be made of it, and on the following day the Office shall be of it at Matins, and Lauds, and the Hours of the day. At None, however, it is always ended.
+If, however, it ought to be celebrated on the day after a totum duplex, on the preceding day nothing shall be done of it, but on the following day let the Office of it be done as is said above.
+When, however, it occurs on the day after a vacant weekday: at preceding Vespers let it be begun at the chapter. Now let it be done thus: At Matins let the Invitatory be said by one as noted. One antiphon over the nine psalms of the feast. Let the versicle before the lessons and the three responsories be said according to the weekday from the history which would be sung if the feast had nine lessons outside of Paschaltide, except on the feast of Praxedes in which the last three responsories are always to be said. In Paschaltide, however, let only three psalms be said with the antiphon of Paschaltide: But the versicle according to the order of the nocturn. The three responsories as on a simplex feast of Paschaltide, the collect as noted. Let other things be done as on a simplex feast, except that \emph{Te Deum} is not said, and the first antiphon of Lauds alone is said at Lauds over the psalms. Prostrations, however, shall not be made as long as it is celebrated for it, and it is never transferred.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} S}{}\ul{\textsc{ciendum} quod de festo trium lectionum nichil fit in Cena Domini et deinceps usque ad Dominicam in Albis inclusive, et in die Pentecostes et deinceps usque ad diem Trinitatis inclusive.
+% Item quandocumque festum totum duplex in die festi trium lectionum fuerit celebrandum.
+% Omnibus autem diebus Dominicis, et quando tempus ita breve fuerit inter Octavas Epyphanie et Septuagesimam: quod in feriis intervenientibus oportet cantari hystoriam} Domine ne in ira: \ul{et in quarta feria Cinerum et deinceps usque ad quartam feriam post Ramos inclusive et in tribus diebus Rogationum, et infra octavas Ascensionis et in Octava, et in vigilia Pentecostes et infra octavas Trinitatis, et infra octavas dedicationis et in octava die, tantum fit memoria de festo trium lectionum in Vesperas et in Laudibus, nisi quando in predictis temporibus festum totum duplex in die festi trium lectionum fuerit celebrandum.
+% Fit eciam tantum memoria de festo trium lectionum in Sabbatis quando de Beata Virgine agitur in conventu, et in ieiuniis quatuor temporum Septembris, et quando festum semiduplex propter translationem in die ipsius fuerit celebrandum.
+% Quando vero festum trium lectionum in crastino Dominice vel festi simplicis aut semiduplicis debuerit celebrari, in primis Vesperis fiet tantum de ipso memoria, et sequenti die Officium de ipso erit in Matutinis, et Laudibus et Horis diei. Ad Nonam autem semper terminatur.
+% Si autem in crastino totius duplicis celebrari debuerit, in precedenti die nichil fiet de eo, sed sequenti die Officium de ipso agatur ut predictum est.
+% Quando vero in crastino ferie vacantis occurrerit: in Vesperis precedentibus ad capitulum inchoetur. Sic autem fiat. Ad Matutinas Invitatorium sicut est notatum ab uno dicatur. Antiphona una super novem psalmos de festo. Versiculus ante lectiones et tria responsoria dicantur secundum feriam de hystoria que cantaretur si festum haberet novem lectiones extra tempus Paschale, excepto festo Praxedis in quo semper dicantur tria ultima responsoria. Tempore vero Paschali dicantur tantum tres psalmi cum antiphona de festo Paschalis temporis: Versiculus vero secundum ordinem nocturni. Tria responsoria sicut in festo simplici Paschalis temporis, oratio sicut est notata. Cetera fiant sicut in festo simplici excepto quod non dicatur} Te Deum \ul{et prima antiphona Laudum sola dicitur in Laudibus super psalmos. Prostrationes autem non fiant quamdiu de eo agitur, et nunquam transferatur.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On a Simplex Feast}{Breviarium: De Festo Simplici}{breviarium-de-festo-simplici-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} F}{or} a simplex feast let it be celebrated in the manner written below, unless a greater preceding feast prevents it. At first Vespers, the antiphons and psalms of the feria which would be said if it were celebrated for the feria, or psalms of the feast if it preceded, or of the Octaves when it occurs within Octaves, with the antiphon of the preceding feast or of the Octaves. The chapter, however, and the things that follow shall be of the feast. The responsory at Vespers is not said. The Invitatory as noted. Let nine lessons be done outside of Paschaltide. In Paschaltide, however, only three. \emph{Te Deum laudamus,} is to be said, except from Septuagesima up to Easter, and except on the feast of the Holy Innocents when it falls outside of Sunday. At Lauds let these psalms be said, \psalm{92} \psalm{99} \psalm{62} \psalm{66} The Canticle \emph{Benedicite.} with psalms \psalm{148} with five antiphons, which also are to be said at the Hours of the day in their order, the fourth being omitted. And let this generally be observed: namely, that whenever the antiphons of Lauds are said at the Hours, the fourth is omitted, whether it is celebrated for the Season or for the Saints.
+The first of them on a simplex feast, however, is to be said at second Vespers over the psalms, except on feasts which occur from the Nativity of the Lord up to the Octave of Epiphany.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} F}{}\ul{\textsc{estum} simplex subscripto modo celebretur, nisi maius festum precedens impediat. In primis Vesperis antiphone et psalmi secundam feriam qui dicerentur si de feria ageretur, vel psalmi de festo si precesserit, vel de Octavis quando infra Octavas evenerit, cum antiphona de festo precedenti vel de Octavis. Capitulum vero et que sequuntur de festo erunt. Responsorium in Vesperis non dicitur. Invitatorium sicut est notatum. Novem lectiones fiant extra tempus Paschale. In tempore vero Paschali, tantum tres.} Te Deum laudamus, \ul{dicatur nisi a Septuagesima usque ad Pascha, et nisi in festo Innocentum quando extra Dominicam fuerit. In Laudibus dicantur hi psalmi,} \psalm{92} \psalm{99} \psalm{62} \psalm{66} \ul{Canticum} \psalm{benedicite} \ul{psalmis} \psalm{148} \ul{cum quinque antiphonis que eciam dicantur ad Horas diei suo ordine quarta pretermissa. Et hoc generaliter observetur, scilicet quod quandocumque antiphone Laudum ad Horas dicuntur: quarta intermittatur, sive de tempore sive de sanctis agatur.
+% Prima vero earum in festo simplici dicatur in secundis Vesperis super psalmos preterquam in festis que a Natali Domini usque ad Octavas Epyphanie occurrerunt.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On a Semiduplex Feast}{Breviarium: De Festo Semiduplici}{breviarium-de-festo-semiduplici-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{n} a semiduplex feast, at first Vespers let only one antiphon of the feast itself be said over the psalms, ferial psalms or of the feast if it preceded, or of the Octaves if it occurs within Octaves. The responsory at first Vespers as marked. Let other things be done as noted above for a simplex feast.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}\ul{\textsc{n} festo semiduplici in primis Vesperis una tantum dicatur antiphona de ipso festo super psalmos, psalmi feriales vel de festo si precesserit vel de Octavis si infra Octavas evenerit. Responsorium in primis Vesperis sicut est signatum. Cetera fiant sicut in festo simplici super notatum est.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On a Duplex Feast}{Breviarium: De Festo Duplici}{breviarium-de-festo-duplici-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} every duplex feast, at first Vespers let only one antiphon of the feast itself be said over the psalms, and the psalms as on semiduplexes, except on the feast of the Circumcision. The responsory at first Vespers as marked. At second Vespers, however, let the psalms be said under one antiphon, except on the feast of the Circumcision.
+Let other things be done as noted for a simplex feast, except that at Compline and at Prime preces are not said, but at Compline, after the antiphon following \emph{Nunc dimittis} has been said, and at Prime after saying \emph{Confiteor}: let there immediately be added \emph{Dominus vobiscum,} and the Collect.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}\ul{\textsc{n} omni festo duplici, in primis Vesperis una tantum antiphona de ipso festo super psalmos dicatur, et psalmi sicut in semiduplicibus, nisi in festo Circumcisionis. Responsorium in primis Vesperis sicut est signatum. In secundis vero Vesperis dicantur psalmi sub una antiphona: nisi in festo Circumcisionis.
+% Cetera fiant sicut in festo simplici est notatum, excepto quod in Completorio et in Prima preces non dicantur, sed in Completorio dicta antiphona post} Nunc dimittis \ul{et in Prima dicto,} Confiteor: \ul{statim subiungatur} Dominus vobiscum, \ul{et Oratio.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On a Totum Duplex Feast}{Breviarium: De Festo Toto Duplici}{breviarium-de-festo-toto-duplici-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} F}{or} a totum duplex feast let it be done on Easter Day and the two following days, on the Ascension of the Lord, on the day of Pentecost and the two following days, on the feast of the Trinity, on the day of the Consecration of a Church and on its Anniversary, and on the feast of the Patron of Our Church, and on the rest which are noted in the Calendar.
+In all totum duplex solemnities, however, at first Vespers let these psalms be said, namely: \psalm{112} \psalm{116} \psalm{145} \psalm{146} \psalm{147} except on the feast of Saint Stephen, Saint John, and Epiphany, and except on Easter Day and the two following days, and except on the day of Pentecost and the two following days, and except on the feast of the Translation of Blessed Dominic, when it is celebrated immediately after the Ascension. The responsory as and when it is marked. Let the antiphon at the Mag. and at the Ben. be said in full before the beginning of the canticle. \emph{Te Deum} is to be said at Matins at all times. Let the responsories of the hours be said with Alleluya, except at Compline of the Saturday before Septuagesima and thereafter up to Easter. Versicles, however, are never said with Alleluya, except in Paschaltide.
+Let all other things be done as noted above for a duplex feast, except that on the day of the Nativity, Saint Stephen, Saint John, and Epiphany, five antiphons are said over the psalms at second Vespers, and that on Monday and Tuesday after Easter and Pentecost, only one antiphon is said at Lauds over the psalms.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} F}{}\ul{\textsc{estum} totum duplex fiat in die Pasche et duobus sequentibus, In Ascensione Domini, In die Pentecostes et duobus sequentibus, In festo Trinitatis, in die Consecrationis Ecclesie et in Anniversario eiusdem, et in festo Patroni Ecclesie Nostre, et in ceteris que in Kalendario sunt notata.
+% In omnibus autem festivitatibus totis duplicibus, ad primas Vesperas dicantur hi psalmi scilicet,} \psalm{112} \psalm{116} \psalm{145} \psalm{146} \psalm{147} \ul{nisi in festo sancti Stephani et sancti Iohannis et Epyphanie et nisi in festo Pasche et duobus diebus sequentibus et nisi in festo Pentecostes et duobus diebus sequentibus, et nisi in festo Translationis Beati Dominici, quando post Ascensionem immediate celebrabitur. Responsorium sicut et quando est signatum. Antiphona ad Mag. et ad Ben. tota dicatur ante cantici inceptionem.} Te Deum, \ul{in Matutinis omni tempore dicatur. Responsoria horarum cum Alleluya dicantur, nisi in Completorio Sabbati ante Septuagesimam et deinceps usque ad Pascha. Versiculi vero nunquam dicantur cum Alleluya, nisi in tempore Paschali.
+% Cetera omnia fiant sicut supra in festo duplici est notatum, preterquam in die Natali et sancti Stephani et sancti Iohannis, et Epyphanie in quibus in secundis Vesperis dicuntur quinque antiphone super psalmos et quod secunda feria et tercia post Pascha et Pentecosten, una tantum antiphona dicitur in Laudibus super psalmos.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Octaves of Saints}{Breviarium: De Octavis Sanctorum}{breviarium-de-octavis-sanctorum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} F}{east} days of saints having Octaves are these: Saint Andrew, Saint Stephen, Saint John the Evangelist, the Holy Innocents, Saint John the Baptist, the Apostles Peter and Paul, Blessed Dominic, Saint Laurence, the Assumption of the Blessed Virgin, Saint Augustine, the Nativity of Blessed Mary, Saint Martin.
+Besides these Octaves let no other Octaves of saints be made, whether of patrons of the church, or of any others whatsoever. Now let the Office through the Octaves of saints be done thus:
+Through all weekdays within the Octaves of saints when it is celebrated for the Octaves: At Matins the Invitatory as noted in its proper places, the Hymn as on the day. Only one antiphon of the feast over the nine psalms. On the first day after the feast let the first antiphon of the nocturn be said, on the second day: the second, and so on for as many as are necessary. The versicle and three responsories of the feast according to the weekday. The history is to be divided through the weekdays in that manner which is noted above for the Sunday history. \emph{Te Deum} is to be said daily. The versicle before Lauds as on the day.
+At Lauds over the psalms, the first antiphon of Lauds. Chapter, Hymn, Verse, of the day. At the Ben. the antiphon as noted. The Collect as on the day. At the hours of the day, the antiphon, Chapters, responsories, versicle, and Collect, of the feast, except that, even if the feast was totum duplex, the responsories nevertheless are not said with Alleluya within the Octaves. At Vespers, antiphon, psalms, Chapter, hymn, versicle of the feast. At the Mag. the antiphon as noted. The Collect of the feast. Excepted from the aforesaid are the Octaves of the Apostles Peter and Paul and of Saint Andrew.
+\newline On the Octave day itself, however, at preceding Vespers, the psalms of the Octave, over the psalms the first antiphon of Lauds of the feast. Let other things be done as on the feast, keeping the manner of a simplex feast. Excepted are the Octave of Saint Laurence, on account of the verses of the antiphons which are not said, and the Octave of the Apostles Peter and Paul, and the Octaves of Saint Andrew, Saint Stephen, Saint John, and the Holy Innocents.
+The Octave of Saint John the Baptist also has its proper antiphon at the Mag. at second Vespers. Sunday within the Octaves, however, shall be done as noted for the Octave day, except that the antiphons at the Ben. and at the Mag. of the feast day are not said if others are noted through the Octaves. Excepted is the Sunday within the Octave of Blessed Augustine when it falls on the Kalends of September.
+When, however, the Sunday homily is read on any weekday within the Octaves, let the entire rest of the Office be done for the Octaves.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} F}{}\ul{\textsc{estivitates} sanctorum habentium Octavas sunt he: Sancti Andree, Sancti Stephani, Sancti Iohannis Evangeliste, Sanctorum Innocentium, Sancti Iohannis Baptiste, Apostolorum Petri et Pauli, Beati Dominici, Sancti Laurentii, Assumptionis Beate Virginis, Sancti Augustini, Nativitatis Beate Marie, Sancti Martini.
+% Preter istas Octavas nulle alie Octave sanctorum fiant sive patronorum ecclesie, sive aliorum quorumcumque. Sic autem fiat Officium per Octavas sanctorum.
+% Per omnes ferias infra Octavas sanctorum quando de Octavis agitur. Ad matutinas Invitatorium sicut in suis locis notatum est, Ymnus sicut in die. Una tantum antiphona de festo super novem psalmos. Prima die post festum dicatur prima antiphona de nocturno, secunda die: secunda, et sic deinceps quot fuerint necessarie. Versiculus et tria responsoria de festo secundum feriam. Est autem dividenda hystoria per ferias eo modo quo supra de dominicali hystoria est notatum.} Te Deum. \ul{cotidie dicatur. Versiculus ante Laudes sicut in die.
+% In Laudibus super psalmos prima antiphona Laudum. Capitulum, Ymnus, Versus, de die. Ad Ben. antiphona, sicut est notata. Oratio sicut in die. Ad horas diei, antiphona, Capitula, responsoria, versiculus, Oratio, de festo, excepto quod si festum fuit totum duplex responsoria tamen non dicuntur cum Alleluya infra Octavas. Ad Vesperas antiphona, psalmi, Capitulum, hymnus, versiculus de festo. Ad Mag. antiphona, sicut est notata. Oratio de festo. Excipiuntur de predictis, Octave Apostolorum Petri et Pauli et sancti Andree.}
+% \newline \ul{In Octava autem die ad Vesperas precedentes psalmi de Octava, super psalmos prima antiphona Laudum de festo. Cetera fiant sicut in festo servato modo festi simplicis. Excipiuntur Octava sancti Laurentii propter, versus antiphonarum qui non dicuntur, et Octava Apostolorum Petri et Pauli, et Octave sancti Andree, sancti Stephani, sancti Iohannis, sanctorum Innocentum.
+% Octava eciam sancti Iohannis Baptiste in secundis Vesperis habet propriam antiphonam Ad Mag. Dominica vero infra Octavas fiat sicut de Octava die notatum est, nisi quod antiphone Ad Ben. et Ad Mag. de die festi non dicantur si alie per Octavas notate sint. Excipitur Dominica infra Octavas Beati Augustini, quando in Kalendis Septembris evenerit.
+% Quando autem omelia Dominicali legitur in aliqua feria infra Octavas, fiat totum aliud Officium de Octavis.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Making Commemorations}{Breviarium: De Memoriis Faciendis}{breviarium-de-memoriis-faciendis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} T}{hroughout} the entire year, when on account of a feast or Octaves a full Office is not said of the Sunday: a commemoration is always to be made of it on the preceding Saturday at Vespers, and on the day itself at Lauds and at Vespers: except on the vigil of the Nativity of the Lord at Vespers, and on the day of the Nativity, and Circumcision, and thereafter whenever Sunday occurs up to the day after Epiphany exclusive. Excepted is the Sunday within the Octaves of the Nativity of the Lord, of which nothing is to be done except on the day after Saint Thomas, or on the day of Saint Sylvester. Also the Sundays within the Octaves of Epiphany and Ascension, of which on the preceding Saturday no commemoration is to be made.
+Let a commemoration of the Season also be made through all weekdays of Advent and Lent, and on the three days of Rogations, when a simplex or greater feast occurs to be celebrated in the aforesaid times; at other times throughout the year, however, let no commemoration be made of the Season through the weekdays when a feast happens to be celebrated within the week.
+Likewise of all simplex feasts and above: if they did not have complete first Vespers, or second, let a commemoration always be made at both Vespers. Excepted is the feast of the Commemoration of Blessed Paul, of which at first Vespers nothing is done specifically. Likewise of a feast of three lessons: when it does not have a full Office, a commemoration is to be made as noted above in its rubric; a commemoration is also to be made of saints of whom it is marked in the Calendar, except when nothing would be done of a feast of three lessons if it occurred. When, however, within any Octave the Office is not said of the Octave: a commemoration is to be made of it, except at both Vespers and at Lauds of the Assumption of Blessed Mary.
+On all Saturdays throughout the year, however, let a commemoration be made of the Blessed Virgin, except on the Saturday within the Octaves of the Nativity of the Lord, and on Holy Saturday of Easter and the following Saturday, and on the Saturday before the feast of the Trinity, and except on duplex and totum duplex feasts, and on All Souls' Day when it falls on a Saturday, and except on Saturdays in which it is celebrated of her in the community, and on Saturdays within the Octaves of her Assumption and Nativity when it is celebrated of the Octave.
+Let a commemoration also be made of her on the Octave of Saint Stephen at Lauds, and thereafter both at Vespers and at Lauds, up to Vespers of the Octaves of Epiphany inclusive, except on the vigil and on the feast of Epiphany.
+Of the Cross, however, a commemoration is to be made daily through the week of Easter at Vespers, and on Low Saturday at Vespers, and thereafter daily at Lauds and at Vespers, up to Vespers of the vigil of the Ascension exclusive, except on its Finding, and on totum duplex feasts.
+Of Blessed Dominic, however, let a commemoration be made daily throughout the entire year, except on the vigil of the Nativity of the Lord at Lauds, and thereafter up to the Octave of Epiphany inclusive, and except on Wednesday after Palm Sunday at Vespers and thereafter up to Low Sunday inclusive, and on the vigil of Pentecost at Vespers, and thereafter up to the feast of the Trinity, and except on duplex and totum duplex feasts, and within his Octaves when it is celebrated of him, and except on All Souls' Day at Lauds.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} P}{}\ul{\textsc{er} totum annum quando propter festum vel Octavas: de Dominica non fit plenum Officium: semper facienda est de ipsa memoria Sabbato precedenti in Vesperis, et in ipsa die in Laudibus et in Vesperis: preterquam in vigilia Natalis Domini in Vesperis, et in die Natalis, et Circumcisionis, et deinceps quandocumque Dominica fuerit usque in crastinum Epyphanie exclusive. Excipitur Dominica infra Octavas Natalis Domini de qua nichil faciendum est nisi in crastino sancti Thome, vel in die sancti Silvestri. Et Dominice infra Octavas Epyphanie et Ascensionis, de quibus in Sabbato precedenti nulla est memoria facienda.
+% Fiat eciam memoria de tempore per omnes ferias Adventus et Quadragesime, et tribus diebus Rogationum, quando festum simplex vel maius in predictis temporibus occurrerit celebrandum, aliis autem temporibus per totum annum de tempore per ferias nulla fiat memoria: quando festum infra ebdomadam contigerit celebrari.
+% Item de omnibus festis simplicibus et supra: si non habuerint integre primas Vesperas, vel secundas, memoria in utrisque Vesperis semper fiat. Excipitur festum commemorationis Beati Pauli: de quo in primis Vesperis nichil sit specialiter. Item de festo trium lectionum: quando non habet plenum Officium, facienda est memoria sicut supra in rubrica de ipso notatum est, facienda est eciam memoria de sanctis de quibus in Kalendario est signata: nisi quando de festo trium lectionum nichil fieret si eveniret. Quando autem infra quascumque Octavas: non fit Officium de Octavas: facienda est de ipsis memoria nisi in utrisque Vesperis et in Laudibus Assumptionis Beate Marie.
+% Omnibus vero Sabbatis per totum annum fiat memoria de Beata Virgine, preterquam in Sabbato infra Octavas Natalis Domini, et in Sabbato Sancto Pasche et sequenti, et Sabbato ante festum Trinitatis, et preterquam in festis duplicibus et totis duplicibus et in die animarum cum in Sabbato evenerint, et preterquam in Sabbatis in quibus de ipsa agitur in conventu, et in Sabbatis infra Octavas Assumptionis et Nativitatis eiusdem quando agitur de Octavis.
+% Fiat eciam de ipsa memoria in Octava sancti Stephani in Laudibus et deinceps tam in Vesperis quam in Laudibus, usque ad Vesperas Octavarum Epiphanie inclusive, nisi in vigilia et in festo Epyphanie.
+% De Cruce vero facienda est memoria cotidie per ebdomadam Pasche in Vesperis et Sabbato in Albis ad Vesperas et deinceps cotidie in Laudibus et in Vesperis, usque ad Vesperas vigilie Ascensionis exclusive, nisi in Inventione ipsius, et in festis totis duplicibus.
+% De Beato autem Dominico fiat cotidie memoria per totum annum nisi in vigilia Natalis Domini in Laudibus, et deinceps usque ad Octavam Epyphanie inclusive, et nisi in quarta feria post Ramos in Vesperis et deinceps usque ad Dominicam in Albis inclusive, et in vigilia Pentecostes in Vesperis, et deinceps usque ad festum Trinitatis, et nisi in festis duplicibus et totis duplicibus, et infra Octavas eiusdem quando de ipsis agitur et nisi in die animarum in Laudibus.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Order of Commemorations}{Breviarium: De Ordine Memoriarum}{breviarium-de-ordine-memoriarum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} T}{he} commemoration of a simplex feast and above precedes a commemoration of Octaves and of Sunday; a commemoration of Octaves, however, precedes a commemoration of Sunday, and also precedes a commemoration of the Blessed Virgin on Friday and Saturday.
+A commemoration of Sunday, and a commemoration of the Blessed Virgin on Friday and Saturday, precedes a commemoration of three lessons, and of a feast having only a commemoration. Likewise a commemoration of Advent and Lent precedes a commemoration of the Blessed Virgin on Friday and Saturday; a commemoration of the Blessed Virgin in Advent, however, precedes a commemoration of Saint Andrew on Friday and Saturday and a commemoration of the Cross in Paschaltide. A commemoration of the Cross in Paschaltide, however, is to be made after all others except after the commemoration of Blessed Dominic, which at all times is to be made after all other commemorations unless within his Octave.
+Whenever a commemoration is to be made, at Vespers and at Lauds, let it be made by antiphon, versicle, and Collect.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} M}{}\ul{\textsc{emoria} de festo simplici et supra: precedit memoriam de Octavis et de Dominica, memoria vero de Octavis precedit memoriam de Dominica, precedit eciam memoriam de Beata Virgine in sexta feria et Sabbato.
+% Memoria vero de Dominica, et memoria de Beata Virgine in sexta feria et Sabbato: precedit memoriam trium lectionum, et festi habentis solam memoriam. Item memoria de Adventu et Quadragesima: precedit memoria de Beata Virgine in sexta feria et Sabbato, memoria autem de Beata Virgine in Adventu: precedit memoria de sancto Andrea in sexta feria et Sabbato et memoriam Crucis in Paschali tempore. Memoria vero de Cruce in Paschali tempore: fiat post omnes alias nisi post memoriam Beati Dominici, que omni tempore est post omnes alias memorias facienda nisi infra Octavam ipsius.
+% Quandocumque autem fuerit memoria facienda, in Vesperis et in Laudibus, per antiphonam et versiculum et Orationem fiat.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Extraordinary Feasts}{Breviarium: De Festivitatibus Extraordinariis}{breviarium-de-festivitatibus-extraordinariis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} F}{east} days of saints which are held solemn in places in which the brothers reside may be celebrated solemnly by them, and histories sung and readings read.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} F}{}\ul{\textsc{estivitates} sanctorum que sollemnes habentur in locis in quibus fratres commorantur possunt ab eis sollemniter celebrari et cantari hystorie et legende legi.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Matins to Be Said in the Evening After Compline}{Breviarium: De Matutinis In Sero Post Completorium Dicendis}{breviarium-de-matutinis-in-sero-post-completorium-dicendis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} the feast of the Holy Trinity and thereafter on all duplex and totum duplex feasts up to the feast of Saint Augustine inclusive, and on the feast of Saint Mary Magdalene, let Matins be sung in the evening after Compline.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}\ul{\textsc{n} festo sancte Trinitatis et deinceps in omnibus festis duplicibus et totis duplicibus usque ad festum sancti Augustini inclusive, et in festo sancte Marie Magdalene cantentur in sero post Completorium Matutine.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Collects and Vigils of Saints}{Breviarium: De Orationibus et Vigiliis Sanctorum}{breviarium-de-orationibus-et-vigiliis-sanctorum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} O}{n} every feast of the saints, unless they have a vigil: the Collect which is said at Vespers preceding the feast day is to be said on the day itself at Lauds, Terce, Sext, and None, and at second Vespers of the day, unless it is a feast of three lessons, which does not have second Vespers.
+On feasts of saints having a vigil, however, the Collect of the vigil, if it is proper, is to be said at first Vespers, except on the feast of Saint Andrew when it is transferred.
+The Collect, however, which is said at Lauds of the day is to be said at Terce, Sext, and None, and at Vespers of the day. It should be known, moreover, that no vigil of any saint has anything at Matins nor at the Hours before Vespers, except the homily alone, on account of which nevertheless, when it is to be read, the other Office of that day is not changed, except sometimes in the blessings of the readings.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{}\ul{\textsc{n} omnibus festis sanctorum nisi vigiliam habuerint: Oratio que dicitur in Vesperis precedentibus diem festum: dicenda est in ipso die Ad Laudes, Terciam, Sextam et Nonam, et ad secundas Vesperas diei, nisi festum fuerit trium lectionum quod non habet secundas Vesperas.
+% In festis vero sanctorum habentium vigiliam, Oratio de vigilia si propria fuerit: dicenda est ad primas Vesperas, nisi in festo sancti Andree quando transfertur.
+% Oratio vero que dicitur in Laudibus diei: dicenda est ad Terciam, Sextam et Nonam et ad Vesperas diei. Sciendum autem quod nulla vigilia sancti alicuius habet aliquid in Matutinis nec in Horas ante Vesperas: nisi solam omeliam, propter quam tamen cum legenda fuerit: aliud Officium diei illius non mutatur nisi quandoque in benedictionibus lectionum.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Things to Be Sought in the Common of Saints}{Breviarium: Que Requirenda Sint in Communi Sanctorum}{breviarium-que-requirenda-sint-in-communi-sanctorum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} N}{ote} that throughout the entire year, all things which are not found marked in their proper places on the feasts of saints are to be taken from the Common of Saints of Paschaltide or of another season, and said in their places according as they are noted there and fit the solemnities which are being celebrated. Whenever, however, nothing proper is found among the readings on any feast, recourse must be had to the Common, whether for propers, or for nine lessons, or for six when there is a proper homily. When, however, there are Octaves, the aforesaid readings are to be repeated both on the Octave day and within as often as necessary.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} N}{}\ul{\textsc{otandum} quod per totum annum omnia que in festis sanctorum in suis locis non inveniuntur signata: de communi sanctorum Paschalis temporis sive alterius sunt assumenda, et dicenda suis locis secundum quod ibi notata sunt, et competunt festivitatibus de quibus agitur. Quandocumque autem non invenitur aliquid proprium de lectionibus in festo quocumque: recurrendum est ad commune sive propribus sive pro novem lectionibus sive pro sex quando est omelia propria. Cum autem fuerint Octave: repetende sunt lectiones predicte et in Octavis et infra quotiens fuerit necesse.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On Other Commemorations}{Breviarium: De Aliis Memoriis}{breviarium-de-aliis-memoriis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline If on the feast of any martyr or within octaves a commemoration is made of another martyr, then at Vespers let there be said for the commemoration of the second saint: the versicle of the second nocturn. At Lauds, however, let the versicle of the third nocturn be said. Let it be done in the same manner for other saints.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Si in festo alicuius martyris vel infra octavas fiat memoria de alio martyre, tunc in Vesperis dicatur ad memoriam de secundo sancto: versiculus secundi nocturni. In Laudibus, vero dicatur versiculus tercii nocturni. Eodem modo fiat de aliis sanctis.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Lessons From the Common of Saints}{Breviarium: Lectiones De Communi Sanctorum}{breviarium-lectiones-de-communi-sanctorum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} N}{ote} that the lessons written below from the Common of Saints are made lengthy for this reason, that those who wish may read them in full. Those, however, who are not delighted by lengthy lessons may make two or three out of one lesson, and thus read this, and then that, to remove distaste that could arise from the repetition of the same, since lessons for the saints are not given in small breviaries except from the Common of Saints.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} N}{}\ul{\textsc{ota} quod lectiones infra scripte de communi sanctorum ad hoc sunt facte prolixe, ut qui volunt legant eas plene. Qui vero non delectantur in prolixis lectionibus faciant de una lectione duas vel tres, et sic legant modo istas modo illas ad fastidium tollendum, quod posset oriri ex repetitione eiusdem, cum non habeantur lectiones de sanctis in parvis breviariis nisi de communi sanctorum.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: On the Conventual Office of the Blessed Virgin on Saturdays}{Breviarium: De Officio Beate Virginis in Sabbatis in Conventu}{breviarium-de-officio-beate-virginis-in-sabbatis-in-conventu-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} F}{rom} the octave of Epiphany up to Septuagesima, on all Saturdays unless a simplex or greater feast occurs: let the conventual office of the Blessed Virgin be said, with this exception: that when the first Saturday after the octave of Epiphany is completely vacant, the ferial office is to be said according to what is noted above in the rubric before the Sunday, \emph{Domine ne in ira.}
+\newline In the same manner also let the office be made on all Saturdays from \emph{Deus omnium,} up to Advent, unless a simplex or greater feast, or octaves, or fasts of the Ember Days, or vigils of saints which have a proper Mass occur.
+When, however, it is omitted on account of any of the aforesaid: then let a commemoration be made of it at Vespers and at Lauds, except on duplex feasts and on totum duplex feasts.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} A}{}\ul{\textsc{b} octavis Epiphanie usque ad Septuagesimam, in omnibus Sabbatis nisi festum simplex vel maius occurrerit: fiat in conventu officium de beata virgine, hoc excepto quod quando Sabbatum primum post octavas Epiphanie omnino vacaverit: faciendum est officium feriale secundum quod supra in rubrica ante Dominicam,} Domine ne in ira. \ul{notatum est.}% Sic autem fiat.}
+% \newline \ul{Eodem eciam modo fiat officium in omnibus Sabbatis a} Deus omnium, \ul{usque ad Adventum nisi festum simplex aut maius, vel octave vel ieiunia quatuor temporum aut vigilie sanctorum que propriam Missam habeant occurrerint.
+% % Ita tamen quod ad Mag. dicatur Ant.} Alma redemptoris: \ul{et ad Ben. Ant.} Ave stella \ul{et oratio,} Concede, \ul{ut predictum est. 
+% Quando vero propter aliquod predictorum intermittitur: tunc fiat de ea memoria in Vesperis et in Laudibus, preterquam in festis duplicibus et in totis duplicibus.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Gradual Psalms}{Breviarium: Canticum Graduum}{breviarium-canticum-graduum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\newline When, however, the aforesaid office is made in choir on Saturdays, rising, let the Gradual Psalms be said [before Matins].
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \newline \ul{Quando autem predictum officium fit in choro in Sabbatis, surgendo dicatur canticum graduum.}% hoc modo. Isti quique psalmi, scilicet,} \psalm{119} \psalm{120} \psalm{121} \psalm{122} \psalm{123} \ul{dicantur sub uno.} Requiem. \ul{Deinde} Pater noster. Et ne nos. A porta inferi. Dominus vobiscum. \ul{vel} Domine exaudi, \ul{si non sit sacerdos, qui dicit,} Oremus. {\color{Red} Oratio.}
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Daily Office of the Blessed Virgin}{Breviarium: Officium Cotidianum Beate Virginis}{breviarium-officium-cotidianum-beate-virginis-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Red} T}{he} the daily office of the Blessed Virgin, is omitted on the vigil of the Nativity of the Lord, at Matins and thereafter up to the day after the octave of Epiphany exclusive. And on Wednesday before Maundy Thursday at Vespers and thereafter up to Monday after the octave of Easter exclusive. Similarly on the vigil of Pentecost at Vespers and thereafter up to Monday after the feast of Trinity exclusive. It is also omitted on all duplex and totum duplex feasts at first Vespers and thereafter up to the day after the feast day exclusive. It is also omitted whenever the conventual office is of her. If any, however, wish out of devotion to say it in the aforesaid times: let them say it by themselves and softly.
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}\ul{\textsc{fficium} cotidianum beate virginis intermittitur, In vigilia Natalis Domini, In Matutinis et deinceps usque in crastinum post octavas Epyphanie exclusive. Et in quarta feria ante Cenam Domini in Vesperis et deinceps usque in secundam feriam post octavas Pasche exclusive. Similiter in vigilia Pentecostes in Vesperis et deinceps usque in secundam feriam post festum Trinitatis exclusive. Intermittitur eciam in omnibus festis duplicibus et totis duplicibus in Primis Vesperis et deinceps usque in crastinum diei festi exclusive. Intermittitur eciam quandocumque fit de ea officium in conventu. Siqui tamen in supradictis temporibus dicere ex devotione voluerint: per se et summisse illud dicant.}%typo: 2nd Intermittur
+
+\begin{paracol}{2}
+\parasubsection{Breviary: Office of the Dead}{Breviarium: Officium Defunctorum}{breviarium-officium-defunctorum-ordo}
+\end{paracol}
+\selectlanguage{english}
+\lettrine[lines=2]{\zallmancaps \color{Blue} I}{t} should be known that for the deceased, vigils of nine lessons are always to be said by the brothers in the community or wherever they may be stationed, once a week: except at the times noted below in which they may be omitted. At Vespers, however, and Matins and Lauds, the antiphons, psalms, canticles, versicles, lessons, and responsories are to be said as noted before in the Commemoration of the Dead: except that the ninth responsory is said only with these three verses, namely, \emph{Dies illa. Tremens.} and \emph{Creator.} After the last verse let the responsory be repeated in its entirety.
+\newline The aforesaid vigils of nine lessons are omitted, however, on all Saturdays and on the vigil of any feast, unless it is of three lessons. Likewise on duplex and totum duplex feasts at both Vespers. And on the vigil of the Nativity of the Lord and thereafter up to the octave of Epiphany exclusive. Likewise on Wednesday before Maundy Thursday and thereafter up to Monday after the octave of Easter exclusive. Likewise on the vigil of Ascension and thereafter up to its octave exclusive. Likewise on the vigil of Pentecost and thereafter up to the Sunday after Trinity exclusive. Likewise through all octaves. If, however, there is presently a deceased person: the office of vigils may be performed for him, but not on the day of the Nativity of the Lord, nor on Maundy Thursday, nor on Good Friday, nor on Holy Saturday, nor on Easter Day, nor on the day of Pentecost. But if any anniversary of the Order occurs: whether for a recently deceased person or for any other reason, when the aforesaid vigils are to be said within the week on any day: it suffices in that same week that those are said, and the brothers are not bound to any other [vigil].
+\lettrine[lines=2]{\zallmancaps \color{Red} O}{f} vigils of three lessons, however, let the psalms, lessons, and responsories be said in this manner. On Sunday and on Wednesday let there be said the psalms of the first nocturn with their antiphons and versicle and lessons and responsories. On Monday and Thursday let there be said the psalms of the second nocturn with their antiphons, and versicle and lessons and responsories. On Tuesday, however, and Friday let there be said the psalms of the third nocturn, similarly with their antiphons, versicle, lessons, and responsories. In the last responsory, however, let only the first verse be said, namely, \emph{Dies illa.} After the repetition, however, the responsory is not repeated. But if a feast falls in between: the aforesaid order shall nonetheless be kept on individual weekdays.
+\newline In this order, moreover, let the Collects be said in vigils of the dead. For a present or for one deceased person: if he was a bishop, let the first Collect be said, \emph{Deus qui inter apostolicos,} if another, \emph{Inclina,} if a woman, \emph{Quesumus domine,} the second, \emph{Deus venie,} the third, \emph{Fidelium.}
+For brothers, family members, and benefactors, the first, \emph{Deus venie,} the second, \emph{Deus qui nos patrem,} the third, \emph{Fidelium.}
+On every anniversary, the first, \emph{Deus indulgentiarum,} the second, \emph{Deus venie,} the third, \emph{Fidelium.}
+If a death and an anniversary occur at the same time, let there be omitted \emph{Deus venie,} and let the first Collect be said for the present deceased person, the second for the anniversary, the third is not changed. In vigils of three lessons, however, let the first be said, \emph{Deus venie,} the second, \emph{Deus qui nos patrem,} the third \emph{Fidelium.}
+
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} S}{}\ul{\textsc{ciendum} quod pro defunctis semper faciende sunt vigilie novem lectionum: a fratribus in conventu sive extra ubicumque fuerint, semel in ebdomada: nisi temporibus infra notatis in quibus intermitti possunt. In Vesperis autem et Matutinis et Laudibus antiphone, psalmi, cantica, versiculi lectiones et responsoria dicenda sunt sicut supra in commemoratione defunctorum notata sunt: excepto quod nonum responsorium dicatur tantum cum his tribus versibus scilicet,} Dies illa. Tremens. \ul{et} Creator. \ul{Post ultimum versum responsorium ex integro repetatur.}%typo novum
+% \newline \ul{Intermittuntur autem predicte vigilie novem lectionum in omnibus Sabbatis et in vigilia cuiuslibet festi nisi trium fuerit lectionum. Item in festis duplicibus et totis duplicibus in utrisque Vesperis. Et in vigilia Natalis Domini et deinceps usque ad octavas Epyphanie exclusive. Item in quarta feria ante Cenam Domini et deinceps usque ad feriam secundam post octavas Pasche exclusive. Item in vigilia Ascensionis et deinceps usque ad octavam ipsius exclusive. Item in vigilia Pentecostes et deinceps usque ad Dominicam post Trinitatem exclusive. Item per omnes octavas. Si tamen presens defunctus fuerit: officium vigiliarum pro eo agi poterit, non tamen in die Natalis Domini: nec in die Cene, nec in Parascheve nec in Sabbato Sancto, nec in die Pasche, nec in die Pentecostes. Quod si anniversarium quodcumque ordinis evenerit: vel pro presenti defuncto vel ex alia qualibet causa infra ebdomadam quocumque die fuerint predicte vigilie faciende: sufficit quod ille fiant, et ad alias in ipsa ebdomada non teneantur fratres.}
+% \lettrine[lines=2]{\zallmancaps \color{Red} I}{}\ul{\textsc{n} vigiliis vero trium lectionum, psalmi, lectiones et responsoria dicantur hoc modo. In Dominica et in quarta feria dicantur, psalmi primi nocturni cum suis antiphonis et versiculo et lectionibus et responsoriis. In secunda et quinta feria dicantur psalmi secundi nocturni: cum suis antiphonis, et versiculo et lectionibus et responsoriis. In tercia vero et sexta feria dicantur psalmi tercii nocturni, similiter cum suis antiphonis, versiculo, lectionibus, et responsoriis. In ultimo autem responsorio dicatur tantum primus versus, scilicet,} Dies illa. \ul{Post resumptionem vero, responsorium non repetatur. Quod si festum intervenerit: nichilominus in feriis singulis predictus ordo servetur.}
+% \newline \ul{Hoc autem ordine dicantur Orationes in vigiliis defunctorum. Pro presenti sive per uno defuncto: si episcopus fuerit: prima Oratio dicatur,} Deus qui inter apostolicos, \ul{si alius,} Inclina, \ul{si vero femina,} Quesumus domine, \ul{secunda,} Deus venie, \ul{tercia,} Fidelium.
+% \ul{Pro fratribus, familiaribus et benefactoribus, prima,} Deus venie, \ul{secunda,} Deus qui nos patrem, \ul{tercia,} Fidelium.
+% \ul{In omni anniversario, prima,} Deus indulgentiarum, \ul{secunda,} Deus venie, \ul{tercia,} Fidelium.
+% \ul{Si simul evenerint obitus et anniversarium dimittatur,} Deus venie, \ul{et prima Oratio dicatur pro presenti defuncto, secunda pro anniversario tercia non mutatur. In vigiliis autem trium lectionum dicatur prima,} Deus venie, \ul{secunda,} Deus qui nos patrem, \ul{tercia} Fidelium.
+
+% \begin{paracol}{2}
+% \parasubsection{Breviary}{Breviarium: }{breviarium--ordo}
+% \end{paracol}
+% \selectlanguage{english}
+% This is text that has not been translated.
+% \switchcolumn % Switch to the right column
+% \selectlanguage{latin}
+
+
+% \newline {\color{Red} .}
+% \newline {\color{Red} .}
+% \newline {\color{Red} .}
+% \newline {\color{Red} .}
+
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{n}
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{n}
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}
+% \lettrine[lines=2]{\zallmancaps \color{Blue} I}{n}
+% \lettrine[lines=2]{\zallmancaps \color{Red} O}{}
+
+% {\color{Red} \ubsubsection{Dity}{dity-ordo}}
+
+\begin{center}
+\vspace{+18em}
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont B
+% \newline
+% \fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont C
+% \newline
+\fontspec{Fraktur-Schmuck}\fontsize{48}{52}\selectfont H
+\end{center}
+
+\input{calendar_kdp_2027}
+
+% \input{calendar_kdp_base}
+
+\selectlanguage{latin}
+
+\input{ordo_2027}
+
+\input{specimens}
+
+% \input{main_humbert}
+
+% \backmatter
+
+% \thispagestyle{fancy}
+
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Indices}
+% \hypertarget{Indices}{}
+% \fancyhead[C]{Indices}
+% \fancyhead[RE,LO]{Indices}
+% Optional: change headers for index pages
+% \renewcommand{\leftmark}{Indices}
+% \renewcommand{\rightmark}{Index Hymnorum}
+
+% Print each index
+% \cprintindex{P}{Index Psalmorum et Canticorum}
+% \thispagestyle{empty}
+% \newpage
+% \cprintindex{H}{Index Hymnorum}
+% \thispagestyle{empty}
+% \newpage
+% \cprintindex{R}{Index Responsoriorum}%It does not index manual labels of responsories
+% \newpage
+% \cprintindex{S}{Index Responsoriorum Breve}
+% \newpage
+% \cprintindex{I}{Index Invitatorium}
+
+\end{document}

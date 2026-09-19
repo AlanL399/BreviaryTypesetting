@@ -27,6 +27,7 @@
 \usepackage{multicol}
 \usepackage{titlesec}
 \usepackage{soul}
+\usepackage{enumitem}
 % \usepackage{pifont}
 \usepackage{gregoriosyms}
 % \usepackage{etoolbox}
@@ -112,12 +113,29 @@
 	\emergencystretch=1em  % Allow some stretch
 	\hfuzz=0.5pt          % Don't complain about small overfulls
     \raggedcolumns  % Instead of balanced columns
-    \clubpenalty=10000
     \widowpenalty=10000  
     \brokenpenalty=4991
     \predisplaypenalty=10000
     \postdisplaypenalty=1549
     \displaywidowpenalty=1602
+}
+
+% Resolves hanging lettrine
+% \clubpenalty=10000
+% \widowpenalty=10000
+
+% Syntax: <number of rules> <penalty after line 1> <penalty after line 2> <default penalty>
+% \clubpenalties 3 10000 10000 150
+
+% Save the original macro
+\let\oldlettrine\lettrine
+
+% Override \lettrine to protect only lettrine-initiated paragraphs
+\renewcommand{\lettrine}[3][]{%
+	\clubpenalty=10000
+	% Prevent page break after 1st and 2nd lines of THIS paragraph only:
+	% \clubpenalties 3 10000 10000 150\relax
+	\oldlettrine[#1]{#2}{#3}%
 }
 
 % Adjust headheight and topmargin
@@ -163,13 +181,13 @@
 \newcommand{\doxology}{%
 	{\bfseries \color{Red} G}lória Patri, et Fílio, * et Spirítui Sancto. \\
 	% {\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
-	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sécula seculórum. Amen. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sécula seculórum. Amen.
 }
 
 \newcommand{\requiem}{%
 	% Réquiem ætérnam * dona eis, Dómine. \\
 	Réquiem etérnam * dona eis, Dómine. \\
-	Et lux perpétua * lúceat eis. \\
+	Et lux perpétua * lúceat eis.
 }
 
 \input{psalms}
@@ -183,17 +201,29 @@
 }
 
 % Define full Psalms with alternately colored, bold firstletters
+\newif\iffirstverse
+
 \newcommand{\fullpsalm}[1]{%
 	\begingroup % Start local group to limit scope
-		\setlength{\parindent}{1em} % Set paragraph Indentation
-		\let\psalmtext\empty % define command
-		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname % Display the psalm text
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{1em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
 		\newif\ifblue
 		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
 		\newcommand{\processline}[1]{%
 			\StrLeft{##1}{1}[\firstletter]%
 			\StrGobbleLeft{##1}{1}[\restofline]%
-			\par\hspace*{1em}%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{1em}% Start the new verse
 			\ifblue
 				{\color{Blue}\textbf{\firstletter}}%
 				\bluefalse
@@ -203,11 +233,37 @@
 			\fi
 			\restofline%
 		}
-		\renewcommand{\\}{\processline} % Redefine \\ to use line processor
+		\renewcommand{\\}{\processline}
 		\psalmtext
-		\par % Add explicit paragraph break after psalm
+		\par 
 	\endgroup
 }
+
+% \newcommand{\fullpsalm}[1]{%
+	% \begingroup % Start local group to limit scope
+		% \setlength{\parindent}{1em} % Set paragraph Indentation
+		% \let\psalmtext\empty % define command
+		% \expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname % Display the psalm text
+		% \newif\ifblue
+		% \bluetrue
+		% \newcommand{\processline}[1]{%
+			% \StrLeft{##1}{1}[\firstletter]%
+			% \StrGobbleLeft{##1}{1}[\restofline]%
+			% \par\hspace*{1em}%
+			% \ifblue
+				% {\color{Blue}\textbf{\firstletter}}%
+				% \bluefalse
+			% \else
+				% {\color{Red}\textbf{\firstletter}}%
+				% \bluetrue
+			% \fi
+			% \restofline%
+		% }
+		% \renewcommand{\\}{\processline} % Redefine \\ to use line processor
+		% \psalmtext
+		% \par % Add explicit paragraph break after psalm
+	% \endgroup
+% }
 
 % Same but full Psalms
 % \newcommand{\fullpsalm}[1]{%
@@ -373,6 +429,9 @@
 	\unskip\ignorespaces% Prevent paragraph break
 }
 
+% Fix invitatory-full
+\def\clearparshape{\parshape=0 \hangindent=0pt \hangafter=1 \relax}
+
 % Define the Invitatory-full environment
 \NewDocumentEnvironment{invitatory-full}{O{} m}{%
 	\leavevmode% forces horizontal mode
@@ -384,24 +443,29 @@
 	\StrBefore{\firstline}{ }[\firstword]%
 	\StrBefore{\parttwo}{ }[\secondword]%
 	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{1em} % Set paragraph indentation
+	\renewcommand{\\}{\par\hspace*{1em}} % Redefine \\ to end the line and add indentation
 % The format of the Invitatory: firstline or all
 	% \firstline
 	\par \noindent {\color{Red} Invitato.} \firstline
 	% {\color{Red} Invit.} \firstline
 	\par \noindent {\color{Red} Psalmus.}
-	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte}, exultémus Dómino, iubilémus Deo, salutári nostro: preoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
-	\firstword . \\
-	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte} exultémus Dómino, iubilémus Deo salutári nostro, preoccupémus fáciem eius in confessióne et in psalmis iubilémus ei. \\
+	\firstword , etc. \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus et rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
 	\secondword . \\
-	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscue eius. \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius, veníte adorémus et procidámus ante Deum, plorémus coram Dómino qui fecit nos, quia ipse est Dóminus Deus noster, nos autem pópulus eius et oves páscue eius. \\
 	\firstword . \\
-	{\bfseries \color{Red} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	{\bfseries \color{Red} H}ódie si vocem eius audiéritis nolíte obduráre corda vestra sicut in exacerbatióne secúndum diem temptatiónis in desérto, ubi temptavérunt me patres vestri probavérunt et vidérunt ópera mea. \\
 	\secondword . \\
-	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi semper hi errant corde, ipsi vero non cognovérunt vias meas quibus iurávi in ira mea si introíbunt in réquiem meam. \\
 	\firstword . \\
-	\doxology
+	% \doxology \\
+	{\bfseries \color{Red} G}lória Patri et Fílio et Spirítui Sancto. \\
+	{\bfseries \color{Blue} S}icut erat in princípio et nunc et semper et in sécula seculórum. Amen. \\
 	\secondword . \firstword .%
 }{%
+	\aftergroup\clearparshape%
 	\unskip\ignorespaces% Prevent paragraph break
 }
 
@@ -443,7 +507,8 @@
 % Define subsection format
 \titleformat{\subsection}
 % {\normalfont\large\bfseries}{}{0pt}{}
-{\normalfont\large\bfseries\centering}{}{0pt}{}
+% {\normalfont\large\bfseries\centering}{}{0pt}{}
+{\normalfont\large\bfseries\centering\color{Red}}{}{0pt}{}
 
 % Adjust spacing before and after the subsection title
 \titlespacing*{\subsection}
@@ -650,10 +715,10 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-& & & & \color{Red} Januarius. \\
+& & & & \color{Red} Ianuarius. \\
  % \color{Red} III & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} \\
  % & B & \color{Red} IIII & 2 & Oct. Sancti Stephani. & \color{Red} \\
-% \color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Johannis. & \color{Red} Incipit Quartus Embolismus.\\
+% \color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \color{Red} Incipit Quartus Embolismus.\\
 % & D & \color{Red} II & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
 % \color{Red} XIX & E & \color{Red} Nonis & 5 & & \color{Red} \\
 \color{Red} VIII & F & \color{Red} VIII & 6 & Obiit Frater Raymundus Ordinis Nostri Magister Tercius. \\
@@ -677,7 +742,7 @@
  % & C & \color{Red} IX & 24 & & \color{Red} \\
 % \color{Red} IX & D & \color{Red} VIII & 25 & Conversio Sancti Pauli. Semid. \\
 % & E & \color{Red} VII & 26 & & \color{Red} \\
-% \color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Juliani Episcopi et Confessoris. Mem. \\
+% \color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Confessoris. Mem. \\
 % \color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. & Claves XL. \\
  % & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
 % \color{Red} XIIII & B & \color{Red} III & 30 & & \color{Red} \\
@@ -786,7 +851,7 @@
 % \color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apostolorum. Semid. \\
 % \color{Red}  & C & \color{Red} VI & 2 & \\
 % \color{Red} XIX & D & \color{Red} V & 3 & Inventio Sancte Crucis. Semid. \\
- % &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Evencii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
+ % &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Eventii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
 % \color{Red} VIII & E & \color{Red} IIII & 4 & Festum Corone Domini. Simplex. & \color{Red} \\
 % \color{Red}  & F & \color{Red} III & 5 & & \color{Red} \\
 % \color{Red} XVI & G & \color{Red} II & 6 & Obiit Frater Petrus Magister Ordinis. XXVII. \\
@@ -832,8 +897,8 @@
 % \color{Red} XVIII & B & \color{Red} II & 12 & \multicolumn{2}{l}{\color{Red} Basilidis Cyrini, Naboris, et Nazarii, Martyrum. III. Lect.} \\
 % \color{Red} VII & C & \color{Red} Idus & 13 & & \color{Red} \\
 % \color{Red}  & D & \color{Red} XVIII & 14 & & Solsticium Estivale. \color{Red} \\
-% \color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modest Martyrum. Mem. \\
-% \color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulice Martyrum. Mem. \\
+% \color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modesti Martyrum. Mem. \\
+% \color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulite Martyrum. Mem. \\
 % \color{Red}  & G & \color{Red} XV & 17 & & Sol in Cancio. \color{Red} \\
 % \color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Martyrum. III. Lect. \\
 % \color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii in Martyrum. Simplex. \\
@@ -1042,7 +1107,7 @@
 % \color{Red} IIII & \color{Red} A & \color{Red} IIII & 10 &  & \color{Red} \\
 % \color{Red}  & B & \color{Red} III & 11 & Damasi Pape et Confess. Mem. & \color{Red} \\
 % \color{Red} XII & C & \color{Red} II & 12 &  & \color{Red} \\
-% \color{Red} I & D & \color{Red} Idus & 13 & Luce Virginis et Martyris. Simplex. & \color{Red} \\
+% \color{Red} I & D & \color{Red} Idus & 13 & Lucie Virginis et Martyris. Simplex. & \color{Red} \\
 % \color{Red}  & E & \color{Red} XIX & 14 &  & \color{Red} \\
 % \color{Red} IX & F & \color{Red} XVIII & 15 & Obiit Frater Conradus Magister Ordinis. XXX. & \\
 % \color{Red}  & G & \color{Red} XVII & 16 & & \color{Red} \\
@@ -1071,7 +1136,7 @@
 \ubsection{Rubrice}{martyrologium-rubrice}
 
 {\color{Red} \ubsubsection{De Officio Legende De Kalendario et Luna et Martyrologyo et Aliis His Annexis}{de-officio-legende-de-kalendario-et-luna-et-martyrologyo-et-aliis-his-annexis}}
-\lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{116} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: Capitulum? Qui si dixerit Non: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit Post Primam: tunc reservande sunt usque ad Primam. Si autem dixerit Sic: legende erunt in capitulo post Matutinas.}
+\lettrine[lines=2]{\zallmancaps \color{Blue} D}{}\ul{\textsc{um} dicitur psalmus} \psalm{148} \ul{in Matutinis: accedit qui lecturus est Kalendas ad prelatum, dicens ei summisse: \emph{Capitulum?} Qui si dixerit \emph{Non}: legende erunt Kalende in choro, finitis Matutinis. Si autem dixerit \emph{Post Primam}: tunc reservande sunt usque ad Primam. Si autem dixerit \emph{Sic}: legende erunt in capitulo post Matutinas.}
 \newline \ul{Cum ergo legende erunt in capitulo post matutinas: debet cum incipitur Benedictus pulsare capitulum, tam prolixe quod fratres possint commode advertere quod ad capitulum pulsetur. Qui modus pulsandi, semper est servandus in convocatione capituli. Debet autem lumen in capitulo tam diligenter parare: quod durante capitulo non oporteat circa idem iterum aliquem occupari. Debet etiam providere: ne iurge pro disciplinis desint. Parato autem libro, et lumine pro se ad legendum, et tabula pro tempore, et aliis pertinentibus ad officium suum: stans ante pulpitum in quo debet legere, dum intrat conventus in capitulum, divertat aliquantulum transeunte prelato ob reverentiam eius. Deinde rediens ad locum illum, cum conventus intraverit: incipiat legere in voce mediocri que legenda fuerint, secundum  modum infrascriptum. Perlectis autem omnibus, et clauso libro, et aliis faciendis breviter expeditis: vadat ad locum suum, finito capitulo reportaturus que fuerint alibi reportanda.}
 \newline \ul{Cum autem reservantur usque post Primam, dum dicitur ultimus psalmus in Prima: accedat qui legere debet ad prelatum, interrogans eum ut supra. Etsi dixerit sic: tunc cito pulsetur ad capitulum ante terminationem hore, et omnia faciat ut supra, preterquam de luminibus, si sit tanta dies quod non sit lumen necessarium. Si autem dixerit Non: legende sunt in choro. Cum autem in choro leguntur sive post Matutinas sive post Primam: non pulsatur capitulum, sed alia fiunt modo supradicto, prout competunt.}
 \newline \ul{De supradictis autem: legendum est sic.}
@@ -1079,6 +1144,7 @@
 \newline \ul{De evangelio autem legendum est omnibus diebus Dominicis, et festis simplicibus et supra. Item in vigilia Nativitatis Domini evangelium de vigilia: sive fuerit in Dominica: sive non. Et in omni vigilia que proprium habet officium in Missa, si in Dominica evenerit: evangelium de ipsa vigilia legendum est, preterquam in vigilia Beati Andree cum in Prima Dominica Adventus evenerit: qua tunc evangelium de Dominica est legendum. Item in crastino sancti Thome martyris. Item feria quarta in capite ieiunii, et in Cena Domini. Item in vigilia Pasche, et cotidie per Octavas Pasche et Pentecostes. Item in commemoratione omnium fidelium defunctorum. Ceteris vero diebus legendum est de constitutionibus. In varietatibus autem que occurrunt in huiusmodi lectionibus: servandus est modus qui in lectionario est notatus.}
 \newline \ul{Dicto igitur} Tu autem \ul{et facta responsione sequitur} Commemoratio fratrum, familiarium, benefactorum, defunctorum: ordinis nostri.
 \newline \ul{Si vero recitandus fuerit obitus alicuius, vel anniversarium aliquod fuerit in crastino: tunc antequam dicatur} Commemoratio \ul{dicendum est} Obiit talis, \ul{vel} Anniversarium Patrum et Matrum.
+\newline \ul{Si vero tabula legenda fuerit. Legatur ante recitationem obitus vel anniversarii, et antequam dicatur} Commemoratio.
 \newline \ul{Solet autem tabula septimana semper legi cum Kalendis. Tabula vero pro diebus aliis in mensa, vel in choro post gratiarum actiones dicto} Fidelium anime \ul{et} Pater noster, \ul{et fratribus sedentibus in locis suis.} 
 
 \end{multicols*}
@@ -1092,13 +1158,13 @@
 \thispagestyle{fancy}
 
 \vspace{+.5em}
-\color{Red}\csection{Januarius}{\color{Red} habet dies. XXXI. luna. XXX.}\color{black}
+\color{Red}\csection{Ianuarius}{\color{Red} habet dies. XXXI. luna. XXX.}\color{black}
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
  \color{Red} III & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Circumcisio domini. \color{Red} Duplex. \\
  & B & \color{Red} IIII & 2 & Oct. Sancti Stephani. & \color{Red} \\
-\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Johannis. & \color{Red} Incipit Quartus Embolismus.\\
+\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \color{Red} Incipit Quartus Embolismus.\\
 & D & \color{Red} II & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
 \color{Red} XIX & E & \color{Red} Nonis & 5 & & \color{Red} \\
 \color{Red} VIII & F & \color{Red} VIII & 6 & Epiphania Domini. Totum Dup. \\
@@ -1122,7 +1188,7 @@
  & C & \color{Red} IX & 24 & & \color{Red} \\
 \color{Red} IX & D & \color{Red} VIII & 25 & Conversio Sancti Pauli. Semid. \\
 & E & \color{Red} VII & 26 & & \color{Red} \\
-\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Juliani Episcopi et Confessoris. Mem. \\
+\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Confessoris. Mem. \\
 \color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. & Claves XL. \\
  & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
 \color{Red} XIIII & B & \color{Red} III & 30 & & \color{Red} \\
@@ -1143,7 +1209,7 @@
 \color{Red} XIX & F & \color{Red} III & 3 & \color{Red} Blasii Episcopi et Martyris. III. Lect. \\
 \color{Red} VIII & G & \color{Red} II & 4 & Anniversarium Patrum et Matrum. \\
  & \color{Red} A & \color{Red} Nonis & 5 & \color{Red} Agathe Virginis et Martyris. Simplex. \\
-\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Episcoporum. Memor. \\
+\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Episcoporum. Memoria. \\
 \color{Red} V & C & \color{Red} VII & 7 & \\
 \color{Red}  & D & \color{Red} VI & 8 & & \color{Red} Initium. XL. \\
 \color{Red} XIII & E & \color{Red} V & 9 & & \color{Red} \\
@@ -1264,7 +1330,7 @@
 \color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apostolorum. Semid. \\
 \color{Red}  & C & \color{Red} VI & 2 & \\
 \color{Red} XIX & D & \color{Red} V & 3 & Inventio Sancte Crucis. Semid. \\
- &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Evencii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
+ &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Eventii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
 \color{Red} VIII & E & \color{Red} IIII & 4 & Festum Corone Domini. Simplex. & \color{Red} \\
 \color{Red}  & F & \color{Red} III & 5 & & \color{Red} \\
 \color{Red} XVI & G & \color{Red} II & 6 & \color{Red} Iohannis Ante Portam Latinam. Semid. \\
@@ -1318,8 +1384,8 @@
 \color{Red} XVIII & B & \color{Red} II & 12 & \multicolumn{2}{l}{\color{Red} Basilidis Cyrini, Naboris, et Nazarii, Martyrum. III. Lect.} \\
 \color{Red} VII & C & \color{Red} Idus & 13 & & \color{Red} \\
 \color{Red}  & D & \color{Red} XVIII & 14 & & Solsticium Estivale. \color{Red} \\
-\color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modest Martyrum. Mem. \\
-\color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulice Martyrum. Mem. \\
+\color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modesti Martyrum. Mem. \\
+\color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulite Martyrum. Mem. \\
 \color{Red}  & G & \color{Red} XV & 17 & & Sol in Cancio. \color{Red} \\
 \color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Martyrum. III. Lect. \\
 \color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii Martyrum. Simplex. \\
@@ -1573,7 +1639,7 @@
 \color{Red} IIII & \color{Red} A & \color{Red} IIII & 10 &  & \color{Red} \\
 \color{Red}  & B & \color{Red} III & 11 & Damasi Pape et Confess. Mem. & \color{Red} \\
 \color{Red} XII & C & \color{Red} II & 12 &  & \color{Red} \\
-\color{Red} I & D & \color{Red} Idus & 13 & Luce Virginis et Martyris. Simplex. & \color{Red} \\
+\color{Red} I & D & \color{Red} Idus & 13 & Lucie Virginis et Martyris. Simplex. & \color{Red} \\
 \color{Red}  & E & \color{Red} XIX & 14 &  & \color{Red} \\
 \color{Red} IX & F & \color{Red} XVIII & 15 & & \color{Red} Solsticium Hyemale. \\
 \color{Red}  & G & \color{Red} XVII & 16 & & \color{Red} \\

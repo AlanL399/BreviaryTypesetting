@@ -1,0 +1,1041 @@
+\documentclass[openany]{book}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage[svgnames, x11names]{xcolor}
+% \usepackage{graphicx}
+\usepackage{geometry}
+\geometry{
+% Try these
+	paperwidth=5.0in,
+	paperheight=7.5in,% Could be taller, 7.75
+	twoside,
+	%
+	% --- HORIZONTAL MARGINS ---
+	% KDP minimum for a ~500 page book is 0.625in.
+	% We use 0.65in to protect the text from disappearing into the deep glue spine.
+	% inner=0.65in,
+	% inner=0.75in,
+	inner=0.765in,
+	% inner=0.85in,
+	% KDP minimum is 0.25in. We use 0.3in to give the text a beautiful,
+	% balanced frame on the wider 5.0" page.
+	outer=0.30in,
+	%
+	% --- VERTICAL MARGINS ---
+	% Since you removed the tall header, 0.35in is tight, clean, and safe.
+	% top=0.35in,
+	top=0.28in,
+	% Gives your footer page number breathing room above the 0.25" KDP cutting floor.
+	% bottom=0.35in,
+	% bottom=0.28in,
+	% bottom=0.26in,
+	% bottom=0.25in,
+	bottom=0.2in,
+	%
+	% --- MEASUREMENT OVERRIDES ---
+	% Tells geometry to compute margins from the top of the actual header line
+	includehead,
+	nomarginpar,
+    % Explicitly tightens the gap between text baseline and the page number
+    footskip=14pt,
+    % footskip=18.5pt,
+includehead,           % Keeps the tall header inside the 0.45in top safety zone
+includefoot            % Keeps the footer inside the 0.4in bottom safety zone
+}
+% \usepackage{xparse}
+\usepackage{titling}
+\usepackage{lettrine}
+\usepackage{multicol}
+\usepackage{paracol}
+\usepackage{titlesec}
+\usepackage{soul}
+\usepackage{enumitem}
+% \usepackage{pifont}
+\usepackage{gregoriosyms}
+% \usepackage{etoolbox}
+\usepackage{xstring}% For string manipulation
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{colortbl}
+% \usepackage{lua-widow-control}
+\usepackage{fontspec}
+% \setmainfont{Georgia}
+% \setmainfont{Times New Roman}
+% \setmainfont{Libre Caslon Text}
+% \setmainfont{Charis}
+\setmainfont{Merriweather}[
+	SmallCapsFeatures={Ligatures=NoCommon}
+]
+% \setmainfont{Libertinus Serif}
+% \setmainfont{Gentium}% 93% of Charis, thinner
+% \setmainfont{Source Serif 4 Regular}% too wide
+% \setmainfont{EB Garamond}% Too thin
+% \setmainfont{Junicode}
+% [
+	% Width=SemiCondensed, % or Condensed if desperate
+	% Ligatures={Common, Rare, Historic}, % Turn on the medieval ligatures
+	% Numbers=OldStyle
+% ]
+% \usepackage{lua-ul}
+% \usepackage{luacolor}
+\usepackage[latin,english]{babel}
+\babelprovide[hyphenrules=latin]{latin}
+% \usepackage{polyglossia}
+% \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
+\usepackage[titles]{tocloft}
+% \usepackage{imakeidx}
+
+% Indices setup code
+% \indexsetup{
+	% level=\section*,
+	% toclevel=section,
+	% noclearpage,
+    % othercode={%
+		% \footnotesize\thispagestyle{empty}
+		% \setlength{\leftskip}{0pt}% This forces the index entries to start at the absolute edge of the column
+		% \everypar{\hangindent=1em \hangafter=1}% Adjust this if you want a hanging indent for long entries
+    % }
+% }
+
+% \makeindex[name=H, title=Index Hymnorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+% \makeindex[name=R, title=Index Responsoriorum, columns=2, columnseprule, columnsep=0.1in]
+% \makeindex[name=S, title=Index Responsoriorum Breve, columns=2, columnseprule, columnsep=0.1in]
+% \makeindex[name=P, title=Index Psalmorum et Canticorum, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+% \makeindex[name=I, title=Index Invitatorium, columns=2, columnseprule, columnsep=0.1in, options=-s index.ist]
+
+% \newcommand{\cprintindex}[2]{%
+    % #1 = index name (e.g., P, H, R)
+    % #2 = display title (e.g., Index Psalmorum et Canticorum)
+    % \phantomsection%
+    % \addcontentsline{toc}{section}{#2}%
+    % \hypertarget{#2}{}%
+    % \renewcommand{\rightmark}{#2}%
+    % \printindex[#1]%
+% }
+
+\usepackage[final]{microtype}
+
+% \microtypecontext{spacing=nonfrench} % Slightly expands text spacing
+\SetProtrusion{encoding=*,family=*}{. = {,500}}
+\SetExpansion{encoding=*,family=*}{A = 500}
+\SetExtraKerning[unit=space]{encoding={*},family={*}}{
+  \textquoteleft = {500, }, % adjust quotes
+  : = {100,100}
+}
+
+% https://tug.org/FontCatalogue/otherfonts.html#initials
+% \usepackage{Acorn}% humanist
+% \usepackage{AnnSton}% not appropriate
+% \usepackage{ArtNouv}% more gothic
+% \usepackage{ArtNouvc}% not appropriate
+% \usepackage{Carrickc}% not medieval
+% \usepackage{Eichenla}
+% \usepackage{Eileen}% same as EileenBl but inverted, white lettering
+% \usepackage{EileenBl}% identical to Romantik except for more spacing
+% \usepackage{Elzevier}% humanist, very thin
+% \usepackage{GotIn}% gothic blackletter
+% \usepackage{GoudyIn}% humanist
+% \usepackage{Kinigcap}% not appropriate
+% \usepackage{Konanur}% not appropriate
+% \usepackage{Kramer}% too modern block
+% \usepackage{MorrisIn}% identical to Eichenla but slightly larger and rougher leaves
+% \usepackage{Nouveaud}% too square
+% \usepackage{Romantik}
+% \usepackage{Rothdn}% looks like yfonts yinipar
+% \usepackage{Royal}% gothic blackletter
+% \usepackage{Sanremo}% not appropriate
+% \usepackage{Starburst}% not appropriate
+% \usepackage{Typocaps}% not appropriate
+% \usepackage{Zallman}% humanist
+% \input{Zallman.fd}
+% \newcommand*\zallmancaps{\usefont{U}{Zallman}{xl}{n}}
+% \newcommand*\zallmancaps{\usefont{TU}{Georgia}{b}{n}}
+% third is ul/xl/l/m/sb/b/eb/bx fourth is n/it/sl/sc
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Libre Caslon Text}}
+% \newcommand*\zallmancaps{\fontspec[Weight=Bold]{Merriweather}}
+\newcommand*\zallmancaps{\fontspec[Weight=Bold]{Aneirin}}
+% \newcommand*\zallmancaps{\fontspec[Weight=700]{Georgia}}
+% [Instance=Condensed Bold] % Name of size
+% 300 = Light; 400 = Regular; 500 = Medium; 600 = SemiBold; 700 = Bold; 800 = ExtraBold; 900 = Black
+
+% Automatically use zallmancaps in lettrine
+% \renewcommand{\LettrineFontHook}{\zallmancaps}
+
+% Adjust font spacing
+\AtBeginEnvironment{multicols}{%
+% \BeforeBeginEnvironment{multicols}{%
+	% \hyphenpenalty=50
+	% lower it
+	\hyphenpenalty=20
+	% \tolerance=200
+	% increase it, but not noticeable here
+	% \tolerance=500
+	% shoudnt it be decreased?
+	% \tolerance=50
+	% \pretolerance=100
+	% lower it to increase hyphens; increase to allow for wider gaps
+	% \pretolerance=50
+	% \emergencystretch=0pt
+	% increase it
+	% \emergencystretch=3em
+	% Doesnt seem to make a difference
+	% \sloppy
+	\emergencystretch=1em  % Allow some stretch
+	\hfuzz=0.5pt          % Don't complain about small overfulls
+    \raggedcolumns  % Instead of balanced columns
+    \widowpenalty=10000  
+    \brokenpenalty=4991
+    \predisplaypenalty=10000
+    \postdisplaypenalty=1549
+    \displaywidowpenalty=1602
+}
+
+% Resolves hanging lettrine
+% \clubpenalty=10000
+% \widowpenalty=10000
+
+% Syntax: <number of rules> <penalty after line 1> <penalty after line 2> <default penalty>
+% \clubpenalties 3 10000 10000 150
+
+% Save the original macro
+\let\oldlettrine\lettrine
+
+% Override \lettrine to protect only lettrine-initiated paragraphs
+\renewcommand{\lettrine}[3][]{%
+	\clubpenalty=10000
+	% Prevent page break after 1st and 2nd lines of THIS paragraph only:
+	% \clubpenalties 3 10000 10000 150\relax
+	\oldlettrine[#1]{#2}{#3}%
+}
+
+% Adjust font spacing
+\AtBeginEnvironment{paracol}{%
+% \BeforeBeginEnvironment{multicols}{%
+	% \hyphenpenalty=50
+	% lower it
+	\hyphenpenalty=20
+	% \tolerance=200
+	% increase it, but not noticeable here
+	% \tolerance=500
+	% shoudnt it be decreased?
+	% \tolerance=50
+	% \pretolerance=100
+	% lower it to increase hyphens; increase to allow for wider gaps
+	% \pretolerance=50
+	% \emergencystretch=0pt
+	% increase it
+	% \emergencystretch=3em
+	% Doesnt seem to make a difference
+	% \sloppy
+	\emergencystretch=1em  % Allow some stretch
+	\hfuzz=0.5pt          % Don't complain about small overfulls
+    \raggedcolumns  % Instead of balanced columns
+    \clubpenalty=10000
+    \widowpenalty=10000  
+    \brokenpenalty=4991
+    \predisplaypenalty=10000
+    \postdisplaypenalty=1549
+    \displaywidowpenalty=1602
+}
+
+% Adjust headheight and topmargin
+% \setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
+% \setlength{\headheight}{32pt} % Set to at least 13.59999pt
+% \addtolength{\topmargin}{-1.6pt} % Adjust topmargin to compensate
+% \addtolength{\topmargin}{-11.6pt} % Adjust topmargin to compensate
+% \addtolength{\topmargin}{-14pt} % Adjust topmargin to compensate
+\setlength{\headsep}{10pt}      % Space between header and text body
+% \setlength{\footskip}{12pt}     % Space between text body and footer
+
+% Reduce padding and whitespace
+\setlength{\parskip}{0.1em} % Reduce space between paragraphs
+\setlength{\parindent}{1em} % Adjust paragraph indentation
+% \setlength{\columnsep}{0.2in} % Adjust the space between columns
+% \setlength{\columnsep}{0.1in} % Reduce space between columns
+% \setlength{\columnsep}{0.08in} % Reduce space between columns
+% \setlength{\columnseprule}{0.4pt} % Add a rule between columns and set its thickness
+
+% Reduce line spacing
+% \setstretch{0.85} % Reduce line spacing slightly; should adjust before publishing
+% \setstretch{0.95} % Reduce line spacing slightly; should adjust before publishing
+
+\makeatletter
+\def\leftmarginnote{%
+	\lrmarginnote{\hskip -\marginparsep \hskip -12.25em}}
+
+\def\rightmarginnote{%
+	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
+
+\long\def\lrmarginnote#1#2{%
+\vadjust{#1%
+\smash{\vtop{{%
+		\hsize\marginparwidth
+        \@parboxrestore
+        \@marginparreset
+		\small
+#2}}}}}
+\makeatother
+
+% \makeatletter
+% \DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
+% \DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
+% \newcommand{\vers@resp}[2]{%
+  % {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
+% }%
+% \makeatother
+
+% Defined by gregoriosyms
+% \newcommand{\Vbar}{℣}
+% \newcommand{\Rbar}{℟}
+
+\frenchspacing
+
+\def\V{\color{Red}\Vbar. \color{black}}
+\def\R{\color{Red}\Rbar. \color{black}}
+
+\newcommand{\doxology}{%
+	{\bfseries \color{Red} G}lória Patri, et Fílio, et Spirítui Sancto. \\
+	% {\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, * et in sǽcula sæculórum. Amen. \\
+	{\bfseries \color{Blue} S}icut erat in princípio, et nunc, et semper, et in sécula seculórum. Amen.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+\newcommand{\requiem}{%
+	% Réquiem ætérnam * dona eis, Dómine. \\
+	Réquiem etérnam * dona eis, Dómine. \\
+	Et lux perpétua * lúceat eis.
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+\input{psalms}
+
+% Controls how to display Psalms.
+\newcommand{\psalm}[1]{%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% \noindent{\csname psalm#1Incipit\endcsname}.%
+	\noindent{#1, \textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% \csname psalm#1Text\endcsname%
+}
+
+% Controls how to display Psalms.
+\newcommand{\psalmincipit}[1]{%
+	% \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	\noindent{\csname psalm#1Incipit\endcsname}.%
+	% \noindent{#1, \textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% \csname psalm#1Text\endcsname%
+}
+
+% Define full Psalms with alternately colored, bold firstletters
+\newif\iffirstverse
+
+\newcommand{\fullpsalm}[1]{%
+	% \index[P]{\csname psalm#1Incipit\endcsname}
+	\begingroup % Start local group to limit scope
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{.25em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
+		\newif\ifblue
+		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
+		\newcommand{\processline}[1]{%
+			\StrLeft{##1}{1}[\firstletter]%
+			\StrGobbleLeft{##1}{1}[\restofline]%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{.25em}% Start the new verse
+			\ifblue
+				{\color{Blue}\textbf{\firstletter}}%
+				\bluefalse
+			\else
+				{\color{Red}\textbf{\firstletter}}%
+				\bluetrue
+			\fi
+			\restofline%
+		}
+		\renewcommand{\\}{\processline}
+		\psalmtext
+		\par 
+	\endgroup
+}
+
+\newcommand{\fullpsalmdoxology}[1]{%
+	% \index[P]{\csname psalm#1Incipit\endcsname}
+	\begingroup % Start local group to limit scope
+		\clubpenalty=10000 % SET HIGH to protect the Lettrine
+		\setlength{\parindent}{.25em}
+		\let\psalmtext\empty
+		\expandafter\let\expandafter\psalmtext\csname psalm#1Text\endcsname 
+		\newif\ifblue
+		\bluetrue
+		\firstversetrue % Reset toggle for the new psalm
+		\newcommand{\processline}[1]{%
+			\StrLeft{##1}{1}[\firstletter]%
+			\StrGobbleLeft{##1}{1}[\restofline]%
+			\par % End the previous verse
+			\iffirstverse
+				% \penalty10000    % Lock Verse 1 and Verse 2 together
+				% \penalty3000    % Separate Verse 1 and 2
+				\penalty500    % Separate Verse 1 and 2
+				\clubpenalty=150 % REVERT TO 150 for all subsequent verses
+				\firstversefalse
+			\fi
+			\hspace*{.25em}% Start the new verse
+			\ifblue
+				{\color{Blue}\textbf{\firstletter}}%
+				\bluefalse
+			\else
+				{\color{Red}\textbf{\firstletter}}%
+				\bluetrue
+			\fi
+			\restofline%
+		}
+		\renewcommand{\\}{\processline}
+		\psalmtext \\ Glória Patri et Fílio: * et Spirítui Sancto. \\ Sicut erat in princípio et nunc et semper: * et in sécula seculórum. Amen.
+		\par 
+	\endgroup
+}
+
+% Same but full Psalms
+% \newcommand{\fullpsalm}[1]{%
+	% % \noindent{\textit{\csname psalm#1Incipit\endcsname}}.%
+	% \vspace{-.75em}\noindent\begin{center}Ps. #1. \textit{\csname psalm#1Incipit\endcsname}\end{center}\vspace{-.75em}%
+	% % \csname psalm#1Text\endcsname% % No indent
+	% \begingroup % Start local group to limit scope
+		% % \setlength{\parindent}{.2em} % Set paragraph indentation
+		% \setlength{\parindent}{.25em} % Set paragraph indentation
+		% % \renewcommand{\\}{\par\hspace*{.1em}} % Redefine \\ to end the line and add indentation
+		% \renewcommand{\\}{\par\hspace*{.25em}} % Redefine \\ to end the line and add indentation
+		% \csname psalm#1Text\endcsname % Display the psalm text
+	% \endgroup % End local group
+% }
+
+% Same but Hymns
+\newcommand{\hymn}[3]{%
+	% \index[H]{#2}
+	\hypertarget{#1}{\label{#1}}
+		\setlength{\parindent}{.25em} % Set paragraph indentation
+		% \setlength{\parindent}{.2em} % Set paragraph indentation
+		% \setlength{\parindent}{1em} % Set paragraph indentation
+	#3 %
+}
+
+% Define the responsory environment
+\NewDocumentEnvironment{responsory}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \parttwo%
+	% \linebreak \R \firstline \ \V \versicle \ \secondword.
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-doxology environment
+\NewDocumentEnvironment{responsory-doxology}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	% \StrBefore{\parttwo}{ }[\secondword]%
+	% Check if \parttwo contains a space.
+	\IfSubStr{\parttwo}{ }{%
+		% If it has a space, just take everything before the space
+		\StrBefore{\parttwo}{ }[\secondword]%
+	}{%
+		% Check if it has a period, and strip it if it does.
+		\IfSubStr{\parttwo}{.}{%
+			\StrBefore{\parttwo}{.}[\secondword]%
+		}{%
+			\let\secondword\parttwo%
+		}%
+	}%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.%
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \secondword.
+	\oldnewline \R \firstline \ \V \versicle \ \parttwo \ Gloria Patri et Filio et Spiritui Sancto. \parttwo%
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-final environment allows us to change the word after doxology
+\NewDocumentEnvironment{responsory-final}{O{} m m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.%
+	\oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. #4.
+	% \index[R]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the responsory-breve environment
+\NewDocumentEnvironment{responsory-breve}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	\StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
+	\oldnewline \R \textcolor{Red}{br.} \firstline \ \R \partone . \V \versicle \ \secondword. Gloria. \firstword.%
+	% \index[S]{\firstline}
+}{%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Fix invitatory-full
+\def\clearparshape{\parshape=0 \hangindent=0pt \hangafter=1 \relax}
+
+% Define the responsory-breve-full environment
+\NewDocumentEnvironment{responsory-breve-full}{O{} m m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\def\versicle{#3}%
+	% \StrBefore{\firstline}{*}[\partone]%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo] % Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{.25em} % Set paragraph indentation
+% The format of the responsory
+	% \noindent \R \firstline \ \V \versicle \ \parttwo \ Gloria. \firstword. \ \secondword.
+	% \noindent \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \newline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.
+	% \oldnewline \R \firstline \ \V \versicle \ \secondword. Gloria. \firstword.%
+	\oldnewline \R \textcolor{Red}{br.} \firstline \oldnewline \R \firstline \oldnewline \V \versicle \par \parttwo \par Gloria Patri et Filio et Spiritui Sancto. \oldnewline \R \firstline%
+	% \index[S]{\firstline}
+}{%
+	\aftergroup\clearparshape%
+	% \unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the invitatory environment
+\NewDocumentEnvironment{invitatory}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\space% Adds space
+% The format of the invitatory: firstline or all
+	\firstline
+	% \index[I]{\firstline}
+	% \par \noindent {\color{Red} Invit.} \firstline \\
+	% {\color{Red} Invit.} \firstline
+	% \lettrine[lines=2]{\zallmancaps \color{Red} V}{eníte}, exsultémus Dómino, iubilémus Deo, salutári nostro: præoccupémus fáciem eius in confessióne, et in psalmis iubilémus ei. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} Q}uóniam Deus magnus Dóminus, et Rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam: quia in manu eius sunt omnes fines terræ, et altitúdines móntium ipse cónspicit. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius veníte, adorémus, et procidámus ante Deum: plorémus coram Dómino, qui fecit nos, quia ipse est Dóminus, Deus noster; nos autem pópulus eius, et oves páscuæ eius. \\
+	% {\color{Red} Invit.} \firstline \\
+	% {\bfseries \color{Blue} H}ódie, si vocem eius audiéritis, nolíte obduráre corda vestra, sicut in exacerbatióne secúndum diem tentatiónis in desérto: ubi tentavérunt me patres vestri, probavérunt et vidérunt ópera mea. \\
+	% {\color{Red} Invit.} \parttwo \\
+	% {\bfseries \color{Red} Q}uadragínta annis próximus fui generatióni huic, et dixi; Semper hi errant corde, ipsi vero non cognovérunt vias meas: quibus iurávi in ira mea; Si introíbunt in réquiem meam. \\
+	% {\color{Red} Invit.} \firstline \\
+	% \doxology
+	% {\color{Red} Invit.} \parttwo \\
+	% {\color{Red} Invit.} \firstline \\
+}{%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+% Define the invitatory-full environment
+\NewDocumentEnvironment{invitatory-full}{O{} m}{%
+	\leavevmode% forces horizontal mode
+	\unskip% Remove any previous spacing
+	\hypertarget{#1}{\label{#1}}
+	\def\firstline{#2}%
+	\StrBehind{\firstline}{*}[\rawparttwo]%
+	\StrGobbleLeft{\rawparttwo}{1}[\parttwo]% Remove the leading space
+	\StrBefore{\firstline}{ }[\firstword]%
+	\StrBefore{\parttwo}{ }[\secondword]%
+	% \unskip\ignorespaces% Prevent paragraph break
+	\setlength{\parindent}{.25em} % Set paragraph indentation
+	\renewcommand{\\}{\par\hspace*{.25em}} % Redefine \\ to end the line and add indentation
+% The format of the invitatory: firstline or all
+	% \firstline
+	\par \noindent {\itshape \color{Red} Invitato.} \firstline
+	\newline \R \firstline
+	% {\color{Red} Invit.} \firstline
+	\par \noindent {\itshape \color{Red} Psalmus.}
+	\lettrine[lines=2]{\zallmancaps \color{Blue} V}{eníte} exultémus Dómino, iubilémus Deo salutári nostro, preoccupémus fáciem eius in confessióne et in psalmis iubilémus ei. \\
+	% \firstword , etc. \\
+	\firstline \\
+	{\bfseries \color{Red} Q}uóniam Deus magnus Dóminus et rex magnus super omnes deos, quóniam non repéllet Dóminus plebem suam quia in manu eius sunt omnes fines terre, et altitúdines móntium ipse cónspicit. \\
+	% \secondword . \\
+	\parttwo \\
+	{\bfseries \color{Blue} Q}uóniam ipsíus est mare, et ipse fecit illud, et áridam fundavérunt manus eius, veníte adorémus et procidámus ante Deum, plorémus coram Dómino qui fecit nos, quia ipse est Dóminus Deus noster, nos autem pópulus eius et oves páscue eius. \\
+	% \firstword . \\
+	\firstline \\
+	{\bfseries \color{Red} H}ódie si vocem eius audiéritis nolíte obduráre corda vestra sicut in exacerbatióne secúndum diem temptatiónis in desérto, ubi temptavérunt me patres vestri probavérunt et vidérunt ópera mea. \\
+	% \secondword . \\
+	\parttwo \\
+	{\bfseries \color{Blue} Q}uadragínta annis próximus fui generatióni huic, et dixi semper hi errant corde, ipsi vero non cognovérunt vias meas quibus iurávi in ira mea si introíbunt in réquiem meam. \\
+	% \firstword . \\
+	\firstline \\
+	% \doxology \\
+	{\bfseries \color{Red} G}lória Patri et Fílio et Spirítui Sancto. \\
+	{\bfseries \color{Blue} S}icut erat in princípio et nunc et semper et in sécula seculórum. Amen. \\
+	\parttwo \\
+	\firstline%
+	% \secondword . \firstword .%
+}{%
+	\aftergroup\clearparshape%
+	\unskip\ignorespaces% Prevent paragraph break
+}
+
+
+% Remove space before chapter and section title: left, before, after
+\titlespacing*{\chapter}{0pt}{-45pt}{0pt}
+% \titlespacing*{\section}{0pt}{-5pt}{0pt}
+\titlespacing*{\section}{0pt}{-3pt}{0pt}
+\titlespacing*{\subsection}{0pt}{-1pt}{0pt}
+
+% Adjust section title spacing
+% \titlespacing*{\section}{0pt}{0.25em}{0.25em} % Adjust the spacing before and after section titles
+
+% Define chapter format
+\titleformat{\chapter}[display]
+{\normalfont\bfseries}{}{0pt}{}
+
+% Define the bookmark text for unnumbered chapters
+\newcommand{\ubchapter}[1]{%
+	\chapter*{}% Empty chapter
+	\addcontentsline{toc}{chapter}{#1}%
+	\renewcommand{\leftmark}{#1}%
+	\phantomsection%
+	\hypertarget{#1}{}%
+	\vspace{+\baselineskip}% Adjust the value as needed
+}
+
+% Define section format
+\titleformat{\section}
+% {\normalfont\Large\bfseries}{}{0pt}{}
+{\normalfont\bfseries\centering\large\color{Red}}{}{0pt}{}
+
+% Define the bookmark text for unnumbered sections
+\newcommand{\ubsection}[2]{%
+	% \section*{#1}%
+	\renewcommand{\rightmark}{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+	\addcontentsline{toc}{section}{#1}%
+	\hypertarget{#2}{}%
+	% \vspace{-\baselineskip}% Adjust the value as needed
+}
+
+% Define subsection format
+\titleformat{\subsection}
+% {\normalfont\large\bfseries}{}{0pt}{}
+% {\normalfont\centering}{}{0pt}{}
+{\normalfont\bfseries\centering\color{Red}}{}{0pt}{}
+
+% Define the bookmark text for unnumbered subsections
+\newcommand{\ubsubsection}[2]{%
+	\subsection*{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+	\addcontentsline{toc}{subsection}{#1}%
+	\hypertarget{#2}{}%
+}
+
+% Define the command for centered subsections, in particular the Kalendar
+\newcommand{\csection}[2]{%
+	\subsection*{\centering\makebox[\linewidth]{\normalfont\Large\bfseries\color{Red} #1}}%
+	{\centering\large #2\par}%
+	\renewcommand{\rightmark}{#1}%
+	\phantomsection%
+	% \hypertarget{#1}{}%
+%	\refstepcounter{sectionctr}% Increment the section counter
+	\addcontentsline{toc}{subsection}{#1}%
+%	\hypertarget{\thesectionctr}{}%
+	\hypertarget{#1}{}%
+}
+
+\newcommand{\osection}[1]{%
+	\par\noindent
+	% \refstepcounter{subsection}%
+	\phantomsection
+	\addcontentsline{toc}{section}{#1}%
+	\hypertarget{#1}{}%
+	\renewcommand{\rightmark}{#1}%
+	% \markright{#1}% Updates \rightmark dynamically for headers
+	{\centering\normalfont\Large\bfseries\color{Red} #1\par}%
+	\vspace{-0.5em}%
+}
+
+% Define custom subsection style macro to keep formatting consistent
+\newcommand{\parasubheadingstyle}[1]{%
+	% {\normalfont\large\bfseries\centering\color{Red} #1\par}%
+	% {\normalfont\centering\color{Red} #1\par}%
+	{\normalfont\centering\bfseries \color{Red} #1\par}%
+	\vspace{-\baselineskip}%
+}
+
+% Define \parasubsection{Title 1 (Left/ToC)}{Title 2 (Right)}{Hyperref Label}
+\newcommand{\parasubsection}[3]{%
+	% Synchronize columns and switch to column 0
+	\switchcolumn[0]*
+	% ToC entry and hyperref anchor for Title 1
+	\phantomsection
+	\addcontentsline{toc}{subsection}{#1}%
+	\hypertarget{#3}{}%
+	% Typeset left title in Column 0
+	\parasubheadingstyle{#1}%
+	\vspace{\baselineskip}%
+	% Switch to Column 1 for the right title
+	\switchcolumn
+	\parasubheadingstyle{#2}%
+	\vspace{\baselineskip}%
+	% Synchronize again so subsequent text stays aligned underneath
+	\switchcolumn[0]*
+}
+
+% Clear default fancyhdr settings
+\fancyhead{}
+
+% \fancyhead[C]{\leftmark} % Display chapter in the center
+\fancyhead[RO,LE]{\rightmark}
+% \fancyhead[RE,LO]{S. O. P.}
+\fancyhead[RE,LO]{\leftmark} % Display chapter in the inside
+
+\pagestyle{fancy} % Activate the custom headers and footers
+
+% \renewcommand{\contentsname}{Index}
+
+% Controls the space from the top of the page
+% \setlength{\droptitle}{-1.5in}
+\setlength{\droptitle}{-1in}
+
+\pretitle{\begin{center} \fontsize{48}{52}\selectfont \color{black} O R D O\\ \vspace{+.5em}}
+\title{\mdseries \fontsize{20}{16}\selectfont \color{Red} DIVINI OFFICII RECITANDI \\ \vspace{+.5em}}
+\posttitle{\large \color{black} IUXTA RITUM SACRI ORDINIS FRATRUM \\ \vspace{+.05em}\end{center}}
+% 3
+
+\preauthor{\vspace{-1em} \begin{center} \fontsize{26}{24}\selectfont \color{Blue} P R E D I C A T O R U M \\ \vspace{+.5em}}
+\author{\normalsize \color{black} \mdseries {S}ECUNDUM {L}ITURGIAM {V}ENERABILIS {M}AGISTRI {N}OSTRI \\ \vspace{+.75em}}
+\postauthor{\upshape \fontsize{26}{24}\selectfont \color{Blue} H U M B E R T I\\ \vspace{+.25em}
+D E \ \ R O M A N I S \\ \vspace{+.05em}\end{center}}
+% 4
+
+\predate{\vspace{-1em} \begin{center}
+AD COMPUTUM GREGORIANUM NOVI PASCHALIS ACCOMMODATUS \\ \vspace{+.5em}}
+\date{\large \color{black} \underline{\color{Red} CUM INSTRUCTIONE LINGUA ANGLICANA} \\ \vspace{+.5em}}
+\postdate{\Large \mdseries \color{black} Pro Anno Domini. \color{black} MMXXVII \\ \vspace{+.5em} \end{center}}
+% 3
+
+% For soul package
+\setulcolor{Red}
+
+% Redefine the underline depth to adjust its position
+\makeatletter
+\def\SOUL@uldepth{.8pt}	% Adjust this value as needed
+\makeatother
+
+% For lua-ul underlining
+% \newcommand{\ul}[1]{%
+    % \underLine[color=Red]{#1}%
+% }
+
+% Change behvior of newline
+\let\oldnewline\newline
+% \renewcommand{\newline}{\linebreak}
+% \renewcommand{\newline}{\par \noindent}
+\renewcommand{\newline}{\par}
+
+% Format: \cftsetindents{entry}{indent}{numwidth}
+% \cftsetindents{section}{0.5in}{0.5in}
+\cftsetindents{section}{0in}{0in}
+% \cftsetindents{subsection}{1.0in}{0.5in}
+\cftsetindents{subsection}{.2in}{0in}
+
+% Redefine the plain style so it copies your fancyhdr layout
+\fancypagestyle{plain}{%
+	\fancyhf{} % clear all header and footer fields
+	% \fancyhead[C]{\leftmark} % Display chapter in the center
+	\fancyhead[RO,LE]{\rightmark}
+	% \fancyhead[RE,LO]{S. O. P.}
+	\fancyhead[RE,LO]{\leftmark} % Display chapter in the inside
+	\renewcommand{\headrulewidth}{0.4pt}
+}
+
+\usepackage{etoolbox}
+
+% This injects a half-inch of vertical space right before the TOC title is printed
+\patchcmd{\tableofcontents}{\contentsname}{\vspace*{0.5in}\contentsname}{}{}
+
+% Page colors
+% \pagecolor[rgb]{0.98,0.94,0.82} % Soft cream
+% \pagecolor[rgb]{0.99,0.95,0.84} % Antique cream, whitest
+% \pagecolor[rgb]{0.93,0.89,0.75} % Warm old paper
+% \pagecolor[rgb]{0.90,0.85,0.70} % Aged book, more yellow than 1906
+% \pagecolor[rgb]{0.85,0.81,0.69} % 1906
+
+% Too bright
+% \pagecolor[rgb]{0.95,0.91,0.80} % 1942
+% \pagecolor[rgb]{1.0,0.98,0.90} % Light parchment
+% \pagecolor[rgb]{0.96,0.96,0.86} % Soft beige
+
+% \colorlet{Red}{black}
+% \colorlet{Blue}{black}
+
+
+% ==============================================================================
+% DESCRIPTIVE CUSTOM COLOR DEFINITIONS
+% ==============================================================================
+
+% Custom Reds & Oranges
+\definecolor{kdpDeepCrimson}{HTML}{8B263E}        % Deep Muted Crimson
+\definecolor{kdpMutedBrick}{HTML}{A63A3A}         % Muted Brick Red
+\definecolor{kdpDensityOrangeRed}{HTML}{D92B00}   % High-Density Orange-Red
+\definecolor{kdpVibrantOrangeRed}{RGB}{245, 30, 2} % Vibrant DVIPS Replica Orange-Red
+\definecolor{kdpWarmCrimson}{RGB}{237, 16, 89}    % DVIPS Warm Magenta-Crimson Blend
+\definecolor{kdpFieryPureRed}{HTML}{E60000}       % Fiery High-Luminance Red
+\definecolor{kdpHighPopOrange}{HTML}{FF3300}      % High-Pop Orange-Red
+\definecolor{kdpPureCadmiumRed}{HTML}{D00000}     % Balanced Pure Cadmium Red
+\definecolor{kdpBrightScarlet}{HTML}{FF2400}      % High-Impact Scarlet Red
+\definecolor{kdpRichCarmine}{HTML}{960018}        % High-Density Deep Carmine
+\definecolor{kdpCoolRuby}{HTML}{9B111E}           % Cool-Tone Pure Ruby
+\definecolor{kdpSinglePassFire}{HTML}{E50914}     % Vibrant Solid Fire Red
+\definecolor{kdpCalibratedPrimaryRed}{HTML}{EE1C25}% Standard Primary Red Calibration
+
+% NEW: Warm Crimsons Bordering Hot Pink
+\definecolor{kdpVibrantMagentaCrimson}{HTML}{E0115F} % Ruby-Magenta Pure Crimson
+\definecolor{kdpHotRaspberryCrimson}{HTML}{DE3163} % Warm Raspberry Pop
+\definecolor{kdpSaturatedCerise}{HTML}{DE004E}     % Deep Saturated Cerise
+\definecolor{kdpElectricRoseCrimson}{HTML}{F00056}  % Electric Rose-Red Blend
+\definecolor{kdpFieryFuchsiaCrimson}{HTML}{E30B5C} % High-Luminance Fuchsia Crimson
+\definecolor{kdpVividWarmCarmine}{HTML}{D10047}     % High-Impact Warm Carmine
+\definecolor{kdpNeonCrimsonPink}{HTML}{FF0055}     % Borderline Hot Pink Punch
+\definecolor{kdpDeepShockingCrimson}{HTML}{C70039} % Deep Rich Magenta-Red
+\definecolor{PsalterRed}{RGB}{254, 81, 64}
+\definecolor{AnthRed}{RGB}{250, 78, 86}
+
+% Custom Blues
+\definecolor{kdpDeepSlateNavy}{HTML}{1F3A52}      % Deep Slate Navy
+\definecolor{kdpMutedSteelBlue}{HTML}{3B6E8C}     % Muted Steel Blue
+\definecolor{kdpDarkSlateBlue}{RGB}{0,102,147}    % DVIPS Midnight Dark Slate Blue
+\definecolor{kdpElectricBlue}{HTML}{0055FF}       % Electric High-Luminance Blue
+\definecolor{kdpHighLuminanceCobalt}{HTML}{0066EE}% High-Luminance Cobalt Blue
+\definecolor{kdpPureCobaltBlue}{HTML}{0047AB}     % Pure Cobalt True Blue
+\definecolor{kdpCyanProtectedRoyal}{HTML}{0038A8} % Anti-Purple Royal Blue
+\definecolor{kdpVibrantElectricBlue}{HTML}{0052D4}% High-Vibrancy Electric Blue
+\definecolor{kdpRichSapphire}{HTML}{0F52BA}       % Rich Pure Sapphire
+\definecolor{kdpDarkClassicBlue}{HTML}{0F4C81}    % Dark Solid Classic Blue
+\definecolor{kdpBalancedMediumBlue}{HTML}{0066CC}  % Balanced Primary Medium Blue
+
+\begin{document}
+
+% Baseline skip is the distance from one line's baseline to the next. It should typically be 1.2 to 1.3 times the font size
+% \fontsize{14pt}{18pt}\selectfont
+% \fontsize{12pt}{16pt}\selectfont % Comparable to Psalterium Tridentinum with Charis
+% \fontsize{11pt}{14pt}\selectfont
+% \fontsize{10pt}{12pt}\selectfont %for Merriweather
+\fontsize{9pt}{11pt}\selectfont %for Merriweather
+
+\frontmatter
+
+\maketitle
+
+\clearpage
+\phantomsection
+\thispagestyle{empty}
+
+
+\vspace{+7em}
+\begin{center}
+\large
+Ordo Divini Officii Recitandi
+\newline Iuxta Ritum Sacri
+\newline Ordinis Fratrum Predicatorum
+\newline Pro Anno Domini. MMXXVII
+\end{center}
+\begin{center}
+
+\end{center}
+\begin{center}
+
+\newline Prepared for \LaTeX \ by \emph{Alan Liang}
+\end{center}
+\begin{center}
+
+\newline Published by \emph{BreviaryTypesetting}
+\end{center}
+\begin{center}
+
+\newline Copyright © 2026 by \emph{BreviaryTypesetting}
+\newline All rights reserved.
+\end{center}
+\begin{center}
+
+
+\newline ISBN: 979-8-171931-98-8
+\end{center}
+\begin{center}
+
+
+This work, including both its liturgical content,
+\newline formatting, and underlying \LaTeX \ source code
+\newline is licensed under the Creative Commons
+\newline Attribution-ShareAlike 4.0 International License
+\newline (CC BY-SA 4.0).
+\end{center}
+\begin{center}
+
+\newline To view a copy of this license, visit:
+\newline https://creativecommons.org/licenses/by-sa/4.0/
+\end{center}
+\begin{center}
+
+You are free to share, adapt, and build
+\newline upon this material for any purpose,
+\newline provided proper attribution is
+\newline given and derivative works are
+\newline distributed under the same license.
+\end{center}
+\begin{center}
+
+\newline The \LaTeX source code and files for this
+\newline work are publicly available and open for
+\newline collaboration on GitHub:
+\newline www.GitHub.com/AlanL399/BreviaryTypesetting
+\end{center}
+\begin{center}
+
+First Edition, 2026
+\end{center}
+
+% \phantomsection
+% \addcontentsline{toc}{section}{Table of Contents}
+% \tableofcontents
+% \thispagestyle{empty}
+% \let\cleardoublepage\clearpage % Suppresses blank page
+
+% \ubchapter{INCIPIT}
+
+% \thispagestyle{fancy}
+
+% \ubsection{Divine Office Responsories}{divine-office-responsories}
+
+% \subsection*{Divine Office Responsories}
+
+% Here is a sample responsory.
+
+% \begin{responsory}[incipit1]
+% {This is the main responsory verse * with a second part.}{This is the versicle.}
+% \end{responsory}
+
+% We can refer to the first responsory using its label. For example, see the responsory \hyperlink{incipit1}{\pageref{incipit1}}.
+
+\frontmatter
+
+\selectlanguage{latin}
+
+% \input{introduction_ordo}
+
+\input{table}
+\arrayrulecolor{Red}
+
+\mainmatter
+
+\input{calendar_kdp_2027}
+
+\input{kdp_color_test}
+
+\input{specimens}
+
+% \input{main_humbert}
+
+% \backmatter
+
+% \thispagestyle{fancy}
+
+% \phantomsection
+% \addcontentsline{toc}{chapter}{Indices}
+% \hypertarget{Indices}{}
+% \fancyhead[C]{Indices}
+% \fancyhead[RE,LO]{Indices}
+% Optional: change headers for index pages
+% \renewcommand{\leftmark}{Indices}
+% \renewcommand{\rightmark}{Index Hymnorum}
+
+% Print each index
+% \cprintindex{P}{Index Psalmorum et Canticorum}
+% \thispagestyle{empty}
+% \newpage
+% \cprintindex{H}{Index Hymnorum}
+% \thispagestyle{empty}
+% \newpage
+% \cprintindex{R}{Index Responsoriorum}%It does not index manual labels of responsories
+% \newpage
+% \cprintindex{S}{Index Responsoriorum Breve}
+% \newpage
+% \cprintindex{I}{Index Invitatorium}
+
+\end{document}

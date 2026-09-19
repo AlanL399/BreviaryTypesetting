@@ -1,155 +1,10 @@
-\documentclass[11pt,openany]{book}
-
-\usepackage{hyperref}
-\usepackage{bookmark}
-\usepackage[dvipsnames]{xcolor}
-% \usepackage{graphicx}
-\usepackage{geometry}
-\geometry{%twoside,
-	inner=1in,
-	outer=.75in,
-	top=1in,
-	bottom=1in,
-	bindingoffset=0in
-% Production margins
-	% paperwidth=7in,
-	% paperheight=10in,
-	% twoside,
-	% inner=0.5in,             % Generous visual inner margin for a desk copy
-	% bindingoffset=0.4375in,  % Tailored for the heavier 7x10 binding curve
-	% outer=0.75in,            % Leaves beautiful whitespace on the outside for fingers/notes
-	% top=0.875in,
-	% bottom=0.875in
-	}
-% \usepackage{xparse}
-% \usepackage{titling}
-% \usepackage{lettrine}
-% \usepackage{multicol}
-\usepackage{titlesec}
-% \usepackage{soul}
-% \usepackage{pifont}
-% \usepackage{gregoriosyms}
-% \usepackage{etoolbox}
-% \usepackage{xstring}% For string manipulation
-\usepackage{fancyhdr}
-\usepackage{fontspec}
-% \setmainfont{Georgia}
-% \setmainfont{Times New Roman}
-% \setmainfont{Libre Caslon Text}
-\setmainfont{Charis}
-% \setmainfont{Junicode}
-% [
-	% Width=SemiCondensed, % or Condensed If desperate
-	% Ligatures={Common, Rare, Historic}, % Turn on the medieval ligatures
-	% Numbers=OldStyle
-% ]
-% \usepackage{lua-ul}
-% \usepackage{luacolor}
-\usepackage[latin]{babel}
-\babelprovide[hyphenrules=latin]{latin}
-% \usepackage{polyglossia}
-% \setdefaultlanguage[variant=ecclesiastic,hyphenation=liturgical]{latin}
-\usepackage[final]{microtype}
-% \usepackage[titles]{tocloft}
-
-% \microtypecontext{spacing=nonfrench} % Slightly expands text spacing
-\SetProtrusion{encoding=*,family=*}{. = {,500}}
-\SetExpansion{encoding=*,family=*}{A = 500}
-\SetExtraKerning[unit=space]{encoding={*},family={*}}{
-  \textquoteleft = {500, }, % adjust quotes
-  : = {100,100}
-}
-
-% Adjust headheight and topmargin
-\setlength{\headheight}{13.6pt} % Set to at least 13.59999pt
-\addtolength{\topmargin}{-1.6pt} % Adjust topmargin to compensate
-% \setlength{\headheight}{14.5pt} % Set to at least 14.49999pt
-% \addtolength{\topmargin}{-.9pt} % Adjust topmargin to compensate
-
-\makeatletter
-\def\leftmarginnote{%
-	\lrmarginnote{\hskip -\marginparsep \hskip -12.25em}}
-
-\def\rightmarginnote{%
-	\lrmarginnote{\hskip\columnwidth \hskip -1em}}
-
-\long\def\lrmarginnote#1#2{%
-\vadjust{#1%
-\smash{\vtop{{%
-		\hsize\marginparwidth
-        \@parboxrestore
-        \@marginparreset
-		\small
-#2}}}}}
-\makeatother
-
-% \makeatletter
-% \DeclareRobustCommand{\Vbar}{\vers@resp{-0.1em}{V}}
-% \DeclareRobustCommand{\Rbar}{\vers@resp{0pt}{R}}
-% \newcommand{\vers@resp}[2]{%
-  % {\ooalign{\hidewidth\kern#1\raisebox{0.2ex}{\rotatebox[origin=c]{-20}{$\m@th\rceil$}}\hidewidth\cr#2\cr}}%
-% }%
-% \makeatother
-
-% Defined by gregoriosyms
-% \newcommand{\Vbar}{℣}
-% \newcommand{\Rbar}{℟}
-
-\frenchspacing
-
-% Define subsection format
-\titleformat{\subsection}
-% {\normalfont\large\bfseries}{}{0pt}{}
-{\normalfont\large\bfseries\centering}{}{0pt}{}
-
-% Adjust spacing before and after the subsection title
-\titlespacing*{\subsection}
-  {0pt}     % Left margin
-  {6pt}    % Space before (adjust as needed)
-  {3pt}     % Space after (adjust as needed)
-
-% Define the bookmark text for unnumbered subsections
-\newcommand{\ubsubsection}[2]{%
-	\subsection*{#1}%
-	\phantomsection%
-	% \hypertarget{#1}{}%
-	\addcontentsline{toc}{subsection}{#1}%
-	\hypertarget{#2}{}%
-}
-
-% Define the command for centered subsections, In particular the Kalendar
-\newcommand{\csection}[2]{%
-	\subsection*{\centering\makebox[\linewidth]{\normalfont\Large\bfseries #1}}%
-	{\centering\large #2\par}%
-	\renewcommand{\rightmark}{#1}%
-	\phantomsection%
-	% \hypertarget{#1}{}%
-%	\refstepcounter{sectionctr}% Increment the section counter
-	\addcontentsline{toc}{subsection}{#1}%
-%	\hypertarget{\thesectionctr}{}%
-	\hypertarget{#1}{}%
-}
-
-% Clear default fancyhdr settings
-\fancyhead{}
-
-\fancyhead[C]{\leftmark} % Display chapter In the center
-\fancyhead[RO,LE]{\rightmark}
-\fancyhead[RE,LO]{S. O. P.}
-
-\pagestyle{fancy} % Activate the custom headers and footers
-
-\begin{document}
-
-
-
-%pp041
-% \ubchapter{Collectarium}
-% Liber iste qui collectarius dicitur eo quo propter collectas sive orationes habendas in promptu principaliter scriptus est, vel quia in unum sunt in eo collecta ea que dicenda sunt a sacerdote extra officium Misse: contient ista per ordinem.
+\ubchapter{Kalendar}
 
 % \ubsection{Kalendarium Sanctorum}{kalendarium-sanctorum}
 
 \thispagestyle{fancy}
+
+% Not including commemorations for octaves when there is an entry
 
 \vspace{+.5em}
 \color{Red}\csection{Ianuarius}{\color{Red} habet dies. XXXI. luna. XXX.}\color{black}
@@ -158,32 +13,34 @@
 \begin{tabular}{l | l | l | r | l l}
  \color{Red} III & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Circumcisio domini. \color{Red} Duplex. \\
  & B & \color{Red} IIII & 2 & Oct. Sancti Stephani. & \color{Red} \\
-\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \color{Red} Incipit Quartus Embolismus.\\
+\color{Red} XI & C & \color{Red} III & 3 & Oct. Sancti Iohannis. & \\
 & D & \color{Red} II & 4 & \color{Red} Oct. Sanctorum Innocentium. & \color{Red} \\
-\color{Red} XIX & E & \color{Red} Nonis & 5 & & \color{Red} \\
+\color{Red} XIX & E & \color{Red} Non. & 5 & \qquad Vigilia. \color{Red} \\
 \color{Red} VIII & F & \color{Red} VIII & 6 & Epiphania Domini. Totum Dup. \\
- & G & \color{Red} VII & 7 & & \color{Red} Claves. LXX. \\
-\color{Red} XVI & \color{Red} A & \color{Red} VI & 8 & & \\
-\color{Red} V & B & \color{Red} V & 9 & & \\
+ % &  & & & Dominica infra Octavas. \\
+ & G & \color{Red} VII & 7 & De Octava Epiphanie. \\
+\color{Red} XVI & \color{Red} A & \color{Red} VI & 8 & De Octava. & \\
+\color{Red} V & B & \color{Red} V & 9 & De Octava. & \\
  & C & \color{Red} IIII & 10 & Pauli Heremite. \color{Red} Mem. \\
-\color{Red} XIII & D & \color{Red} III & 11 & & \color{Red} \\
-\color{Red} II & E & \color{Red} II. & 12 & & \color{Red} \\
- & F & \color{Red} Idus & 13 & \multicolumn{2}{l}{Oct. Epiphanie. \color{Red} Simplex. \color{black} Hylarii et Remigii. \color{Red} Mem.} \\
-\color{Red} X & G & \color{Red} XIX & 14 & \multicolumn{2}{l}{Felicis Presbiteri et Confessoris. III. Lect.} \\
+\color{Red} XIII & D & \color{Red} III & 11 & De Octava. & \color{Red} \\
+\color{Red} II & E & \color{Red} II. & 12 & De Octava. & \color{Red} \\
+ & F & \color{Red} Idus & 13 & \multicolumn{2}{l}{Oct. Epiphanie. \color{Red} Simplex.} \\
+ &  & & & \multicolumn{2}{l}{\quad \color{black} Hylarii et Remigii. \color{Red} Mem.} \\
+\color{Red} X & G & \color{Red} XIX & 14 & \multicolumn{2}{l}{Felicis Presbiteri et Conf. III. Lect.} \\
  & \color{Red} A & \color{Red} XVIII & 15 & \color{Red} Mauri Abbatis. III. Lect. \\
 \color{Red} XVIII & B & \color{Red} XVII & 16 & Marcelli Pape et Martyris. III. Lect. \\
 \color{Red} VII & C & \color{Red} XVI & 17 & \color{Red} Anthonii Abbatis. III. Lect. \\
- & D & \color{Red} XV & 18 & Prisce Virginis et Martyris. III. Lect. & \color{Red} Sol in Aquario. Initium LXX. \\
+ & D & \color{Red} XV & 18 & Prisce Virginis et Martyris. III. Lect. \\
 \color{Red} XV & E & \color{Red} XIIII & 19 & \color{Red} \\
-\color{Red} IIII & F & \color{Red} XIII & 20 & \multicolumn{2}{l}{Fabiani et Sebastiani Martyrum. Simplex.} \\
- & G & \color{Red} XII & 21 & Agnetis Virginis et Martyris. Simplex. \\
+\color{Red} IIII & F & \color{Red} XIII & 20 & \multicolumn{2}{l}{Fabiani et Sebastiani Mart. Simplex.} \\
+ & G & \color{Red} XII & 21 & Agnetis Virginis et Mart. Simplex. \\
 \color{Red} XII & \color{Red} A & \color{Red} XI & 22 & Vincentii Martyris. Semid. \\
-\color{Red} I & B & \color{Red} X & 23 & \color{Red} Emerentiane Virginis et Martyris. Mem. \\
+\color{Red} I & B & \color{Red} X & 23 & \color{Red} Emerentiane Virg. et Mart. Mem. \\
  & C & \color{Red} IX & 24 & & \color{Red} \\
 \color{Red} IX & D & \color{Red} VIII & 25 & Conversio Sancti Pauli. Semid. \\
 & E & \color{Red} VII & 26 & & \color{Red} \\
-\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Confessoris. Mem. \\
-\color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. & Claves XL. \\
+\color{Red} XVII & F & \color{Red} VI & 27 & \color{Red} Iuliani Episcopi et Conf. Mem. \\
+\color{Red} VI & G & \color{Red} V & 28 & \color{Red} Agnetis Secundo. III. Lect. \\
  & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
 \color{Red} XIIII & B & \color{Red} III & 30 & & \color{Red} \\
 \color{Red} III & C & \color{Red} II & 31 & & \color{Red} \\
@@ -198,21 +55,22 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
- & D & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Ignatii Episcopi et Martyris. Mem. & Finis. IIII. embolismi. \\
-\color{Red} XI & E & \color{Red} IIII & 2 & \multicolumn{2}{l}{Purificatio Sancte Marie Virginis. Totum Dup.} \\
+ & D & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Ignatii Episcopi et Martyris. Mem. \\
+
+\color{Red} XI & E & \color{Red} IIII & 2 & \multicolumn{2}{l}{Purificatio S. Marie Virg. Tot. Dup.} \\
 \color{Red} XIX & F & \color{Red} III & 3 & \color{Red} Blasii Episcopi et Martyris. III. Lect. \\
 \color{Red} VIII & G & \color{Red} II & 4 & Anniversarium Patrum et Matrum. \\
- & \color{Red} A & \color{Red} Nonis & 5 & \color{Red} Agathe Virginis et Martyris. Simplex. \\
-\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Episcoporum. Memor. \\
+ & \color{Red} A & \color{Red} Non. & 5 & \color{Red} Agathe Virginis et Mart. Simplex. \\
+\color{Red} XVI & B & \color{Red} VIII & 6 &  Vedasti et Amandi Epis. Memoria. \\
 \color{Red} V & C & \color{Red} VII & 7 & \\
-\color{Red}  & D & \color{Red} VI & 8 & & \color{Red} Initium. XL. \\
+\color{Red}  & D & \color{Red} VI & 8 & \\
 \color{Red} XIII & E & \color{Red} V & 9 & & \color{Red} \\
 \color{Red} II & F & \color{Red} IIII & 10 & Scolastice Virginis. Mem. & \color{Red} \\
 \color{Red}  & G & \color{Red} III & 11 & & \color{Red} \\
 \color{Red} X & \color{Red} A & \color{Red} II & 12 & \\
 \color{Red}  & B & \color{Red} Idus & 13 & & \color{Red} \\
 \color{Red} XVIII & C & \color{Red} XVI & 14 & \color{Red} Valentini Martyris. III. Lect. \\
-\color{Red} VII & D & \color{Red} XV & 15 & & \color{Red} Sol in Piscibus. \\
+\color{Red} VII & D & \color{Red} XV & 15 & \\
 \color{Red}  & E & \color{Red} XIIII & 16 & & \color{Red} \\
 \color{Red} XV & F & \color{Red} XIII & 17 & & \color{Red} \\
 \color{Red} IIII & G & \color{Red} XII & 18 & & \color{Red} \\
@@ -221,7 +79,8 @@
 \color{Red} I & C & \color{Red} IX & 21 & & \color{Red} \\
 \color{Red}  & D & \color{Red} VIII & 22 & \color{Red} Cathedra Sancti Petri. Simplex. \\
 \color{Red} IX & E & \color{Red} VII & 23 & & \color{Red} \\
-\color{Red}  & F & \color{Red} VI & 24 & Mathie Apostoli. Semid. & \color{Red} Locus Byssexti. \\
+\color{Red}  & F & \color{Red} VI & 24 & Mathie Apostoli. Semid. \\
+ % &  & & & \qquad \color{Red} Locus Byssexti. \\
 \color{Red} XVII & G & \color{Red} V & 25 & & \color{Red} \\
 \color{Red} VI & \color{Red} A & \color{Red} IIII & 26 & & \color{Red} \\
 \color{Red}  & B & \color{Red} III & 27 & & \color{Red} \\
@@ -238,28 +97,28 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-\color{Red} III & D & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Albini Episcopi et Confessoris. Mem. \\
+\color{Red} III & D & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Albini Episcopi et Conf. Mem. \\
 \color{Red}  & E & \color{Red} VI & 2 & & \color{Red} \\
 \color{Red} XI & F & \color{Red} V & 3 & \\
 \color{Red}  & G & \color{Red} IIII & 4 & & \color{Red} \\
-\color{Red} XIX & \color{Red} A & \color{Red} III & 5 & & \color{Red} Incipit. VII. Embolismus. \\
-\color{Red} VIII & B & \color{Red} II & 6 & & \color{Red} Incipit. III. Embolismus. \\
-\color{Red}  & C & \color{Red} Nonis & 7 & & \color{Red} \\
+\color{Red} XIX & \color{Red} A & \color{Red} III & 5 & \\
+\color{Red} VIII & B & \color{Red} II & 6 & \\
+\color{Red}  & C & \color{Red} Non. & 7 & & \color{Red} \\
 \color{Red} XVI & D & \color{Red} VIII & 8 & & \color{Red} \\
 \color{Red} V & E & \color{Red} VII & 9 & & \color{Red} \\
 \color{Red}  & F & \color{Red} VI & 10 & & \color{Red} \\
-\color{Red} XIII & G & \color{Red} V & 11 & & \color{Red} Claves Pasche. \\
+\color{Red} XIII & G & \color{Red} V & 11 & \\
 \color{Red} II & \color{Red} A & \color{Red} IV. & 12 & \color{Red} Gregorii Pape et Conf. Simplex. \\
 \color{Red}  & B & \color{Red} III & 13 & & \color{Red} \\
-\color{Red} X & C & \color{Red} II & 14 & & \color{Red} Ultima XXL. \\
-\color{Red}  & D & \color{Red} Idus & 15 & & \color{Red} Equinoctium Vernale. \\
+\color{Red} X & C & \color{Red} II & 14 & \\
+\color{Red}  & D & \color{Red} Idus & 15 & \\
 \color{Red} XVIII & E & \color{Red} XVII & 16 & \\
 \color{Red} VII & F & \color{Red} XVI & 17 & & \color{Red} \\
-\color{Red}  & G & \color{Red} XV & 18 & & \color{Red} Sol in Ariete. \\
+\color{Red}  & G & \color{Red} XV & 18 & \\
 \color{Red} XV & \color{Red} A & \color{Red} XIIII & 19 & & \color{Red} \\
 \color{Red} IIII & B & \color{Red} XIII & 20 & & \color{Red} \\
 \color{Red}  & C & \color{Red} XII & 21 & \color{Red} Benedicti Abbatis. Simplex. \\
-\color{Red} XII & D & \color{Red} XI & 22 & & \color{Red} Primum Pascha. \\
+\color{Red} XII & D & \color{Red} XI & 22 & \\
 \color{Red} I & E & \color{Red} X & 23 & & \color{Red} \\
 \color{Red}  & F & \color{Red} IX & 24 & & \color{Red} \\
 \color{Red} IX & G & \color{Red} VIII & 25 & Annunciatio Dominica. Totum Dupl.& \color{Red} \\
@@ -282,9 +141,9 @@
 \begin{tabular}{l | l | l | r | l l}
 \color{Red}  & G & \textbf{\color{Red} K\color{Blue}L} & 1 & & \color{Red} \\
 \color{Red} XI & \color{Red} A & \color{Red} IIII & 2 & & \color{Red} \\
-\color{Red}  & B & \color{Red} III & 3 & & Finis. VII. Embolismus. \color{Red} \\
-\color{Red} XIX & C & \color{Red} II & 4 & Ambrosii Episcopi et Conf. Simplex. & \color{Red} Finis. VI. Embolismus. \\
-\color{Red} VIII & D & \color{Red} Nonis & 5 & & \color{Red} \\
+\color{Red}  & B & \color{Red} III & 3 & \\
+\color{Red} XIX & C & \color{Red} II & 4 & Ambrosii Episcopi et Conf. Simplex. \\
+\color{Red} VIII & D & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red} XVI & E & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} V & F & \color{Red} VII & 7 & & \color{Red} \\
 \color{Red}  & G & \color{Red} VI & 8 & & \color{Red} \\
@@ -293,10 +152,11 @@
 \color{Red}  & C & \color{Red} III & 11 & & \color{Red} \\
 \color{Red} X & D & \color{Red} II & 12 & & \color{Red} \\
 \color{Red}  & E & \color{Red} Idus & 13 & & \color{Red} \\
-\color{Red} XVIII & F & \color{Red} XVIII & 14 & \multicolumn{2}{l}{Tyburcii Valeriani, et Maximi \color{Red} Martyrum. \color{black} III. Lect.} \color{Red} \\
-\color{Red} VII & G & \color{Red} XVII & 15 & & \color{Red} Claves Rogationum. \\
+\color{Red} XVIII & F & \color{Red} XVIII & 14 & \multicolumn{2}{l}{Tyburcii Valeriani, et Maximi} \\
+ & & & & \quad \color{Red} Martyrum. \color{black} III. Lect. \color{Red} \\
+\color{Red} VII & G & \color{Red} XVII & 15 & \\
 \color{Red}  & \color{Red} A & \color{Red} XVI & 16 & \\
-\color{Red} XV & B & \color{Red} XV & 17 & & Sol in Tauro. \color{Red} \\
+\color{Red} XV & B & \color{Red} XV & 17 & \\
 \color{Red} IIII & C & \color{Red} XIIII & 18 & & \color{Red} \\
 \color{Red}  & D & \color{Red} XIII & 19 & & \color{Red} \\
 \color{Red} XII & E & \color{Red} XII & 20 & & \color{Red} \\
@@ -304,11 +164,12 @@
 \color{Red}  & G & \color{Red} X & 22 & & \color{Red} \\
 \color{Red} IX & \color{Red} A & \color{Red} IX & 23 & Georgii Martyris. Simplex. & \color{Red} \\
 \color{Red}  & B & \color{Red} VIII & 24 & & \color{Red} \\
-\color{Red} XVII & C & \color{Red} VII & 25 & \color{Red} Marci Evangeliste. Semid. & Ultimum Pascha. \\
+\color{Red} XVII & C & \color{Red} VII & 25 & \color{Red} Marci Evangeliste. Semid. \\
 \color{Red} VI & D & \color{Red} VI & 26 & & \color{Red} \\
 \color{Red}  & E & \color{Red} V & 27 & & \color{Red} \\
 \color{Red} XIIII & F & \color{Red} IIII & 28 & Vitalis Martyris. III. Lect. & \color{Red} \\
-\color{Red} III & G & \color{Red} III & 29 & \multicolumn{2}{l}{Beati Petri Martyris de Ordines Predic. Totum Dup. \color{Red} Claves Pente.} \\
+\color{Red} III & G & \color{Red} III & 29 & \multicolumn{2}{l}{Beati Petri Martyris de Ordinis } \\
+ & & & & \quad Predicatorum. Totum Duplex. \\
 \color{Red}  & \color{Red} A & \color{Red} II & 30 & & \color{Red} \\
 \end{tabular}
 \newline \color{Red} Hore noctis. X. Diei. XIIII.
@@ -321,30 +182,32 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-\color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apostolorum. Semid. \\
+\color{Red} XI & B & \textbf{\color{Red} K\color{Blue}L} & 1 & Philippi et Iacobi Apos. Semid. \\
 \color{Red}  & C & \color{Red} VI & 2 & \\
 \color{Red} XIX & D & \color{Red} V & 3 & Inventio Sancte Crucis. Semid. \\
- &  &  &  & \multicolumn{2}{l}{\qquad Alexandri Eventii, et Theodoli. \color{Red} Martyrum. \color{black} Mem.} \\
+ &  &  &  & \multicolumn{2}{l}{\quad Alexandri Eventii, et Theodoli.} \\
+ &  &  &  & \quad \color{Red} Martyrum. \color{black} Mem. \\
 \color{Red} VIII & E & \color{Red} IIII & 4 & Festum Corone Domini. Simplex. & \color{Red} \\
 \color{Red}  & F & \color{Red} III & 5 & & \color{Red} \\
-\color{Red} XVI & G & \color{Red} II & 6 & \color{Red} Iohannis Ante Portam Latinam. Semid. \\
-\color{Red} V & \color{Red} A & \color{Red} Nonis & 7 & & \color{Red} \\
+\color{Red} XVI & G & \color{Red} II & 6 & \color{Red} Iohannis Ante Portam Lati. Semid. \\
+\color{Red} V & \color{Red} A & \color{Red} Non. & 7 & & \color{Red} \\
 \color{Red}  & B & \color{Red} VIII & 8 & & \color{Red} \\
 \color{Red} XIII & C & \color{Red} VII & 9 & & \color{Red} \\
-\color{Red} II & D & \color{Red} VI & 10 & \multicolumn{2}{l}{Gordiani et Epimachi Martyrum. III. Lect.} \color{Red} \\
+\color{Red} II & D & \color{Red} VI & 10 & \multicolumn{2}{l}{Gordiani et Epimachi Mart. III. Lect.} \color{Red} \\
 \color{Red}  & E & \color{Red} V & 11 & & \color{Red} \\
-\color{Red} X & F & \color{Red} IIII & 12 & \multicolumn{2}{l}{Neri, Achillei, et Pancratii Martyrum. III. Lect.} \color{Red} \\
+\color{Red} X & F & \color{Red} IIII & 12 & \multicolumn{2}{l}{Neri, Achillei, et Pancratii Mart.} \\
+ &  &  &  & \quad III. Lect. \color{Red} \\
 \color{Red}  & G & \color{Red} III & 13 & & \color{Red} \\
 \color{Red} XVIII & \color{Red} A & \color{Red} II & 14 & & \color{Red} \\
 \color{Red} VII & B & \color{Red} Idus & 15 & & \color{Red} \\
 \color{Red}  & C & \color{Red} XVII & 16 &  & \color{Red} \\
 \color{Red} XV & D & \color{Red} XVI & 17 & & \color{Red} \\
-\color{Red} IIII & E & \color{Red} XV & 18 & & Sol in Geminis. \color{Red} \\
+\color{Red} IIII & E & \color{Red} XV & 18 & \\
 \color{Red}  & F & \color{Red} XIIII & 19 & Potentiane Virginis. Mem. & \color{Red} \\
 \color{Red} XII & G & \color{Red} XIII & 20 & & \color{Red} \\
 \color{Red} I & \color{Red} A & \color{Red} XII & 21 & & \color{Red} \\
 \color{Red}  & B & \color{Red} XI & 22 & & \color{Red} \\
-\color{Red} IX & C & \color{Red} X & 23 & Translatio Beati Dominici. Totum Dup. & \color{Red} \\
+\color{Red} IX & C & \color{Red} X & 23 & Translatio Beati Dominici. Tot. Dup. & \color{Red} \\
 \color{Red}  & D & \color{Red} IX & 24 & & \color{Red} \\
 \color{Red} XVII & E & \color{Red} VIII & 25 & Urbani Pape et Martyris. III. Lect. & \color{Red} \\
 \color{Red} VI & F & \color{Red} VII & 26 & & \color{Red} \\
@@ -365,33 +228,35 @@
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
 \color{Red}  & E & \textbf{\color{Red} K\color{Blue}L} & 1 & & \color{Red} \\
-\color{Red} XIX & F & \color{Red} IIII & 2 & Marcellini et Petri Martyrum. III. Lect. & \color{Red} \\
+\color{Red} XIX & F & \color{Red} IIII & 2 & Marcellini et Petri Mart. III. Lect. & \color{Red} \\
 \color{Red} VIII & G & \color{Red} III & 3 & & \color{Red} \\
 \color{Red} XVI & \color{Red} A & \color{Red} II & 4 & & \color{Red} \\
-\color{Red} V & B & \color{Red} Nonis & 5 & & \color{Red} \\
+\color{Red} V & B & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red}  & C & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} XIII & D & \color{Red} VII & 7 & & \color{Red} \\
 \color{Red} II & E & \color{Red} VI & 8 & Medardi Episcopi et Conf. Mem. & \color{Red} \\
-\color{Red}  & F & \color{Red} V & 9 & Primi et Feliciani Martyrum. III. Lect. & \color{Red} \\
+\color{Red}  & F & \color{Red} V & 9 & Primi et Feliciani Mart. III. Lect. & \color{Red} \\
 \color{Red} X & G & \color{Red} IIII & 10 & & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} III & 11 & \color{Red} Barnabe Apostoli. Semid. \\
-\color{Red} XVIII & B & \color{Red} II & 12 & \multicolumn{2}{l}{\color{Red} Basilidis Cyrini, Naboris, et Nazarii, Martyrum. III. Lect.} \\
+\color{Red} XVIII & B & \color{Red} II & 12 & \multicolumn{2}{l}{\color{Red} Basilidis Cyrini, Naboris, et } \\
+ &  &  &  & \quad \color{Red} Nazarii, Martyrum. III. Lect. \\
 \color{Red} VII & C & \color{Red} Idus & 13 & & \color{Red} \\
-\color{Red}  & D & \color{Red} XVIII & 14 & & Solsticium Estivale. \color{Red} \\
+\color{Red}  & D & \color{Red} XVIII & 14 & \\
 \color{Red} XV & E & \color{Red} XVII & 15 & \color{Red} Viti et Modesti Martyrum. Mem. \\
 \color{Red} IIII & F & \color{Red} XVI & 16 & \color{Red} Cyrici et Iulite Martyrum. Mem. \\
-\color{Red}  & G & \color{Red} XV & 17 & & Sol in Cancio. \color{Red} \\
-\color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Martyrum. III. Lect. \\
-\color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii Martyrum. Simplex. \\
+\color{Red}  & G & \color{Red} XV & 17 & \\
+\color{Red} XII & \color{Red} A & \color{Red} XIIII & 18 & \color{Red} Marci et Marcelliani Mart. III. Lect. \\
+\color{Red} I & B & \color{Red} XIII & 19 & \color{Red} Gervasii et Prothasii Mart. Simplex. \\
 \color{Red}  & C & \color{Red} XII & 20 & & \color{Red} \\
 \color{Red} IX & D & \color{Red} XI & 21 & & \color{Red} \\
 \color{Red}  & E & \color{Red} X & 22 & & \color{Red} \\
-\color{Red} XVII & F & \color{Red} IX & 23 & & Vigilia. \color{Red} \\
-\color{Red} VI & G & \color{Red} VIII & 24 & Nativitas Sancti Iohannis Baptiste. Dupl. \\
-\color{Red}  & \color{Red} A & \color{Red} VII & 25 & & \color{Red} \\
-\color{Red} XIIII & B & \color{Red} VI & 26 & Iohannis et Pauli Martyrum. Simplex. & \color{Red} \\
-\color{Red} III & C & \color{Red} V & 27 & & \color{Red} \\
-\color{Red}  & D & \color{Red} IIII & 28 & Leonis Pape et Conf. Memoria. & Vigilia. \color{Red} \\
+\color{Red} XVII & F & \color{Red} IX & 23 & \qquad Vigilia. \color{Red} \\
+\color{Red} VI & G & \color{Red} VIII & 24 & Nativitas S. Iohannis Baptiste. Dupl. \\
+\color{Red}  & \color{Red} A & \color{Red} VII & 25 & De Octava. & \color{Red} \\
+\color{Red} XIIII & B & \color{Red} VI & 26 & Iohannis et Pauli Mart. Simplex. & \color{Red} \\
+\color{Red} III & C & \color{Red} V & 27 & De Octava. & \color{Red} \\
+\color{Red}  & D & \color{Red} IIII & 28 & Leonis Pape et Conf. Memoria. \\
+ &  &  &  & \qquad Vigilia. \color{Red} \\
 \color{Red} XI & E & \color{Red} III & 29 & Apostolorum Petri et Pauli. Duplex. & \color{Red} \\
 \color{Red}  & F & \color{Red} II & 30 & Commemoratio Sancti Pauli. \color{Red} Semid. \\
 \end{tabular}
@@ -405,36 +270,39 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-\color{Red} XIX & G & \textbf{\color{Red} K\color{Blue}L} & 1 & Octava Sancti Iohannis Baptiste. Simplex. & \color{Red} \\
-\color{Red} VIII & \color{Red} A & \color{Red} VI & 2 & Processi et Martiniani Martyrum. Mem. & \color{Red} \\
-\color{Red}  & B & \color{Red} V & 3 & & \color{Red} \\
-\color{Red} XVI & C & \color{Red} IIII & 4 & & \color{Red} \\
-\color{Red} V & D & \color{Red} III & 5 & & \color{Red} \\
-\color{Red}  & E & \color{Red} II & 6 & \color{Red} Octava Apostolorum Petri et Pauli. Simplex. \\
-\color{Red} XIII & F & \color{Red} Nonis & 7 & & \color{Red} \\
+\color{Red} XIX & G & \textbf{\color{Red} K\color{Blue}L} & 1 & Octava S. Iohannis Baptiste. Simplex. & \color{Red} \\
+\color{Red} VIII & \color{Red} A & \color{Red} VI & 2 & Processi et Martiniani Mart. Mem. & \color{Red} \\
+\color{Red}  & B & \color{Red} V & 3 & De Octava. & \color{Red} \\
+\color{Red} XVI & C & \color{Red} IIII & 4 & De Octava. & \color{Red} \\
+\color{Red} V & D & \color{Red} III & 5 & De Octava. & \color{Red} \\
+\color{Red}  & E & \color{Red} II & 6 & \color{Red} Oct. Apos. Petri et Pauli. Simplex. \\
+\color{Red} XIII & F & \color{Red} Non. & 7 & & \color{Red} \\
 \color{Red} II & G & \color{Red} VIII & 8 & & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} VII & 9 & & \color{Red} \\
 \color{Red} X & B & \color{Red} VI & 10 & Septem Fratrum. III. Lect. & \color{Red} \\
 \color{Red}  & C & \color{Red} V & 11 & & \color{Red} \\
 \color{Red} XVIII & D & \color{Red} IIII & 12 &  & \color{Red} \\
 \color{Red} VII & E & \color{Red} III & 13 & & \color{Red} \\
-\color{Red}  & F & \color{Red} II & 14 & & \color{Red} Dies Caniculares. \\
+\color{Red}  & F & \color{Red} II & 14 & \\
 \color{Red} XV & G & \color{Red} Idus & 15 & & \color{Red} \\
 \color{Red} IIII & \color{Red} A & \color{Red} XVII & 16 & \\
 \color{Red}  & B & \color{Red} XVI & 17 & & \color{Red} \\
-\color{Red} XII & C & \color{Red} XV & 18 & & \color{Red} Sol in Leone. \\
+\color{Red} XII & C & \color{Red} XV & 18 & \\
 \color{Red} I & D & \color{Red} XIIII & 19 & & \color{Red} \\
-\color{Red}  & E & \color{Red} XIII & 20 & Margarete Virginis et Martyris. Simplex. & \color{Red} \\
+\color{Red}  & E & \color{Red} XIII & 20 & Margarete Virg. et Mart. Simplex. & \color{Red} \\
 \color{Red} IX & F & \color{Red} XII & 21 & Praxedis Virginis. III. Lect. & \color{Red} \\
 \color{Red}  & G & \color{Red} XI & 22 & \color{Red} Marie Magdalene. Semid. \\
-\color{Red} XVII & \color{Red} A & \color{Red} X & 23 & \color{Red} Apollinaris Episcopi et Martyris. III. Lect. \\
-\color{Red} VI & B & \color{Red} IX & 24 & Christine Virginis et Martyris. Mem. \\
-\color{Red}  & C & \color{Red} VIII & 25 & \multicolumn{2}{l}{Iacobi Apostoli. Semi. Christofori et Cucufatis Martyrum. Mem.} \\
+\color{Red} XVII & \color{Red} A & \color{Red} X & 23 & \color{Red} Apollinaris Epis. et Mart. III. Lect. \\
+\color{Red} VI & B & \color{Red} IX & 24 & Christine Virginis et Mart. Mem. \\
+\color{Red}  & C & \color{Red} VIII & 25 & \multicolumn{2}{l}{Iacobi Apostoli. Semi. \quad Christofori } \\
+ &  &  &  & \quad et Cucufatis Martyrum. Mem. \\
 \color{Red} XIIII & D & \color{Red} VII & 26 & & \color{Red} \\
 \color{Red} III & E & \color{Red} VI & 27 & & \color{Red} \\
-\color{Red}  & F & \color{Red} V & 28 & \multicolumn{2}{l}{Nazarii, Celsi, et Pantaleonis. Martyrum. III. Lect.} \color{Red} \\
-\color{Red} XI & G & \color{Red} IIII & 29 & \multicolumn{2}{l}{\color{Red} Felicis, Simplicii, Faustini, et Beatricis Martyrum. III. Lect.} \\
-\color{Red} XIX & \color{Red} A & \color{Red} III & 30 & Abdon et Sennen Martyrum. III. Lect. & \color{Red} \\
+\color{Red}  & F & \color{Red} V & 28 & \multicolumn{2}{l}{Nazarii, Celsi, et Pantaleonis.} \\
+ &  &  &  & \quad Martyrum. III. Lect. \color{Red} \\
+\color{Red} XI & G & \color{Red} IIII & 29 & \multicolumn{2}{l}{\color{Red} Felicis, Simplicii, Faustini, et} \\
+ &  &  &  & \quad \color{Red} Beatricis Martyrum. III. Lect. \\
+\color{Red} XIX & \color{Red} A & \color{Red} III & 30 & Abdon et Sennen Mart. III. Lect. & \color{Red} \\
 \color{Red}  & B & \color{Red} II & 31 & Germani Episcopi et Conf. III. Lect. & \color{Red} \\
 \end{tabular}
 \newline \color{Red} Hore noctis. VIII. Diei. XVI.
@@ -448,38 +316,42 @@
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
 \color{Red} VIII & C & \textbf{\color{Red} K\color{Blue}L} & 1 & Ad Vincula Sancti Petri. Simplex. & \color{Red} \\
- &  & &  & \multicolumn{2}{l}{\qquad Sanctorum Machabeorum Martyrum. Mem. \color{Red}} \\
+ &  & &  & \multicolumn{2}{l}{\quad S. Machabeorum Mart. Mem. \color{Red}} \\
 \color{Red} XVI & D & \color{Red} IIII & 2 & \color{Red} Stephani Pape et Martyris. III. Lect. \\
 \color{Red} V & E & \color{Red} III & 3 & \color{Red} Inventio Sancti Stephani. Simplex. \\
 \color{Red}  & F & \color{Red} II & 4 & & \color{Red} \\
-\color{Red} XIII & G & \color{Red} Nonis & 5 & Beati Dominici Conf. Totum Dup. & \color{Red} \\
-\color{Red} II & \color{Red} A & \color{Red} VIII & 6 & \multicolumn{2}{l}{Sixti Pape, Felicissimi et Agapiti Martyrum. Mem.} \color{Red} \\
+\color{Red} XIII & G & \color{Red} Non. & 5 & Beati Dominici Conf. Totum Dup. & \color{Red} \\
+\color{Red} II & \color{Red} A & \color{Red} VIII & 6 & \multicolumn{2}{l}{Sixti Pape, Felicissimi et Agapiti}\\
+ &  & &  & \quad Martyrum. Mem. \color{Red} \\
 \color{Red}  & B & \color{Red} VII & 7 & Donati Episcopi et Martyris. Mem. & \color{Red} \\
-\color{Red} X & C & \color{Red} VI & 8 & Cyriaci Sociorumque eius Martyrum. Mem. & \color{Red} \\
-\color{Red}  & D & \color{Red} V & 9 & & \color{Red} Vigilia. \\
+\color{Red} X & C & \color{Red} VI & 8 & Cyriaci Socio. eius Mart. Mem. & \color{Red} \\
+\color{Red}  & D & \color{Red} V & 9 & \qquad \color{Red} Vigilia. \\
 \color{Red} XVIII & E & \color{Red} IIII & 10 & \color{Red} Laurentii Martyris. Semid. & \color{Red} \\
 \color{Red} VII & F & \color{Red} III & 11 & Tiburtii Martyris. Mem. & \color{Red} \\
 \color{Red}  & G & \color{Red} II & 12 & Octava Sancti Dominici. Simplex. & \color{Red} \\
 \color{Red} XV & \color{Red} A & \color{Red} Idus & 13 & Ypoliti Sociorumque eius. Simplex. & \color{Red} \\
-\color{Red} IIII & B & \color{Red} XIX & 14 & Eusebii Presbiteri et Conf. Mem. & \color{Red} Vigilia. \\
-\color{Red}  & C & \color{Red} XVIII & 15 & \multicolumn{2}{l}{\color{Red} Assumptio Beate Marie Virginis. Totum Dupl.} \color{Red} \\
-\color{Red} XII & D & \color{Red} XVII & 16 & & \color{Red} \\
+\color{Red} IIII & B & \color{Red} XIX & 14 & Eusebii Presbiteri et Conf. Mem. & \\
+ &  & &  & \qquad \color{Red} Vigilia. \\
+\color{Red}  & C & \color{Red} XVIII & 15 & \multicolumn{2}{l}{\color{Red} Assumptio B. Marie Virg. Tot. Dupl.} \color{Red} \\
+\color{Red} XII & D & \color{Red} XVII & 16 & De Octava. & \color{Red} \\
 \color{Red} I & E & \color{Red} XVI & 17 & Octava Sancti Laurentii. Simplex. & \color{Red} \\
-\color{Red}  & F & \color{Red} XV & 18 & Agapiti Martyris. Mem. & \color{Red} Sol in Virgine. \\
-\color{Red} IX & G & \color{Red} XIIII & 19 & & \color{Red} \\
+\color{Red}  & F & \color{Red} XV & 18 & Agapiti Martyris. Mem. & \\
+\color{Red} IX & G & \color{Red} XIIII & 19 & De Octava. & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} XIII & 20 & Bernardi Abbatis. Simplex. & \color{Red} \\
-\color{Red} XVII & B & \color{Red} XII & 21 & & \color{Red} \\
+\color{Red} XVII & B & \color{Red} XII & 21 & De Octava. & \color{Red} \\
 \color{Red} VI & C & \color{Red} XI & 22 & \color{Red} Octava Sancte Marie. Simplex. \\
-& & & & \multicolumn{2}{l}{\qquad \color{Red} Tymothei et Symphoriani Martyrum. Mem.} \\
+& & & & \multicolumn{2}{l}{\quad \color{Red} Tymothei et Symphoriani} \\
+& & & & \multicolumn{2}{l}{\quad \color{Red} Martyrum. Mem.} \\
 \color{Red}  & D & \color{Red} X & 23 & & \color{Red} \\
 \color{Red} XIIII & E & \color{Red} IX & 24 & Bartholomei Apostoli. \color{Red} Semid. & \color{Red} \\
 \color{Red} III & F & \color{Red} VIII & 25 &  & \color{Red} \\
 \color{Red}  & G & \color{Red} VII & 26 &  & \color{Red} \\
 \color{Red} XI & \color{Red} A & \color{Red} VI & 27 & \color{Red} Rufi Martyris. Mem. \\
-\color{Red} XIX & B & \color{Red} V & 28 & \color{Red} Augustini Episcopi et Conf. Totum Dup. & \color{Red} \\
-\color{Red}  & C & \color{Red} IIII & 29 & \multicolumn{2}{l}{Decollatio Sancti Iohannis Baptiste. Simplex. Sabine Martyris. Mem.} \\
+\color{Red} XIX & B & \color{Red} V & 28 & \color{Red} Augustini Epis. et Conf. Totum Dup. & \color{Red} \\
+\color{Red}  & C & \color{Red} IIII & 29 & \multicolumn{2}{l}{Decollatio S. Iohannis Bapt. Simplex.} \\
+ &  & &  & \quad Sabine Martyris. Mem. \\
 \color{Red} VIII & D & \color{Red} III & 30 & \color{Red} Felicis, et Adaucti Martyrum. Mem. \\
-\color{Red}  & E & \color{Red} II & 31 & & \color{Red} Finis Quinti Embolismus. \\
+\color{Red}  & E & \color{Red} II & 31 & De Octava. \\
 \end{tabular}
 \color{Red} Hore noctis. X. Diei. XIIII.
 \end{center}
@@ -492,39 +364,39 @@
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
 \color{Red} XVI & F & \textbf{\color{Red} K\color{Blue}L} & 1 & Egidii Abbatis. Mem. & \color{Red} \\
-\color{Red} V & G & \color{Red} IIII & 2 & & \color{Red} Incipit. II. Embolismus. \\
-\color{Red}  & \color{Red} A & \color{Red} III & 3 & & \color{Red} \\
+\color{Red} V & G & \color{Red} IIII & 2 & De Octava. \\
+\color{Red}  & \color{Red} A & \color{Red} III & 3 & De Octava. & \color{Red} \\
 \color{Red} XIII & B & \color{Red} II & 4 & Octava Sancti Augustini. Simplex. & \color{Red} \\
-& & & & \qquad Marcelli Martyris. Mem. \\
-\color{Red} II & C & \color{Red} Nonis & 5 & Anniversarium Familiarium et & \color{Red} \\
-& & & & \qquad Benefactorum Ordinis Nostri. \\
+& & & & \quad Marcelli Martyris. Mem. \\
+\color{Red} II & C & \color{Red} Non. & 5 & Anniversarium Familiarium et & \color{Red} \\
+& & & & \quad Benefactorum Ordinis Nostri. \\
 \color{Red}  & D & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} X & E & \color{Red} VII & 7 & & \color{Red} \\
-\color{Red}  & F & \color{Red} VI & 8 & \multicolumn{2}{l}{\color{Red} Nativitas Sancte Marie Virginis. Totum Dup.} \\
+\color{Red}  & F & \color{Red} VI & 8 & \multicolumn{2}{l}{\color{Red} Nativitas S. Marie Virg. Tot. Dup.} \\
 \color{Red} XVIII & G & \color{Red} V & 9 & Gorgonii Martyris. \color{Red} Mem. \\
-\color{Red} VII & \color{Red} A & \color{Red} IIII & 10 & & \color{Red} \\
+\color{Red} VII & \color{Red} A & \color{Red} IIII & 10 & De Octava. & \color{Red} \\
 \color{Red}  & B & \color{Red} III & 11 & \color{Red} Prothi et Iacinti Martyrum. Mem. \\
-\color{Red} XV & C & \color{Red} II & 12 & & \color{Red} \\
-\color{Red} IIII & D & \color{Red} Idus & 13 & & \color{Red} \\
-\color{Red}  & E & \color{Red} XVIII & 14 & Exaltatio Sancte Crucis. Semid. & Equinoctium Autumpnale. \color{Red} \\
-& & & & \multicolumn{2}{l}{\qquad Cornelii, et Cipriani Martyrum. Mem.} \\
+\color{Red} XV & C & \color{Red} II & 12 & De Octava. & \color{Red} \\
+\color{Red} IIII & D & \color{Red} Idus & 13 & De Octava. & \color{Red} \\
+\color{Red}  & E & \color{Red} XVIII & 14 & Exaltatio Sancte Crucis. Semid. \\
+& & & & \multicolumn{2}{l}{\quad Cornelii, et Cipriani Mart. Mem.} \\
 \color{Red} XII & F & \color{Red} XVII & 15 & Octava Sancte Marie. Simplex. & \color{Red} \\
-& & & & \qquad Nichomedis Martyris. Mem. \\
-\color{Red} I & G & \color{Red} XVI & 16 & Eufemie Virginis et Martyris. III. Lect. & \color{Red} \\
-\color{Red}  & \color{Red} A & \color{Red} XV & 17 & Lamberti Episcopi et Martyris. Mem. & \color{Red} Sol in Libra. \\
+& & & & \quad Nichomedis Martyris. Mem. \\
+\color{Red} I & G & \color{Red} XVI & 16 & Eufemie Virginis et Mart. III. Lect. & \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} XV & 17 & Lamberti Episcopi et Mart. Mem. \\
 \color{Red} IX & B & \color{Red} XIIII & 18 & & \color{Red} \\
 \color{Red}  & C & \color{Red} XIII & 19 & & \color{Red} \\
-\color{Red} XVII & D & \color{Red} XII & 20 & \color{Red} & \color{Red} Vigilia. \\
-\color{Red} VI & E & \color{Red} XI & 21 & \multicolumn{2}{l}{Matthei Apostoli et Evangeliste. Semid.} \color{Red} \\
-\color{Red}  & F & \color{Red} X & 22 & \multicolumn{2}{l}{Mauritii Sociorumque eius Martyrum. Simplex.} \color{Red} \\
+\color{Red} XVII & D & \color{Red} XII & 20 & \color{Red} \qquad \color{Red} Vigilia. \\
+\color{Red} VI & E & \color{Red} XI & 21 & \multicolumn{2}{l}{Matthei Apos. et Evan. Semid.} \color{Red} \\
+\color{Red}  & F & \color{Red} X & 22 & \multicolumn{2}{l}{Mauritii Socio. eius Mart. Simplex.} \color{Red} \\
 \color{Red} XIIII & G & \color{Red} IX & 23 &  & \color{Red} \\
 \color{Red} III & \color{Red} A & \color{Red} VIII & 24 & & \color{Red} \\
 \color{Red}  & B & \color{Red} VII & 25 & & \color{Red} \\
 \color{Red} XI & C & \color{Red} VI & 26 & & \color{Red} \\
-\color{Red} XIX & D & \color{Red} V & 27 & \color{Red} Cosme et Damiani Martyrum. Simplex. \\
+\color{Red} XIX & D & \color{Red} V & 27 & \color{Red} Cosme et Damiani Mart. Simplex. \\
 \color{Red}  & E & \color{Red} IIII & 28 & & \color{Red} \\
 \color{Red} VIII & F & \color{Red} III & 29 & \color{Red} Michaelis Archangeli. Dup. & \color{Red} \\
-\color{Red}  & G & \color{Red} II & 30 & Iheronimi Presbiteri et Conf. Simplex. & \color{Red} Finis Secundi Embolismus. \\
+\color{Red}  & G & \color{Red} II & 30 & Iheronimi Pres. et Conf. Simplex. \\
 \end{tabular}
 \newline \color{Red} Hore noctis. XII. Diei. XII.
 \end{center}
@@ -537,16 +409,17 @@
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
 \color{Red} XVI & \color{Red} A & \textbf{\color{Red} K\color{Blue}L} & 1 & \color{Red} Remigii Episcopi et Conf. III. Lect. \\
-\color{Red} V & B & \color{Red} VI & 2 & \color{Red} Leodegarii Episcopi et Martyris. Mem. \\
+\color{Red} V & B & \color{Red} VI & 2 & \color{Red} Leodegarii Episcopi et Mart. Mem. \\
 \color{Red} XIII & C & \color{Red} V & 3 & & \color{Red} \\
 \color{Red} II & D & \color{Red} IIII & 4 & Francisci Confessoris. Simplex. & \color{Red} \\
 \color{Red}  & E & \color{Red} III & 5 & & \color{Red} \\
 \color{Red} X & F & \color{Red} II & 6 & & \color{Red} \\
-\color{Red}  & G & \color{Red} Nonis & 7 & Marci Pape et Conf. III. Lect. \\
- &  & & & \multicolumn{2}{l}{\qquad Sergii, et Bachi, Marcelli, et Apulei. Martyrum. Mem.} \\
+\color{Red}  & G & \color{Red} Non. & 7 & Marci Pape et Conf. III. Lect. \\
+ &  & & & \multicolumn{2}{l}{\quad Sergii, et Bachi, Marcelli, et} \\
+ &  & & & \multicolumn{2}{l}{\quad Apulei. Martyrum. Mem.} \\
 \color{Red} XVIII & \color{Red} A & \color{Red} VIII & 8 & & \color{Red} \\
-\color{Red} VII & B & \color{Red} VII & 9 & \multicolumn{2}{l}{\color{Red} Dionisii Sociorumque eius Martyrum. Simplex.} \\
-\color{Red}  & C & \color{Red} VI & 10 & \multicolumn{2}{l}{\color{Red} Anniversarium Omnium Fratrum Ordinis Nostri.} \\
+\color{Red} VII & B & \color{Red} VII & 9 & \multicolumn{2}{l}{\color{Red} Dionisii Socio. eius Mart. Simplex.} \\
+\color{Red}  & C & \color{Red} VI & 10 & \multicolumn{2}{l}{\color{Red} Anni. Omnium Fratrum Ord. Nos.} \\
 \color{Red} XV & D & \color{Red} V & 11 & & \color{Red} \\
 \color{Red} IIII & E & \color{Red} IIII & 12 & & \color{Red} \\
 \color{Red}  & F & \color{Red} III & 13 &  & \color{Red} \\
@@ -554,20 +427,22 @@
 \color{Red} I & \color{Red} A & \color{Red} Idus & 15 & & \color{Red} \\
 \color{Red}  & B & \color{Red} XVII & 16 &  & \color{Red} \\
 \color{Red} IX & C & \color{Red} XVI & 17 &  & \color{Red} \\
-\color{Red}  & D & \color{Red} XV & 18 & Luce Evangeliste. Semid. & \color{Red} Sol in Scorpione. \\
+\color{Red}  & D & \color{Red} XV & 18 & Luce Evangeliste. Semid. & \\
+
 \color{Red} XVII & E & \color{Red} XIIII & 19 & & \color{Red} \\
 \color{Red} VI & F & \color{Red} XIII & 20 & & \color{Red} \\
-\color{Red}  & G & \color{Red} XII & 21 & \multicolumn{2}{l}{\color{Red} Undecim Milium Virginum et Martyrum. Mem.} \\
+\color{Red}  & G & \color{Red} XII & 21 & \multicolumn{2}{l}{\color{Red} XI. Milium Virg. et Mart. Mem.} \\
 \color{Red} XIIII & \color{Red} A & \color{Red} XI & 22 & & \color{Red} \\
 \color{Red} III & B & \color{Red} X & 23 &  & \color{Red} \\
 \color{Red}  & C & \color{Red} IX & 24 & & \color{Red} \\
-\color{Red} XI & D & \color{Red} VIII & 25 & Crispini et Crispiani Martyrum. Mem. & \color{Red} \\
+\color{Red} XI & D & \color{Red} VIII & 25 & Crispini et Crispiani Mart. Mem. & \color{Red} \\
 \color{Red} XIX & E & \color{Red} VII & 26 & & \color{Red} \\
-\color{Red}  & F & \color{Red} VI & 27 &  & \color{Red} Vigilia. \\
-\color{Red} VIII & G & \color{Red} V & 28 & \color{Red} Symonis et Iude Apostolorum. Semid. & \color{Red} \\
+\color{Red}  & F & \color{Red} VI & 27 &  \qquad \color{Red} Vigilia. \\
+\color{Red} VIII & G & \color{Red} V & 28 & \color{Red} Symonis et Iude Apos. Semid. & \color{Red} \\
 \color{Red}  & \color{Red} A & \color{Red} IIII & 29 & & \color{Red} \\
 \color{Red} XII & B & \color{Red} III & 30 &  & \color{Red} \\
-\color{Red} V & C & \color{Red} II & 31 & Quintini Martyris. Mem. & Vigilia. \color{Red} \\
+\color{Red} V & C & \color{Red} II & 31 & Quintini Martyris. Mem. & \\
+& & & & \qquad Vigilia. \color{Red} \\
 \end{tabular}
 \newline \color{Red} Hore noctis. XIIII. Diei. X.
 \end{center}
@@ -579,35 +454,37 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-\color{Red}  & D & \textbf{\color{Red} K\color{Blue}L} & 1 & Festivitas Omnium Sanctorum. Totum Dup. & \color{Red} \\
-\color{Red} XIII & E & \color{Red} IIII & 2 & Commemoratio Omnium Fidelium Defunctorum. & \color{Red} Incipit. V. Embolismus. \\
+\color{Red}  & D & \textbf{\color{Red} K\color{Blue}L} & 1 & Fest. Omnium Sanctorum. Tot. Dup. & \color{Red} \\
+\color{Red} XIII & E & \color{Red} IIII & 2 & Comm. Omni. Fidelium Defunc. & \\
 \color{Red} II & F & \color{Red} III & 3 & & \color{Red} \\
 \color{Red}  & G & \color{Red} II & 4 & & \color{Red} \\
-\color{Red} X & \color{Red} A & \color{Red} Nonis & 5 & & \color{Red} \\
+\color{Red} X & \color{Red} A & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red}  & B & \color{Red} VIII & 6 & & \color{Red} \\
 \color{Red} XVIII & C & \color{Red} VII & 7 & & \color{Red} \\
-\color{Red} VII & D & \color{Red} VI & 8 & Quatuor Coronatorum Martyrum. III. Lect. & \color{Red} \\
+\color{Red} VII & D & \color{Red} VI & 8 & IV. Coronatorum Mart. III. Lect. & \color{Red} \\
 \color{Red}  & E & \color{Red} V & 9 & Theodori Martyris. III. Lect. & \color{Red} \\
 \color{Red} XV & F & \color{Red} IIII & 10 & & \color{Red} \\
-\color{Red} IIII & G & \color{Red} III & 11 & \multicolumn{2}{l}{\color{Red} Martini Episcopi et Conf. Semid. Menne Martyris. Mem.} \color{Red} \\
-\color{Red}  & \color{Red} A & \color{Red} II & 12 &  & \color{Red} \\
+\color{Red} IIII & G & \color{Red} III & 11 & \multicolumn{2}{l}{\color{Red} Martini Episcopi et Conf. Semid. } \\
+& & & & \quad \color{Red} Menne Martyris. Mem. \color{Red} \\
+\color{Red}  & \color{Red} A & \color{Red} II & 12 & De Octava. & \color{Red} \\
 \color{Red} XII & B & \color{Red} Idus & 13 & Brictii Episcopi et Conf. Mem. & \color{Red} \\
-\color{Red} I & C & \color{Red} XVIII & 14 & & \color{Red} \\
-\color{Red}  & D & \color{Red} XVII & 15 & & \color{Red} \\
-\color{Red} IX & E & \color{Red} XVI & 16 & & \color{Red} \\
-\color{Red}  & F & \color{Red} XV & 17 &  & \color{Red} Sol in Sagittario. \\
+\color{Red} I & C & \color{Red} XVIII & 14 & De Octava. & \color{Red} \\
+\color{Red}  & D & \color{Red} XVII & 15 & De Octava. & \color{Red} \\
+\color{Red} IX & E & \color{Red} XVI & 16 & De Octava. & \color{Red} \\
+\color{Red}  & F & \color{Red} XV & 17 & De Octava. \\
 \color{Red} XVII & G & \color{Red} XIIII & 18 & Octava Sancti Martini. \color{Red} Simplex. \\
 \color{Red} VI & \color{Red} A & \color{Red} XIII & 19 & Sancte Elysabeth. Mem. & \color{Red} \\
 \color{Red}  & B & \color{Red} XII & 20 & & \color{Red} \\
 \color{Red} XIIII & C & \color{Red} XI & 21 & & \color{Red} \\
-\color{Red} III & D & \color{Red} X & 22 & \color{Red} Cecilie Virginis et Martyris. Simplex. & \color{Red} \\
-\color{Red}  & E & \color{Red} IX & 23 & Clementis Pape et Martyris. Simplex. & \color{Red} \\
-\color{Red} XI & F & \color{Red} VIII & 24 & Crisogoni Martyris. Mem. & \color{Red} \\
-\color{Red} XIX & G & \color{Red} VII & 25 & \color{Red} Katherine Virginis et Martyris. Semid. \\
+\color{Red} III & D & \color{Red} X & 22 & \color{Red} Cecilie Virginis et Mart. Simplex. & \color{Red} \\
+\color{Red}  & E & \color{Red} IX & 23 & Clementis Pape et Mart. Simplex. & \color{Red} \\
+\color{Red} XI & F & \color{Red} VIII & 24 & Crisogoni Mart. Mem. & \color{Red} \\
+\color{Red} XIX & G & \color{Red} VII & 25 & \color{Red} Katherine Virginis et Mart. Semid. \\
 \color{Red}  & \color{Red} A & \color{Red} VI & 26 & & \color{Red} \\
-\color{Red} VIII & B & \color{Red} V & 27 & Vitalis et Agricole Martyrum. Mem. & \color{Red} \\
+\color{Red} VIII & B & \color{Red} V & 27 & Vitalis et Agricole Mart. Mem. & \color{Red} \\
 \color{Red}  & C & \color{Red} IIII & 28 & & \color{Red} \\
-\color{Red} XVI & D & \color{Red} III & 29 & \color{Red} Saturnini Martyris. Mem. & \color{Red} Vigilia. \\
+\color{Red} XVI & D & \color{Red} III & 29 & \color{Red} Saturnini Martyris. Mem. & \\
+& & & & \qquad \color{Red} Vigilia. \\
 \color{Red} V & E & \color{Red} II & 30 & Andree Apostoli. Semid. & \color{Red} \\
 \end{tabular}
 \newline \color{Red} Hore noctis. XVI. Diei. VIII.
@@ -621,11 +498,11 @@
 
 \begin{center}
 \begin{tabular}{l | l | l | r | l l}
-\color{Red} XIII & F & \textbf{\color{Red} K\color{Blue}L} & 1 & & \color{Red} Finis. V. Embolismus. \\
-\color{Red} II & G & \color{Red} IIII & 2 & & \color{Red} Incipit Primus Embolismus. \\
+\color{Red} XIII & F & \textbf{\color{Red} K\color{Blue}L} & 1 & \\
+\color{Red} II & G & \color{Red} IIII & 2 & \\
 \color{Red}  & \color{Red} A & \color{Red} III & 3 & & \color{Red} \\
 \color{Red} X & B & \color{Red} II & 4 & & \color{Red} \\
-\color{Red}  & C & \color{Red} Nonis & 5 & & \color{Red} \\
+\color{Red}  & C & \color{Red} Non. & 5 & & \color{Red} \\
 \color{Red} XVIII & D & \color{Red} VIII & 6 & \color{Red} Nicolai Episcopi. Semid. & \color{Red} \\
 \color{Red} VII & E & \color{Red} VII & 7 & \color{Red} Octava Sancti Andree. Mem. \\
 \color{Red}  & F & \color{Red} VI & 8 & & \color{Red} \\
@@ -635,25 +512,23 @@
 \color{Red} XII & C & \color{Red} II & 12 &  & \color{Red} \\
 \color{Red} I & D & \color{Red} Idus & 13 & Lucie Virginis et Martyris. Simplex. & \color{Red} \\
 \color{Red}  & E & \color{Red} XIX & 14 &  & \color{Red} \\
-\color{Red} IX & F & \color{Red} XVIII & 15 & & \color{Red} Solsticium Hyemale. \\
+\color{Red} IX & F & \color{Red} XVIII & 15 & \\
 \color{Red}  & G & \color{Red} XVII & 16 & & \color{Red} \\
-\color{Red} XVII & \color{Red} A & \color{Red} XVI & 17 & & O Sapiencia. \color{Red} \\
-\color{Red} VI & B & \color{Red} XV & 18 & & \color{Red} Sol in Capricorno. \\
+\color{Red} XVII & \color{Red} A & \color{Red} XVI & 17 & \\% \qquad O Sapiencia. \color{Red} \\
+\color{Red} VI & B & \color{Red} XV & 18 & \\
 \color{Red}  & C & \color{Red} XIIII & 19 & & \color{Red} \\
 \color{Red} XIIII & D & \color{Red} XIII & 20 & & \color{Red} \\
 \color{Red} III & E & \color{Red} XII & 21 & Thome Apostoli. Semid. & \color{Red} \\
 \color{Red}  & F & \color{Red} XI & 22 & & \color{Red} \\
 \color{Red} XI & G & \color{Red} X & 23 & & \color{Red} \\
-\color{Red} XIX & \color{Red} A & \color{Red} IX & 24 & & \color{Red} Vigilia. \\
-\color{Red}  & B & \color{Red} VIII & 25 & \multicolumn{2}{l}{\color{Red} Nativitas Domini Nostri Ihesu Christi. Totum Dupl.} \color{Red} \\
-\color{Red} VIII & C & \color{Red} VII & 26 & Stephani Prothomartyris. Totum Dup. & \color{Red} \\
-\color{Red}  & D & \color{Red} VI & 27 & \multicolumn{2}{l}{\color{Red} Iohannis Apostoli et Evangeliste. Totum Dupl.} \color{Red} \\
+\color{Red} XIX & \color{Red} A & \color{Red} IX & 24 & \qquad \color{Red} Vigilia. \\
+\color{Red}  & B & \color{Red} VIII & 25 & \multicolumn{2}{l}{\color{Red} Nativitas D.N.I.C. Totum Dup.} \color{Red} \\
+\color{Red} VIII & C & \color{Red} VII & 26 & Stephani Prothomart. Tot. Dup. & \color{Red} \\
+\color{Red}  & D & \color{Red} VI & 27 & \multicolumn{2}{l}{\color{Red} Iohannis Apostoli et Evan. Tot. Dup.} \color{Red} \\
 \color{Red} XVI & E & \color{Red} V & 28 & Sanctorum Innocentium. Simplex. & \color{Red} \\
-\color{Red} V & F & \color{Red} IIII & 29 & \color{Red} Thome Episcopi et Martyris. Simplex. & \color{Red} \\
+\color{Red} V & F & \color{Red} IIII & 29 & \color{Red} Thome Episcopi et Mart. Simplex. & \color{Red} \\
 \color{Red}  & G & \color{Red} III & 30 &  & \color{Red} \\
-\color{Red} XIII & \color{Red} A & \color{Red} II & 31 & Silvestri Pape et Confessoris. Simplex. & \color{Red} Finis. I. Embolismus. \\
+\color{Red} XIII & \color{Red} A & \color{Red} II & 31 & Silvestri Pape et Conf. Simplex. & \\
 \end{tabular}
 \newline \color{Red} Hore noctis. XVIII. Diei. VI.
 \end{center}
-
-\end{document}
