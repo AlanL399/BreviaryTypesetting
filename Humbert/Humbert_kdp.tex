@@ -6,61 +6,9 @@
 % \usepackage{graphicx}
 \usepackage{geometry}
 \geometry{
-	% paperwidth=4.25in, % Adjust the width of the page
-	% paperheight=7.5in, % Adjust the height of the page
-	% inner=0.1in, % Inner margin
-	% outer=0.1in, % Outer margin
-	% top=0.4in, % Top margin
-	% bottom=0.5in, % Bottom margin
-	% bindingoffset=0in % at least 0.75" to 0.875" inner margins.
-% No text can exist within 0.25 inches of the physical edge of the book (The Safe Zone). If your margins are 0.1in, their automated uploader will reject
-% 4.25" x 7.0" or 5" x 8". For an 800-page book, a 5" x 8" size is highly recommended
-	% paperwidth=5in,       % Shift to a standard industry pocket trim
-	% paperheight=8in,      % Standard pocket height
-	% inner=0.4in,          % Gives you room to actually read without text spilling off the edge
-	% outer=0.4in,          % Safe from the 0.25" printer rejection zone
-	% top=0.4in, 
-	% bottom=0.5in, 
-	% bindingoffset=0in     % Keep at 0 for editing; adjust later for the final spine glue
-% Or these:	
-	% paperwidth=5in,       % Standard available pocket trim size
-	% paperheight=8in,      
-	% inner=0.375in,        % Gives the thick 800-page spine some breathing room
-	% outer=0.3in,          % Looks incredibly tight and "Dessain-esque", but safely clear of the 0.25" failure limit
-	% top=0.35in, 
-	% bottom=0.4in, 
-	% bindingoffset=0in     % Keep at 0 for editing; adjust later for the final spine glue
-% Production margins
-    % top=0.375in,
-    % bottom=0.4in
-% Ingram
-	% paperwidth=5in,
-    % paperheight=8in,
-    % twoside,                 % Crucial: alternates margins for left/right pages
-    % inner=0.375in,           % Visual whitespace from text to the gutter curve
-    % bindingoffset=0.5in,     % The "sacrifice zone" swallowed by the glue/curve
-    % outer=0.3125in,          % Tight, old-school Dessain look (safely over the 0.25" POD limit)
-    % top=0.6in,         % Increased slightly to give the 32pt header breathing room
-    % bottom=0.5in,      % Increased slightly for the footer
-    % headheight=32pt,   % Sets header height directly in geometry
-    % headsep=10pt,      % Space between header and text body
-    % footskip=18pt,     % Space from text baseline to footer (increased from 12pt so 10pt font doesn't collide)
-    % includehead,       % Counts the header as part of the top margin area
-    % includefoot        % Counts the footer as part of the bottom margin area
 % KDP, We need to fix the margins, compare with psalterium, its too much top and bottom, which are 6x9. Perhaps 5.25x8? Gutter at 0.75" to 0.875"?
 % Consider page count. Do we want 600pg max? or aim for 500? 6x9 is too big, 5x8 is better, but even better is 5x7.5. And 9pt Merriweather is massive, so we can always decrease. Gutter should still be .75. Smaller is better, and less pages better. but <=5x7 is ideal from the below.
 % Ascension will be 4.5x6.75in @ 10pt, Ascension Large is 5.5x8.375in @ 12.41pt, WOF will be @ 11.4 and 14pt, Pax inter Spinas is 10.5x16.5cm (very readable), Anthologion is 4.5x7in @ 10pt, current LotH is 4.375x6.75in, large is 5.5x8.375in, (Shorter) Christian Prayer is 4.375x6.75in, large is 5.5x8.125, Angelus (Iris) is 7.16x4.16, Angelus Diurnal is 3.5x5.5 pocket and 4.5x7.5 full, FSSP Diurnal is 4x7in, Nova et Vetera is 11.8x18cm, Baronius is 4.5x7in, ChurchLatin Diurnal is 5.5x8.5", Lancelot Andrews Matins is 5x7.5in, Lancelot Diurnal is 4.25x6.25in, Ukrainian is 5x6.75in (too wide), Before and After 5.75x8.75, Anglican Breviary is 5.75x7.75in
-	% paperwidth=5in,
-	% paperheight=8in,
-	% twoside,
-	% inner=0.375in,         % Keeps your visual whitespace to the gutter
-	% bindingoffset=0.5in,   % Keeps the "sacrifice zone" for KDP's glue spine
-	% outer=0.26in,          % Pushes text right to the edge (safely over KDP's 0.25" floor)
-	% top=0.45in,            % Accounts for your 32pt header + 10pt space + 0.25" KDP floor
-	% bottom=0.4in,          % Accounts for your footer + 18pt space + 0.25" KDP floor
-	% headheight=32pt,       % Your custom tall header height
-	% headsep=10pt,          % Space between header and text body
-	% footskip=18pt,         % Space from text baseline to footer
 % Try these
 	paperwidth=5.0in,
 	paperheight=7.5in,% Could be taller, 7.75
@@ -73,15 +21,13 @@
 	% inner=0.75in,
 	inner=0.765in,
 	% inner=0.85in,
-	% KDP minimum is 0.25in. We use 0.3in to give the text a beautiful,
-	% balanced frame on the wider 5.0" page.
+	% KDP minimum is 0.25in. We use 0.3in to give the text a balanced frame on the wider 5.0" page.
 	outer=0.30in,
 	%
 	% --- VERTICAL MARGINS ---
-	% Since you removed the tall header, 0.35in is tight, clean, and safe.
 	% top=0.35in,
 	top=0.28in,
-	% Gives your footer page number breathing room above the 0.25" KDP cutting floor.
+	% Gives footer page number breathing room above the 0.25" KDP cutting floor.
 	% bottom=0.35in,
 	% bottom=0.28in,
 	% bottom=0.26in,
@@ -90,19 +36,12 @@
 	%
 	% --- MEASUREMENT OVERRIDES ---
 	% Tells geometry to compute margins from the top of the actual header line
-	includehead,
 	nomarginpar,
     % Explicitly tightens the gap between text baseline and the page number
     footskip=14pt,
     % footskip=18.5pt,
 includehead,           % Keeps the tall header inside the 0.45in top safety zone
 includefoot            % Keeps the footer inside the 0.4in bottom safety zone
-% Psalterium dimensions
-% inner=25mm,
-% outer=10mm,
-% top=12mm,
-% bottom=15mm,
-% headsep=3mm,
 }
 % \usepackage{xparse}
 \usepackage{titling}
@@ -892,7 +831,7 @@ You are free to share, adapt, and build
 \end{center}
 \begin{center}
 
-\newline The \LaTeX source code and transcription files
+\newline The \LaTeX \ source code and transcription files
 \newline for this work are publicly available and
 \newline open for collaboration on GitHub:
 \newline www.GitHub.com/AlanL399/BreviaryTypesetting
